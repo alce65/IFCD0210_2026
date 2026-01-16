@@ -18,6 +18,24 @@ Formador / Desarrollador Web FullStack
 
 ## Alumnos
 
+1. Jose Luis
+2. Eduardo
+3. Beatriz
+4. Daniel Alexis
+5. 
+
+6. Juan Carlos
+7. Rocio
+8. Aranzazu
+9. Jefferson
+10. Maria Victoria
+11. Ronny Alexander
+
+12. Evgeniya
+13. Serigne Modou
+14. 
+15. Juan Manuel
+
 ## Skill
 
 - **HTML**
@@ -46,7 +64,7 @@ Formador / Desarrollador Web FullStack
 
 ## Semana 1 (Enero)
 
-### Día 1 (x - 14/01/2026) - Git 01
+### Día 1 (X - 14/01/2026) - Git 01
 
 - Presentación del curso
 - Introducción a la Web
@@ -54,7 +72,7 @@ Formador / Desarrollador Web FullStack
   - Visual Studio Code
   - NVM: NodeJS y npm
 
-### Día 2 (j - 15/01/2026) - Git 01
+### Día 2 (J - 15/01/2026) - Git 01
 
 - Instalación de herramientas (continuación)
   - Git
@@ -74,6 +92,8 @@ Formador / Desarrollador Web FullStack
   - Añadir remotos
   - Push
   - Clonar repositorio. Forks
+
+### Día 3 (V - 16/01/2026) - Git 01
 
 <!-- - Git. Continuación
   - Reescribiendo la historia
