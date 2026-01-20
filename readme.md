@@ -22,7 +22,7 @@ Formador / Desarrollador Web FullStack
 2. Eduardo
 3. Beatriz
 4. Daniel Alexis
-5. 
+5.
 
 6. Juan Carlos
 7. Rocio
@@ -33,7 +33,7 @@ Formador / Desarrollador Web FullStack
 
 12. Evgeniya
 13. Serigne Modou
-14. 
+14.
 15. Juan Manuel
 
 ## Skill
@@ -93,11 +93,45 @@ Formador / Desarrollador Web FullStack
   - Push
   - Clonar repositorio. Forks
 
-### Día 3 (V - 16/01/2026) - Git 01
+### Día 3 (V - 16/01/2026) - Git 02
 
-<!-- - Git. Continuación
-  - Reescribiendo la historia
-    - Checkout
-    - Reset
+- Git. Continuación
   - Ramas
-  - Merge. Fast Forward y Recursive -->
+  - Merge. Fast Forward y Recursive
+  - Conflictos
+  - Resolución de conflictos
+  - Pull Request
+
+## Semana 2 (Enero)
+
+### Día 4 (L - 19/01/2026) - ES 01
+
+- Presentación de JS
+  - Entornos de ejecución
+    - Browse
+    - Node
+- Conceptos clave
+  - Datos y variables
+  - Modelo mental
+  - Mutables v. inmutables
+
+<!--
+
+### Día 5 (M - 20/01/2026) - ES 02
+
+- Conceptos clave de JS (continuación)
+  - Sentencias
+  - Expresiones
+    - Datos (literales)
+    - Variables
+    - Operadores
+
+Ejercicios de introducción a JS
+
+### Día 6 (X - 21/01/2026) - ES 03
+
+### Día  (J - 22/01/2026) - ES 04
+
+### Día 6 (V - 23/01/2026) - ES 05
+
+-->
