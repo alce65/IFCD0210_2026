@@ -166,12 +166,18 @@ Ejercicios de introducción a JS: bloque 2
 [Descanso]
 
 - body -> principales etiquetas
-- Ejemplo inicial - ejercicio
+- Ejemplo inicial - ejercicio 1
 
-<!-- ### Dia 2 (M 27/01/2026) - M1.01 02
+### Dia 2 (M 27/01/2026) - M1.01 02
 
+- Completamos el ejercicio 1
 - Continuamos el ejemplo inicial
+- Live-server (cmd)
 - head -> metadata, title, links (favicon)
+- Ejercicio 2
+
+<!--
+### Dia 3 (X 28/01/2026) - M1.01 03
 
 - Estructura del estándar HTML
 
@@ -179,9 +185,7 @@ Ejercicios de introducción a JS: bloque 2
 
 - Sectioning levels:
   - headings (implícito)
-  - etiquetas semánticas (explícitas) -->
-
-<!-- ### Dia 3 (X 28/01/2026) - M1.01 03
+  - etiquetas semánticas (explícitas)
 
 - Etiquetas de sección y agrupamiento
 
