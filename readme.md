@@ -30,7 +30,7 @@ Formador / Desarrollador Web FullStack
 9. [Daniel Saigua Labre](https://github.com/daniel48saigua)
 10. [Aranzazu Checa Alvaro](https://github.com/ArantxaCheca)
 
-11. [Jesmy Sarai Romay Cedeño](https://github.com/)
+11. [Jesmy Sarai Romay Cedeño](https://github.com/sarayromay)
 12. [Serigne Modou Fall Belle](https://github.com/MODOU19999)
 13. [Ronny Alexander Pin Pincay](https://github.com/ronnyaalez)
 14. ***
@@ -176,11 +176,13 @@ Ejercicios de introducción a JS: bloque 2
 - head -> metadata, title, links (favicon)
 - Ejercicio 2
 
-<!--
 ### Dia 3 (X 28/01/2026) - M1.01 03
 
+- Revisión del ejercicio: metadatos
+- Validación y análisis con lighthouse
 - Estructura del estándar HTML
 
+<!--
 - Sectioning v. grouping
 
 - Sectioning levels:

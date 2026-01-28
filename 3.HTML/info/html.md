@@ -199,7 +199,7 @@ En la misma línea, para comprobar el funcionamiento de los metadatos de **Schem
 - `a` - anchor (enlace)
 - `div`, `span` - divisiones genéricas
 - `ul`, `ol`, `li` - listas
-- `img` - imagen
+- `img`, `svg` - imagen
 - `br`, `hr` (casi NO se usan)
 
 #### Atributos universales básicos
