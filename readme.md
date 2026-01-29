@@ -173,6 +173,9 @@ Ejercicios de introducción a JS: bloque 2
 - Completamos el ejercicio 1
 - Continuamos el ejemplo inicial
 - Live-server (cmd)
+
+[Descanso]
+
 - head -> metadata, title, links (favicon)
 - Ejercicio 2
 
@@ -182,7 +185,8 @@ Ejercicios de introducción a JS: bloque 2
 - Validación y análisis con lighthouse
 - Estructura del estándar HTML
 
-<!--
+[Descanso]
+
 - Sectioning v. grouping
 
 - Sectioning levels:
@@ -191,35 +195,31 @@ Ejercicios de introducción a JS: bloque 2
 
 - Etiquetas de sección y agrupamiento
 
-- Ejercicio: Construcción de una Web de recetas por todos los alumnos
+### Dia 4 (J 29/01/2026) - M1.01 04
 
+- Ejercicio: Construcción de una Web de recetas por todos los alumnos
   - Creación de un repo privado con acceso a todos
   - Protección de la main y política de ramas
   - Creación de una GitHub page
   - Clonado por cada alumno
   - Creación de una rama para cada grupo (por 1 alumno del grupo)
   - Fetch de las ramas y acceso a la rama asignada
-  - Inicio del trabajo individual -->
 
-<!-- ### Dia 4 (J 29/01/2026) - M1.01 04
+[Descanso]
 
 - Continuación del ejercicio
-
   - Trabajo individual en cada receta
   - Uso de PRs para incorporar el trabajo a Main
   - Comprobación del proceso CI/CD
-
-- Corrección del trabajo hasta ahora
-
-  - Falta integración de elementos comunes (header, footer)
-  - Ajuste de main a su verdadera funcionalidad
-
-- Etiquetas Text-Level
-- Etiquetas de enlace
-- Elementos embebidos -->
+  - Integración de elementos comunes (header, footer)
 
 <!-- ### Dia 5 (V 30/01/2026) - M1.01 05
 
+- Corrección del trabajo en común
+
+- Etiquetas Text-Level
+- Etiquetas de enlace
+- Elementos embebidos
 - Elementos embebidos (iframe)
 - Tablas
 - Formularios
@@ -232,4 +232,5 @@ Ejercicios de introducción a JS: bloque 2
   - Incorporación de elementos text-level: strong...
   - Incorporación de Vídeo
   - Opción: Uso de una tabla para indicar los ingredientes
-  - Formulario de contacto -->
+  - Formulario de contacto
+-->
