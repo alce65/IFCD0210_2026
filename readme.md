@@ -213,7 +213,7 @@ Ejercicios de introducción a JS: bloque 2
   - Comprobación del proceso CI/CD
   - Integración de elementos comunes (header, footer)
 
-<!-- ### Dia 5 (V 30/01/2026) - M1.01 05
+### Dia 5 (V 30/01/2026) - M1.01 05
 
 - Corrección del trabajo en común
 
@@ -225,6 +225,7 @@ Ejercicios de introducción a JS: bloque 2
 - Formularios
 - Etiquetas interactivas (details/summary, dialog)
 
+<!--
 - Continuación del ejercicio:
   - Correcciones indicadas
   - Revisión de metadatos

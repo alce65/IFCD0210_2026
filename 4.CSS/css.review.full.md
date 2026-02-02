@@ -48,7 +48,6 @@
     - [Performance](#performance)
 - [Conclusions](#conclusions)
 
-
 ## 1. CSS Concepts
 
 ### Selectors
