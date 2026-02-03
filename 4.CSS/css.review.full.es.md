@@ -134,6 +134,19 @@
 - Especificidad en contexto. Cálculo
 - Aumentar la especificidad pragmáticamente
 
+```css
+.p1 {}
+p.p1 {}
+body p.p1 {}
+html body p.p1 {}
+.p1.p1 {}
+.p1{ !important}
+```
+
+```html
+<p class='p1'>Párrafo</p>
+```
+
 ### Herencia
 
 - Flujo de herencia

@@ -235,3 +235,27 @@ Ejercicios de introducción a JS: bloque 2
   - Opción: Uso de una tabla para indicar los ingredientes
   - Formulario de contacto
 -->
+
+## Semana 4 (Febrero)
+
+### Día 1 (02/02/2026) - M1.01 06
+
+- CSS
+  - Referencias
+  - Conceptos básicos
+    - Añadir CSS
+    - Selectores
+  - Selectores: ejercicios
+  - Cascada: especificidad y herencia
+
+### Día 2 (03/02/2026) - M1.01 07
+
+- Cascada: especificidad y herencia: Ejercicios
+- Variables (custom properties)
+- Funciones: calc(), min(), max()
+- Pseudo-clases y pseudo-elementos
+  - e.g. ::mark() -> details (summary) / dialog
+- Propiedades lógicas
+
+- Ejemplo practica: añadir CSS a las recetas
+- CSS
