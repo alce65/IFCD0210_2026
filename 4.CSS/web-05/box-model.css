@@ -1,0 +1,36 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: bisque;
+}
+
+header {
+    h1 {width: 40% ;}
+    p {width: 40%;}
+}
+
+section.box {
+    span {
+        display: inline-block;
+        width: 48%;
+        height: 1rem;
+        background-color: hwb(0 17% 35%);
+        border: 2px solid;
+        margin: 1%;
+    }
+    span:nth-of-type(2n) {
+        background-color: chocolate;
+        padding: 10px;
+    }
+}
+
+img {
+    display: block;
+    /* max-width: 100%; */
+    width: 400px;
+    height: 400px;
+    aspect-ratio: 1 / 1;
+}
