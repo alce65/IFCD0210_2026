@@ -5,7 +5,7 @@ body {
     font-size: 16px; */
     font-size: var(--size-normal);
     background-color: var(--back-color-primary);
-    color: var(--color-primary);
+    color: var(--color-font);
 }
 
 h1,
@@ -15,6 +15,8 @@ h2,
 h3,
 .h3 {
     line-height: 1;
+    color: var(--color-primary);
+    margin-block: 1rem;
 }
 
 h1,

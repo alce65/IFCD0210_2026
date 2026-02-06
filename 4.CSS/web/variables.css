@@ -1,16 +1,30 @@
 /* html { */
 :root {
+    /* CSS HEX */
+    --rich-mahogany: #400406ff;
+    --ebony: #515a47ff;
+    --soft-fawn: #d7be82ff;
+    --saddle-brown: #7a4419ff;
+    --olive-bark: #755c1bff;
+
+    --black: rgb(30, 30, 30);
+    --light-gray: rgb(60, 60, 60);
+    --gray: rgb(100, 100, 100);
+    --dark-gray: rgb(180, 180, 180);
+    --white: rgb(230, 230, 230);
+
     /* Paleta de colores */
-    --color-primary: black;
-    --color-secondary: bisque;
+    --color-primary: var(--rich-mahogany);
+    --color-font: var(--black);
+    --color-secondary: var(--soft-fawn);
     --back-color-primary: var(--color-secondary);
     --back-color-secondary: brown;
     --back-color-accent: rgb(86, 45, 45);
 
     /* Fuentes*/
-    --font-primary: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
-        sans-serif;
-    --font-title: 'Arial Black', 'Arial Bold', Gadget, sans-serif;
+    --font-primary:
+        "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+    --font-title: "Arial Black", "Arial Bold", Gadget, sans-serif;
 
     /* Escala*/
     --scala: 1.2;
@@ -23,5 +37,3 @@
     --size-small: calc(var(--size-normal) / var(--scala));
     --size-x-small: calc(var(--size-small) / var(--scala));
 }
-
-
