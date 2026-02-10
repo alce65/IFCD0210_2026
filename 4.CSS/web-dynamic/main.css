@@ -1,0 +1,172 @@
+body {
+    background-color: bisque;
+    margin: 10rem;
+}
+
+section {
+    margin-top: 3rem;
+}
+
+.transformations {
+    .object {
+        margin-top: 2rem;
+        width: 20px;
+        height: 20px;
+        border: 1px solid gainsboro;
+        /* transition-property: all;
+    transition-duration: 2s;
+    transition-delay: 1s;
+    transition-timing-function: cubic-bezier(0.5, 0, 0.5, 1); */
+        /* transition: all 2s 1s cubic-bezier(0.5, 0, 0.5, 1); */
+
+        /* animation-name: sample;
+    animation-duration: 2s;
+    animation-delay: 1s;
+    animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1); 
+    animation-iteration-count: 4;
+    animation-direction: alternate;
+    animation-fill-mode: both;
+    */
+        animation: sample 2s cubic-bezier(0.5, 0, 0.5, 1) 0.2s infinite
+            alternate both;
+    }
+}
+
+@keyframes sample {
+    0% {
+        background-color: brown;
+    }
+    50% {
+        background-color: chartreuse;
+    } 
+    100% {
+        transform: scale(3) rotate(45deg);
+        background-color: blue;
+    }
+}
+
+.ball-section {
+    --space: 5rem;
+    .ball {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: rgb(95, 89, 198);
+        background: radial-gradient(
+            circle,
+            rgb(77, 69, 221) 0%,
+            rgb(14, 75, 87) 100%
+        );
+        animation: move 4s cubic-bezier(0.5, 0, 0.5, 1);
+        animation-fill-mode: both;
+        animation-iteration-count: infinite;
+    }
+}
+
+@keyframes move {
+    25% {
+        transform: translate(var(--space), 0rem);
+        rotate: (90deg);
+    }
+    50% {
+        transform: translate(var(--space), var(--space));
+        rotate: (90deg);
+    }
+    75% {
+        transform: translate(0rem, var(--space));
+        rotate: (90deg);
+    }
+    100% {
+        transform: translateY(0rem, 0rem);
+        rotate: (90deg);
+    }
+}
+
+.three-balls-section {
+    --space: 10rem;
+    --base-delay: 0.5s;
+    --interval: 0.5s;
+
+    .ball {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: rgb(95, 89, 198);
+        background: radial-gradient(
+            circle,
+            rgb(120, 19, 28) 0%,
+            rgb(97, 60, 78) 100%
+        );
+        transform: translate(var(--space));
+    }
+
+    .ball:nth-of-type(1) {
+        transition: transform var(--interval) var(--base-delay);
+    }
+    .ball:nth-of-type(2) {
+        transition: transform var(--interval)
+            calc(var(--base-delay) + var(--interval));
+    }
+    .ball:nth-of-type(3) {
+        transition: transform var(--interval)
+            calc(var(--base-delay) + 2 * var(--interval));
+    }
+}
+
+.three-balls-section-animation {
+    --space: 10rem;
+    --base-delay: 0.5s;
+    --interval: 0.5s;
+
+    .ball {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: rgb(95, 89, 198);
+        background: radial-gradient(
+            circle,
+            rgb(120, 19, 28) 0%,
+            rgb(97, 60, 78) 100%
+        );
+        animation: move-linear var(--interval) cubic-bezier(0.5, 0, 0.5, 1) both;
+        animation-delay: calc(var(--base-delay) + var(--interval) * var(--i));
+    }
+}
+
+@keyframes move-linear {
+    0% {
+        transform: none;
+    }
+
+    100% {
+        transform: translate(var(--space), 0);
+    }
+}
+
+.states {
+    button {
+        appearance: none;
+        padding: 1rem 2rem;
+        border: 1px solid gray;
+        background-color: brown;
+        color: bisque;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: all 1s;
+
+        &:hover,
+        &:focus {
+            /* background-color: bisque;
+            color: brown; */
+            opacity: 0.5;
+        }
+
+        &:active {
+            transition-duration: 1s;
+            opacity: 1;
+            background-color: brown;
+            color: rgb(255, 145, 10);
+            transform: scale(90%);
+        }
+    }
+}

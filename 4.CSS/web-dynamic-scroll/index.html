@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Ejercicios de CSS" />
+    <title>Scroll animations</title>
+    <link rel="shortcut icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <h1>Scroll animations</h1>
+    <div class="wrapper">
+      <section>
+        <p>
+          Las nuevas propiedades de css permiten una animación basada en el
+          scroll sin necesidad de utilizar JS, como la Intersection Observer API
+          que se utilizaba hasta ahora.
+        </p>
+        <p>
+          Para ello se utilizan las propiedades
+          <code>view-timeline-name</code> y <code>view-timeline-axis</code>, que
+          definen respectivamente el nombre del timeline y el eje al que se
+          aplica (normalmente block)
+        </p>
+        <p>
+          En cuanto a la propia animación, queda definida por las siguientes
+          propiedades:
+        </p>
+        <ul>
+          <li><cite> animation-name </cite></li>
+          <li><cite>animation-timeline</cite></li>
+          <li><cite>animation-range</cite>< indicando entry y cover/li></li>
+          <li><code>animation-fill-mode</code> con elñ valor de both</li>
+        </ul>
+        <p>
+          En este ejercicio se ha utilizado la propiedad scroll-snap-type para
+          que el scroll se haga de forma más suave y se pueda ver la animación
+          de los elementos.
+        </p>
+      </section>
+      <section>
+        <h2>Placeholder de texto con imágenes</h2>
+        <p>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, vel
+          placeat! Accusantium similique eum hic sunt eos, blanditiis cum dolore
+          a fuga nihil harum obcaecati modi minima ea animi aspernatur.
+        </p>
+        <p>
+          Iste tenetur, aspernatur excepturi quia modi ex nesciunt, dolorem qui
+          dolores incidunt quam cupiditate? Eos deleniti repellat aut at amet
+          ducimus quaerat, atque officia in architecto, dicta nemo, quam
+          temporibus.
+        </p>
+        <p>
+          Magni officiis laudantium omnis quibusdam nostrum hic ipsa animi
+          dolorum, eum debitis, unde sunt laborum corporis a alias maxime
+          asperiores! Ipsa blanditiis iure architecto quasi quos deleniti rerum,
+          dolor eligendi.
+        </p>
+        <p>
+          Tempora totam, dignissimos beatae vitae reiciendis dolore atque soluta
+          facere sed possimus voluptatibus, dolor maiores iste consectetur
+          adipisci ducimus ipsam! Consequatur deleniti beatae ipsam rem repellat
+          velit cum, impedit eius.
+        </p>
+        <p>
+          Et dolorum neque rerum iusto fuga corporis atque, minus vitae eos
+          fugiat repellat sit culpa corrupti voluptas officiis consequuntur
+          porro voluptatibus laborum deleniti expedita architecto accusamus
+          natus. Reiciendis, nostrum unde?
+        </p>
+        <p>
+          Quibusdam nulla distinctio consectetur! Quis cum, aliquam, doloribus
+          eaque veritatis corrupti quam libero animi eligendi odit ullam, vel
+          recusandae molestiae placeat. Ducimus asperiores perferendis
+          perspiciatis quia quaerat ea veniam aperiam.
+        </p>
+        <p>
+          Rerum, atque quod eius distinctio placeat optio aperiam sequi vel
+          earum perspiciatis tempore iste ut nobis est, at facere, doloremque
+          labore eum laudantium consequuntur similique dolorum accusantium eos
+          maxime? Modi.
+        </p>
+        <p>
+          Quisquam, praesentium rerum tempore nemo deleniti veniam nisi commodi
+          ducimus non. Consequuntur, voluptatum. Explicabo aliquam magnam quod
+          error deleniti quisquam, possimus reprehenderit numquam similique
+          nobis enim debitis pariatur quae necessitatibus!
+        </p>
+        <p>
+          Dignissimos, molestiae dicta, a nulla aliquid cum quisquam velit
+          minima est distinctio ratione aperiam adipisci mollitia qui
+          voluptatibus voluptatem fuga facilis iusto ipsum sint tenetur ab!
+          Itaque beatae dolor eligendi.
+        </p>
+        <p>
+          Doloribus laboriosam enim commodi dolor officia consequatur nihil,
+          facere distinctio eos natus molestiae sapiente necessitatibus earum
+          tempore aspernatur blanditiis at ab fuga eveniet quasi impedit
+          inventore explicabo. Quis, nesciunt repudiandae!
+        </p>
+        <p>
+          Magnam, deserunt, ipsa ipsam saepe eius at harum quidem quas amet
+          assumenda accusamus ratione necessitatibus qui nostrum incidunt
+          architecto, facere magni omnis! Ad nemo tenetur voluptates soluta
+          aliquam dolore qui!
+        </p>
+        <p>
+          Ut dolorem ab minus sapiente libero fugit dolores asperiores cum
+          eligendi! Laudantium sed voluptate, omnis distinctio eius nostrum
+          voluptatum neque aspernatur eos officiis magni suscipit, impedit
+          fugiat quam fugit. Suscipit!
+        </p>
+        <p>
+          Rerum doloremque laboriosam, consectetur vel, amet quae, temporibus
+          ipsa modi voluptatem reprehenderit debitis! Debitis consequuntur eum
+          esse mollitia, nam quibusdam sed architecto non et iusto quod, ex
+          minus ipsa facere.
+        </p>
+        <p>
+          Tempora rerum aut, corporis et placeat quasi inventore, non dicta
+          dolorum omnis ut magnam obcaecati quos earum facere, tenetur error
+          ratione ex consequuntur? Facilis illo, facere placeat laborum ratione
+          tempore.
+        </p>
+        <img
+          src="https://picsum.photos/seed/castle/600/600"
+          alt="Imagen aleatoria"
+        />
+        <p>
+          Tenetur, pariatur! Cum officiis, nam iste quae expedita eaque aliquid,
+          aliquam, voluptates omnis esse dicta consectetur! Eligendi
+          repudiandae, dignissimos vitae pariatur temporibus quaerat recusandae
+          molestiae sapiente laborum perspiciatis? Laborum, modi.
+        </p>
+        <p>
+          Sequi non sapiente id facilis suscipit doloremque, veritatis debitis
+          unde consequuntur autem! Molestiae, laborum labore? Natus quas
+          voluptate quos! Corrupti, ratione delectus! Quod dolore fugit optio
+          voluptatum placeat nobis amet?
+        </p>
+        <p>
+          Accusantium veniam quae sapiente maiores blanditiis libero non velit
+          enim omnis necessitatibus consectetur sequi ratione, totam nihil,
+          earum vero qui, obcaecati facere? Nostrum odit nihil nam corrupti cum
+          nobis expedita?
+        </p>
+        <img
+          src="https://picsum.photos/seed/dragon/600/600"
+          alt="Imagen aleatoria"
+        />
+        <p>
+          Aut nostrum error et dolorum distinctio magnam illum vel molestiae
+          nesciunt quisquam alias similique pariatur, incidunt ut adipisci omnis
+          qui beatae quasi ipsam molestias doloribus explicabo iste dignissimos.
+          Optio, magnam.
+        </p>
+        <p>
+          Fuga ex eligendi ipsa odit ducimus, illo porro sunt voluptas
+          aspernatur voluptatum quam repellat dolores, possimus et distinctio
+          molestiae expedita quas cum necessitatibus consequatur veniam eveniet!
+          Itaque veniam temporibus in.
+        </p>
+        <p>
+          Dignissimos, ab libero. Perferendis unde, odit delectus laboriosam sed
+          in vel atque nemo ullam alias vitae voluptatem ex? Facilis laboriosam
+          accusantium rerum suscipit hic ut saepe, numquam quae repellat
+          perspiciatis.
+        </p>
+
+        <p>
+          Fuga ex eligendi ipsa odit ducimus, illo porro sunt voluptas
+          aspernatur voluptatum quam repellat dolores, possimus et distinctio
+          molestiae expedita quas cum necessitatibus consequatur veniam eveniet!
+          Itaque veniam temporibus in.
+        </p>
+        <p>
+          Dignissimos, ab libero. Perferendis unde, odit delectus laboriosam sed
+          in vel atque nemo ullam alias vitae voluptatem ex? Facilis laboriosam
+          accusantium rerum suscipit hic ut saepe, numquam quae repellat
+          perspiciatis.
+        </p>
+      </section>
+    </div>
+  </body>
+</html>

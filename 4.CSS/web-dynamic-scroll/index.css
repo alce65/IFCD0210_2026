@@ -1,0 +1,56 @@
+body {
+    background-color: bisque;
+    margin: 0;
+    padding: 0;
+
+    .wrapper {
+        padding: 1rem;
+    }
+}
+
+h1 {
+    padding: 2rem;
+    margin: 0;
+    font-size: 2em;
+    color: bisque;
+    background-color: #333;
+    position: sticky;
+    top: 0;
+    left: 0;
+
+    animation: scroll linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0 200px
+}
+
+@keyframes scroll {
+    to {
+        padding-block: 0.5rem;
+        background-color: #aaa;
+        backdrop-filter: blur(10px);
+        font-size: 1.8rem;
+        color: #333;
+    }
+}
+
+img {
+    /* view-timeline-name: --image;
+  view-timeline-axis: block; */
+
+    animation: reveal linear both;
+    /* animation-timeline: --image; */
+    animation-timeline: view();
+    animation-range: entry 25% cover 60%;
+}
+
+@keyframes reveal {
+    0% {
+        opacity: 0.5;
+        scale: 50%;
+    }
+
+    100% {
+        opacity: 1;
+        scale: 100%;
+    }
+}
