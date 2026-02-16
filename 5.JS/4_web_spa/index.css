@@ -1,0 +1,219 @@
+@import url(./reset.css);
+@import url(./variables.css);
+@import url(./base.css);
+
+/* layout global */
+
+html {
+scroll-behavior: smooth;
+}
+
+.header,
+.footer,
+main {
+    border: 1px solid rgb(176, 176, 180);
+    padding: 1rem;
+}
+
+body {
+    height: 100vh;
+    min-width: 300px;
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-rows: min-content auto min-content;
+    
+}
+
+main {
+    /* Definimos el display para tener gap */
+    display: grid;
+    gap: 1.5rem;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+menu.full-menu {
+    display: none;
+}
+
+menu.mobile-menu {
+    width: 2.5rem;
+}
+
+menu {
+    color: var(--color-primary);
+    list-style: none;
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+}
+
+dialog.menu-dialog {
+    width: 60vw;
+    max-width: 100vh;
+    height: 100vh;
+    max-height: 100vh;
+    border: 1px solid var(--color-secondary);
+    background-color: var(--color-secondary);
+    opacity: 0.95;
+    padding: 1rem;
+
+    menu {
+        margin-block: 1rem;
+    }
+}
+
+/* From Uiverse.io by Yaya12085 */ 
+.switch {
+  position: relative;
+  height: 1.5rem;
+  width: 3rem;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 9999px;
+  background-color: rgba(100, 116, 139, 0.377);
+  transition: all .3s ease;
+}
+
+.switch:checked {
+  background-color: var(--color-primary);
+}
+
+.switch::before {
+  position: absolute;
+  content: "";
+  left: calc(1.5rem - 1.6rem);
+  top: calc(1.5rem - 1.6rem);
+  display: block;
+  height: 1.6rem;
+  width: 1.6rem;
+  cursor: pointer;
+  border: 1px solid rgba(100, 116, 139, 0.527);
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 3px 10px rgba(100, 116, 139, 0.327);
+  transition: all .3s ease;
+}
+
+.switch:hover::before {
+  box-shadow: 0 0 0px 8px rgba(0, 0, 0, .15)
+}
+
+.switch:checked:hover::before {
+  box-shadow: 0 0 0px 8px rgba(236, 72, 153, .15)
+}
+
+.switch:checked:before {
+  transform: translateX(100%);
+  border-color: var(--color-primary);
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+   align-items: center;
+    ul {
+        width: auto;
+        list-style: none;
+        display: flex;
+        gap: 1rem;
+    }
+    svg {
+        width: 3rem;
+        fill: var(--color-primary);
+    }
+}
+
+.personal-info {
+    .mas-info {
+        display: none;
+    }
+}
+
+.projects {
+    header,
+    article {
+        margin-block: 1rem;
+    }
+}
+
+.articles-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+
+@media (width > 430px) {
+    menu.full-menu {
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+        a {
+            border: 1px solid ghostwhite;
+            display: block;
+            padding: 0.5rem 1rem;
+            /* transition-property: all;
+            transition-duration: 1s;
+            transition-delay: 1s;
+            transition-timing-function: linear */
+            transition: all 0.3s ease-in-out;
+        }
+        a:hover {
+            /* font-size: var(--size-large);
+            padding: 0.2rem 0.5rem; */
+            border: 1px solid rgb(144, 144, 152);
+            transform: scale(1.2);
+        }
+    }
+
+    menu.mobile-menu {
+        display: none;
+    }
+}
+
+@media (width > 500px) {
+    .personal-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        & > p {
+            padding-inline-end: 1rem;
+        }
+        hgroup {
+            grid-column: span 2;
+        }
+        img {
+            height: 100%;
+            object-fit: cover;
+        }
+        .mas-info {
+            display: initial;
+        }
+    }
+}
+
+/* 
+Al usar repeat(auto-fit, minmax(17rem, 1fr)) 
+no necesitamos media queries para el grid
+
+@media (width > 550px) {
+    .articles-wrapper {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    }
+} */
+
+/* 
+Una media query puede cambiar los valores de una variable root
+@media (width > 700px) {
+    :root{
+        --base: 1.2rem
+    }
+} */
