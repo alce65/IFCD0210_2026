@@ -46,16 +46,66 @@ const handleDialogMenu = (event) => {
     }
 };
 
-const handleContact = (event) =>  {
-    event.preventDefault()
+const handleContact = (event) => {
+    event.preventDefault();
+    const { target } = event;
+    const { elements } = target;
+    console.log("Target");
+    console.dir(elements);
 
-    const target = event.target
-    console.log('Target')
-    console.dir(target.elements)
+    console.log("Enviando...");
+    // let userName = elements[0].value
+    // console.log(userName)
+    // userName = elements['user-name'].value
+    // console.log(userName)
+    // userName = elements.namedItem('user-name').value
+    // console.log(userName)
+    // userName = elements.item(0).value
+    // console.log(userName)
 
-    console.log('Enviando...')
+    const contactData = {
+        userName: "",
+        phone: "",
+        age: 0,
+        password: "",
+        dob: "",
+        contactTime: "",
+        file: "",
+        email: "",
+        message: "",
+        country: "",
+        subscribeNewsletter: false,
+        subscribeUpdates: false,
+        contactMethod: "",
+    };
 
-}
+    for (const key in contactData) {
+        contactData[key] =
+            elements.namedItem(key).type !== "checkbox"
+                ? elements.namedItem(key).value
+                : elements.namedItem(key).checked;
+
+        if (elements.namedItem(key).type === "date") {
+            contactData[key] = new Date(contactData[key]);
+        }
+        if (elements.namedItem(key).type === "file") {
+            contactData[key] = contactData[key].split("\\").pop();
+        }
+    }
+
+    console.log(contactData);
+
+    const formData = new FormData(target);
+    console.log(formData);
+
+    console.log("Enviando...");
+
+    //  fetch('url', {
+    //     method: POST,
+    //     body: formData
+
+    //  })
+};
 
 export function main() {
     console.log("Loaded main");
@@ -82,6 +132,7 @@ export function main() {
 
     // Formulario
 
-    document.querySelector('#contact form')
-    .addEventListener('submit', handleContact)
+    document
+        .querySelector("#contact form")
+        .addEventListener("submit", handleContact);
 }
