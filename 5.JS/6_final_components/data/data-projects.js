@@ -1,0 +1,80 @@
+const PROJECT = {
+    id: crypto.randomUUID(),
+    name: "",
+    author: "",
+    isCompleted: false,
+    description: "",
+};
+
+export const PROJECTS = [
+    {
+        id: crypto.randomUUID(),
+        name: "Portfolio personal",
+        author: "María Gómez",
+        isCompleted: true,
+        description: "Sitio responsivo para mostrar trabajos, blog y CV.",
+    },
+    {
+        id: crypto.randomUUID(),
+        name: "Tienda e-commerce básica",
+        author: "Equipo A",
+        isCompleted: false,
+        description: "Carrito, catálogo y pasarela de pago simulada.",
+    },
+    {
+        id: crypto.randomUUID(),
+        name: "Blog con CMS ligero",
+        author: "Carlos Ruiz",
+        isCompleted: true,
+        description: "Frontend consumiendo una API para entradas y comentarios.",
+    },
+    {
+        id: crypto.randomUUID(),
+        name: "SPA de tareas (To‑Do)",
+        author: "Laura Fernández",
+        isCompleted: true,
+        description: "Aplicación de una sola página con almacenamiento local.",
+    },
+    {
+        id: crypto.randomUUID(),
+        name: "PWA noticia local",
+        author: "David López",
+        isCompleted: false,
+        description: "Progressive Web App con modo offline y notificaciones.",
+    },
+    {
+        id: crypto.randomUUID(),
+        name: "Dashboard administrativo",
+        author: "Equipo B",
+        isCompleted: false,
+        description: "Panel con gráficos, filtros y gestión de usuarios.",
+    },
+    {
+        id: crypto.randomUUID(),
+        name: "Chat en tiempo real",
+        author: "Ángel Rivera",
+        isCompleted: false,
+        description: "Cliente web con WebSocket para mensajería instantánea.",
+    },
+    {
+        id: crypto.randomUUID(),
+        name: "Editor colaborativo",
+        author: "Irene Martín",
+        isCompleted: false,
+        description: "Edición simultánea de documentos con sincronización.",
+    },
+    {
+        id: crypto.randomUUID(),
+        name: "Landing con animaciones",
+        author: "Pedro Sáez",
+        isCompleted: true,
+        description: "Página de producto con animaciones CSS y accesibilidad.",
+    },
+    {
+        id: crypto.randomUUID(),
+        name: "Frontend para Headless CMS",
+        author: "Natalia Peña",
+        isCompleted: false,
+        description: "Interfaz que consume un CMS sin cabecera (headless).",
+    },
+];

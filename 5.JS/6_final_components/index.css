@@ -1,0 +1,330 @@
+:root {
+    /* Paleta de colores: Theme Light / Dark */
+    --color-back: light-dark(var(--white), var(--black));
+    /* color de fondo principal */
+    --color-font: light-dark(var(--black), var(--white));
+    /* color de texto */
+
+    /* --color-primary: light-dark(var(--rich-mahogany), var(--bisque)); */
+    /* color principal para elementos destacados */
+    /* --color-font-primary: light-dark(var(--bisque), var(--rich-mahogany)); */
+    /* color de fuente para elementos secundarios */
+
+    --color-secondary: light-dark(var(--mahogany), var(--soft-fawn));
+    /* color secundario para elementos de apoyo */
+    --color-font-secondary: light-dark(var(--soft-fawn), var(--mahogany));
+    /* color de fuente para elementos secundarios */
+
+    --color-accent: light-dark(var(--soft-fawn), var(--mahogany));
+    /* color de acento para elementos interactivos o destacados */
+    --color-font-accent: light-dark(var(--rich-mahogany), var(--soft-fawn));
+    /* color de fuente para elementos de acento */
+}
+
+@layer base-modifications {
+    h1,
+    .h1,
+    h2,
+    .h2,
+    h3,
+    .h3 {
+        line-height: 1;
+        color: var(--color-secondary);
+        margin-block: 1rem;
+    }
+
+    /* 
+    Definir variables de color para el tema claro y oscuro.
+    Estas variables se pueden usar en todo el CSS para mantener la consistencia de los colores.
+    El uso de la función light-dark permite cambiar automáticamente entre los colores según el tema activo.
+    */
+
+    html {
+        color-scheme: light dark;
+    }
+
+    html.light {
+        color-scheme: light;
+    }
+
+    html.dark {
+        color-scheme: dark;
+    }
+
+    /* html:has(.radio-switch #light:checked) {
+        color-scheme: light;
+    }
+
+    html:has(.radio-switch #dark:checked) {
+        color-scheme: dark;
+    } */
+}
+
+@layer header {
+    .header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    menu.full-menu {
+        display: none;
+    }
+
+    menu.mobile-menu {
+        width: 2.5rem;
+    }
+
+    menu {
+        color: var(--color-font-primary);
+        list-style: none;
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+    }
+
+    dialog.menu-dialog {
+        width: 60vw;
+        max-width: 100vh;
+        height: 100vh;
+        max-height: 100vh;
+        border: 1px solid var(--color-font-primary);
+        background-color: rgb(from var(--color-font-primary) r g b / 0.95);
+        /* opacity: 0.95; */
+        padding: 1rem;
+
+        menu {
+            color: var(--color-primary);
+            margin-block: 1rem;
+
+            display: flex;
+            flex-direction: column;
+            max-width: 80%;
+            gap: 0.5rem;
+            li {
+                background-color: var(--color-font-primary);
+            }
+            a {
+                border: 1px solid ghostwhite;
+                display: block;
+                padding: 0.5rem 1rem;
+                transition: all 0.3s ease-in-out;
+            }
+            a:hover {
+                border: 1px solid rgb(144, 144, 152);
+                transform: scaleY(1.2);
+            }
+        }
+    }
+}
+
+@layer switch {
+    /* From Uiverse.io by Yaya12085 */
+
+    .theme-toggle-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .switch {
+        position: relative;
+        height: 1.5rem;
+        width: 3rem;
+        cursor: pointer;
+        appearance: none;
+        -webkit-appearance: none;
+        border-radius: 9999px;
+        background-color: var(--color-accent);
+        transition: all 0.3s ease;
+    }
+
+    .switch:checked {
+        background-color: var(--color-secondary);
+    }
+
+    .switch::before {
+        position: absolute;
+        content: "";
+        left: calc(1.5rem - 1.6rem);
+        top: calc(1.5rem - 1.6rem);
+        display: block;
+        height: 1.6rem;
+        width: 1.6rem;
+        cursor: pointer;
+        border: 1px solid rgba(100, 116, 139, 0.527);
+        border-radius: 9999px;
+        background-color: rgba(255, 255, 255, 1);
+        box-shadow: 0 3px 10px rgba(100, 116, 139, 0.327);
+        transition: all 0.3s ease;
+    }
+
+    .switch:hover::before {
+        box-shadow: 0 0 0px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .switch:checked:hover::before {
+        box-shadow: 0 0 0px 8px rgba(236, 72, 153, 0.15);
+    }
+
+    .switch:checked:before {
+        transform: translateX(100%);
+        border-color: var(--color-primary);
+    }
+}
+
+@layer components {
+    .footer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        ul {
+            width: auto;
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+        }
+        svg {
+            width: 3rem;
+            fill: var(--color-primary);
+        }
+
+        a {
+            color: var(--color-secondary);
+        }
+    }
+
+    .home {
+        display: grid;
+        gap: 1rem;
+    }
+
+    .personal-info {
+        .mas-info {
+            display: none;
+        }
+    }
+
+    .projects {
+        header,
+        article {
+            margin-block: 1rem;
+        }
+    }
+
+    .articles-wrapper {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    }
+
+    .sample-component {
+        background-color: var(--color-secondary);
+        color: var(--color-font-secondary);
+        padding: 1rem;
+        border-radius: 0.5rem;
+        text-align: center;
+    }
+
+    .label {
+        display: grid;
+        margin-block: 0.2rem;
+    }
+
+    fieldset {
+        margin-block: 0.2rem;
+        padding: 0.4rem;
+    }
+
+    .button-wrapper {
+        margin-block: 0.5rem;
+
+        button {
+            padding: 0.2rem 0.4rem;
+        }
+    }
+
+    .todo {
+        ul {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            list-style: none;
+            gap: 1rem;
+        }
+        li {
+            padding: 1rem;
+            border: 1px solid;
+            border-radius: 10px;
+        }
+    }
+
+    .add-task-component {
+        border: 1px solid var(--color-secondary);
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-block: 1rem;
+
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            padding-block: 1rem;
+        }   
+    }
+}
+
+@media (width > 500px) {
+    menu.full-menu {
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+        a {
+            border: 1px solid ghostwhite;
+            display: block;
+            padding: 0.5rem 1rem;
+            /* transition-property: all;
+            transition-duration: 1s;
+            transition-delay: 1s;
+            transition-timing-function: linear */
+            transition: all 0.3s ease-in-out;
+        }
+        a:hover {
+            /* font-size: var(--size-large);
+            padding: 0.2rem 0.5rem; */
+            border: 1px solid rgb(144, 144, 152);
+            transform: scale(1.2);
+        }
+    }
+
+    menu.mobile-menu {
+        display: none;
+    }
+
+    .personal-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        & > p {
+            padding-inline-end: 1rem;
+        }
+        hgroup {
+            grid-column: span 2;
+        }
+        img {
+            height: 100%;
+            object-fit: cover;
+        }
+        .mas-info {
+            display: initial;
+        }
+    }
+}
+
+/* 
+Una media query puede cambiar los valores de una variable root
+@media (width > 700px) {
+    :root{
+        --base: 1.2rem
+    }
+} */

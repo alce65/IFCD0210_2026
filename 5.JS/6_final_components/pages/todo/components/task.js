@@ -1,0 +1,62 @@
+export const createTaskElement = (task) => {
+    const template =
+        /*html*/
+        `
+            <li>
+                <article title="${task.id}">
+                <header>
+                    <h3>${task.title}</h3>
+                </header>
+
+                <p><input type="checkbox" ${task.isCompleted ? "checked" : ""} />
+                    ${task.isCompleted ? "terminada" : "en curso"}
+                </p>
+                <p>${task.description}</p>
+                <footer>
+                    <address>
+                    ${task.owner}
+                    </address>
+                </footer>
+                <button>Borrar</button>
+                </article>
+            </li>`;
+
+    const parentElement = document.createElement("parent");
+    parentElement.innerHTML = template;
+    const element = parentElement.firstElementChild;
+
+    element.querySelector("button").addEventListener("click", () => {
+        console.log("borrando tarea", task.id);
+        const event = new CustomEvent("taskDeleted", { detail: task });
+        document.dispatchEvent(event);
+        element.remove();
+    });
+
+    element
+        .querySelector("input[type=checkbox]")
+        .addEventListener("change", (event) => {
+            const isChecked = event.target.checked;
+            console.log("cambiando estado de tarea", task.id, isChecked);
+            const eventChange = new CustomEvent("taskStatusChanged", {
+                detail: { ...task, isCompleted: isChecked },
+            });
+            document.dispatchEvent(eventChange);
+        });
+
+    return element;
+};
+
+export const task = () => {
+    const selector = "app-task";
+
+    document.querySelectorAll(selector).forEach((taskElement) => {
+        const task = {
+            ...taskElement.dataset, // DOMStringMap
+            isCompleted:
+                taskElement.dataset.isCompleted === "true" ? true : false,
+        };
+        taskElement.replaceWith(createTaskElement(task));
+    });
+
+    return;
+};

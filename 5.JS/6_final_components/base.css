@@ -1,0 +1,282 @@
+/* Variables CSS */
+
+:root {
+    --rich-mahogany: hsl(0, 96%, 11%); /* caoba intenso*/
+    --mahogany: rgb(127, 52, 52); /* caoba */
+    --brown: hsl(0, 59%, 41%);
+    --copper: hsl(43, 76%, 34%); /* cobre: */
+    --ebony: hsl(88, 20%, 36%); /* ébano: verde oscuro */
+    --soft-fawn: hsl(40, 40%, 70%); /* beige cervatillo */
+    --bisque: hsl(40, 50%, 90%); /* beige claro */
+
+    --black: hsl(0, 0%, 12%);
+    --dark-gray: hsl(0, 0%, 23%);
+    --gray: hsl(0, 0%, 40%);
+    --light-gray: hsl(0, 0%, 71%);
+    --white: hsl(0, 0%, 90%);
+
+    /* Paleta de colores: Theme Light */
+    --color-back: var(--white); /* color de fondo principal */
+    --color-font: var(--black); /* color de texto principal */
+
+    --color-primary: var(--rich-mahogany);
+    /* color principal para elementos destacados */
+    --color-font-primary: var(--soft-fawn);
+    /* color de fuente para elementos secundarios */
+
+    --color-secondary: var(--brown);
+    /* color secundario para elementos de apoyo */
+    --color-font-secondary: var(--bisque);
+    /* color de fuente para elementos secundarios */
+
+    --color-accent: var(--soft-fawn);
+    /* color de acento para elementos interactivos o destacados */
+    --color-font-accent: var(--rich-mahogany);
+    /* color de fuente para elementos de acento */
+
+    --color-error: var(--brown);
+    --color-font-error: var(--bisque);
+
+    --color-warning: var(--copper);
+    --color-font-warning: var(--bisque);
+
+    --color-success: var(--ebony);
+    --color-font-success: var(--bisque);
+
+    --color-info: var(--gray);
+    --color-font-info: var(--bisque);
+
+    /* Paleta de colores original */
+    /* --color-primary: var(--rich-mahogany);
+    --color-font: var(--black);
+    --color-secondary: var(--soft-fawn);
+    --back-color-primary: var(--color-secondary);
+    --back-color-secondary: brown;
+    --back-color-accent: rgb(86, 45, 45); */
+
+    /* Fuentes*/
+    --font-primary:
+        Montserrat, "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
+    --font-title: "Arial Black", "Arial Bold", Gadget, sans-serif;
+
+    /* Escala*/
+    --scala: 1.2;
+    --base: 1rem;
+
+    --size-x-large: calc(var(--size-large) * var(--scala));
+    --size-large: calc(var(--size-medium) * var(--scala));
+    --size-medium: calc(var(--size-normal) * var(--scala));
+    --size-normal: var(--base);
+    --size-small: calc(var(--size-normal) / var(--scala));
+    --size-x-small: calc(var(--size-small) / var(--scala));
+
+    /* Bordes*/
+    --border-radius: 0.5rem;
+}
+
+/* Reset */
+
+@layer reset {
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        overflow-wrap: break-word;
+    }
+
+    body {
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    img,
+    picture,
+    video,
+    canvas,
+    svg {
+        display: block;
+        max-width: 100%;
+    }
+
+    input,
+    button,
+    textarea,
+    select {
+        font: inherit;
+    }
+
+    p {
+        text-wrap: pretty;
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        text-wrap: balance;
+    }
+
+    /* Aplicación de la escala a los títulos y texto */
+
+    h1,
+    .h1,
+    h2,
+    .h2,
+    h3,
+    .h3 {
+        line-height: 1;
+        margin-block: 1rem;
+    }
+
+    h1,
+    .h1,
+    .x-large {
+        font-size: var(--size-x-large);
+    }
+    h1,
+    .h1 {
+        font-family: var(--font-title);
+    }
+
+    h2,
+    .h2,
+    .large {
+        font-size: var(--size-large);
+    }
+    h3,
+    .h3,
+    .medium {
+        font-size: var(--size-medium);
+    }
+    h4,
+    .h4,
+    .normal {
+        font-size: var(--size-normal);
+    }
+    h5,
+    .h5 {
+        font-size: var(--size-small);
+    }
+    h6,
+    .h6 {
+        font-size: var(--size-x-small);
+    }
+
+    .scale2 {
+        --scala: 1.5;
+        --base: 1rem;
+
+        --size-x-large: calc(var(--size-large) * var(--scala));
+        --size-large: calc(var(--size-medium) * var(--scala));
+        --size-medium: calc(var(--size-normal) * var(--scala));
+        --size-normal: var(--base);
+        --size-small: calc(var(--size-normal) / var(--scala));
+        --size-x-small: calc(var(--size-small) / var(--scala));
+    }
+}
+
+/* Layout  */
+@layer layout {
+    body {
+        height: 100vh;
+        min-width: 300px;
+        max-width: 1200px; /* max-width: 900px; */
+        margin: 0 auto;
+        display: grid;
+        grid-template-rows: min-content auto min-content;
+    }
+
+    main {
+        /* Definimos el display para tener gap */
+        display: grid;
+        gap: 1.5rem;
+        padding: 1rem;
+    }
+
+    /* Borde provisional para visualizar las áreas del layout, luego se eliminará */
+
+    body > header,
+    body > footer,
+    main {
+        border: 1px solid rgb(176, 176, 180);
+        padding: 1rem;
+    }
+}
+
+/* Propiedades básicas */
+
+@layer main-components {
+    body {
+        font-family: var(--font-primary);
+        font-size: var(--size-normal);
+        background-color: var(--color-back);
+        color: var(--color-font);
+    }
+
+    body > header {
+        background-color: var(--color-primary);
+        color: var(--color-font-primary);
+    }
+}
+
+/* Componentes */
+
+@layer buttons {
+    .button {
+        font-family: var(--font-primary);
+        font-size: var(--size-normal);
+        background-color: var(--color-primary);
+        color: var(--color-font-primary);
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        border: 1px solid;
+        border-radius: var(--border-radius);
+    }
+
+    .button-secondary {
+        background-color: var(--color-secondary);
+        color: var(--color-font-secondary);
+    }
+
+    .button:hover {
+        background-color: var(--color-accent);
+        color: var(--color-font-accent);
+    }
+}
+
+@layer alerts {
+    .alerts-container {
+        display: grid;
+        gap: 0.75rem;
+    }
+
+    .alert {
+        padding: 0.75rem 1rem;
+        border-radius: 4px;
+        width: fit-content;
+    }
+
+    .alert-error {
+        background-color: var(--color-error);
+        color: var(--color-font-error);
+    }
+
+    .alert-warning {
+        background-color: var(--color-warning);
+        color: var(--color-font-warning);
+    }
+
+    .alert-success {
+        background-color: var(--color-success);
+        color: var(--color-font-success);
+    }
+
+    .alert-info {
+        background-color: var(--color-info);
+        color: var(--color-font-info);
+    }
+}

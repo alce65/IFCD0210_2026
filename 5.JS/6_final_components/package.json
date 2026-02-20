@@ -1,0 +1,8 @@
+{
+  "name": "demo-06-components",
+  "version": "1.0.0",
+  "scripts": {
+    "server:spa": "live-server --entry-file=index.html --port=5555",
+    "server:mpa": "live-server --port=5555"
+  }
+}
