@@ -2,6 +2,8 @@
 
 ## Componente
 
+### Opción A
+
 Una función
 
 - selector
@@ -17,6 +19,13 @@ export const component = () => {
     document.querySelector(selector).outerHTML = setTemplate()
 }
 ```
+
+### Opción B
+
+- selector
+- template
+- elemento HTML
+- renderización: elemento -> selector
 
 ## Uso de un componente
 

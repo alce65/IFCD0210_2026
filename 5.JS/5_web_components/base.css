@@ -4,7 +4,7 @@ body {
     MALO PRACTICA definir tamaños fijos en las fuentes
     font-size: 16px; */
     font-size: var(--size-normal);
-    background-color: var(--back-color-primary);
+    background-color: var(--color-back: );
     color: var(--color-font);
 }
 
@@ -68,7 +68,7 @@ h6,
 .button {
     font-family: var(--font-primary);
     font-size: var(--size-normal);
-    background-color: var(--back-color-primary);
+    background-color: var(--color-back: );
     color: var(--color-primary);
     border: none;
     padding: 0.5rem 1rem;

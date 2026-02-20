@@ -14,12 +14,33 @@
     --white: rgb(230, 230, 230);
 
     /* Paleta de colores */
-    --color-primary: var(--rich-mahogany);
-    --color-font: var(--black);
-    --color-secondary: var(--soft-fawn);
+    /* --color-primary: var(--rich-mahogany);
+    --color-font: var(--black); */
+    /* --color-secondary: var(--soft-fawn);
     --back-color-primary: var(--color-secondary);
     --back-color-secondary: brown;
-    --back-color-accent: rgb(86, 45, 45);
+    --back-color-accent: rgb(86, 45, 45); */
+
+        /* Paleta de colores: Theme Light / Dark */
+    --color-back: light-dark(var(--white), var(--black));
+    /* color de fondo principal */
+    --color-font: light-dark(var(--black), var(--white));
+    /* color de texto */
+
+    --color-primary: light-dark(var(--rich-mahogany), var(--bisque)); 
+    /* color principal para elementos destacados */
+    /* --color-font-primary: light-dark(var(--bisque), var(--rich-mahogany)); */
+    /* color de fuente para elementos secundarios */
+
+    --color-secondary: light-dark(var(--mahogany), var(--soft-fawn));
+    /* color secundario para elementos de apoyo */
+    --color-font-secondary: light-dark(var(--soft-fawn), var(--mahogany));
+    /* color de fuente para elementos secundarios */
+
+    --color-accent: light-dark(var(--soft-fawn), var(--mahogany));
+    /* color de acento para elementos interactivos o destacados */
+    --color-font-accent: light-dark(var(--rich-mahogany), var(--soft-fawn));
+    /* color de fuente para elementos de acento */
 
     /* Fuentes*/
     --font-primary:

@@ -2,6 +2,8 @@ const handleChange = (event) => {
     const element = event.target;
     themeColor = element.checked ? "dark" : "light";
     console.log(themeColor);
+    document.documentElement.classList.remove('dark', 'light')
+    document.documentElement.classList.add(themeColor)
 };
 
 export let themeColor = "light";

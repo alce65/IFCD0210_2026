@@ -1,6 +1,7 @@
 import { footer } from "./components/footer.js";
 import { header } from "./components/header.js";
 import { menu } from "./components/menu.js";
+import { sample } from "./components/sample.js";
 import { contactPage } from "./pages/contact.js";
 import { homePage } from "./pages/home.js";
 import { projectsPage } from "./pages/projects.js";
@@ -65,6 +66,7 @@ export function main() {
     header();
     menu(routes);
     footer();
+    sample()
 
     window.addEventListener("popstate", (event) => {
         console.log(location.path);

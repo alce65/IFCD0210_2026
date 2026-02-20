@@ -3,7 +3,7 @@ import { task } from "./task.js";
 
 export const todoPageInitial = () => {
     console.log("Loaded Todos", TASKS);
-    const tasks = TASKS;
+    const tasks = [...TASKS];
 
  
     const setTemplate = () => `
@@ -44,6 +44,15 @@ export const todoPage = () => {
         </ul>
       </section>
      `;
+
+
+
+    document.addEventListener('deleteTask', ({detail}) => {
+        console.log('Borrando', detail)
+        const i = tasks.findIndex((task) => task.id === detail.id )
+        tasks.splice(i, 1)
+        console.log(tasks)
+    }) 
 
     document.querySelector("main").innerHTML = setTemplate();
     task()
