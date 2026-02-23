@@ -1,0 +1,95 @@
+{
+  "users": [
+    {
+      "id": "1aa1",
+      "name": "Pepe",
+      "email": "pepe@sample.com"
+    },
+    {
+      "id": "2bb3",
+      "name": "Luisa",
+      "email": "luisa@sample.com"
+    },
+    {
+      "id": "6ea5",
+      "name": "Ernestina",
+      "email": "ernestina@sample.com"
+    },
+    {
+      "id": "07c2",
+      "name": "Rosa"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "1a2b",
+      "title": "Diseñar wireframes",
+      "owner": "María Gómez",
+      "isCompleted": true,
+      "description": "Crear wireframes para la web principal."
+    },
+    {
+      "id": "a2b3",
+      "title": "Configurar repositorio",
+      "owner": "Carlos Ruiz",
+      "isCompleted": true,
+      "description": "Inicializar proyecto y subirlo a GitHub."
+    },
+    {
+      "id": "2b3c",
+      "title": "Maquetar landing",
+      "owner": "Laura Fernández",
+      "isCompleted": false,
+      "description": "HTML y CSS para la página de inicio."
+    },
+    {
+      "id": "3c4d",
+      "title": "Implementar login",
+      "owner": "David López",
+      "isCompleted": false,
+      "description": "Crear formulario y lógica de autenticación."
+    },
+    {
+      "id": "12c4",
+      "title": "Crear API REST",
+      "owner": "Equipo B",
+      "isCompleted": false,
+      "description": "Backend para gestión de usuarios y tareas."
+    },
+    {
+      "id": "1a4d",
+      "title": "Añadir tests unitarios",
+      "owner": "Ángel Rivera",
+      "isCompleted": false,
+      "description": "Pruebas para funciones principales."
+    },
+    {
+      "id": "1ac4",
+      "title": "Optimizar imágenes",
+      "owner": "Irene Martín",
+      "isCompleted": true,
+      "description": "Reducir peso y mejorar carga de recursos."
+    },
+    {
+      "id": "0008",
+      "title": "Configurar hosting",
+      "owner": "Pedro Sáez",
+      "isCompleted": false,
+      "description": "Subir la web a un servicio de hosting."
+    },
+    {
+      "id": "1a09",
+      "title": "Revisar accesibilidad",
+      "owner": "Natalia Peña",
+      "isCompleted": true,
+      "description": "Comprobar contraste, navegación y etiquetas."
+    },
+    {
+      "id": "4d10",
+      "title": "Documentar proyecto",
+      "owner": "Equipo A",
+      "isCompleted": false,
+      "description": "Crear README y documentación técnica."
+    }
+  ]
+}

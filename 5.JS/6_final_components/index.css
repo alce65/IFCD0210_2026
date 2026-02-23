@@ -319,6 +319,15 @@
             display: initial;
         }
     }
+
+    [popover] {
+        padding: 1rem;
+        top: 50vh;
+        left: 50vw;
+        border: none;
+        background-color:  rgb(from var(--color-primary) r g b / 0.8);
+        color: var(--color-font-primary);
+    }
 }
 
 /* 

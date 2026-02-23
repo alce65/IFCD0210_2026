@@ -4,7 +4,7 @@ const handleForm = (event) => {
         event.preventDefault();
         const formData = new FormData(form);
         const task = {
-            id: crypto.randomUUID(),
+            // id: crypto.randomUUID(),
             title: formData.get("title"),
             owner: formData.get("owner"),
             isCompleted: formData.get("isCompleted") === "on" ? true : false,

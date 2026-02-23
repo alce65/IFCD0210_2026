@@ -23,7 +23,7 @@ export const createTaskElement = (task) => {
 
     const parentElement = document.createElement("parent");
     parentElement.innerHTML = template;
-    const element = parentElement.firstElementChild;
+    let element = parentElement.firstElementChild;
 
     element.querySelector("button").addEventListener("click", () => {
         console.log("borrando tarea", task.id);
@@ -37,9 +37,11 @@ export const createTaskElement = (task) => {
         .addEventListener("change", (event) => {
             const isChecked = event.target.checked;
             console.log("cambiando estado de tarea", task.id, isChecked);
+            task.isCompleted = isChecked 
             const eventChange = new CustomEvent("taskStatusChanged", {
-                detail: { ...task, isCompleted: isChecked },
+                detail: { ...task},
             });
+            element = createTaskElement(task)
             document.dispatchEvent(eventChange);
         });
 

@@ -1,10 +1,35 @@
 import { addTask } from "./components/add.js";
 import { task, createTaskElement } from "./components/task.js";
-import { getAllTasksSync } from "./services/tasks-repo.js";
+import {
+    createTask,
+    deleteTask,
+    getAllTasks,
+    updateTask,
+} from "./services/tasks-repo.js";
 
-export const todoPage = () => {
-    const tasks = getAllTasksSync();
-    console.log("Loaded Todos", tasks);
+export const todoPage = async () => {
+    let tasks = [];
+
+    const renderTasks = () => {
+        const list = createList();
+        // elementSection.querySelector('ul').setHTMLUnsafe(list)
+        elementSection.querySelector("ul").innerHTML = list;
+        task();
+    };
+
+    const createList = () => {
+        return tasks
+            .map((task) => {
+                return `<app-task 
+                        data-id="${task.id}"
+                        data-title="${task.title}"
+                        data-owner="${task.owner}"
+                        data-is-completed="${task.isCompleted}"
+                        data-description="${task.description}"
+                    ></app-task>`;
+            })
+            .join("");
+    };
 
     const setElement = () => {
         const template =
@@ -16,18 +41,9 @@ export const todoPage = () => {
                     <button id="add-task">Añadir tareas</button>
                 </app-add-task>
                 <ul>
-                ${tasks
-                    .map((task) => {
-                        return `<app-task 
-                        data-id="${task.id}"
-                        data-title="${task.title}"
-                        data-owner="${task.owner}"
-                        data-is-completed="${task.isCompleted}"
-                        data-description="${task.description}"
-                    ></app-task>`;
-                    })
-                    .join("")}
+                ${createList()}
                 </ul>
+                <div popover id="error-info"></div>
             </section>
             `;
 
@@ -37,7 +53,7 @@ export const todoPage = () => {
 
         element.querySelector("#add-task").addEventListener("click", () => {
             const addTaskElement = element.querySelector("app-add-task");
-            console.dir(addTaskElement)
+            console.dir(addTaskElement);
             console.log("Añadiendo tarea");
             addTask(addTaskElement);
         });
@@ -46,37 +62,81 @@ export const todoPage = () => {
 
     const elementSection = setElement();
 
+    // try {
+    //     tasks = await getAllTasks();
+    //     renderTasks();
+    // } catch (error) {
+    //     const pop = elementSection.querySelector('#error-info')
+    //     pop.innerHTML = error.message
+    //     //pop.showPopover();
+    //     console.error(error.message);
+    // }
+
+    getAllTasks().then((data) => {
+            tasks = data;
+            renderTasks();
+        }).catch(error => {
+            const pop = elementSection.querySelector('#error-info')
+            pop.innerHTML = error.message
+            pop.showPopover();
+            console.error(error.message)
+        })
+
     document.querySelector("main").innerHTML = "";
     document.querySelector("main").appendChild(elementSection);
     task();
 
-    document.addEventListener("taskDeleted", ({detail}) => {
-        console.log("Tarea eliminada", detail);
-        tasks.splice(
-            tasks.findIndex((t) => t.id === detail.id),
-            1,
-        );
-        console.log("Tareas restantes", tasks);
+    document.addEventListener("taskDeleted", ({ detail }) => {
+        deleteTask(detail)
+            .then(() => {
+                console.log("Tarea eliminada", detail);
+                tasks.splice(
+                    tasks.findIndex((t) => t.id === detail.id),
+                    1,
+                );
+                console.log("Tareas restantes", tasks);
+            })
+            .catch((error) => console.error(error.message));
     });
 
-    document.addEventListener("taskStatusChanged", ({detail}) => {
-        console.log("Tarea modificada", detail);
-        const index = tasks.findIndex((t) => t.id === detail.id);
-        if (index !== -1) {
-            tasks[index] = detail;
-        }
-        console.log("Tareas actualizadas", tasks);
+    document.addEventListener("taskStatusChanged", ({ detail }) => {
+        updateTask(detail)
+            .then(() => {
+                console.log("Tarea modificada", detail);
+                const index = tasks.findIndex((t) => t.id === detail.id);
+                if (index !== -1) {
+                    tasks[index] = detail;
+                }
+                console.log("Tareas actualizadas", tasks);
+            })
+            .catch((error) => console.error(error.message));
     });
 
-    document.addEventListener("taskCreated", ({detail}) => {
+    document.addEventListener("taskCreated", ({ detail }) => {
         console.log("Tarea creada", detail);
-        tasks.push(detail);
-        console.log("Tareas actualizadas", tasks);
-        
-        const newTaskElement = createTaskElement(detail);
-        const list = elementSection.querySelector("ul");
-        list.insertBefore(newTaskElement, list.firstChild);
-        // elementSection.querySelector("ul").appendChild(createTaskElement(detail));
 
+        // Async -> actualiza backend
+
+        createTask(detail)
+            .then((finalTask) => {
+                // Sync -> actualiza el UI y el estado
+                tasks.push(finalTask);
+                console.log("Tareas actualizadas", tasks);
+
+                const newTaskElement = createTaskElement(finalTask);
+                const list = elementSection.querySelector("ul");
+                list.insertBefore(newTaskElement, list.firstChild);
+                // elementSection.querySelector("ul").appendChild(createTaskElement(detail));
+            })
+            .catch((error) => console.error(error.message));
     });
 };
+
+// No optimistic (conservadora)
+// Async -> actualiza backend
+// Sync -> actualiza el UI y el estado
+
+// Optimistic
+// Sync -> actualiza el UI y el estado
+// Async -> actualiza backend
+// ¿Error? -> rollback el UI y el estado
