@@ -22,19 +22,22 @@ Formador / Desarrollador Web FullStack
 2. [Eduardo Yeves Estévez](https://github.com/Yevestevez)
 3. [Beatriz López León](https://github.com/BeatrizLL83)
 4. [Daniel Alexis Soledad LLatas](https://github.com/DaAlexis24)
-5. ***
+5. [Juan Manuel García del Totro](https://github.com/juanmatoro)
 
-6. ***
-7. ***
+6. [Serigne Modou Fall Belle](https://github.com/MODOU19999)
+7. [Ronny Alexander Pin Pincay](https://github.com/ronnyaalez)
 8. [Jefferson Steven Espitia Flórez](https://github.com/Jefferespitia)
-9. [Daniel Saigua Labre](https://github.com/daniel48saigua)
+9. ***
 10. [Aranzazu Checa Alvaro](https://github.com/ArantxaCheca)
 
-11. [Jesmy Sarai Romay Cedeño](https://github.com/sarayromay)
-12. [Serigne Modou Fall Belle](https://github.com/MODOU19999)
-13. [Ronny Alexander Pin Pincay](https://github.com/ronnyaalez)
+11. ***
+12. ***
+13. ***
 14. ***
-15. [Juan Manuel García del Totro](https://github.com/juanmatoro)
+15. ***
+
+[Daniel Saigua Labre](https://github.com/daniel48saigua)
+[Jesmy Sarai Romay Cedeño](https://github.com/sarayromay)
 
 ## Skill
 
@@ -488,7 +491,7 @@ Ejercicios de introducción a JS: bloque 2
   - Componente todoPage: array de datos
   - Componente card: atributos (props) y parámetros
 
-<!-- ### Día 5 (V 20/02/2026) - M1.02 10
+### Día 5 (V 20/02/2026) - M1.02 10
 
 - Final del CRUD:
   - Delete: función como parámetro
@@ -503,11 +506,17 @@ Ejercicios de introducción a JS: bloque 2
 
 - AJAX. xmlHttpRequest (XHR)
   - Desde el código <https://pokeapi.co/api/v2/pokemon/ditto>
-  - fetch (Browser, Node) -->
+  - fetch (Browser, Node)
 
 ## Semana 7 (Febrero)
 
 <!-- ### Día 1 (L 23/02/2026) - M1.03 01
+
+- Fetch. API Rest
+  - Métodos GET, POST, PUT/PATCH, DELETE 
+  - Repo service: CRUD
+
+[Descanso]
 
 - Accesibilidad / UX
   - Concepto general
