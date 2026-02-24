@@ -3,7 +3,8 @@
     {
       "id": "1aa1",
       "name": "Pepe",
-      "email": "pepe@sample.com"
+      "email": "pepe@sample.com",
+      "job": "Developer"
     },
     {
       "id": "2bb3",
@@ -24,7 +25,7 @@
     {
       "id": "1a2b",
       "title": "Diseñar wireframes",
-      "owner": "María Gómez",
+      "owner": "María Luisa Gómez",
       "isCompleted": true,
       "description": "Crear wireframes para la web principal."
     },

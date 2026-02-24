@@ -33,4 +33,5 @@ export const projectsPage = () => {
 
     document.querySelector("main").innerHTML = "";
     document.querySelector("main").appendChild(setElement());
+    document.title = 'Proyectos | ' + BASE_TITLE
 };

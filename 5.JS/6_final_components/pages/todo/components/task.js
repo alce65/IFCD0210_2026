@@ -8,9 +8,9 @@ export const createTaskElement = (task) => {
                     <h3>${task.title}</h3>
                 </header>
 
-                <p><input type="checkbox" ${task.isCompleted ? "checked" : ""} />
+                <label><input type="checkbox" ${task.isCompleted ? "checked" : ""} />
                     ${task.isCompleted ? "terminada" : "en curso"}
-                </p>
+                </label>
                 <p>${task.description}</p>
                 <footer>
                     <address>

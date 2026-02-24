@@ -51,14 +51,16 @@
         color-scheme: dark;
     }
 
-    /* html:has(.radio-switch #light:checked) {
+    /* html:has(#light:checked) {
         color-scheme: light;
     }
 
-    html:has(.radio-switch #dark:checked) {
+    html:has(#light:indeterminate) {
         color-scheme: dark;
     } */
 }
+
+
 
 @layer header {
     .header {

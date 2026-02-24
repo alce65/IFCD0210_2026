@@ -157,4 +157,5 @@ export const contactPage = () => {
 
     document.querySelector("main").innerHTML = "";
     document.querySelector("main").appendChild(setElement());
+    document.title = 'Contacto | ' + BASE_TITLE
 };

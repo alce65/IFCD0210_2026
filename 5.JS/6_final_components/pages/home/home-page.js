@@ -52,4 +52,5 @@ export const homePage = () => {
 
     document.querySelector("main").innerHTML = "";
     document.querySelector("main").appendChild(setElement());
+    document.title = 'Inicio | ' + BASE_TITLE
 };

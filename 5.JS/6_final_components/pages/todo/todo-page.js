@@ -84,6 +84,7 @@ export const todoPage = async () => {
 
     document.querySelector("main").innerHTML = "";
     document.querySelector("main").appendChild(elementSection);
+    document.title = 'Tareas | ' + BASE_TITLE
     task();
 
     document.addEventListener("taskDeleted", ({ detail }) => {
