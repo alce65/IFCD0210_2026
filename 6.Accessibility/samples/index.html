@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+    <title>Accesibilidad web | Formularios y Botones</title>
+    <script type="module" src="./index.js" defer></script>
+  </head>
+
+  <body>
+    <header>
+      <h1>Accesible, que no es poco!! - Formularios y Botones</h1>
+    </header>
+    <main>
+      <section class="bad-buttons">
+        <div>
+          <img src="./assets/pexels-600w.jpg" alt="" />
+        </div>
+        <h2>Botones NO ACCESIBLES</h2>
+        <div class="btns">
+          <button class="btn">OPCIÓN A</button>
+          <a class="btn"> OPCIÓN B </a>
+          <p class="btn">OPCIÓN C</p>
+        </div>
+        <output></output>
+      </section>
+      <section class="good-buttons">
+        <picture>
+          <source
+            srcset="./assets/pexels-1280w.jpg"
+            media="(min-width: 600px)"
+          />
+          <img src="./assets/pexels-600w.jpg" alt="" />
+        </picture>
+        <hgroup>
+          <h2>Botones ACCESIBLES</h2>
+          <p>
+            ¿Botón o no botón? <span aria-hidden="true">💀</span>, esa es la
+            cuestión
+          </p>
+        </hgroup>
+        <ul>
+          <li>
+            <button id="A" type="button" class="btn">OPCIÓN A</button>
+          </li>
+          <li>
+            <button id="B" type="button" class="btn">OPCIÓN B</button>
+          </li>
+          <li>
+            <button id="C" type="button" class="btn">OPCIÓN C</button>
+          </li>
+        </ul>
+
+        <output name="action_result" for="A B C" aria-live="polite"> </output>
+      </section>
+      <section class="forms">
+        <h2>Formularios de registro</h2>
+        <form>
+          <fieldset>
+            <legend>Datos de contacto</legend>
+            <label for="name00">Nombre</label>
+            <input
+              type="text"
+              id="name00"
+              name="name00"
+              placeholder="Escribe tu nombre"
+            />
+            <label>
+              Apellidos
+              <input
+                type="text"
+                name="apellidos00"
+                placeholder="Escribe tus apellidos separados por coma"
+              />
+            </label>
+            <input
+              type="number"
+              name="edad00"
+              placeholder="Expresa tu edad en numeros"
+              aria-label="Edad*"
+            />
+          </fieldset>
+          <fieldset>
+            <legend>Datos de dirección</legend>
+            <label>
+              Dirección
+              <input type="text" placeholder="Dirección" />
+            </label>
+            <label>
+              Código Postal
+              <input
+                type="number"
+                name="codigo00"
+                min="0000"
+                max="99999"
+                placeholder="C.P"
+              />
+            </label>
+            <input
+              type="text"
+              name="localidad00"
+              placeholder="Localidad*"
+              aria-label="Localidad*"
+            />
+          </fieldset>
+          <button type="submit">
+            Enviar
+            <span class="hide--accessibility">Formulario de registro</span>
+          </button>
+        </form>
+      </section>
+      <section class="accordion">
+        <h2>Ejemplo de acordeón accesible</h2>
+        <div class="details">
+          <h3 class="summary">
+            <button
+              aria-expanded="false"
+              class="acc-trigger"
+              aria-controls="sect1"
+              id="accordion1id"
+            >
+              <span class="acc-title">
+                Personal Information
+                <span class="acc-icon"></span>
+              </span>
+            </button>
+          </h3>
+          <div
+            id="sect1"
+            role="region"
+            aria-labelledby="accordion1id"
+            class="acc-panel"
+            hidden
+          >
+            <p lang="en">Do Something personal</p>
+          </div>
+        </div>
+        <div class="details">
+          <h3 class="summary">
+            <button
+              aria-expanded="false"
+              class="acc-trigger"
+              aria-controls="sect2"
+              id="accordion1id"
+            >
+              <span class="acc-title">
+                Profesional Information
+                <span class="acc-icon"></span>
+              </span>
+            </button>
+          </h3>
+          <div
+            id="sect2"
+            role="region"
+            aria-labelledby="accordion1id"
+            class="acc-panel"
+            hidden
+          >
+            <p lang="en">Do Something profesional</p>
+          </div>
+        </div>
+      </section>
+      <section class="faq">
+        <details name="faq" lang="en">
+          <summary>
+            <h3>
+              <!-- <button
+                aria-expanded="false"
+                aria-controls="sect2"
+                id="accordion1id"
+              > 
+              <span class="acc-title"> -->
+              Question 1
+              <!-- </span>
+              </button> -->
+            </h3>
+          </summary>
+          <!-- <div
+            id="sect2"
+            role="region"
+            aria-labelledby="accordion1id"
+           
+          > 
+          <div class="acc-panel"> -->
+          <p lang="en">Response 1</p>
+          <!-- </div>
+          </div> -->
+        </details>
+        <details name="faq" lang="en">
+          <summary>
+            <h3>Question 2</h3>
+          </summary>
+          <p>Response 2</p>
+        </details>
+      </section>
+    </main>
+    <footer>
+      <p lang="en">Garaje Live Coding by Edu Iglesias</p>
+    </footer>
+  </body>
+</html>
