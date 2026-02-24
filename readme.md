@@ -510,13 +510,24 @@ Ejercicios de introducción a JS: bloque 2
 
 ## Semana 7 (Febrero)
 
-<!-- ### Día 1 (L 23/02/2026) - M1.03 01
+### Día 1 (L 23/02/2026) - M1.03 01
 
 - Fetch. API Rest
-  - Métodos GET, POST, PUT/PATCH, DELETE 
-  - Repo service: CRUD
+  - HTTP / HTTPs
+    - Métodos GET, POST, PUT/PATCH, DELETE
+    - Concepto de API REST (Representational State Transfer)
+      - URL: recurso (nombre)
+      - Method: acción (verbo)
+  - Backend: Simple API REST: json-server
+  - Postman
 
 [Descanso]
+
+- Web por componentes: ToDo
+  - Repo service: CRUD
+  - Gestión errores
+
+### Día 2 (M 24/02/2026) - M1.03 02
 
 - Accesibilidad / UX
   - Concepto general
@@ -526,22 +537,21 @@ Ejercicios de introducción a JS: bloque 2
     - Pautas WCAG 2
   - Elementos de accesibilidad
     - HTML
-    - CSS -->
+    - CSS
 
-<!-- ### Día 2 (M 24/02/2026) - M1.03 02
+[Descanso]
 
 - Accesibilidad / UX
   - WAI - ARIA. Roles y propiedades
-  - Tools -->
+  - Tools
 
-<!-- ### Día 3 (X 25/02/2026) - M1.02 11
+### Día 3 (X 25/02/2026) - M1.02 11
 
-Examen (1) -->
+Examen teórico (1)
+Examen práctico (1)
 
----
-
-### Día 4 (J 26/02/2026) - M2.01 01
+<!-- ### Día 4 (J 26/02/2026) - M2.01 01
 
 Examen (2)
 
-### Día 5 (V 27/02/2026) - M2.01 02
+### Día 5 (V 27/02/2026) - M2.01 02 -->
