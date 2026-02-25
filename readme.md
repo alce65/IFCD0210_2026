@@ -550,8 +550,43 @@ Ejercicios de introducción a JS: bloque 2
 Examen teórico (1)
 Examen práctico (1)
 
-<!-- ### Día 4 (J 26/02/2026) - M2.01 01
+### Día 4 (J 26/02/2026) - M2.01 01
 
-Examen (2)
+<!-- Examen (2) -->
 
-### Día 5 (V 27/02/2026) - M2.01 02 -->
+- JS/TS profesional. Entorno
+  - Versiones de NodeJS: actualizar v23.6.0x -> Ejecuta TS
+  - Construcción de un proyecto FRONT: Vite
+  - TypeScript
+  - editorconfig / prettier
+  - Linter
+  - Build
+
+[Descanso]
+
+- Ejemplo frontend con VITE
+
+- Despliegue de una aplicación web
+  - GitHub Pages
+  - Netlify atajo: <https://app.netlify.com/drop>
+  - Netlify
+  - Vercel
+
+### Día 5 (V 27/02/2026) - M2.01 02
+
+- El proceso del desarrollo de software (módulo 3)
+  - ciclo de vida del software
+  - agile: scrum
+
+[Descanso]
+
+- JS como lenguaje: profundización
+  - Valores. Variables y tipos
+  - Modelo mental
+- Expresiones y sentencias. Funciones
+- Sentencias: Flujo del código
+- Errores
+- Objetos en JS
+- Constructores y métodos estáticos
+- Tipos primitivos y objetos. Métodos de string
+- Arrays
