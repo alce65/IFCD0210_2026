@@ -12,7 +12,7 @@ Vista inicial del componente
 
 Vista cuando el usuario hace hover en una puntuación
 
-![Vista cuando el usuario hace hover](./challeng/view-1-hover.png)
+![Vista cuando el usuario hace hover](./challenge/view-1-hover.png)
 
 Vista cuando el usuario hace click en una puntuación, y retira el ratón
 
