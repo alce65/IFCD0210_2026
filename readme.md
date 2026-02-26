@@ -554,6 +554,11 @@ Examen práctico (1)
 
 <!-- Examen (2) -->
 
+Review Examen
+
+[Descanso]
+
+- Ejemplo frontend con VITE
 - JS/TS profesional. Entorno
   - Versiones de NodeJS: actualizar v23.6.0x -> Ejecuta TS
   - Construcción de un proyecto FRONT: Vite
@@ -562,17 +567,13 @@ Examen práctico (1)
   - Linter
   - Build
 
-[Descanso]
-
-- Ejemplo frontend con VITE
+### Día 5 (V 27/02/2026) - M2.01 02
 
 - Despliegue de una aplicación web
   - GitHub Pages
   - Netlify atajo: <https://app.netlify.com/drop>
   - Netlify
   - Vercel
-
-### Día 5 (V 27/02/2026) - M2.01 02
 
 - El proceso del desarrollo de software (módulo 3)
   - ciclo de vida del software
