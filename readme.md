@@ -552,8 +552,6 @@ Examen práctico (1)
 
 ### Día 4 (J 26/02/2026) - M2.01 01
 
-<!-- Examen (2) -->
-
 Review Examen
 
 [Descanso]
