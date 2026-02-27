@@ -1,14 +1,12 @@
-import { hero } from '@/components/hero/hero';
+import { footer } from '@/components/footer/footer';
+import { home } from '@/pages/home/home';
 import './style.css';
 
-import { counter } from '@/components/counter/counter';
-import { footer } from './components/footer/footer';
 
 const setTemplate = () => {
     return /*html*/ `
     <div>
-        <app-hero></app-hero>
-        <app-counter></app-counter>
+        <main></main>
         <app-footer></app-footer>
     </div>
     `;
@@ -19,6 +17,5 @@ if (target) {
     target.innerHTML = setTemplate();
 }
 
-hero();
-counter();
-footer();
+footer();  
+home();
