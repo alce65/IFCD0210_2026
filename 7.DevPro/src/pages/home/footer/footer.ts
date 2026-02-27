@@ -20,7 +20,7 @@ export const footer = () => {
     `;
 
     const element = document.createElement('footer');
-    element.classList.add('footer');
+    element.classList.add('home-footer');
     element.innerHTML = template;
 
     // Agrega lógica (eventos, etc.)

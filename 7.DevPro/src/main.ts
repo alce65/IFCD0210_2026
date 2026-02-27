@@ -2,13 +2,17 @@ import { footer } from '@/components/footer/footer';
 import { home } from '@/pages/home/home';
 import './style.css';
 
-
 const setTemplate = () => {
     return /*html*/ `
-    <div>
+        <header>
+           <nav>
+                <a href="/">Home</a>
+                <a href="/products">Products</a>
+                <a href="/about">About</a>
+            </nav>
+        </header>
         <main></main>
         <app-footer></app-footer>
-    </div>
     `;
 };
 
@@ -17,5 +21,5 @@ if (target) {
     target.innerHTML = setTemplate();
 }
 
-footer();  
+footer();
 home();

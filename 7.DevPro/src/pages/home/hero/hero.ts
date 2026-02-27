@@ -26,7 +26,7 @@ export const hero = () => {
         <h1>Vite + TypeScript</h1>
     `;
 
-    const element = document.createElement('div');
+    const element = document.createElement('header');
     element.classList.add('hero');
     element.innerHTML = template;
 

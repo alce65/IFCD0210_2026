@@ -5,11 +5,11 @@ import { footer } from '@/pages/home/footer/footer';
 export const home = () => {
     const setTemplate = () => {
         return /*html*/ `
-    <div>
+    <section class="home">
         <app-hero></app-hero>
         <app-counter></app-counter>
         <app-home-footer></app-home-footer>
-    </div>
+    </section>
     `;
     };
 
