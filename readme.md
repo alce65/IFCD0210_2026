@@ -550,6 +550,8 @@ Ejercicios de introducción a JS: bloque 2
 Examen teórico (1)
 Examen práctico (1)
 
+## Semana 7b (Febrero) - Módulo 2
+
 ### Día 4 (J 26/02/2026) - M2.01 01
 
 Review Examen
@@ -565,7 +567,7 @@ Review Examen
   - Linter
   - Build
 
-### Día 5 (V 27/02/2026) - M2.01 02
+### Día 5 (V 27/02/2026) - M2.03 01
 
 - Despliegue de una aplicación web
   - GitHub Pages
@@ -573,19 +575,50 @@ Review Examen
   - Netlify
   - Vercel
 
-- El proceso del desarrollo de software (módulo 3)
-  - ciclo de vida del software
-  - agile: scrum
-
 [Descanso]
+
+- Proyecto Vite [Continuación]
+  - Incorporación de componentes
+  - Review: creación de componentes vanilla JS
+  - MPA: MultiPage Application
+
+## Semana 8 (Marzo)
+
+### Día 1 (02/03/2026) - M2.01 02 - JS
 
 - JS como lenguaje: profundización
   - Valores. Variables y tipos
   - Modelo mental
+  - Constantes: Object.freeze()
+- Comparación con Typescript
+  - Inferencia de tipos
+  - Constantes: as const
+
+[Descanso]
+
+- Casting y coerción
+- Operadores de paso: && - || - ??  (.? - !)
 - Expresiones y sentencias. Funciones
-- Sentencias: Flujo del código
+- Sentencias: Flujo del código. Condicionales
+- Objetos en JS. Arrays
+  - Valores primitivos: inmutabilidad
+  - Objetos: instancias y mutabilidad
+    - Clonado de objetos
+    - Acceso a propiedades
+    - Iteración: for - in
+
+### Día 2 (03/03/2026) - M2.01 03 - JS
+
+- Objetos en JS (continuación)
+  - Constructores y métodos estáticos
+  - Tipos primitivos y objetos. Métodos de string
+  - Arrays
 - Errores
-- Objetos en JS
-- Constructores y métodos estáticos
-- Tipos primitivos y objetos. Métodos de string
-- Arrays
+- Funciones
+  - Parámetros primitivos v. objeto
+- Desestructuración
+  - En declaración de variables y parámetros
+  - Operador spreed
+  - Operador rest (parámetros)
+- Objetos en JS. Literales
+  - Prototype (\_\_proto\_\_)
