@@ -1,25 +1,29 @@
+"use strict";
+
 {
     // Datos y sus tipos
 
-    console.log('Pepe', typeof 'Pepe');
+    console.log("Primitive types");
+    console.log("Pepe", typeof "Pepe");
     console.log(22, typeof 22);
     console.log(true, typeof true);
     console.log(22n, typeof 22n);
     console.log(undefined, typeof undefined);
-    console.log(null, typeof null, 'MENTIRA, un BUG del lenguaje original');
+    console.log(null, typeof null, "MENTIRA, un BUG del lenguaje original");
     console.log(Symbol(), typeof Symbol());
+    console.log("Referenced types");
     console.log({}, typeof {});
     console.log(() => {}, typeof (() => {}));
 
     // Demostración de que null NO ES UN OBJETO
 
-    console.log(({}.foo = 22));
-    // console.log(('Pepe'.foo = 22));
-    //console.log((22.foo = 22));
-    // console.log((undefined.foo = 22));
-    // console.log((null.foo = 22));
+    //console.log(({}.foo = 22), 'Linea 18');
+    //console.log(('Pepe'.foo = 22));
+    //console.log((Number(22).foo = 22));
+    //console.log((true.foo = 22, 'Linea 20'));
+    //console.log((undefined.foo = 22));
+    //console.log((null.foo = 22));
 }
-
 {
     // Variables
 
@@ -33,8 +37,8 @@
     console.log({ baz });
 
     const pi = 3.14; // const siempre se inicializan
+    // pi = 3.1416; // TypeError: Assignment to constant variable.
 }
-
 {
     // Variables con let -> reasignarse y opcionalmente CAMBIAR DE TIPO
 
@@ -43,7 +47,7 @@
 
     let foo;
     console.log({ foo }, typeof foo);
-    foo = 'Pepe';
+    foo = "Pepe";
     console.log({ foo }, typeof foo);
     foo = 22;
     console.log({ foo }, typeof foo);
@@ -62,9 +66,12 @@
 }
 
 // El scope de let y const es el BLOQUE en el que se definen
-
-//console.log(foo); // ReferenceError: foo is not defined
-
+// let foo2 = 22;
+{
+    let foo2 = 250;
+    console.log(foo2, "Dentro del bloque");
+}
+// console.log(foo2, "Fuera del bloque"); // ReferenceError: foo2 is not defined
 {
     const IVA_VALUES = {
         base: 1.21,
@@ -74,13 +81,20 @@
 
     Object.freeze(IVA_VALUES);
 
-    // IVA_VALUES.base = 1; TypeError: Cannot assign ...
+    // IVA_VALUES.base = 1.16; // TypeError: Cannot assign ...
 
     let price = 22;
     let total = price * IVA_VALUES.base;
-    console.log(total);
+    console.log({ total });
 
     const data = [1, 2, 3];
+    Object.freeze(data);
+
+    // data = []
+
+    // data.push(4); // TypeError: Cannot add property 3, object is not extensible
+    // data[0] = 0; // TypeError: Cannot assign to read only property '0' of object '[object Array]'
+    console.log({ data });
 }
 {
     // undefined y null -> nullish
@@ -91,7 +105,7 @@
     console.log({ baz });
 
     // Intencional
-    foo = 'Pepe';
+    foo = "Pepe";
     foo = null;
     console.log({ foo });
     baz = (() => null)();
@@ -102,6 +116,8 @@
 
     let user = 'Pepe "El tuerto"';
     user = "Pepe \n 'El tuerto'";
+    user = 'Pepe \n \'El tuerto\'';
+    
 
     console.log(user);
 
@@ -152,9 +168,9 @@
     console.log(Number.isNaN(rare)); //true
 
     // Con conversion de tipos
-    console.log(isNaN('Pepe')); //true
+    console.log(isNaN("Pepe")); //true
     // Sin conversion de tipos
-    console.log(Number.isNaN('Pepe')); //false
+    console.log(Number.isNaN("Pepe")); //false
 
     // rare = 1n / 0n; // RangeError: Division by zero
 
@@ -174,15 +190,20 @@
     // casting -> explícita
 
     let n = 1;
-    let x = '2';
+    let x = "2";
 
-    let result = n / Number(x); // casting
-    console.log(result);
-
+    let resultDivision = n / x; // coerción
+    console.log(resultDivision); // 0.5
+    
     // Tipado débil => SIEMPRE hace coerción
-
-    result = n + x; // coerción
+    
+    let result = n + x; // coerción
     console.log(result); // 12
+  
+    result = n + Number(x); // casting
+    console.log(result); // 3
+
+    console.log(typeof n, typeof x); 
 }
 {
     // truly v. falsy v. nullish
@@ -192,168 +213,97 @@
     console.log(Boolean(0));
     console.log(Boolean(-0));
     console.log(Boolean(0n));
-    console.log(Boolean(''));
+    console.log(Boolean(""));
     console.log(Boolean(NaN));
     // nullish (??)
     console.log(Boolean(undefined));
     console.log(Boolean(null));
 }
 {
+    // Condicionales 
+
+    const b = true;
+    let x;
+    if (b) {
+        //algo
+        x = "Es true";
+    } else {
+        //otro algo
+        x = "No es true";
+    }
+    console.log(x);
+
+    const y = !b ? "No Es true" : "Es true"; // operador ternario
+    console.log(y);
+
+    
+    // A OR B -> false si A es falsy y B es falsy, true en cualquier otro caso
+}
+{
+    // Operadores lógicos
+    
+    // || // OR lógico
+
+    // && // AND lógico
+
+    const a = () => {
+        console.log("Ejecutando a");
+        return "Pepe";
+    };
+    
+    const b = () => {
+        console.log("Ejecutando b");
+        return 22;
+    };
+
+    // A || B -> true si A es truthy o B es truthy, false en cualquier otro caso
+    
+    const r = a() || b(); //  Ejecuta a, devuelve 'Pepe', no ejecuta b
+    console.log({ r });
+
+    // A && B -> true si A es truthy y B es truthy, false en cualquier otro caso
+
+    const r2 = a() && b() // Ejecuta a, devuelve 22, no ejecuta b
+    console.log({ r2 });
+
+    if (a() || b()) {
+        console.log("Es verdad uno de los dos");
+    } else {
+        console.log("Son los dos falsos");
+    }
+
+    if (a() && b()) {
+        console.log("Son verdad los dos");
+    } else {
+        console.log("Al menos uno es falso");
+    }
+
+    // ?? // nullish coalescing operator
+
+    // A ?? B -> devuelve A si A no es nullish, devuelve B en cualquier otro caso
+
+    const r3 = a() ?? 'Default'; // Ejecuta a, devuelve 'Pepe', no ejecuta b
+    // const r4 = a() ? a() : 'Default'; // No ejecuta a, devuelve 'Default'
+
+    // El operador .? -> Optional chaining operator
+
+    const obj = {
+        name: "Pepe",
+        address: {
+            city: "Madrid",
+        },
+    };
+
+    console.log("Comprobando city:", obj.address?.city);
+    console.log("Comprobando JOB:", obj.job);
+    console.log("Comprobando JOB:", obj.job?.job);
+
+    // El operador ! -> Non-null assertion operator (TypeScript)
+
+}
+{
     // Coerción de primitivos a objetos
-    let foo = 'Pepe';
+    let foo = "Pepe";
     // foo.to = 9; // TypeError
     console.log(foo.toLowerCase());
-}
-{
-    // functions
-    function foo() {} // Declaración
-    const baz = function () {}; // asignación de expresión funcional (anónima)
-    const arrowFoo = () => {}; // asignación de arrow function (anónima)
-
-    // Uso (ejecuto, invoco, run) la función
-    // operador de invocación: ()
-
-    foo();
-    baz();
-    arrowFoo();
-
-    // Son objetos de primera clase
-
-    foo.title = 'Función declarada';
-    baz.title = 'Función por asignación';
-    arrowFoo.title = 'Arrow function';
-
-    console.log(foo, baz, arrowFoo);
-}
-{
-    // objects
-    const obj1 = new Object(); // No se usa
-
-    // Objeto literal (JSON): Douglas Crockford
-    const obj = {
-        name: 'Juan',
-        age: 45,
-        isUser: true,
-    };
-
-    obj1.name = 'Juan';
-    obj1.age = 45;
-    obj1.isUser = true;
-
-    // obj1 = {}; TypeError: Assignment
-    console.log(obj1, obj);
-
-    obj.name = 'Pepe';
-    delete obj.isUser;
-
-    console.log(obj);
-}
-{
-    // Acceso a las propiedades
-
-    const obj = {
-        name: 'Juan',
-        age: 45,
-        isUser: true,
-    };
-
-    // Notación por puntos
-    console.log(obj.age);
-    // console.log(obj['age']);
-
-    // Notación []
-
-    const propertyName = 'name';
-
-    console.log(obj[propertyName]);
-
-    for (const key in obj) {
-        console.log(`La propiedad ${key} vale ${obj[key]}`);
-    }
-}
-{
-    // Arrays
-    const data = [1, 2, 3];
-    const data2 = new Array(1, 2, 3);
-
-    console.log(typeof data, typeof data2);
-
-    data.name = 'Array de números';
-    console.log(data, data2);
-}
-{
-    // Mutabilidad
-
-    // Reasignación de valores INMUTABLES
-    let z = 22;
-    let x = 22;
-    x = 24;
-
-    // const + valor primitivo (INMUTABLE) = CONSTANTE
-    const c = 23;
-    // c = 33; // Error TypeError: Assignment
-
-    // const + objeto -> NO ES CONSTANTE: es MUTABLE
-
-    const obj = {};
-    obj.name = 'Pepe';
-    // obj = {}; // Error TypeError: Assignment
-
-    // const + objeto + Object.freeze = CONSTANTE
-
-    const EMPRESA = { brand: 'CAS', address: '' };
-    Object.freeze(EMPRESA);
-
-    // EMPRESA.brand = 'New Empresa'; // TypeError: Cannot assign to read only
-}
-{
-    //  Métodos (de instancia)
-    const greet = () => 'Hola Mundo';
-    const obj = {
-        greet: function () {
-            return 'Hola Mundo';
-        },
-    };
-
-    console.log(obj.greet());
-    [].at(-1);
-    ''.toLowerCase();
-}
-{
-    // Métodos estáticos (de clase)
-    const obj = {
-        greet: function () {
-            return 'Hola Mundo';
-        },
-    };
-
-    Object.freeze(obj);
-
-    const data = [];
-    console.log(typeof data);
-
-    Array.isArray(data); // true
-
-    Math.random();
-    // new JSON();
-}
-{
-    // Wrapper objects de los primitivos
-
-    const d = '2';
-    console.log(22 / d);
-
-    let foo = 'Hola';
-
-    // const z = new String()
-
-    // Ejemplo de coercion a String
-    console.log(foo.toLowerCase());
-    console.log(foo);
-
-    let n = 22;
-    console.log(n.toFixed(2));
-
-    let big = 2n;
-    big.toString();
 }
