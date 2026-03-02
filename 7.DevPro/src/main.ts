@@ -21,5 +21,7 @@ if (target) {
     target.innerHTML = setTemplate();
 }
 
+
+
 footer();
 home();

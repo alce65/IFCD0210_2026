@@ -4,9 +4,9 @@
     1. Función
     2. Define un selector (custom element)
     3. Define un template (string)
-    4. Crea un elemento HTML a partir del template
-    5. Agrega lógica (eventos, etc.)
-    4. Renderiza el template en el selector
+    4. Se define una función que crea un elemento HTML a partir del template
+    5. Agrega lógica (eventos, etc.) en la función
+    4. Renderiza el elemento en el selector / los selectores
         - appendChild (estilo Web Components)
         - replaceWith (estilo React)
  */
@@ -19,13 +19,20 @@ export const footer = () => {
         </p>
     `;
 
-    const element = document.createElement('footer');
-    element.classList.add('home-footer');
-    element.innerHTML = template;
+    const createElement = (tag = 'footer', className = 'home-footer') => {
+        const element = document.createElement(tag);
+        element.classList.add(className);
+        element.innerHTML = template;
 
-    // Agrega lógica (eventos, etc.)
+        // Agrega lógica (eventos, etc.)
+
+        return element;
+    };
 
     // Agrega el elemento / elementos al DOM
+    // document.querySelector(selector)?.replaceWith(createElement());
 
-    document.querySelector(selector)?.replaceWith(element);
-}
+    document
+        .querySelectorAll(selector)
+        .forEach((el) => el.replaceWith(createElement()));
+};
