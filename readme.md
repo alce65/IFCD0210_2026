@@ -597,7 +597,7 @@ Review Examen
 [Descanso]
 
 - Casting y coerción
-- Operadores de paso: && (paso true) - || (paso false) - ?? (paso nullish)  
+- Operadores de paso: && (paso true) - || (paso false) - ?? (paso nullish)
   - Otros operadores (.? - !)
 - Expresiones y sentencias. Funciones
 - Sentencias: Flujo del código.
@@ -627,3 +627,25 @@ Review Examen
   - Operador rest (parámetros)
 - Objetos en JS. Literales
   - Prototype (\_\_proto\_\_)
+
+### Día 3 (04/03/2026) - M2.01 04 - JS (OOP)
+
+- Objetos en JS. Literales (continuación)
+  - Prototype shadowing
+  - Prototype pollution
+- Elementos de FP (Functional Programming) en JS
+  - Funciones y propiedades
+  - Funciones anidadas
+  - HOF
+
+[Descanso]
+
+- Elementos de FP (Functional Programming) en JS
+  - IIFE
+  - Closures
+- Módulos ES6 (review)
+- Patrones de ejecución. This
+
+<!-- - OOP: Creación de Objetos
+  - Constructor: "clases".
+  - Constructores y miembros estáticos -->
