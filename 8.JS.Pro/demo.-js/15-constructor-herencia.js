@@ -7,10 +7,18 @@ Person.prototype.greet = function () {
     console.log(`Hola, soy ${this.name} y tengo ${this.age} años`);
 };
 
+
+const p1 = new Person('Pepe', 23) 
+const p2 = new Person('Juan', 34) 
+
+
+
 function User(name, age, role) {
     this.role = role;
     User.countUsers();
     Person.call(this, name, age);
+    // this.name = name;
+    // this.age = age;
 }
 
 User.prototype.greet = function () {

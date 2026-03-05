@@ -28,14 +28,14 @@ const user3 = {
 // Factory
 
 function createUser(name, age, job) {
-    const greet = function() {
+    const greet = function () {
         console.log(`Hello, I'm ${this.name} and I work as a ${this.job}`);
     };
     return {
         name,
         age,
         job,
-        greet
+        greet,
     };
 }
 
@@ -44,26 +44,26 @@ const user4 = createUser("Jill", 28, "Analyst");
 // Constructor
 
 function User(name, age, job) {
-    this.id = ++User.countUsers
+    this.id = ++User.countUsers;
     this.name = name;
     this.age = age;
     this.job = job;
-    this.sayAgeBad = function() {
+    this.sayAgeBad = function () {
         console.log(`Hello, I'm ${this.name} and I'm ${this.age} years old`);
     };
 }
 
 User.countUsers = 0;
-User.showUsersNumber = function() {
+User.showUsersNumber = function () {
     console.log(User.countUsers);
-}
-User.add = function(a, b) {
+};
+User.add = function (a, b) {
     return a + b;
-}
+};
 
 User.prototype.greet = function () {
     console.log(`Hello, I'm ${this.name} and I work as a ${this.job}`);
-}
+};
 
 const user5 = new User("Jim", 32, "Architect");
 const user6 = new User("Jenny", 27, "Consultant");
@@ -86,12 +86,23 @@ user6.sayAgeBad();
 
 User.showUsersNumber();
 
-Object.freeze({})
-Array.isArray([])
-Object.foo = function() {
+Object.freeze({});
+Array.isArray([]);
+Array.isArray(user5); // false
+
+Array.foo = function () {
     console.log("This is a static method on the Object constructor");
 };
 
-Object.foo(user5);
+// Object.freeze = 22;
 
+Array.foo(user5);
+Object.freeze(user5);
 
+const fu = function (arg) {
+    if (!Array.isArray(arg)) return;
+    return arg.map((item) => (isNaN(item) ? item : item * 2));
+};
+
+console.log(fu([1, 2, 3]));
+console.log(fu(["Pepe", 5]));
