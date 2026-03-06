@@ -669,10 +669,24 @@ Review Examen
 
 ### Día 5 (06/03/2026) - M2.01 06 - TS
 
-<!-- - Code Review ejercicios OOP: Facturas
+- Code Review ejercicios OOP: Facturas
+
+[Descanso]
+
+- Ejercicio TS + OOP: Facturas
+  - Migración a TS: tipos
+- TS instalación y configuración
+  - tsc & tsconfig
+  - linter
+- Usos
+  - Node TS native
+  - Transpilación a JS
+
+## Semana 9 (Marzo)
+
+### Día 1 (09/03/2026) - M2.01 07 - ?
 
 - TS. Tipos
-
   - Type checking
   - Inferencia de tipos
   - Tipos literales
@@ -681,10 +695,6 @@ Review Examen
   - Guardias de tipos
   - Arrays y tuplas
   - Uniones e intersecciones -->
-
-## Semana 9 (Marzo)
-
-### Día 1 (09/03/2026) - M2.01 07 - ?
 
 ### Día 2 (10/03/2026) - M2.01 08 - ?
 
