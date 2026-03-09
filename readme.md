@@ -684,7 +684,14 @@ Review Examen
 
 ## Semana 9 (Marzo)
 
-### Día 1 (09/03/2026) - M2.01 07 - ?
+### Día 1 (09/03/2026) - M2.01 07 - TS
+
+- Review: proyectos con TS
+  - Compilación (emit) v. type checking (no emit)
+  - target: versiones de ES
+  - ubicación de ficheros: /src - /dist (/build)
+  - Formato de los import
+  - base configs
 
 - TS. Tipos
   - Type checking
