@@ -26,7 +26,7 @@
 
         // Style Options
         // "noImplicitReturns": true,
-        // "noImplicitOverride": true,
+        "noImplicitOverride": true,
         // "noUnusedLocals": true,
         // "noUnusedParameters": true,
         // "noFallthroughCasesInSwitch": true,
@@ -41,7 +41,8 @@
         "moduleDetection": "force",
         "skipLibCheck": true,
         "noEmit": true,
-        "allowImportingTsExtensions": false
+        "allowImportingTsExtensions": true,
+        "erasableSyntaxOnly": true
     },
-    "include": ["./src", "../demo.js"],
+    "include": ["./src"],
 }

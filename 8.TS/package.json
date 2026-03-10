@@ -6,7 +6,7 @@
   "scripts": {
     "start": "tsc -w",
     "compile": "tsc",
-    "build": "tsc --noEmit false",
+    "build": "tsc --noEmit false --allowImportingTsExtensions false",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint ."
   },
