@@ -693,32 +693,86 @@ Review Examen
   - Formato de los import
   - base configs
 
+[Descanso]
+
 - TS. Tipos
   - Type checking
-  - Inferencia de tipos
+  - Inferencia de tipos v. anotación
   - Tipos literales
-  - Aserción de tipos (as)
+  - Aserción / casing de tipos (as)
   - Objetos. Propiedades
-  - Guardias de tipos
   - Arrays y tuplas
-  - Uniones e intersecciones -->
 
-### Día 2 (10/03/2026) - M2.01 08 - ?
+### Día 2 (10/03/2026) - M2.01 08 - TS
 
-### Día 3 (11/03/2026) - M2.01 09 - ?
+- TS
+  - Narrowing. Guardias de tipos
+  - Uniones e intersecciones
+  - Tipos propios: alias e interfaces
+    - Tipos para primitivos
+    - Interfaces abiertos
+    - Uniones e intersecciones con tipos propios
+  - Tipado estructural
+  - Guardias de tipos
+  - Clases y OOP en TS
+    - Elementos de ES6
+    - Ámbitos: privado, protected, public
+    - Propiedades de parámetros
 
-### Día 4 (12/03/2026) - M2.01 10 - ?
+<!-- ### Día 3 (11/03/2026) - M2.01 09 - OOP
 
-### Día 1 (13/03/2026) - M2.01 11 - ?
+- TS
+  - Clases abstractas
+  - Implementación de interfaces
+  - Abstracción: patrón Repository
+
+
+- Paradigma de la OOP en JS/TS
+- Conceptos generales de OOP
+  - Clases y objetos
+- Pilares de la OOP
+  - Abstracción (clases)
+  - Encapsulación (objetos)
+  - Herencia
+  - Polimorfismo
+- Elementos de la OOP
+
+  - Clases
+  - Objetos
+  - Herencia y polimorfismo
+  - Relaciones entre objetos y clases
+    - Asociación, agregación, composición
+  - Modularidad, genericidad y sobrecarga
+  - UML
+
+  - Tipado avanzado. Generics
+    - En funciones
+    - En clases
+  - Ejemplo: Repositorio genérico -->
+
+<!-- ### Día 4 (12/03/2026) - M2.01 10 - OOP
+
+- Detalles OOP - Tipos
+  - Extensiones de VSCode para TS
+  - Type queries
+  - Utility types
+  - Mixins
+- Practica: Repositorio genérico
+  - interfaz TypeODM ... app.d.ts
+  - file system mock
+  - implementación de la interfaz: clase ODMLite
+  - test de la implementación -->
+
+### Día 5 (13/03/2026) - M2.01 11 - ?
 
 ## Semana 10 (Marzo)
 
-### Día 1 (16/03/2026) - M2.01 12 - ?
+### Día 1 (16/03/2026) - M2.01 12 - Node / FS
 
-### Día 2 (17/03/2026) - M2.01 13 - ?
+### Día 2 (17/03/2026) - M2.01 13 - Node (CLI)
 
-### Día 3 (18/03/2026) - M2.01 14 - ?
+### Día 3 (18/03/2026) - M2.01 14 - Node (Servidor)
 
-### Día 4 (19/03/2026) - M2.01 15 - ?
+### Día 4 (19/03/2026) - M2.01 15 - Node + Express
 
-### Día 1 (20/03/2026) - M2.01 16 - ?
+### Día 1 (20/03/2026) - M2.01 16 - Node + Express
