@@ -1,8 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
-/* eslint-disable @typescript-eslint/no-unused-expressions */
-/* eslint-disable @typescript-eslint/consistent-type-definitions */
-/* eslint-disable @typescript-eslint/prefer-as-const */
-/* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 // Inferencia de tipos
@@ -20,7 +15,9 @@ z = "Pepe";
 
 // Tipos fuertes (strong) => no hay coerción
 {
+    // eslint-disable-next-line prefer-const
     let x = 22;
+    // eslint-disable-next-line prefer-const
     let y = "22";
 
     const r = x / Number(y);
@@ -36,6 +33,9 @@ z = "Pepe";
 // let y tipos literales as const
 
 {
+
+    // let z = 'Developer' as const
+    // eslint-disable-next-line prefer-const, @typescript-eslint/prefer-as-const
     let x: "Pepe" = "Pepe";
     // x = 'Juan'; // Error de TS
     console.log(x);
@@ -50,7 +50,7 @@ z = "Pepe";
 // conversión / casting / aserción de tipos
 
 {
-    function foo() {
+    function foo(): void {
         const z1 = document.querySelector("#button1") as HTMLButtonElement;
         const z2 = document.querySelector("h1") as unknown as number;
 
@@ -64,21 +64,27 @@ z = "Pepe";
 // Anotación de tipo --> : tipo
 {
     let z: number;
+    // eslint-disable-next-line prefer-const
     z = 22;
     // z = 'Pepe'; Error de TS
 }
 
 // Declaración const / let NO SE ANOTA
 {
-    // eslint-disable-next-line @typescript-eslint/no-inferrable-types
+    // eslint-disable-next-line @typescript-eslint/no-inferrable-types, prefer-const
     let x: number = 22; // SOBRA number
 }
 
 // Anotamos los parámetros
 
-function add(a: number, b = 0) {
+function add(a: number, b = 0): number {
     const r = a + b;
     return r;
+}
+
+function showAdd(a: number, b = 0): void {
+    const r = a + b;
+    console.log(r);
 }
 
 const s = (a: number, b: number): number => a - b;
@@ -101,9 +107,43 @@ const user: {
     age: 23,
 };
 
+// user.name = 'Ramón'
 user.age = 24;
 user.job = "Developer";
 delete user.job;
+
+
+// Objeto inmutable
+{
+    const config = {
+        api_url: 'http://hkshjkf.com/api',
+        api_key: '349247ay6383'
+    } as const
+    Object.freeze(config)
+
+    // config.api_key = '22'
+    // config.api_url = 'fuu'
+
+    const user1: {
+        readonly id: string | number,
+        name: string,
+        age: number
+    } = {
+        id: 15151,
+        name: 'Pepe',
+        age: 23
+    }
+
+    const user2: {
+        readonly id: string | number,
+        name: string,
+        age: number
+    } = {
+        id: 213244,
+        name: 'Luisa',
+        age: 25
+    }
+}
 
 // Propiedades opcionales
 {
@@ -118,11 +158,11 @@ delete user.job;
 
     // Parámetros opcionales
     // Narrowing: restricción del tipo
-    const foo = (a?: string): string  => {
-        if (!a) return 'Todo bien'
-        const r = a.toLocaleLowerCase()
+    const foo = (a?: string): string => {
+        if (!a) return "Todo bien";
+        const r = a.toLocaleLowerCase();
         console.log(r);
-        return r
+        return r;
 
         // if (a) {
         //     console.log(a.toLocaleLowerCase());
@@ -130,7 +170,6 @@ delete user.job;
     };
 
     foo();
-
 }
 
 // Arrays
@@ -139,8 +178,8 @@ delete user.job;
     data.push(23);
     // data.push('Pepa') //Error de tipo
 
-    const foo = (data: number[]) => {
-        data.map((item): number => item * item);
+    const foo = (data: number[]) : number[] => {
+        return data.map((item): number => item * item);
     };
 
     // No se usa
@@ -149,117 +188,22 @@ delete user.job;
     // };
 }
 {
-    const numbers: number[] = []
-    numbers.push(12)
+    const numbers: number[] = [];
+    numbers.push(12);
 }
 
 {
     const t: (number | string)[] = [1, 2];
     t.push("Luis");
 }
-// Tupla
+// Tupla (Tuple)
 {
     const t1: [string, number] = ["Pepe", 2];
     const t2: readonly [string, number] = ["Juan", 4];
 
     t1[1] = 5;
+    // t1[2] = 8
 
     t1.push("Pepe");
     console.log(t1.length);
 }
-// Firmas de indice
-{
-    // const user: {
-    //     name: string;
-    //     age: number;
-    // } = {
-    //     name: 'Pepe',
-    //     age: 23,
-    // };
-    // user.age = 24;
-    // for (const key in user) {
-    //     const element = user[key];
-    // }
-    // as { [key: string]: string | number }
-}
-{
-    // eslint-disable-next-line @typescript-eslint/consistent-indexed-object-style
-    const user: { [key: string]: string | number | boolean } = {
-        name: "Pepe",
-        age: 23,
-        hasJob: true,
-    };
-
-    user.algo = "";
-
-    const p = "score";
-    console.log(user[p]);
-
-    for (const key in user) {
-        const element = user[key];
-    }
-}
-// Union de tipos
-{
-    let id: string | number;
-    id = 12;
-    id = "KO923";
-
-    const fooString = (a: string) => {};
-    const fooNumber = (a: number) => {};
-
-    let x: string | number = 0;
-    // Error fooString(x)
-    // Error fooNumber(x)
-
-    const foo = (a: string | number) => {
-        if (typeof a === "string") {
-            a.slice();
-        } else {
-            a.toPrecision();
-        }
-    };
-
-    foo(x);
-}
-// Union de tipos literales
-{
-    let state: "Idle" | "Success" | "Error";
-    state = "Success";
-    state = "Error";
-}
-
-// Uniones discriminadas
-{
-    type Success = { status: "success"; data: string[] };
-    type Fail = { status: "error"; error: Error };
-
-    const foo = (a: Success | Fail) => {
-        if (a.status === "success") {
-            a.data.length;
-        } else if (a.status === "error") {
-            a.error.message;
-        } else {
-            console.log("No se como estoy aquí");
-        }
-    };
-}
-
-// Tipos intersection
-{
-    let c: (1 | 2 | 3) & (2 | 4 | 6);
-    c = 2;
-}
-{
-    // eslint-disable-next-line @typescript-eslint/consistent-indexed-object-style
-    let x: { [key: string]: any };
-    x = { a: 12 };
-    x.b = null;
-    x.c = [];
-}
-{
-    let c: { id: number } & { name: string };
-    c = { id: 12, name: "Pepe" };
-}
-// Tipos propios
-// Alias v. Interface
