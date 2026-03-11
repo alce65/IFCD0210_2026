@@ -6,7 +6,7 @@ class User {
         User.usersNumber++;
     }
     static {
-        console.log('Load class USER');
+        console.log("Load class USER");
     }
 
     #name: string;
@@ -36,8 +36,8 @@ class User {
     }
 }
 
-const user1 = new User('Pepe', 22, ['Rufo']);
-const user2 = new User('Juan', 24);
+const user1 = new User("Pepe", 22, ["Rufo"]);
+const user2 = new User("Juan", 24);
 
 console.log(user1, user2);
 
@@ -71,7 +71,7 @@ console.log(User.usersNumber);
             User.usersNumber++;
         }
         static {
-            console.log('Load class USER');
+            console.log("Load class USER");
         }
 
         // private _name: string;
@@ -108,18 +108,15 @@ console.log(User.usersNumber);
         }
     }
 
-    const u = new User('Luisa', 63);
+    const u = new User("Luisa", 63);
 }
 {
     class Person {
-        public name: string
-        protected age: number
-        constructor(
-            name: string,
-            age: number,
-        ) {
-            this.name = name
-            this.age = age
+        public name: string;
+        protected age: number;
+        constructor(name: string, age: number) {
+            this.name = name;
+            this.age = age;
         }
 
         greet() {
@@ -128,14 +125,10 @@ console.log(User.usersNumber);
     }
 
     class Employee extends Person {
-        public salary: number
-        constructor(
-            name: string,
-            age: number,
-            salary: number,
-        ) {
+        public salary: number;
+        constructor(name = "", age: number, salary: number) {
             super(name, age);
-            this.salary = salary
+            this.salary = salary;
         }
 
         override greet() {
@@ -143,55 +136,75 @@ console.log(User.usersNumber);
         }
 
         birthday() {
-            this.age++
+            this.age++;
         }
 
         // override greet() {
         //     return `cobro ${this.salary}€`;
         // }
     }
-    
-    const e = new Employee('Pepe', 23, 2_000)
-    e.
-}
 
+    const e = new Employee("Pepe", 23, 2_000);
+}
 {
     interface User {
         account: string;
         createAccount: () => string;
     }
 
+    type UserT = {
+        account: string;
+        createAccount: () => string;
+    };
+
     const u: User = {
-        account: '',
+        account: "",
         createAccount: function () {
-            return '';
+            return "";
         },
     };
 
-    abstract class Person {
-        constructor(
-            public name: string,
-            public age: number,
-        ) {}
+    class Admin implements UserT {
+        account: string;
+        id: string;
+        constructor(account: string) {
+            this.account = account;
+            this.id = "";
+        }
 
-        abstract greet(): string;
-        eat() {
-            return 'Estoy comiendo';
+        createAccount() {
+            return "";
+        }
+
+        changeId(id: string) {
+            this.id = id;
         }
     }
 
+    abstract class Person {
+        public name: string;
+        age: number;
+        constructor(name: string, age: number) {
+            this.name = name;
+            this.age = age;
+        }
+        eat() {
+            return "Estoy comiendo";
+        }
+
+        abstract greet(): string;
+    }
+
     class Employee extends Person implements User {
-        account: string = '';
-        constructor(
-            name: string,
-            age: number,
-            public salary: number,
-        ) {
+        account: string = "";
+        salary: number;
+        constructor(name: string, age: number, salary: number) {
             super(name, age);
+            this.salary = salary;
         }
 
         createAccount(): string {
-            return '';
+            return "";
         }
 
         greet() {
@@ -199,79 +212,15 @@ console.log(User.usersNumber);
         }
 
         override eat(): string {
-            return super.eat() + ' ......';
+            return super.eat() + " ......";
         }
     }
 
-    const e1 = new Employee('Pepe', 34, 40_000);
+    const e1 = new Employee("Pepe", 34, 40_000);
     console.log(e1.eat());
     console.log(e1.greet());
 }
-{
-    type Item = {};
-    type PartialItem = {};
 
-    interface Repository {
-        read: () => Item[];
-        readById: (id: string) => Item;
-        create: (data: PartialItem) => Item;
-        update: (id: string, data: PartialItem) => Item;
-        delete: (id: string) => Item;
-    }
-
-    class RepoNotesSQL implements Repository {
-        read() {
-            return [];
-        }
-
-        readById(id: string) {
-            return {};
-        }
-
-        create(data: PartialItem) {
-            return {};
-        }
-
-        update(id: string, data: PartialItem) {
-            return {};
-        }
-
-        delete(id: string) {
-            return {};
-        }
-
-        generateSQL() {
-            return '';
-        }
-    }
-
-    class RepoNotesMongo implements Repository {
-        read() {
-            return [];
-        }
-
-        readById(id: string) {
-            return {};
-        }
-
-        create(data: PartialItem) {
-            return {};
-        }
-
-        update(id: string, data: PartialItem) {
-            return {};
-        }
-
-        delete(id: string) {
-            return {};
-        }
-    }
-
-    const repo: Repository = new RepoNotesMongo();
-
-    repo.read();
-    (repo as RepoNotesSQL).generateSQL();
-}
 // Interfaz/type como tipo de data
 {
     interface User {
@@ -279,59 +228,115 @@ console.log(User.usersNumber);
         age: number;
     }
 
+    type UserT = {
+        name: string;
+        age: number;
+    };
+
     function foo(param: User) {
         console.log(param.name, param.age);
     }
 
-    const u = { name: 'Pepe', age: 23, c: 9 };
+    const u = { name: "Pepe", age: 23, c: 9 };
     // foo({ name: 'Pepe', age: 23, c: 9 });
     foo(u);
 }
 // Interfaz/type como implements
 {
-    type Person = {
+    interface Person {
         name: string;
         age: number;
-    };
-    class User implements Person {
-        constructor(
-            public name: string,
-            public age: number,
-            public address: string,
-        ) {}
     }
 
-    const p: Person = new User('Pepe', 23, 'Calle Falsa 123');
+    class User implements Person {
+        name: string;
+        age: number;
+        address: string;
+        constructor(name: string, age: number, address: string) {
+            this.name = name;
+            this.age = age;
+            this.address = address;
+        }
+    }
+
+    const p: Person = new User("Pepe", 23, "Calle Falsa 123");
+    p.name;
     (p as User).address;
 }
+// Herencia -> jerarquía (de abstracción) de clases
 {
-    class Animal {
+    abstract class Animal {
         makeSound(): void {
-            console.log('Animal makes a sound.');
+            console.log("Animal makes a sound.");
+        }
+        abstract eat(): void;
+    }
+
+    interface CanMove {
+        move: (p: number) => string;
+    }
+
+    class Dog extends Animal implements CanMove {
+        override makeSound(): void {
+            console.log("Dog barks.");
+        }
+        eat(): void {
+            // TODO comer como un perro
+        }
+
+        move(p: number) {
+            return "Me muevo como un perro";
+        }
+        makeDogThinks() {
+            return ''
         }
     }
 
-    class Dog extends Animal {
+    class Cat extends Animal implements CanMove {
         override makeSound(): void {
-            console.log('Dog barks.');
+            console.log("Cat meows.");
         }
-        eat(): void {}
-    }
-    class Cat extends Animal {
-        override makeSound(): void {
-            console.log('Cat meows.');
+        eat(): void {
+            // TODO comer como un gato
+        }
+        move(p: number) {
+            return "Me muevo como un gato";
+        }
+        makeCatThinks() {
+            return ''
         }
     }
 
-    let animal: Animal;
+    let animal: Animal & CanMove; // No de si será Dog o Cat
 
     animal = new Dog();
     console.log(animal instanceof Dog); // true
     console.log(animal instanceof Animal); // true
 
     animal.makeSound(); // Dog barks (enlace dinámico)
-    (animal as Dog).eat();
+    // (animal as Dog).makeDogThinks();
 
+    if (animal instanceof Dog) {
+        animal.makeDogThinks()
+    } else if (animal instanceof Cat ) {
+        animal.makeCatThinks()
+    }
     animal = new Cat();
     animal.makeSound(); // Cat meows (enlace dinámico)
+
 }
+
+// Firma de una función
+/*eslint-disable */
+
+type Options = "success" | "error";
+type StringUtility = (a: string, b?: number) => string;
+
+const truncate: StringUtility = function (a, limit = 10) {
+    const z = a.length;
+    let r = a;
+    if (z > limit) {
+        r = a.substring(1, 10) + "...";
+    }
+    return r;
+};
