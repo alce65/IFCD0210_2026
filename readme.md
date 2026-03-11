@@ -713,19 +713,19 @@ Review Examen
     - Interfaces abiertos
     - Uniones e intersecciones con tipos propios
   - Tipado estructural
-  - Guardias de tipos
   - Clases y OOP en TS
     - Elementos de ES6
     - Ámbitos: privado, protected, public
     - Propiedades de parámetros
 
-<!-- ### Día 3 (11/03/2026) - M2.01 09 - OOP
+### Día 3 (11/03/2026) - M2.01 09 - OOP
 
 - TS
   - Clases abstractas
   - Implementación de interfaces
-  - Abstracción: patrón Repository
+  - Abstracción
 
+[Descanso]
 
 - Paradigma de la OOP en JS/TS
 - Conceptos generales de OOP
@@ -735,8 +735,14 @@ Review Examen
   - Encapsulación (objetos)
   - Herencia
   - Polimorfismo
-- Elementos de la OOP
 
+- Tipado avanzado. Generics
+  - En funciones
+  - En clases
+
+<!-- ### Día 4 (12/03/2026) - M2.01 10 - OOP
+
+- Elementos de la OOP
   - Clases
   - Objetos
   - Herencia y polimorfismo
@@ -745,12 +751,9 @@ Review Examen
   - Modularidad, genericidad y sobrecarga
   - UML
 
-  - Tipado avanzado. Generics
-    - En funciones
-    - En clases
-  - Ejemplo: Repositorio genérico -->
-
-<!-- ### Día 4 (12/03/2026) - M2.01 10 - OOP
+- Tipado avanzado. Generics (continuación)
+  - Ejemplo: Repositorio genérico
+    (Abstracción: patrón Repository)
 
 - Detalles OOP - Tipos
   - Extensiones de VSCode para TS
@@ -761,7 +764,9 @@ Review Examen
   - interfaz TypeODM ... app.d.ts
   - file system mock
   - implementación de la interfaz: clase ODMLite
-  - test de la implementación -->
+  - test de la implementación 
+
+-->
 
 ### Día 5 (13/03/2026) - M2.01 11 - ?
 
