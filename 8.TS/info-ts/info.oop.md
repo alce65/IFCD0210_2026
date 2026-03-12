@@ -72,6 +72,7 @@ Description: Conceptos generales de Programación Orientada a Objetos (OOP) y su
     - [Diagramas de Comportamiento](#diagramas-de-comportamiento)
   - [Beneficios de Utilizar UML](#beneficios-de-utilizar-uml)
   - [4. Herramientas UML](#4-herramientas-uml)
+  - [Mermaid](#mermaid)
   - [Conclusión: UML en el Desarrollo de Software](#conclusión-uml-en-el-desarrollo-de-software)
 - [Temario del certificado](#temario-del-certificado)
 
@@ -627,7 +628,7 @@ En este ejemplo, las habitaciones (Room) son parte de la casa (House), y no pued
 
 #### Resumen de las diferencias
 
-| Relación | Definición | Independencia de los objetos |
+| Relación   | Definición                         | Independencia de los objetos |
 | Asociación | Relación general entre dos clases. | Los objetos pueden existir independientemente.|
 | Agregación | Una clase "contiene" a otras, pero los objetos agregados pueden existir por sí mismos. | Los objetos agregados son independientes|
 | Composición | Una clase "posee" a otras, y los objetos compuestos dependen de la existencia de la clase contenedora. | Los objetos compuestos no pueden existir independientemente |
@@ -761,7 +762,7 @@ function updateCar(car: Car): void {
 const myCar = new Car('Honda');
 updateCar(myCar);
 
-console.log(myCar.model); // Toyota
+console.log(myCar.model); 
 ```
 
 ### Persistencia de objetos
@@ -1012,13 +1013,13 @@ class Animal {
 }
 
 class Dog extends Animal {
-  makeSound(): void {
+  override makeSound(): void {
     console.log('Dog barks.');
   }
 }
 
 class Cat extends Animal {
-  makeSound(): void {
+  override makeSound(): void {
     console.log('Cat meows.');
   }
 }
@@ -1497,6 +1498,38 @@ Existen muchas herramientas que permiten crear diagramas UML de manera visual y 
 - [StarUML](https://staruml.io/): Una herramienta de modelado UML de código abierto, ligera y con soporte para diversos tipos de diagramas.
 - [Lucidchart](https://www.lucidchart.com/) y [Draw.io](https://www.drawio.com/): Herramientas en línea que permiten crear diagramas UML de manera colaborativa y fácil.
 - [Visual Paradigm](https://www.visual-paradigm.com/): Ofrece herramientas avanzadas para el diseño de UML y otros diagramas de arquitectura.
+
+### Mermaid
+
+[mermaid](https://mermaid.ai/web/)
+
+Ejemplo de diagrama de clases UML
+
+```mermaid
+classDiagram
+    Animal <|-- Duck
+    Animal <|-- Fish
+    Animal <|-- Zebra
+    Animal: -string name
+    Animal : +number age
+    Animal : +string gender
+    Animal: +boolean isMammal()
+    Animal: +void mate()
+    class Duck{
+      +String beakColor
+      +swim()
+      +quack()
+      +fly()
+    }
+    class Fish{
+      -int sizeInFeet
+      -canEat()
+    }
+    class Zebra{
+      +bool is_wild
+      +run()
+    }
+```
 
 ### Conclusión: UML en el Desarrollo de Software
 

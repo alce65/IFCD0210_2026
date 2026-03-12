@@ -735,32 +735,42 @@ Review Examen
   - Encapsulación (objetos)
   - Herencia
   - Polimorfismo
+    - Herencia
 
 - Tipado avanzado. Generics
   - En funciones
   - En clases
+  - Ejemplo: Stack
+    - Genéricos
+    - Propiedades privadas
 
-<!-- ### Día 4 (12/03/2026) - M2.01 10 - OOP
+### Día 4 (12/03/2026) - M2.01 10 - OOP
 
 - Elementos de la OOP
   - Clases
-  - Objetos
   - Herencia y polimorfismo
+    - Overload
+  
+[Descanso]
+
+- Elementos de la OOP (continuación)
+  - Objetos
   - Relaciones entre objetos y clases
     - Asociación, agregación, composición
   - Modularidad, genericidad y sobrecarga
   - UML
 
-- Tipado avanzado. Generics (continuación)
-  - Ejemplo: Repositorio genérico
-    (Abstracción: patrón Repository)
+### Día 5 (13/03/2026) - M2.01 11 - ?
 
+<!-- 
 - Detalles OOP - Tipos
   - Extensiones de VSCode para TS
   - Type queries
   - Utility types
   - Mixins
+
 - Practica: Repositorio genérico
+  (Abstracción: patrón Repository)
   - interfaz TypeODM ... app.d.ts
   - file system mock
   - implementación de la interfaz: clase ODMLite
@@ -768,7 +778,7 @@ Review Examen
 
 -->
 
-### Día 5 (13/03/2026) - M2.01 11 - ?
+
 
 ## Semana 10 (Marzo)
 
