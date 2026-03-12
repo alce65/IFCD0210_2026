@@ -1,5 +1,6 @@
 
-// 
+// Uso de genéricos
+// Encapsulación y propiedades privadas
 
 export class Stack<T> {
   private items: T[] = [];
