@@ -757,10 +757,12 @@ Review Examen
   - Objetos
   - Relaciones entre objetos y clases
     - Asociación, agregación, composición
-  - Modularidad, genericidad y sobrecarga
   - UML
+  - Modularidad, genericidad y sobrecarga
 
 ### Día 5 (13/03/2026) - M2.01 11 - ?
+
+Practica: Figuras geométricas
 
 <!-- 
 - Detalles OOP - Tipos
