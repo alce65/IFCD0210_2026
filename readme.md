@@ -27,7 +27,7 @@ Formador / Desarrollador Web FullStack
 6. [Serigne Modou Fall Belle](https://github.com/MODOU19999)
 7. [Ronny Alexander Pin Pincay](https://github.com/ronnyaalez)
 8. [Jefferson Steven Espitia Flórez](https://github.com/Jefferespitia)
-9. ***
+9. [Carlos Amo Martínez](https://github.com/)
 10. [Aranzazu Checa Alvaro](https://github.com/ArantxaCheca)
 
 11. ***
@@ -750,7 +750,7 @@ Review Examen
   - Clases
   - Herencia y polimorfismo
     - Overload
-  
+
 [Descanso]
 
 - Elementos de la OOP (continuación)
@@ -762,34 +762,98 @@ Review Examen
 
 ### Día 5 (13/03/2026) - M2.01 11 - ?
 
-Practica: Figuras geométricas
-
-<!-- 
-- Detalles OOP - Tipos
-  - Extensiones de VSCode para TS
-  - Type queries
-  - Utility types
-  - Mixins
-
-- Practica: Repositorio genérico
-  (Abstracción: patrón Repository)
-  - interfaz TypeODM ... app.d.ts
-  - file system mock
-  - implementación de la interfaz: clase ODMLite
-  - test de la implementación 
-
--->
-
-
+- Practica: Figuras geométricas
+  - Herencia
+  - Interfaces
+- Test
+  - node:test / node:assert
 
 ## Semana 10 (Marzo)
 
 ### Día 1 (16/03/2026) - M2.01 12 - Node / FS
 
+- NodeJS
+  - Nuevo proyecto desde cero
+    - TS
+    - ESLint
+  - Introducción. Elementos de NodeJS. NPM
+
+[Descanso]
+
+- Módulos. ESM. Módulos del core de Node
+- Entorno de ejecución
+  - global
+  - process
+  - variables de entorno. dotenv
+  - .env.SAMPLE
+
 ### Día 2 (17/03/2026) - M2.01 13 - Node (CLI)
+
+<!-- - 
+- Linea de comandos
+  - stdin / stdout
+  - CLI: librerías (minimist, yargs, commander)
+
+- Asincronía en NodeJS
+  - Callbacks
+  - Event Loop
+  - Promesas
+
+- FILE System
+  - readFileSync / writeFileSync
+  - readFile / writeFile
+
+File System: fs/promises
+- NodeJS: CLI + FS
+  - Creación de un CLI - CRUD
+  - Patrón repository
+  - Persistencia en ficheros json
+- CLI Wizard: Inquirer -->
 
 ### Día 3 (18/03/2026) - M2.01 14 - Node (Servidor)
 
+<!-- - Eventos
+- Streams
+- Servidores Web: Node Http server
+  - Conceptos
+  - Creación de un servidor
+  - Ajustes del entorno
+  - Mejoras en el servidor -->
+
 ### Día 4 (19/03/2026) - M2.01 15 - Node + Express
 
+<!-- Servidores Web: Node + Express
+
+- Separación de responsabilidades: server v. app
+- Rutas (method / url) y controladores
+- Middleware: custom (logger) y de terceros (morgan)
+- Cors -->
+
 ### Día 1 (20/03/2026) - M2.01 16 - Node + Express
+
+<!-- Servidores Web: Node + Express
+
+- Cors (continuación)
+- Error Handler
+- Elementos estáticos
+- Templating (Vistas ES6)
+- Rutas y controladores
+-->
+
+<!-- - Templating (Vistas ES6)
+  - Tagged templates
+- Práctica: Servidores Web: Node + Express -->
+
+## Semana 11 (Marzo)
+
+Sesiones anticipadas del módulo 3
+
+### Día 1 (23/03/2026) - M2.03 01
+
+### Día 2 (23/03/2026) - M2.03 02
+
+## Unidad 2
+
+Acceso a datos en aplicaciones web del entorno servidor - 16 días (antes 18)
+
+### Día 3 (23/03/2026) - M2.02 01
