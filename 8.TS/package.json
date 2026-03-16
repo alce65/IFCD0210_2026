@@ -7,7 +7,7 @@
     "start": "tsc -w",
     "compile": "tsc",
     "build": "tsc --noEmit false --allowImportingTsExtensions false",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node --test",
     "lint": "eslint ."
   },
   "keywords": [],

@@ -45,48 +45,6 @@ describe("Con un cuadrado de lado 3", () => {
     });
 });
 
-describe("Con un cuadrado de lado 3", () => {
-    let shape: Square;
-    beforeEach(() => {
-        // Arrange
-        const side = 3;
-        shape = new Square(side, "rojo");
-    });
-    test("El area es 9", () => {
-        // Act
-        const area = shape.calculateArea();
-        // Assert
-        assert.equal(area, 9);
-    });
-    test("El perírmetro es 12", () => {
-        // Act
-        const perimeter = shape.calculatePerimeter();
-        // Assert
-        assert.equal(perimeter, 12);
-    });
-});
-
-describe("Con un cuadrado de lado 3", () => {
-    let shape: Square;
-    beforeEach(() => {
-        // Arrange
-        const side = 3;
-        shape = new Square(side, "rojo");
-    });
-    test("El area es 9", () => {
-        // Act
-        const area = shape.calculateArea();
-        // Assert
-        assert.equal(area, 9);
-    });
-    test("El perírmetro es 12", () => {
-        // Act
-        const perimeter = shape.calculatePerimeter();
-        // Assert
-        assert.equal(perimeter, 12);
-    });
-});
-
 describe("Con un círculo de radio 3", () => {
     let shape: Circle;
     beforeEach(() => {

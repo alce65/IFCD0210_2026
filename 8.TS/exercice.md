@@ -8,3 +8,4 @@ Creamos una aplicación que permita calcular la superficie y el perímetro de di
 - círculo
 
 1. Paradigma -> OOP
+2. Diseñar
