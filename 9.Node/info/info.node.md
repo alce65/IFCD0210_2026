@@ -7,11 +7,17 @@ dates: 01/2025
 - [Fundamentos de Node.JS](#fundamentos-de-nodejs)
   - [Entorno de ejecución](#entorno-de-ejecución)
   - [Características: Node en la práctica](#características-node-en-la-práctica)
+  - [Características recientes](#características-recientes)
   - [Historia](#historia)
     - [Creación de Node.js](#creación-de-nodejs)
     - [Evolución de NodeJS](#evolución-de-nodejs)
-  - [Node.js: utilización](#nodejs-utilización)
+  - [Node.js: ejemplos de utilización](#nodejs-ejemplos-de-utilización)
 - [Preparación del Entorno de Desarrollo](#preparación-del-entorno-de-desarrollo)
+  - [Instalación de Node.js y npm](#instalación-de-nodejs-y-npm)
+  - [Desarrollo con Node.js. Herramientas de desarrollo](#desarrollo-con-nodejs-herramientas-de-desarrollo)
+    - [gestión de paquetes y dependencias](#gestión-de-paquetes-y-dependencias)
+    - [Dependencias](#dependencias)
+    - [Utilidades de ejecución](#utilidades-de-ejecución)
   - [Creación de un proyecto con Node.js, TS, ESLint y Prettier \& Vitest (como herramienta de testing)](#creación-de-un-proyecto-con-nodejs-ts-eslint-y-prettier--vitest-como-herramienta-de-testing)
     - [Primera demo en Node.js](#primera-demo-en-nodejs)
     - [Código bloqueante](#código-bloqueante)
@@ -31,6 +37,7 @@ dates: 01/2025
     - [Número máximo de manejadores (listeners)](#número-máximo-de-manejadores-listeners)
 - [Módulos nativos de Node.JS](#módulos-nativos-de-nodejs)
   - [Acceso a los módulos. Importación y exportación](#acceso-a-los-módulos-importación-y-exportación)
+    - [Extensiones de los módulos](#extensiones-de-los-módulos)
   - [Módulos del core](#módulos-del-core)
   - [Entrono de ejecución](#entrono-de-ejecución)
   - [La variable global](#la-variable-global)
@@ -46,8 +53,10 @@ dates: 01/2025
     - [Output: stdout y stderr](#output-stdout-y-stderr)
     - [Nota sobre los saltos de línea](#nota-sobre-los-saltos-de-línea)
     - [Input: stdin](#input-stdin)
+  - [Scripting](#scripting)
   - [Creación de un CLI](#creación-de-un-cli)
-    - [Creación de un comando ejecutable](#creación-de-un-comando-ejecutable)
+    - [Creación de un comando ejecutable en Linux](#creación-de-un-comando-ejecutable-en-linux)
+    - [Creación de un comando ejecutable en Windows](#creación-de-un-comando-ejecutable-en-windows)
     - [Procesamiento de argumentos](#procesamiento-de-argumentos)
     - [Procesamiento de argumentos con minimist](#procesamiento-de-argumentos-con-minimist)
     - [Procesamiento de argumentos con yargs](#procesamiento-de-argumentos-con-yargs)
@@ -59,6 +68,7 @@ dates: 01/2025
   - [File System basado en Promesas](#file-system-basado-en-promesas)
   - [Escritura de ficheros](#escritura-de-ficheros)
   - [Otras operaciones de ficheros](#otras-operaciones-de-ficheros)
+  - [Ejemplo de uso de fs desde un CLI](#ejemplo-de-uso-de-fs-desde-un-cli)
 - [CRUD sobre datos JSON](#crud-sobre-datos-json)
   - [Modelo de datos](#modelo-de-datos)
   - [Operaciones](#operaciones)
@@ -93,6 +103,7 @@ dates: 01/2025
   - [Creación de un servidor HTTP en Node.js. La función `createServer`](#creación-de-un-servidor-http-en-nodejs-la-función-createserver)
     - [Funcionamiento interno de un servidor HTTP en Node.js](#funcionamiento-interno-de-un-servidor-http-en-nodejs)
     - [Los objetos `req` y `res`](#los-objetos-req-y-res)
+  - [Puerto y variables de entorno](#puerto-y-variables-de-entorno)
     - [Optimización y Gestión de Memoria](#optimización-y-gestión-de-memoria)
   - [Ajustes del entorno de trabajo](#ajustes-del-entorno-de-trabajo)
     - [Utilidades de ejecución: Nodemon](#utilidades-de-ejecución-nodemon)
@@ -100,7 +111,16 @@ dates: 01/2025
     - [Clientes HTTP para desarrollo y pruebas](#clientes-http-para-desarrollo-y-pruebas)
   - [Evolución del servidor HTTP](#evolución-del-servidor-http)
     - [Servidor HTTP básico: rutas y respuestas en HTML](#servidor-http-básico-rutas-y-respuestas-en-html)
+    - [Rutas y ficheros estáticos](#rutas-y-ficheros-estáticos)
+    - [Enrutamiento y construcción de respuestas](#enrutamiento-y-construcción-de-respuestas)
+    - [Refactorización del código: función de enrutamiento](#refactorización-del-código-función-de-enrutamiento)
+    - [Librerías y ficheros estáticos](#librerías-y-ficheros-estáticos)
+  - [Respuesta JSON: API RESTful](#respuesta-json-api-restful)
+    - [Pruebas automatizadas de funcionamiento: ruta HealthCheck](#pruebas-automatizadas-de-funcionamiento-ruta-healthcheck)
+    - [Pruebas de funcionamiento del API: herramientas](#pruebas-de-funcionamiento-del-api-herramientas)
     - [Métodos HTTP y manejo en Node.js](#métodos-http-y-manejo-en-nodejs)
+      - [Manejo de solicitudes POST con body (forma tradicional)](#manejo-de-solicitudes-post-con-body-forma-tradicional)
+      - [Manejo de solicitudes POST con body (forma moderna)](#manejo-de-solicitudes-post-con-body-forma-moderna)
 - [Otros protocolos de comunicaciones](#otros-protocolos-de-comunicaciones)
 - [Aplicación Realtime con Socket IO](#aplicación-realtime-con-socket-io)
   - [Instalación de Socket.IO](#instalación-de-socketio)
@@ -115,11 +135,11 @@ dates: 01/2025
 
 ## Fundamentos de Node.JS
 
-Node es un entorno de ejecución para JavaScript construido con el motor de JavaScript V8 de Chrome.
+Node es un entorno de ejecución para JavaScript construido con el **motor de JavaScript V8** de Chrome.
 
-Node.js usa un modelo de operaciones E/S sin bloqueo y orientado a eventos, que lo hace liviano y eficiente.
+Node.js usa un modelo de **operaciones E/S sin bloqueo** y **orientado a eventos**, que lo hace liviano y eficiente.
 
-El ecosistema de paquetes de Node, npm, es el ecosistema mas grande de librerías de código abierto en el mundo.
+El **ecosistema de paquetes** de Node, npm, es el ecosistema mas grande de librerías de código abierto en el mundo.
 
 ### Entorno de ejecución
 
@@ -148,6 +168,24 @@ Node.js es un entorno de ejecución para JavaScript construido con el motor de J
 - Asíncrono y orientado a eventos (no bloqueante)
 - Ideal para aplicaciones que consumen datos en tiempo real y que se ejecutan a través de dispositivos distribuidos
 - Lo usan muchas empresas (Walmart, PayPal, Yahoo, LinkedIn, eBay, Uber, etc.)
+
+### Características recientes
+
+[10 Node.js 24 features you’re probably not using](https://blog.logrocket.com/node-js-24-features/)
+
+Algunas de las características más destacadas de las últimas versiones de Node son:
+
+- Soporte nativo para **TypeScript**
+- Soporte completo de **ESM** (ECMAScript Modules)
+- Paquetes nativos basados de **Promises**
+- Herramientas nativas de **testing**: node:test y node:assert
+- Built-in **SQLite** database
+- **Debugging** mejorado con el inspector de Node.js o con herramientas de terceros como Chrome DevTools o Visual Studio Code
+- Cliente nativo de **WebSockets**
+- Modificador (flag) **--env-file**: permite cargar variables de entorno desde un archivo .env (sustituye a la dependencia dotenv)
+- Modificador **--watch**: permite reiniciar automáticamente el proceso de Node.js cuando se detectan cambios en los archivos del proyecto (sustituye a la dependencia nodemon)
+
+Recientemente se ha anunciado un cambio de **versionado**, eliminando la alternancia entre versiones pares e impares, pasando a ser todas las futuras versiones LTS (Long Term Support) y numerándose de forma semántica, lo que facilita la gestión de las actualizaciones.
 
 ### Historia
 
@@ -201,7 +239,7 @@ La necesidad de un **event loop** para organizar estos nodos llevo a sustituir R
   - Paralelamente, al cabo de dos años, Joyent lanza la versión 0.12.x que recupera la paridad con las características de IO.JS
 - En septiembre 2015 se produce la **reconciliación** entre ambos grupos con una nueva versión de Node.JS, que al adoptar el versionado semántico, se numera como 4.0.0
 
-### Node.js: utilización
+### Node.js: ejemplos de utilización
 
 - Creación rápida de servidores HTTP o TCP ….
 - Aplicaciones Web con frameworks como Express (<http://expressjs.com/es/>) y plantillas como las de Jade/Pug <(http://jade-lang.com/>)
@@ -222,16 +260,68 @@ La necesidad de un **event loop** para organizar estos nodos llevo a sustituir R
 - Editor de código: Visual Studio Code <https://code.visualstudio.com/>
 - Terminal (Linea de commandos)
 - Administrador de versiones de Node.js: NVM <https://github.com/coreybutler/nvm-windows>
+
+### Instalación de Node.js y npm
+
 - Node.js y el gestor de paquetes npm <https://nodejs.org/es/>
 
-Instalación de Node.js y npm, despues de instalar NVM:
+Hay varias herramientas que permiten la instalación de varias versiones de Node.js, pero la más recomendable es **NVM (Node Version Manager)**, que permite gestionar múltiples versiones de Node.js en el mismo sistema, facilitando la instalación, actualización y cambio entre versiones.
+
+- [NVM para Linux y MacOS](https://github.com/nvm-sh/nvm)
+- [NVM para Windows](https://github.com/coreybutler/nvm-windows)
+- [FNM: Fast Node Manager](https://github.com/Schniz/fnm)
+- [Volta](https://volta.sh/)
+- [pnpm](https://francescomenghi.com/blog/manage-node-versions-with-pnpm)
+
+Instalación de Node.js y npm, después de instalar NVM:
 
 ```bash
-nvm install 23.6.0
+nvm install 24.14.0
+nvm install lts
 nvm install latest
 nvm list
-nvm use 23
+nvm use 24
 ```
+
+Las instalaciones globales con npm **(npm i -g)** se hacen en la versión de Node.js que esté activa en ese momento, por lo que es importante asegurarse de tener la versión correcta activa antes de instalar paquetes globales y reinstalarlos al cambiar de versión en caso de que sean necesarios.
+
+### Desarrollo con Node.js. Herramientas de desarrollo
+
+#### gestión de paquetes y dependencias
+
+La instalación de Node incluye el gestor de paquetes **npm**, que es el ecosistema de paquetes más grande del mundo, con más de 1.5 millones de paquetes disponibles. npm permite instalar y gestionar las dependencias de un proyecto, así como ejecutar scripts definidos en el archivo package.json.
+
+El paquete incluye **npx** <https://www.npmjs.com/package/npx>: una herramienta para ejecutar paquetes de npm sin necesidad de instalarlos globalmente, que también permite ejecutar comandos de paquetes instalados localmente en el proyecto.
+
+Existen además otras herramientas de desarrollo que facilitan el trabajo con Node.js, como:
+
+- yarn <https://yarnpkg.com/>: una alternativa a npm para la gestión de paquetes
+- pnpm <https://pnpm.io/>: una alternativa a npm que utiliza enlaces simbólicos para gestionar las dependencias de manera más eficiente
+
+#### Dependencias
+
+En un proyecto de Node.js, las dependencias se gestionan a través del archivo `package.json`, que es el archivo de configuración del proyecto. En este archivo se definen las dependencias necesarias para el proyecto, así como los scripts para ejecutar tareas comunes.
+
+Se pueden instalar dependencias de dos formas:
+
+- Dependencias de producción: `npm install <package-name> --save` o `npm install <package-name>`
+- Dependencias de desarrollo: `npm install <package-name> --save-dev` o `npm install <package-name> -D`
+
+Por defecto las dependencias se instalan indicando su versión junto con un caracter especial que indica el rango de versiones permitido, lo que facilita la actualización de las dependencias sin romper la compatibilidad. Por ejemplo:
+
+- `^1.0.0`: permite cualquier versión mayor o igual a 1.0.0 pero menor que 2.0.0
+- `~1.0.0`: permite cualquier versión mayor o igual a 1.0.0 pero menor que 1.1.0
+- `1.0.0`: permite solo la versión 1.0.0
+
+Para actualizar las dependencias a la última versión compatible con el rango definido, se puede usar el comando `npm update`.
+
+Es posible instalar una versión específica de una dependencia, por ejemplo: `npm install <package-name>@1.0.0`. Igualmente se puede forzar la instalación de la última versión disponible de una dependencia, independientemente del rango definido en `package.json`, con el comando `npm install <package-name>@latest`.
+
+Si en la instalación se añade el flag `--save-exact` o `-E`, se guardará la versión exacta instalada en el archivo `package.json`, sin ningún rango de versiones, lo que puede ser útil para evitar actualizaciones no deseadas.
+
+#### Utilidades de ejecución
+
+Tradicionalmente, para el desarrollo con Node.js se ha utilizado la herramienta **Nodemon**, que permite reiniciar automáticamente el proceso de Node.js cuando se detectan cambios en los archivos del proyecto. Sin embargo, con las últimas versiones de Node.js, se ha introducido el **modificador `--watch`**, que ofrece esta funcionalidad de forma nativa, eliminando la necesidad de depender de herramientas externas como Nodemon.
 
 - Nodemon <https://nodemon.io/>: `npm install -g nodemon`
 - Alternativa actual `node -w`
@@ -240,12 +330,17 @@ nvm use 23
 
 - Creación de un proyecto con Node.js: `npm init -y`
 - Instalación de TypeScript <https://www.typescriptlang.org/>: `npm install -D typescript`
+- Configuración de TypeScript: `npx tsc --init`
+- Ajustes de la configuración de TypeScript en `tsconfig.json`
+
+Análisis estático de código y formateo:
+
 - Instalación de Prettier <https://prettier.io/>: `npm install -D prettier`
 - Configuración de Prettier en package.json
 - Instalación de ESLint <https://eslint.org/>: `npm init @eslint/config@latest`
-- Cambios en eslint.config.js: `tseslint.configs`
-- Configuración de TypeScript: `npx tsc --init`
-- Ajustes de la configuración de TypeScript en `tsconfig.json`
+
+Testing:
+
 - Instalación de Vitest <https://vitest.io/>: `npm install -D vitest`
 - Configuración de Vitest en `vitest.config.js` y `tsconfig.json`
 - Incorporación de scripts en `package.json`
@@ -488,18 +583,18 @@ variable mediante el comando `require`
 var <nombre> = require('<nombre módulo>);
 ```
 
-Actualmente, desde la versión 18, Node.js soporta completamente el sistema de módulos ES6, indicando en package.json "type": "nodule". ESM está siendo paulatinamente adoptado como el más habitual en las aplicaciones Node: en las últimas versiones se reconoce incluso si no se ha configurado package.json.
+Actualmente, desde la versión 18, Node.js soporta completamente el sistema de **módulos ES6**, indicando en package.json "type": "nodule". ESM está siendo paulatinamente adoptado como el más habitual en las aplicaciones Node: en las últimas versiones se reconoce incluso si no se ha configurado package.json.
 
 Los elementos exportados como `module.exports` en CommonJS son importados mediante el comando `import` de la siguiente forma:
 
 ```javascript
-import <nombre> from '<nombre módulo>';
+import <nombre> from '<nombre módulo.extensión>';
 ```
 
 Cuando los elementos exportados en ESM son varios, se importan mediante la notación de llaves `{}`
 
 ```javascript
-import { <nombre1>, <nombre2> } from '<nombre módulo>';
+import { <nombre1>, <nombre2> } from '<nombre módulo.extensión>';
 ```
 
 Cada modulo es un fichero diferente con un espacio de nombres local que da lugar a un closure que incluye
@@ -511,6 +606,19 @@ Ejemplo: Creamos un modulo que contenga los cálculos geométricos de un círcul
 
 - Su circunferencia
 - Su área
+
+#### Extensiones de los módulos
+
+En Node.js, los módulos se importan indicando su ruta, nombre y extensión. La extensión del módulo es importante para que Node.js pueda resolver correctamente el módulo a importar. Las extensiones más comunes son:
+
+- `.js`: para módulos escritos en JavaScript
+- `.ts`: para módulos escritos en TypeScript
+
+Para que typescript permita importar módulos con extensión .ts, es necesario configurar el archivo `tsconfig.json` con las opciones `allowImportingTsExtensions: true` y `noEmit: true`. Junto a ellas se incluirá frecuentemente `erasableSyntaxOnly: true` para configurar un entorno en el que no se transpila el código, sino que se ejecuta directamente TS con Node.js.
+
+Otros ficheros pueden ser importados como módulos, dependiendo de su contenido y del contexto de uso:
+
+- `.json`: para módulos que exportan datos en formato JSON. Para permitir la importación de módulos JSON, es necesario configurar el archivo `tsconfig.json` con la opción `resolveJsonModule: true`.
 
 ### Módulos del core
 
@@ -528,18 +636,22 @@ Toda la información sobre el núcleo está en el API Docs
 
 Algunos módulos del core
 
-- `global`: objeto global
-- `process`: información y control sobre el proceso de Node.js
-- `os`: información sobre el sistema operativo
-- `module`: información sobre el módulo actual
-- `debugger`: interfaz de depuración
-- `events`: emisión y escucha de eventos
-- `fs`: operaciones de ficheros (file system)
-- `buffer`: manipulación de datos binarios
-- `streams`: operaciones de lectura y escritura desde flujos de datos (streams)
-- `http`: servidor y cliente HTTP
-- `util`: funciones de utilidad
-- `timers`: funciones de temporización
+- `node:global`: objeto global
+- `node:process`: información y control sobre el proceso de Node.js
+- `node:os`: información sobre el sistema operativo
+- `node:path`: manejo de rutas de archivos
+- `node:readline`: interfaz para leer datos de un flujo de entrada (como la consola)
+- `node:module`: información sobre el módulo actual
+- `node:debugger`: interfaz de depuración
+- `node:events`: emisión y escucha de eventos
+- `node:fs`: operaciones de ficheros (file system)
+- `node:buffer`: manipulación de datos binarios
+- `node:streams`: operaciones de lectura y escritura desde flujos de datos (streams)
+- `node:http`: servidor y cliente HTTP
+- `node:https`: servidor y cliente HTTPS
+- `node:net`: comunicación en red
+- `node:util`: funciones de utilidad
+- `node:timers`: funciones de temporización
 
 ### Entrono de ejecución
 
@@ -728,7 +840,7 @@ PASSWORD=123456
 
 La posibilidad de incluir información sensible en este fichero es muy alta por lo que es recomendable añadirlo al fichero .gitignore para evitar que se suba al repositorio.
 
-Para acceder a las variables definidas en el fichero .env, se puede usar el paquete [dotenv](https://www.npmjs.com/package/dotenv), que permite cargar las variables del fichero en process.env.
+Para acceder a las variables definidas en el fichero .env, se solía usar el paquete [dotenv](https://www.npmjs.com/package/dotenv), que permite cargar las variables del fichero en process.env.
 
 Para instalar dotenv, ejecutamos el siguiente comando en la terminal:
 
@@ -744,7 +856,7 @@ import 'dotenv/config';
 console.log(process.env.MY_VARIABLE);
 ```
 
-A partir de la versión 20.6.0 de Node, es posible cargar las variables de un fichero .env en process.env sin necesidad de instalar dotenv, utilizando el flag --env-file al arrancar el proceso de Node.
+A partir de la versión 20.6.0 de Node, es posible cargar las variables de un fichero .env en process.env sin necesidad de instalar dotenv, utilizando el **flag --env-file** al arrancar el proceso de Node.
 
 ```shell
 node --env-file=.env app.js
@@ -756,6 +868,13 @@ En el **frontend**, cuando se usa **Vite**, este builder expone algunas de las v
 
 El módulo **os** proporciona información sobre el sistema operativo en el que se está ejecutando Node.js con nuestra aplicación. Este módulo es útil para obtener información sobre la plataforma, la arquitectura, la versión del sistema operativo, la memoria total y libre, el directorio temporal y más.
 
+- **Sistema**: Tipo de sistema operativo (os.type()).
+- **Arquitectura**: Si es x64, arm64, etc. (os.arch()).
+- **Memoria**: Memoria total y libre en bytes (os.totalmem(), os.freemem()).
+- **Home**: El directorio principal del usuario actual (os.homedir()).
+- **Uptime**: Cuánto tiempo lleva encendido el sistema en segundos (os.uptime()).
+- **CPUs**: Información de los núcleos y su velocidad (os.cpus()).
+
 Veamos algunos ejemplos de uso del módulo `os`:
 
 - Obtener información sobre el sistema
@@ -765,12 +884,22 @@ import os from 'node:os';
 
 console.log('Plataforma:', os.platform());
 console.log('Arquitectura:', os.arch());
+console.log('CPU:', os.cpus());
 console.log('Versión del SO:', os.version());
-console.log('Memoria total (bytes):', os.totalmem());
-console.log('Memoria libre (bytes):', os.freemem());
+console.log(
+  'Memoria total (bytes):',
+  (os.totalmem() / 1024 / 1024 / 1024).toFixed(2),
+  'GB',
+);
+console.log(
+  'Memoria libre (bytes):',
+  (os.freemem() / 1024 / 1024 / 1024).toFixed(2),
+  'GB',
+);
 console.log('Directorio temporal:', os.tmpdir());
 console.log('Nombre del host:', os.hostname());
-console.log('CPU:', os.cpus());
+console.log('Home:', os.homedir());
+console.log('Uptime:', os.uptime(), 'segundos');
 ```
 
 - Obtener información sobre los usuarios del sistema
@@ -909,6 +1038,22 @@ process.stdin.on('data', (data) => {
 
 Como veremos, en la práctica la lectura de la entrada estándar se hace de forma más sencilla con **librerías**, que simplifican la gestión de la entrada estándar y permiten hacer cosas más complejas como leer líneas completas o mostrar mensajes al usuario.
 
+### Scripting
+
+Node.js también se puede usar para ejecutar scripts escritos en JavaScript. Para ello, se debe crear un fichero con extensión .js o .ts que contenga el código del script y luego ejecutarlo con el comando node seguido del nombre del fichero.
+
+```shell
+node script.js
+```
+
+No solo Python sirve para scripting. Node.js es igual de versátil y muy cómodo si ya dominas JavaScript. Este tipo de programas muestran el verdadero poder de Node.js más allá de crear servidores web:
+
+- Scripts de transformación de archivos.
+- Automatizaciones de tareas repetitivas.
+- Procesamiento de datos.
+- Generadores de contenido.
+- Herramientas internas y CLIs.
+
 ### Creación de un CLI
 
 Una de las aplicaciones más comunes de Node.js es la creación de **CLI** (Command Line Interface) o interfaces de línea de comandos. Una CLI es una aplicación que se ejecuta en la terminal y permite interactuar con el usuario a través de comandos, de manera similar a como lo hace un shell del S.O.
@@ -918,7 +1063,7 @@ Esto plantea dos necesidades:
 - hacer el comando ejecutable, es decir que se pueda invocar desde la terminal sin necesidad de invocar node, como si fuera un comando del sistema
 - procesar los argumentos que se pasan al comando para hacer que la aplicación responda de forma diferente en función de los argumentos aportados por el usuario
 
-#### Creación de un comando ejecutable
+#### Creación de un comando ejecutable en Linux
 
 Para hacer un comando ejecutable en Linux, se debe añadir un shebang al principio del fichero que contiene el código del comando. Un shebang es una secuencia de caracteres que indica al S.O. cómo debe ejecutar el fichero.
 
@@ -959,6 +1104,15 @@ npm link
 ```
 
 Nota: es posible que en Windows se necesite configurar el final de línea como LF en lugar de CRLF para que el comando funcione correctamente. También puede ser necesario configurar la extensión .js asociada a Node.
+
+#### Creación de un comando ejecutable en Windows
+
+En Windows, no se utilizan shebangs, por lo que no es necesario añadir la línea `#!/usr/bin/env node` al principio del fichero. Sin embargo, es necesario asociar la extensión .js a Node.js para que se pueda ejecutar el comando sin necesidad de invocar node. Para ello, se debe ejecutar el siguiente comando en la terminal:
+
+```shell (admin mode)
+assoc .js=NodeJSFile
+ftype NodeJSFile="C:\Program Files\nodejs\node.exe" "%1" %*
+```
 
 #### Procesamiento de argumentos
 
@@ -1015,13 +1169,13 @@ El tipo del argumento se define en el objeto de configuración de minimist, que 
 
 ```shell
 node index --version
-node index.js -help
+node index.js --help
 node index.js --name "John Doe" -h -v
 ```
 
 #### Procesamiento de argumentos con yargs
 
-Con yargs, no es necesario incluir los comandos de ayuda y versión, ya que se incluyen por defecto. Para definir los argumentos que acepta el comando y procesarlo, se puede hacer con el método **command**:
+Con yargs, no es necesario incluir los comandos de ayuda y versión, ya que se incluyen por defecto. Para definir los argumentos que acepta el comando y procesarlo, se puede hacer con el **método command**:
 
 - command: crea un comando
   - nombre y argumentos <requeridos> / [opcionales]
@@ -1035,26 +1189,32 @@ Por ejemplo, un comando new que acepta un argumento note, de tipo string
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
+// hideBin es una función que se encarga de eliminar los dos primeros elementos de process.argv, que corresponden al ejecutable de Node.js y al nombre del script que se está ejecutando, para que solo queden los argumentos que se han pasado al comando.
+
 yargs(hideBin(process.argv))
   .command(
     'new <note>',
     'create a new note',
+    // el objeto de formato de los argumentos se puede definir como un objeto o como una función que recibe el objeto yargs como argumento y devuelve el objeto con la configuración de los argumentos
     {
       note: {
         describe: 'The content of the note you want to create',
         type: 'string',
       };
     },
+    // función del comando, que se ejecuta cuando se invoca el comando
     () => {
       console.log('Procesando comando new');
       console.log({ argv });
     },
   )
+  // demandCommand es un método que se encarga de exigir que se invoque al menos un comando, en este caso el comando new, para que la aplicación funcione correctamente. Si no se invoca ningún comando, se muestra un mensaje de error y se finaliza el proceso con un código de salida distinto de 0.
   .demandCommand(1)
+  // parse es el método que se encarga de procesar los argumentos que se han pasado al comando y ejecutar la función del comando correspondiente. Este método debe ser el último en la cadena de métodos, ya que es el que inicia el procesamiento de los argumentos y la ejecución del comando.
   .parse();
 ```
 
-El método option le añade al parámetro argumentos opcionales, definidas como un objeto
+El **método option** le añade al parámetro argumentos opcionales, definidas como un objeto
 
 Por ejemplo, al comando new que acepta un argumento note, le añadimos un argumento opcional tags, de tipo string, que se puede abreviar con -t
 
@@ -1078,12 +1238,14 @@ En el método command, el cuarto parámetro es una función que se ejecuta cuand
 Por el momento solo se muestra el contenido de los argumentos, que nos muestra como los procesa yargs
 
 ```shell
+>node notes.ts new "Hola" -t "saludo, español" 
+
 Procesando comando new
 {
   argv: {
     _: [ 'new' ],
     t: 'saludo,español',
-    tags: 'saludo,español',
+    tags: 'saludo, español',
     '$0': 'note',
     note: "'Hola'"
   }
@@ -1203,6 +1365,8 @@ import path from 'path';
 const dir = path.join(__dirname, 'notes');
 ```
 
+`path.join()` se encarga de añadir los separadores de ruta adecuados para cada sistema operativo, evitando errores de sintaxis en las rutas. Además, también normaliza la ruta resultante, eliminando redundancias como los puntos (.) y los dobles puntos (..).
+
 Sin embargo, con los módulos ES6, la variable \_\_dirname no está definida, pero se puede usar la variable `import.meta.url` para obtener la ruta del fichero actual, y el método `new URL()` para obtener la ruta del directorio que contiene el fichero actual. 'URL' es un objeto global que se puede usar para crear y manipular URLs, por lo que no es necesario importarlo.
 
 ```typescript
@@ -1220,6 +1384,8 @@ Si se le pasa una ruta absoluta, simplemente la devuelve
 
 ```typescript
 import path from 'path';
+// const __dirname = path.resolve('.');
+//const filePath = path.join(__dirname, 'notes.json'); // /ruta/absoluta/del/directorio/actual/notes.json
 const filePath = path.resolve('notes.json'); // /ruta/absoluta/del/directorio/actual/notes.json
 ```
 
@@ -1368,7 +1534,6 @@ El módulo fs de Node.js incluye otras operaciones para trabajar con ficheros y 
 - acceso a ficheros y directorios
   - `fs.access()`: comprueba si se puede acceder a un fichero o directorio
   - `fs.existsSync()`: comprueba si un fichero o directorio existe
-  - `fs.stat()`: obtiene información sobre un fichero o directorio
 - creación y eliminación directorios
   - `fs.mkdir()`: crea un directorio
   - `fs.rmdir()`: borra un directorio
@@ -1377,6 +1542,77 @@ El módulo fs de Node.js incluye otras operaciones para trabajar con ficheros y 
   - `fs.appendFile()`: añade contenido a un fichero
   - `fs.copyFile()`: copia un fichero
   - `fs.unlink()`: borra un fichero
+
+### Ejemplo de uso de fs desde un CLI
+
+Vamos a simular el comando ls de Linux, que muestra el contenido de un directorio, con una función que lee el contenido de un directorio y lo muestra en la consola.
+
+- Aceptar una ruta por argumento (o usar la actual por defecto).
+- Listar todos los archivos y carpetas.
+- Diferenciar visualmente entre ficheros y directorios.
+- Mostrar el tamaño de cada archivo de forma legible.
+
+1. El primer paso es aceptar una ruta por argumento, o usar la ruta actual por defecto. Para ello, se puede usar el método `path.resolve()` para obtener la ruta absoluta del directorio que se quiere listar, y el método `process.argv` para obtener los argumentos de la línea de comandos.
+
+   ```typescript
+   import fs from 'fs/promises';
+   import path from 'path';
+   const dirPath = path.resolve('./');
+
+   // Aceptar una ruta por argumento (o usar la actual por defecto).
+   const targetDir = process.argv[2] ? path.resolve(process.argv[2]) : dirPath;
+   ```
+
+2. El siguiente paso es listar todos los archivos y carpetas del directorio. Para ello, se puede usar el método `fs.readdir()` para leer el contenido del directorio.
+
+   ```typescript
+   import fs from 'fs/promises';
+   import path from 'path';
+   const targetDir = process.argv[2]
+     ? path.resolve(process.argv[2])
+     : path.resolve('./');
+   const listDir = async (dir: string) => {
+     try {
+       const files = await fs.readdir(dir);
+       // const info = await makeInfo(files, dir);
+       // console.log(info.join('\n'));
+     } catch (err) {
+       console.error(err);
+     }
+   };
+
+   await listDir(targetDir);
+   ```
+
+3. El tercer paso es usar el método `fs.stat()` para obtener información sobre cada archivo o carpeta.
+
+   ```typescript
+   const makeInfo = async (files: string[], dir: string) => {
+     const info = files.map(async (file) => {
+       const filePath = path.join(dir, file);
+       const stats = await fs.stat(filePath);
+       const isDirectory = stats.isDirectory();
+       const size = stats.size;
+       return `${isDirectory ? `📁 ${file}` : `📄 ${file.padEnd(20)} (${formatSize(size).padStart(10)})`}`;
+     });
+
+     return Promise.all(info);
+   };
+   ```
+
+   Usamos padding (padEnd y padStart) para alinear las columnas. Esto hace que la información sea mucho más fácil de leer de un vistazo.
+
+4. Formateando el tamaño para humanos. Mostrar 1048576 bytes no es muy útil. Vamos a crear una pequeña utilidad para mostrar KB o MB de forma legible:
+
+   ```ts
+   const formatSize = (bytes: number): string => {
+     if (bytes === 0) return '0 B';
+     const k = 1024;
+     const sizes = ['B', 'KB', 'MB', 'GB'];
+     const i = Math.floor(Math.log(bytes) / Math.log(k));
+     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+   };
+   ```
 
 ## CRUD sobre datos JSON
 
@@ -2323,7 +2559,7 @@ console.log('-------------------------');
 console.log('Hash:', oUrl.hash);
 ```
 
-Como se ve en el ejemplo, el contructor de la clase permite crear una url a partir de una url base y una url relativa, y proporciona propiedades y métodos para acceder a los distintos componentes de la url, como el protocolo, el host, el nombre de host, el puerto, el usuario, la contraseña, la ruta, los parámetros de búsqueda y el hash.
+Como se ve en el ejemplo, el constructor de la clase permite crear una url a partir de una url base y una url relativa, y proporciona propiedades y métodos para acceder a los distintos componentes de la url, como el protocolo, el host, el nombre de host, el puerto, el usuario, la contraseña, la ruta, los parámetros de búsqueda y el hash.
 
 Una segunda clase, **URLSearchParams**, permite trabajar con los parámetros de búsqueda de una url. El constructor de la clase acepta un objeto iterable, como un array o un objeto, y la propiedad `searchParams` es uan instancia de URLSearchParams que proporciona métodos para añadir, eliminar y modificar parámetros, y para convertir los parámetros en una cadena de consulta.
 
@@ -2486,6 +2722,13 @@ Aunque nosotros escribimos el servidor en JavaScript (TypeScript en este caso), 
 
 Al usar `createServer`, la función callback recibe dos objetos clave, construidos por Node como interfaces o facade para las interacciones con las partes del sistema ajenas de JavaScript:
 
+Tanto `req` como `res` son **streams**, lo que significa que los datos pueden ser leídos o escritos de forma incremental:
+
+- **`req` (Request)** es un stream de lectura. Puedes leer los datos de una solicitud entrante en bloques (`chunks`), lo cual es muy útil cuando se manejan solicitudes grandes.
+- **`res` (Response)** es un stream de escritura. Puedes enviar datos al cliente de forma incremental antes de finalizar la respuesta.
+
+Más adelante veremos un ejemplo de como se accede a estos objetos y se utilizan para manejar solicitudes 'POST'.
+
 - **`request` (objeto `req`)**: Representa la solicitud HTTP entrante. Contiene información importante sobre la solicitud, extraída a partir de los datos que han llegado por la red de acuerdo con el protocolo http, como:
 
   - **Método HTTP** (GET, POST, PUT, etc.) a través de `req.method`.
@@ -2500,12 +2743,43 @@ Al usar `createServer`, la función callback recibe dos objetos clave, construid
 
 En última instancia, este objeto incluye métodos como `writeHead`, `write`, y `end`, responsables de interaccionar con otras partes del sistema para desencadenar el envío de la respuesta al cliente, en el que intervienen el sistema operativo y la red.
 
-Tanto `req` como `res` son **streams**, lo que significa que los datos pueden ser leídos o escritos de forma incremental:
+```ts
+import { createServer, IncomingMessage, ServerResponse } from 'http';
 
-- **`req` (Request)** es un stream de lectura. Puedes leer los datos de una solicitud entrante en bloques (`chunks`), lo cual es muy útil cuando se manejan solicitudes grandes.
-- **`res` (Response)** es un stream de escritura. Puedes enviar datos al cliente de forma incremental antes de finalizar la respuesta.
+const PORT = process.env.PORT ?? 3000;
 
-Más adelante veremos un ejemplo de como se accede a estos objetos y se utilizan para manejar solicitudes 'POST'.
+const server = createServer((req: IncomingMessage, res: ServerResponse) => {
+  res.statusCode = 200; // valor por defecto
+  // valor por defecto es 'text/plain', pero es recomendable especificarlo junto con el charset
+  // para evitar problemas de codificación con caracteres especiales (como acentos o emojis)
+  res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+  res.end('Hola mundo 🚀 Aquí tienes un servidor en español');
+});
+
+server.listen(PORT, () => {
+  console.log(`Servidor escuchando en http://localhost:${PORT}`);
+});
+```
+
+### Puerto y variables de entorno
+
+Para especificar el puerto suele utilizarse una variable de entorno, por ejemplo `PORT`, para que el servidor pueda ser configurado fácilmente en diferentes entornos (desarrollo, producción, etc.) sin necesidad de modificar el código. En el entorno de producción es común que el puerto sea asignado por el proveedor de hosting, y se accede a él a través de `process.env.PORT`.
+
+Al usar el operador de coalescencia nula (`??`), se asegura que si la variable de entorno `PORT` no está definida, el servidor utilizará el puerto 3000 por defecto. Si el valor de entorno es 0, este se mantendría, al contrarío de lo que sucedería con el operador OR (`||`). Un puerto con valor 0 es un puerto dinámico que el sistema operativo asigna automáticamente, lo que puede ser útil para pruebas o en entornos donde no se desea especificar un puerto fijo.
+
+Ya hemos visto las [variables de entorno y su manejo](#variables-de-entorno).
+
+Desde la línea de comandos, se puede iniciar el servidor con una variable de entorno específica:
+
+```shell
+PORT=4000 node server.js
+```
+
+Gracias a este enfoque se consigue
+
+- Portabilidad: la aplicación puede correr en cualquier máquina sin preocuparte de si el puerto 3000 está libre.
+- Preparado para producción: Casi todos los servicios de hosting inyectan una variable PORT automáticamente.
+- Seguridad: el entorno y el fichero .env permiten ocultar información sensible (como claves de API o URLs de bases de datos) fuera del código fuente.
 
 #### Optimización y Gestión de Memoria
 
@@ -2672,10 +2946,21 @@ const createHtmlString = (content: string) => `
 
 // App que recibirá como callback el servidor http
 const app = (req: IncomingMessage, res: ServerResponse) => {
-  // Crear la respuesta adecuada como html
-  // ...
-  // Enviar la respuesta al cliente
-  res.end(page);
+  // Manejar diferentes rutas
+  if (url === '/') {
+    // res.statusCode = 200 ; // valor por defecto
+    res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+    res.end('Bienvenido a la página principal');
+  } else if (url === '/about') {
+    // res.statusCode = 200; // valor por defecto
+    res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+    res.end('Acerca de nosotros');
+  } else {
+    res.statusCode = 404;
+    res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+    res.end('Página no encontrada');
+  }
+  return;
 };
 
 // Crear un servidor HTTP
@@ -2689,7 +2974,87 @@ server.listen(PORT, () => {
 });
 ```
 
-El código de la aplicación discrimina entre las diferentes rutas, construye la respuesta y la envía al cliente. En este caso, se envía una página HTML simple con poco más que un título
+El código de la aplicación discrimina entre las diferentes rutas y envía una respuesta al cliente.
+
+Es buena práctica añadir un return al final de la función para asegurarse de que no se ejecuta código adicional después de enviar la respuesta, lo que podría causar errores (como `ERR_HTTP_HEADERS_SENT`) o comportamientos inesperados.
+
+#### Rutas y ficheros estáticos
+
+En lugar de enviar una respuesta HTML simple, se puede servir un fichero HTML estático. Para ello, se puede utilizar el módulo `fs` para leer el fichero y enviarlo como respuesta al cliente.
+
+```ts
+import { createServer, IncomingMessage, ServerResponse } from 'http';
+import { readFile } from 'fs/promises';
+
+const PORT = 3000;
+
+const app = async (req: IncomingMessage, res: ServerResponse) => {
+  const { url } = req;
+  let htmlContent = '';
+  try {
+    if (url === '/') {
+      htmlContent = await readFile('./index.html', 'utf-8');
+    } else if (url === '/about') {
+      htmlContent = await readFile('./about.html', 'utf-8');
+    } else {
+      res.statusCode = 404;
+      res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+      res.end('Página no encontrada');
+      return;
+    }
+  } catch (error) {
+    res.statusCode = 500;
+    res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+    res.end('Error al leer el fichero');
+    console.error('Error al leer el fichero:', error);
+    return;
+  }
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  res.end(htmlContent);
+  return;
+};
+```
+
+Una alternativa más eficiente para servir ficheros estáticos es utilizar streams, lo que permite enviar el contenido del fichero al cliente sin necesidad de cargarlo completamente en memoria.
+
+```ts
+import { createServer, IncomingMessage, ServerResponse } from 'http';
+import { createReadStream, ReadStream } from 'node:fs';
+
+const PORT = 3000;
+const app = (req: IncomingMessage, res: ServerResponse) => {
+  const { url } = req;
+  let stream: ReadStream;
+  console.log(`Request recibida para ${url}`);
+  if (url === '/') {
+    stream = createReadStream('./index.html');
+  } else if (url === '/about') {
+    stream = createReadStream('./about.html');
+  } else {
+    res.statusCode = 404;
+    res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+    res.end('Página no encontrada');
+    return;
+  }
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  stream.pipe(res);
+  stream.on('error', () => {
+    res.statusCode = 500;
+    res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+    res.end('Error al leer el fichero');
+  });
+};
+```
+
+#### Enrutamiento y construcción de respuestas
+
+Otra posibilidad es construir la respuesta directamente en el código de la aplicación, sin necesidad de leer ficheros estáticos. Esto es útil para generar contenido dinámico o para aplicaciones más simples.
+
+Una vez que el código de la aplicación discrimina entre las diferentes rutas, se construye la respuesta y la envía al cliente.
+
+En este caso, se envía una página HTML simple con poco más que un título
 
 ```ts
 const app = (req: IncomingMessage, res: ServerResponse) => {
@@ -2698,8 +3063,13 @@ const app = (req: IncomingMessage, res: ServerResponse) => {
   debug(method + ' ' + url);
 
   // Manejar diferentes rutas
+
+  // Por defecto, se devuelve una página de error 404
+  // Es muy importante cambiar el código de status por defecto (200) por el código 404,
+  // para que el cliente (browser, herramientas, clientes API) sepa que la página no se ha encontrado.
   let htmlContent = '<h1>404 Página no encontrada</h1>';
   let statusCode = 404;
+
   if (url === '/') {
     htmlContent = '<h1>Bienvenido a la página principal</h1>';
     statusCode = 200;
@@ -2711,10 +3081,13 @@ const app = (req: IncomingMessage, res: ServerResponse) => {
 
   // Creación y envío de la respuesta
   res.statusCode = statusCode;
-  res.setHeader('Content-Type', 'text/html');
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
   res.end(page);
+  return;
 };
 ```
+
+#### Refactorización del código: función de enrutamiento
 
 El código de la aplicación se puede refactorizar utilizando un objeto con las rutas y las respuestas asociadas a cada ruta, y una función separada que maneje las rutas y devuelva la respuesta html y su código de status.
 
@@ -2748,14 +3121,173 @@ const app = (req: IncomingMessage, res: ServerResponse) => {
 
   // Creación y envío de la respuesta
   res.statusCode = statusCode;
-  res.setHeader('Content-Type', 'text/html');
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
   res.end(page);
+  return;
 };
 ```
 
+#### Librerías y ficheros estáticos
+
+En lulugar de servir los ficheros estáticos de forma manual, se pueden utilizar librerías como [`serve-static`](https://www.npmjs.com/package/serve-static?activeTab=readme) o [`node-static`](https://www.npmjs.com/package/node-static) para servir los ficheros estáticos de forma más sencilla y eficiente.
+
+### Respuesta JSON: API RESTful
+
+En caso de un API RESTful, en lugar de responder con HTML, se suele responder con JSON. Para ello, es necesario cambiar el encabezado `Content-Type` a `application/json` y convertir el objeto JavaScript a una cadena JSON utilizando `JSON.stringify`.
+
+```ts
+type ResponseData = {
+  url: string | undefined;
+  method: string | undefined;
+  data?: string;
+  error?: string;
+};
+
+const app = (req: IncomingMessage, res: ServerResponse) => {
+  // Desestructurar la URL y el método de la request
+  const { url, method } = req;
+  debug(method + ' ' + url);
+
+  const sendResponse = (
+    res: ServerResponse,
+    statusCode: number,
+    data: ResponseData,
+  ) => {
+    res.statusCode = statusCode;
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
+    res.end(JSON.stringify(data));
+  };
+
+  if (url === '/api/user') {
+    const responseData = { message: 'Hola mundo', url, method };
+    const page = JSON.stringify(responseData);
+
+    // Creación y envío de la respuesta
+    sendResponse(res, 200, responseData);
+    return;
+  }
+};
+```
+
+Es buena práctica definir un tipo para la respuesta, como `ResponseData`, para asegurarse de que la estructura de los datos es **consistente** y fácil de entender. Además, se puede incluir información adicional en la respuesta, como datos recibidos en la solicitud o mensajes de error.
+
+En el funcionamiento de una API RESTful, es imprescindible definir claramente los endpoints (rutas) y diferenciar las respuestas de cada una delos métodos HTTP que se van a utilizar para cada endpoint. Por ejemplo, un endpoint `/api/user` incluiría:
+
+[GET] `/api/user`: para obtener la información de un usuario.
+[POST] `/api/user`: para crear un nuevo usuario con los datos enviados en el cuerpo de la solicitud.
+[PATCH] `/api/user`: para actualizar la información de un usuario existente con los datos enviados en el cuerpo de la solicitud.
+[DELETE] `/api/user`: para eliminar un usuario existente.
+
+El concepto de API RESTful implica que cada endpoint debe ocuparse de un **recurso específico (URL)** y responder de manera consistente a los **métodos HTTP** de las solicitudes realizadas a ese recurso.
+
+Cada método corresponde a una acción específica sobre el recurso, y la respuesta debe ser clara y consistente, teniendo en cuenta su posible idenpotencia. Este concepto hace referencia a que una misma solicitud realizada varias veces debe producir el mismo resultado, sin causar efectos secundarios adicionales después de la primera solicitud exitosa. Y es importante al planificar la API y definir los endpoints, para asegurarse de que cada recurso tiene un comportamiento claro y predecible.
+
+GET -> Recuperar información de un recurso. Idenpotente
+POST -> Crear un nuevo recurso en el servidor. No idenpotente
+PUT -> Actualizar un recurso existente (lo reemplaza por completo). Idenpotente
+PATCH -> Actualizar parcialmente un recurso. No idenpotente
+DELETE -> Eliminar un recurso específico. Idenpotente
+OPTIONS -> Consultar qué métodos están permitidos para una URL. Idenpotente
+
+#### Pruebas automatizadas de funcionamiento: ruta HealthCheck
+
+Una práctica común en el desarrollo de aplicaciones web es incluir una ruta de **Health Check** (por ejemplo, `/health`) que permita verificar que el servidor está funcionando correctamente.
+
+Esta ruta no está pensada para ser consumida por usuarios finales, sino por sistemas automatizados para comprobar:
+
+- Disponibilidad: Si el servidor está levantado y acepta conexiones.
+- Salud: Si el servidor responde correctamente (no está bloqueado).
+- Estadísticas: Cuánto tiempo lleva activo el proceso.
+
+Esta ruta suele responder con un mensaje simple y un código de estado 200 si el servidor está operativo.
+
+```ts
+type ResponseHealthCheck = {
+  status?: string;
+  uptime?: number;
+  timestamp?: string;
+};
+
+const app = (req: IncomingMessage, res: ServerResponse) => {
+  // Desestructurar la URL y el método de la request
+  const { url, method } = req;
+  debug(method + ' ' + url);
+
+  if (url === '/health') {
+    const responseData: ResponseHealthCheck = {
+      status: 'ok',
+      uptime: Math.floor(process.uptime()), // tiempo de actividad en segundos
+      timestamp: new Date().toISOString(), // fecha y hora actual en formato ISO
+    };
+    sendResponse(res, 200, responseData);
+    return;
+  }
+
+  // Resto del código para manejar otras rutas...
+};
+```
+
+Un dato interesante que se puede incluir en la respuesta de la ruta de Health Check es el tiempo de actividad del servidor (`uptime`), que se obtiene a través de `process.uptime()`. Esto proporciona información adicional sobre el estado del servidor y puede ser útil para monitorear su rendimiento.
+
+Monitorear el uptime tiene aplicaciones prácticas muy importantes:
+
+- Detectar reinicios inesperados: Si ves que el uptime vuelve a ser bajo (ej. 10 segundos) cuando esperabas que fuera de días, significa que tu servidor se ha caído y se ha reiniciado (posiblemente por un error no capturado).
+- Estabilidad: Un uptime alto es sinónimo de un servicio estable y robusto.
+- Alertas: Los sistemas de monitorización pueden disparar una alerta si el uptime es menor de lo esperado tras un despliegue.
+
+Además, incluir un timestamp en la respuesta permite verificar que el servidor está respondiendo en tiempo real y no está bloqueado o congelado.
+
+En entornos profesionales esta ruta no se monitorea manualmente, sino que acceden a ella herramientas como:
+
+- Load Balancers -> Deciden si enviar tráfico a esa instancia o si está “muerta”.
+- Docker / Kubernetes -> Usan “Liveness Probes” para reiniciar el contenedor si la ruta falla.
+- UptimeRobot / New Relic -> Te envían un email o mensaje si tu API deja de responder.
+- Cloud Providers -> Servicios como AWS o Google Cloud comprueban esta ruta para auto-escalado
+
+#### Pruebas de funcionamiento del API: herramientas
+
+Existen diversas herramientas para realizar pruebas de funcionamiento de un servidor HTTP, como:
+
+- **curl**: es una herramienta de línea de comandos que permite enviar solicitudes HTTP a un servidor y ver las respuestas. Es muy útil para probar rápidamente si el servidor está respondiendo correctamente.
+
+  ```bash
+  curl http://localhost:3000/health
+  ```
+
+- **GUI Tools**: hay diversas aplicaciones gráficas que permiten enviar solicitudes HTTP a un servidor y ver las respuestas de manera más visual. Estas herramientas son especialmente útiles para probar APIs RESTful, ya que permiten configurar fácilmente los métodos HTTP, los encabezados, el cuerpo de la solicitud, etc. Algunas de las más populares son:
+
+- [Postman](https://www.postman.com)
+- [Insomnia](https://insomnia.rest)
+- [Bruno](https://www.usebruno.com)
+- [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client&ssr=false#overview)
+- [Thunder Client](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client&ssr=false#overview)
+
 #### Métodos HTTP y manejo en Node.js
 
-Dependiendo del tipo de método HTTP que se use en la solicitud, el servidor puede responder de manera diferente. En este ejemplo, se maneja el método `POST` de forma diferente a los demás.
+Dependiendo del tipo de método HTTP que se use en la solicitud, el servidor debe responder de manera diferente.
+
+```ts
+if (url === '/usuarios') {
+  if (method === 'GET') {
+    // Lógica para devolver usuarios
+    return res.end('Lista de usuarios');
+  }
+
+  if (method === 'POST') {
+    // Lógica para crear un usuario
+    res.statusCode = 201;
+    return res.end('Usuario creado');
+  }
+
+  // Si el método no es soportado para esta ruta
+  res.statusCode = 405;
+  return res.end('Method Not Allowed');
+}
+```
+
+##### Manejo de solicitudes POST con body (forma tradicional)
+
+En este ejemplo, se maneja el método `POST` de forma diferente a los demás.
 
 - Para las solicitudes que no sean `POST`, (e.g. `GET`), el router se ocupa de las operaciones, como en el ejemplo anterior.
 - Para las solicitudes `POST`, existe un controller específico, que recibe req y res como parámetros para construir la respuesta adecuada.
@@ -2775,7 +3307,7 @@ const app = (req: IncomingMessage, res: ServerResponse) => {
 
   // Creación y envío de la respuesta
   res.statusCode = statusCode;
-  res.setHeader('Content-Type', 'text/html');
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
   res.end(page);
   return;
 };
@@ -2804,9 +3336,43 @@ const controllerPost = (req: IncomingMessage, res: ServerResponse) => {
     }
     const page = createHtmlString(htmlTitle, content);
     res.statusCode = statusCode;
-    res.setHeader('Content-Type', 'txt/html');
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
     res.end(page);
   });
+};
+```
+
+##### Manejo de solicitudes POST con body (forma moderna)
+
+En las versiones más recientes de Node.js, se han introducido nuevas APIs que permiten manejar las solicitudes de manera más sencilla y moderna, utilizando el módulo node:stream/consumers que permite consumir stream de datos de forma muy sencilla usando async/await.
+
+```ts
+import { createServer, IncomingMessage, ServerResponse } from 'http';
+import { json } from 'node:stream/consumers';
+
+const controllerPost = async (req: IncomingMessage, res: ServerResponse) => {
+  const { url } = req;
+
+  let statusCode = 404;
+  let htmlTitle = '<h1>404 Página no encontrada</h1>';
+  let content = '';
+
+  if (url === '/submit') {
+    try {
+      const body = await json(req);
+      statusCode = 200;
+      htmlTitle = '<h1>Gracias por enviar el formulario</h1>';
+      content = `<p>Datos recibidos:</p> <pre>${JSON.stringify(body, null, 2)}</pre>`;
+    } catch (error) {
+      statusCode = 400;
+      htmlTitle = '<h1>Error al procesar la solicitud</h1>';
+      content = `<p>${error instanceof Error ? error.message : 'Error desconocido'}</p>`;
+    }
+  }
+  const page = createHtmlString(htmlTitle, content);
+  res.statusCode = statusCode;
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  res.end(page);
 };
 ```
 

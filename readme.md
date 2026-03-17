@@ -783,16 +783,16 @@ Review Examen
 - Módulos. ESM. Módulos del core de Node
 - Entorno de ejecución
   - global
-  - process
+  - process -> process.argv
   - variables de entorno. dotenv
   - .env.SAMPLE
 
 ### Día 2 (17/03/2026) - M2.01 13 - Node (CLI)
 
-<!-- - 
 - Linea de comandos
   - stdin / stdout
-  - CLI: librerías (minimist, yargs, commander)
+  - Eventos
+  - Streams
 
 - Asincronía en NodeJS
   - Callbacks
@@ -800,25 +800,44 @@ Review Examen
   - Promesas
 
 - FILE System
-  - readFileSync / writeFileSync
-  - readFile / writeFile
+  - readFileSync
+  - readFile
+  - fs/promises: readFile
 
-File System: fs/promises
+[Descanso]
+
+- File System
+  - / writeFileSync
+  - / writeFile
+
 - NodeJS: CLI + FS
-  - Creación de un CLI - CRUD
-  - Patrón repository
-  - Persistencia en ficheros json
-- CLI Wizard: Inquirer -->
+  - input
+  - save as JSON
+
+- CLI: librerías (minimist, yargs, commander)
+
+- Creación de un CLI - CRUD
+  - Entity
+  - Interface de operaciones
 
 ### Día 3 (18/03/2026) - M2.01 14 - Node (Servidor)
 
-<!-- - Eventos
-- Streams
+<!--
+- Creación de un CLI - CRUD
+  - Patrón repository
+  - Persistencia en ficheros json
+- CLI Wizard: Inquirer
+-->
+
+<!--
+- Eventos (?)
+- Streams (?)
 - Servidores Web: Node Http server
   - Conceptos
   - Creación de un servidor
   - Ajustes del entorno
-  - Mejoras en el servidor -->
+  - Mejoras en el servidor
+-->
 
 ### Día 4 (19/03/2026) - M2.01 15 - Node + Express
 
