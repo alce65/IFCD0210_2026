@@ -1,8 +1,8 @@
 import { readFile } from 'node:fs/promises';
-import { resolve, join } from "node:path";
+import { resolve, join } from 'node:path';
 
-const __dirname = resolve('.')
-const file = join(__dirname, '/data/', '/sample.txt' )
+const __dirname = resolve('.');
+const file = join(__dirname, '/data/', '/sample.txt');
 //
 // const handleReadFile = (err:  NodeJS.ErrnoException | null, info: string ) => {
 //     if (err) {
