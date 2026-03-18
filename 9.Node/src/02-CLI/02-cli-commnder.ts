@@ -1,10 +1,12 @@
 import { join, resolve } from 'node:path';
 import { program } from 'commander';
-//import { RepoNoteFile } from './services/repo-notes-file.js';
+import { NotesRepoJson } from './services/notes-repo-json.ts';
 
-const dataBase = resolve('../data'); // dist
-const file = join(dataBase, 'db.json');
-const repo = new RepoNoteFile(file);
+// const __dirname = resolve('../');
+// join(__dirname, '/data/', file)
+const dataFolder = resolve('./data'); // dist
+const file = join(dataFolder, 'db.json');
+const repo = new NotesRepoJson(file);
 
 program.name('CLI').description(`CLI sample`).version('1.0.0');
 
@@ -43,7 +45,7 @@ const addNote = async (content: string) => {
 const updateNote = async (content: string, { id }: { id: string }) => {
     const updatedNote = { content: content };
     try {
-        const finalNote = await repo.update(id, updatedNote);
+        const finalNote = await repo.updateById(id, updatedNote);
         console.log('Nota actualizada', finalNote);
     } catch (error) {
         if (error instanceof Error) {
@@ -56,14 +58,17 @@ const updateNote = async (content: string, { id }: { id: string }) => {
 
 const deleteNote = async ({ id }: { id: string }) => {
     try {
-        const deletedNote = await repo.delete(id);
+        const deletedNote = await repo.deleteById(id);
         console.log('Nota borrada', deletedNote);
     } catch (error) {
         console.error((error as Error).message);
     }
 };
 
-program.command('all').description('Mostrar todas las notas').action(readAll);
+program
+    .command('all')
+    .description('Mostrar todas las notas')
+    .action(readAll);
 // .action(() => {
 //     repo.read().then((data) => {
 //         console.table(data);
@@ -77,10 +82,14 @@ program
     .description('Mostrar las notas encontradas')
     .action(findNote);
 
-program.command('add <note>').description('Añadir una nota').action(addNote);
+program.command('add <note>')
+.description('Añadir una nota').action(addNote);
 
-program.command('update <note>').option('-i, --id <id>').action(updateNote);
+program.command('update <note>')
+.option('-i, --id <id>').action(updateNote);
 
-program.command('delete').option('-i, --id <id>').action(deleteNote);
+program.command('delete')
+.option('-i, --id <id>')
+.action(deleteNote);
 
 program.parse();

@@ -6,20 +6,25 @@
     "scripts": {
         "start": "cross-env NODE_ENV=prod node ./src/cli-demo.ts",
         "dev": "cross-env NODE_ENV=dev node --env-file=.env ./src/cli-demo.ts",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test:fail": "echo \"Error: no test specified\" && exit 1",
+        "test:success": "echo \"Mock Test success\" && exit 0",
+        "test": "cross-env NODE_ENV=test node --env-file=.env.test node --test"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "type": "module",
     "dependencies": {
+        "@inquirer/prompts": "^8.3.2",
         "commander": "^14.0.3",
         "cross-env": "^10.1.0",
+        "inquirer": "^13.3.2",
         "minimist": "^1.2.8",
         "prompt-sync": "^4.2.0"
     },
     "devDependencies": {
         "@eslint/js": "^10.0.1",
+        "@types/inquirer": "^9.0.9",
         "@types/minimist": "^1.2.5",
         "@types/node": "^25.5.0",
         "@types/prompt-sync": "^4.2.3",
