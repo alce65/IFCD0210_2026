@@ -790,7 +790,7 @@ Review Examen
 ### Día 2 (17/03/2026) - M2.01 13 - Node (CLI)
 
 - Linea de comandos
-  - stdin / stdout
+  - stdin / stdout / stderr
   - Eventos
   - Streams
 
