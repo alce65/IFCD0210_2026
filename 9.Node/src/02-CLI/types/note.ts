@@ -1,5 +1,6 @@
 export interface Note {
   id: string;
   content: string;
-  tags: string[];
+  owner?: string;
+  tags?: string[];
 }
