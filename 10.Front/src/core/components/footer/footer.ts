@@ -25,6 +25,7 @@ export const footer = () => {
     `;
 
         const parentElement = document.createElement("parent");
+        console.log(typeof template, template)
         parentElement.innerHTML = template;
         const element = parentElement.firstElementChild;
 
@@ -33,5 +34,5 @@ export const footer = () => {
 
     document
         .querySelectorAll(selector)
-        .forEach((el) => el.replaceWith(setElement()));
+        .forEach((el) => el.appendChild(setElement()));
 };
