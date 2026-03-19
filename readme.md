@@ -820,7 +820,7 @@ Review Examen
   - Entity
   - Interface de operaciones
 
-### Día 3 (18/03/2026) - M2.01 14 
+### Día 3 (18/03/2026) - M2.01 14
 
 - Creación de un CLI - CRUD
   - Patrón repository
@@ -838,15 +838,39 @@ Review Examen
 
 Sesiones anticipadas del módulo 3
 
-<!--
+- Conceptos de backend/frontent
+  - static server
+  - backend (dynamic server)
+  - frontend
+
 - Servidores Web: Node Http server
+  - Nuevo proyecto
   - Conceptos
   - Creación de un servidor
-  - Ajustes del entorno
+  - Ajustes del entorno: PORT
+
+- Postman
+
+[descanso]
+
+- Servidores Web: Node Http server
+  - pruebas con postman
   - Mejoras en el servidor
+    - rutas y respuestas
+
+- Frontend
+  - proyecto vite
+  - componentes funcionales en vanilla TS
+
+### Día 5 (20/03/2026)  - M2.03 02
+
+<!--
+  - componentes con clases en vanilla TS
 -->
 
-### Día 5 (20/03/2026) - M2.01 15 - Node + Express
+## Semana 11 (Marzo)
+
+### Día 1 (23/03/2026) - M2.01 15 - Node + Express
 
 <!-- Servidores Web: Node + Express
 
@@ -855,11 +879,7 @@ Sesiones anticipadas del módulo 3
 - Middleware: custom (logger) y de terceros (morgan)
 - Cors -->
 
-## Semana 11 (Marzo)
-
-Sesiones anticipadas del módulo 3
-
-### Día 1 (23/03/2026) - M2.01 16 - Node + Express
+### Día 2 (24/03/2026) - M2.01 16 - Node + Express
 
 <!-- Servidores Web: Node + Express
 
@@ -874,10 +894,16 @@ Sesiones anticipadas del módulo 3
   - Tagged templates
 - Práctica: Servidores Web: Node + Express -->
 
-### Día 2 (24/03/2026) - M2.03 02
-
 ## Unidad 2
 
 Acceso a datos en aplicaciones web del entorno servidor - 16 días (antes 18)
 
 ### Día 3 (25/03/2026) - M2.02 01
+
+### Día 4 (26/03/2026) - M2.02 02
+
+### Día 5 (27/03/2026) - M2.02 03
+
+## Semana Santa
+
+## Semana 12 (Abril)
