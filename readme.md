@@ -820,18 +820,25 @@ Review Examen
   - Entity
   - Interface de operaciones
 
-### Día 3 (18/03/2026) - M2.01 14 - Node (Servidor)
+### Día 3 (18/03/2026) - M2.01 14 
 
-<!--
 - Creación de un CLI - CRUD
   - Patrón repository
   - Persistencia en ficheros json
-- CLI Wizard: Inquirer
--->
 
-<!--
+- Uso desde un CLI
+  - Commander
+  - Llamadas al repositorio
+- CLI Wizard: Inquirer
+
 - Eventos (?)
 - Streams (?)
+
+### Día 4 (19/03/2026) - M2.03 01 - Backend Node (Servidor) v. Frontend
+
+Sesiones anticipadas del módulo 3
+
+<!--
 - Servidores Web: Node Http server
   - Conceptos
   - Creación de un servidor
@@ -839,7 +846,7 @@ Review Examen
   - Mejoras en el servidor
 -->
 
-### Día 4 (19/03/2026) - M2.01 15 - Node + Express
+### Día 5 (20/03/2026) - M2.01 15 - Node + Express
 
 <!-- Servidores Web: Node + Express
 
@@ -848,7 +855,11 @@ Review Examen
 - Middleware: custom (logger) y de terceros (morgan)
 - Cors -->
 
-### Día 1 (20/03/2026) - M2.01 16 - Node + Express
+## Semana 11 (Marzo)
+
+Sesiones anticipadas del módulo 3
+
+### Día 1 (23/03/2026) - M2.01 16 - Node + Express
 
 <!-- Servidores Web: Node + Express
 
@@ -863,16 +874,10 @@ Review Examen
   - Tagged templates
 - Práctica: Servidores Web: Node + Express -->
 
-## Semana 11 (Marzo)
-
-Sesiones anticipadas del módulo 3
-
-### Día 1 (23/03/2026) - M2.03 01
-
-### Día 2 (23/03/2026) - M2.03 02
+### Día 2 (24/03/2026) - M2.03 02
 
 ## Unidad 2
 
 Acceso a datos en aplicaciones web del entorno servidor - 16 días (antes 18)
 
-### Día 3 (23/03/2026) - M2.02 01
+### Día 3 (25/03/2026) - M2.02 01

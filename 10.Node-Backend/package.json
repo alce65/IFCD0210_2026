@@ -1,0 +1,33 @@
+{
+    "name": "10.node-backend",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "cross-env NODE_ENV=prod node ./src/cli-demo.ts",
+        "dev": "cross-env NODE_ENV=dev node --watch --env-file=.env ./src/index.ts",
+        "test:fail": "echo \"Error: no test specified\" && exit 1",
+        "test:success": "echo \"Mock Test success\" && exit 0",
+        "test": "cross-env NODE_ENV=test node --env-file=.env.test node --test"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "type": "module",
+    "dependencies": {
+        "cross-env": "^10.1.0"
+    },
+    "devDependencies": {
+        "@eslint/js": "^10.0.1",
+        "@types/node": "^25.5.0",
+        "@types/prompt-sync": "^4.2.3",
+        "eslint": "^10.0.3",
+        "globals": "^17.4.0",
+        "prettier": "^3.8.1",
+        "typescript": "^5.9.3",
+        "typescript-eslint": "^8.57.0"
+    },
+    "prettier": {
+        "singleQuote": true
+    }
+}
