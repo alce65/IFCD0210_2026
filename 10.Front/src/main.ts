@@ -1,4 +1,6 @@
-import { footer } from "./core/components/footer/footer"
+import { Counter } from "./core/components/counter/counter"
+import { Footer } from "./core/components/footer-oop/footer"
 
 console.log('Load main')
-footer()
+Footer.render()
+Counter.render()

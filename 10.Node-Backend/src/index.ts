@@ -2,26 +2,26 @@ import { createServer, IncomingMessage, ServerResponse } from 'node:http';
 
 const PORT = Number(process.env.PORT) || 3000;
 
+const notes = [
+    {
+        id: '1',
+        content: 'Primera nota',
+    },
+    {
+        id: '2',
+        content: 'Segunda nota',
+    },
+    {
+        content: 'Nota creada',
+        id: 'df10700f-18ae-41ea-9e8e-16583023b8db',
+        owner: 'Pepe',
+    },
+];
+
 const app = (request: IncomingMessage, response: ServerResponse) => {
     try {
         console.log(request.url, request.method);
         console.log(request.headers);
-
-        const notes = [
-            {
-                id: '1',
-                content: 'Primera nota',
-            },
-            {
-                id: '2',
-                content: 'Segunda nota',
-            },
-            {
-                content: 'Nota creada',
-                id: 'df10700f-18ae-41ea-9e8e-16583023b8db',
-                owner: 'Pepe',
-            },
-        ];
 
         if (request.method === 'PUT') {
             response.statusCode = 405;
