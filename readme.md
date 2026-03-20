@@ -836,9 +836,9 @@ Review Examen
 
 ### Día 4 (19/03/2026) - M2.03 01 - Backend Node (Servidor) v. Frontend
 
-Sesiones anticipadas del módulo 3
+Sesión anticipadas del módulo 3
 
-- Conceptos de backend/frontent
+- Conceptos de backend/frontend
   - static server
   - backend (dynamic server)
   - frontend
@@ -862,10 +862,25 @@ Sesiones anticipadas del módulo 3
   - proyecto vite
   - componentes funcionales en vanilla TS
 
-### Día 5 (20/03/2026)  - M2.03 02
+### Día 5 (20/03/2026)  - M2.03 02 - Frontend OOP
 
-<!--
-  - componentes con clases en vanilla TS
+Sesión anticipadas del módulo 3
+
+- Frontend
+  - Componentes con clases en vanilla TS
+    - Footer
+    - Counter -> Actualización
+
+[descanso]
+
+- Frontend
+  - Componentes con clases en vanilla TS
+    - Counter -> Paso de parámetros
+  - Web Components
+  - Challenge: SPA con Routing y Class Components (o Web Components)
+
+<!-- 
+  Publicación en el servidor de Node (o de Node/Express) 
 -->
 
 ## Semana 11 (Marzo)
@@ -898,12 +913,165 @@ Sesiones anticipadas del módulo 3
 
 Acceso a datos en aplicaciones web del entorno servidor - 16 días (antes 18)
 
-### Día 3 (25/03/2026) - M2.02 01
+### Día 3 (25/03/2026) - M2.02 01 - Node / Express
 
-### Día 4 (26/03/2026) - M2.02 02
+Code review de la práctica de Servidor Web: Node + Express
 
-### Día 5 (27/03/2026) - M2.02 03
+Especial atención a
+
+- Server y app: separación de responsabilidades
+- Middleware
+  - Logger
+  - Cors
+  - Error Handler
+- Diferentes patrones de renderizado
+  - Servidor de ficheros estáticos (Static Site Generation)
+  - Publicación de Astro SSG
+  - Servidor dinámico: Server Side Rendering (SSR)
+- MVC (Clean Architecture)
+- Rutas y controladores, vistas
+  - Definición mediante clases
+  - Herencia y clases abstractas
+- Modelo: Patrón Repositorio
+  - ODM encapsulando NodeJS FS
+  - Modelo (Repo) como clase instanciable
+
+### Día 4 (26/03/2026) - M2.02 02 - Node / Express
+
+Dudas de la code review de la práctica de Servidor Web: Node + Express
+
+- Inyección de dependencias. Patrón Repositorio
+  - Clases
+  - Funciones (e.g. Router)
+  - Inversión de control
+- Validaciones: Zod
+
+### Día 5 (27/03/2026) - M2.02 03 - ??
+
+??
 
 ## Semana Santa
 
 ## Semana 12 (Abril)
+
+## Día 1 (6/04/2026) - M2.02 04 - DB (SQL)
+
+Bases de datos
+
+- Conceptos generales
+- Modelos de datos
+- Bases de datos relacionales (SQL)
+- Bases de datos no relacionales (NoSQL)
+- ORM / ODM
+
+Bases de datos relacionales (SQL)
+
+- Conceptos generales: arquitectura cliente-servidor
+- Servidor
+  - MySQL: instalación del servidor local
+  - PostgreSQL: acceso a un servidor remoto SupaBase
+- Cliente
+  - MySQL Workbench
+  - pgAdmin
+  - Otras opciones: DBeaver...
+- SQL
+  - DDL => CREATE, ALTER, DROP
+  - DML => SELECT, INSERT, UPDATE, DELETE
+  - DCL => GRANT, REVOKE
+- Diseño de bases de datos: herramientas
+  - Diagramas Entidad-Relación (ER)
+
+## Día 2 (7/04/2026) - M2.02 05 - DB (MySQL)
+
+Bases de datos MySQL
+
+- Conceptos de diseño de bases de datos
+  - E/R. Claves y relaciones
+  - Normalización
+  - Diagramas E/R
+- MySQL
+  - Conexión
+  - Referencia: SQLBolt
+- DB y tablas
+  - Listado y creación de bases de datos
+  - Listado y uso de tablas
+  - Descripción de una tabla
+- Consultas: SELECT
+  - Restricciones (constrains)
+- Consultas avanzadas
+  - JOIN
+  - Sub-consultas
+
+## Día 3 (8/04/2026) - M2.02 06 - DB (Diseño)
+
+- Conceptos de diseño de bases de datos. Prácticas
+  - Diagramas E/R
+  - Normalización
+  - Diseño de tablas
+
+## Día 4 (9/04/2026) - M2.02 07 - DB (Ejemplos)
+
+- Review conceptos de diseño de bases de datos.
+
+  - Un sistema para gestionar una biblioteca
+  - Un sistema para gestionar venta de billetes de avión
+    - usuario
+    - aerolínea (carrier)
+    - conexión (connection) - Madrid - Barcelona (10) // Barcelona - Madrid (11)
+    - vuelo (fly) - fecha
+    - pasaje (booking)
+    - aviones (airplane)
+  - Un sistema para gestionar una tienda de determinados productos
+    - Product
+    - Client
+    - Category
+    - Provider
+    - Order
+    - Order_item
+    - Shipper
+
+## Día 5 (10/04/2026) - M2.02 08 - DB (DDL, DML)
+
+Tipos de datos
+
+- DDL => CREATE, ALTER, DROP
+
+  - Conexión: Shell v. Workbench (GUI)
+  - Listado y Creación de bases de datos. Uso
+  - Listado y descripción de tablas
+  - Creación de tablas. Uso de IF NOT EXISTS
+    - Tipos de datos
+    - Restricciones
+      - NOT NULL
+      - UNIQUE
+      - DEFAULT
+      - CHECK
+      - AUTO_INCREMENT
+      - Claves primarias y foráneas
+        - PRIMARY KEY numérica
+        - PRIMARY KEY UUID
+        - FOREIGN KEY
+    - Añadiendo Named Constraints (e.g. CHECK)
+  - Borrado de tablas (DROP)
+  - Indexación
+  - Modificación de tablas (ALTER)
+  - Claves primarias y foráneas
+  - Creación de índices
+
+  - Ejemplos / ejercicios - creación de tablas simples
+    - red social: usuarios, posts, comentarios, likes, seguidores
+    - named constraints: likes, seguidores
+    - red social amigos / enemigos
+
+- DML =>
+  - SELECT
+  - JOIN
+  - UNION
+  - INSERT, UPDATE, DELETE
+  - Group y Funciones de agregación
+  - Otras funciones
+
+## Semana 13 (Abril)
+
+## Día 1 (13/04/2026) - M2.02 09
+
