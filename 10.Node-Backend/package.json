@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "start": "cross-env NODE_ENV=prod node ./src/cli-demo.ts",
-        "dev": "cross-env NODE_ENV=dev node --watch --env-file=.env ./src/index.ts",
+        "dev": "cross-env NODE_ENV=dev DEBUG=10-back* node --watch --env-file=.env ./src/index2.ts",
         "test:fail": "echo \"Error: no test specified\" && exit 1",
         "test:success": "echo \"Mock Test success\" && exit 0",
         "test": "cross-env NODE_ENV=test node --env-file=.env.test node --test"
@@ -15,12 +15,16 @@
     "license": "ISC",
     "type": "module",
     "dependencies": {
-        "cross-env": "^10.1.0"
+        "cross-env": "^10.1.0",
+        "debug": "^4.4.3",
+        "serve-static": "^2.2.1"
     },
     "devDependencies": {
         "@eslint/js": "^10.0.1",
+        "@types/debug": "^4.1.13",
         "@types/node": "^25.5.0",
         "@types/prompt-sync": "^4.2.3",
+        "@types/serve-static": "^2.2.0",
         "eslint": "^10.0.3",
         "globals": "^17.4.0",
         "prettier": "^3.8.1",
