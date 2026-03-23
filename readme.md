@@ -879,22 +879,40 @@ Sesión anticipadas del módulo 3
   - Web Components
   - Challenge: SPA con Routing y Class Components (o Web Components)
 
-<!-- 
-  Publicación en el servidor de Node (o de Node/Express) 
--->
-
 ## Semana 11 (Marzo)
 
-### Día 1 (23/03/2026) - M2.01 15 - Node + Express
+### Día 1 (23/03/2026) - M2.02 03 
+
+Sesión anticipadas del módulo 3
+
+- Revisión del challenge (que nadie ha hecho)
+  - AppComponent basado en clases
+  - AppComponent como WebComponent
+
+- Ejercicio: añadir una HomePage como Web Component
+
+[Descanso]
+
+- Revisión del ejercicio
+
+<!-- 
+- Publicación en el servidor de Node
+  - Páginas estáticas
+  - SPA
+  - API
+-->
+
+### Día 2 (24/03/2026) - M2.01 15 - Node + Express
 
 <!-- Servidores Web: Node + Express
 
 - Separación de responsabilidades: server v. app
 - Rutas (method / url) y controladores
 - Middleware: custom (logger) y de terceros (morgan)
-- Cors -->
+- Cors 
+-->
 
-### Día 2 (24/03/2026) - M2.01 16 - Node + Express
+### Día 3 (25/03/2026) - M2.01 16 - Node + Express
 
 <!-- Servidores Web: Node + Express
 
@@ -913,9 +931,9 @@ Sesión anticipadas del módulo 3
 
 Acceso a datos en aplicaciones web del entorno servidor - 16 días (antes 18)
 
-### Día 3 (25/03/2026) - M2.02 01 - Node / Express
+### Día 4 (26/03/2026) - M2.02 01 - Node / Express
 
-Code review de la práctica de Servidor Web: Node + Express
+<!-- Code review de la práctica de Servidor Web: Node + Express
 
 Especial atención a
 
@@ -934,21 +952,17 @@ Especial atención a
   - Herencia y clases abstractas
 - Modelo: Patrón Repositorio
   - ODM encapsulando NodeJS FS
-  - Modelo (Repo) como clase instanciable
+  - Modelo (Repo) como clase instanciable -->
 
-### Día 4 (26/03/2026) - M2.02 02 - Node / Express
+### Día 5 (27/03/2026) - - M2.02 02 - Node / Express
 
-Dudas de la code review de la práctica de Servidor Web: Node + Express
+<!-- Dudas de la code review de la práctica de Servidor Web: Node + Express
 
 - Inyección de dependencias. Patrón Repositorio
   - Clases
   - Funciones (e.g. Router)
   - Inversión de control
-- Validaciones: Zod
-
-### Día 5 (27/03/2026) - M2.02 03 - ??
-
-??
+- Validaciones: Zod -->
 
 ## Semana Santa
 
