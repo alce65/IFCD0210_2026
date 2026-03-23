@@ -1,0 +1,1 @@
+app-footer .footer{flex-direction:column;align-items:center;display:flex}app-footer .footer ul{gap:1rem;width:auto;list-style:none;display:flex}app-footer .footer svg{width:3rem;fill:var(--color-primary)}app-footer .footer a{color:var(--color-secondary)}app-footer .footer p{color:brown;font-size:large}
