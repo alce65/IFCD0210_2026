@@ -1,4 +1,3 @@
-import { Counter } from "../counter/counter2";
 import { Footer } from "../footer-wc/footer";
 
 export class App extends HTMLElement {
@@ -6,7 +5,7 @@ export class App extends HTMLElement {
     static render() {
        customElements.define(App.#selector, App)
        Footer.render()
-       Counter.render()
+       // Debería hacerlo el router
     }
 
     #template!: string;
@@ -20,12 +19,7 @@ export class App extends HTMLElement {
 
     #setTemplate() {
         this.#template = /*html*/`
-            <main>
-                <p>Uso de componentes y web components</p>
-                <app-counter counterId="1" ></app-counter>
-                <app-counter counterId="2"></app-counter>
-                <app-counter counterId="3"></app-counter>
-            </main>
+            <main></main>
             <app-footer></app-footer>
         `
     }
