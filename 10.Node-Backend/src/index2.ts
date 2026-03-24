@@ -1,9 +1,10 @@
 import { createServer, IncomingMessage, ServerResponse } from 'node:http';
 import { readFile } from 'node:fs/promises';
+import { json } from 'node:stream/consumers';
 import serveStaticCreator from 'serve-static';
-import debugCreator from 'debug';
+import debug from 'debug';
 
-const debug = debugCreator('10-back');
+const log = debug('10-back:index');
 
 const PORT = Number(process.env.PORT) || 3000;
 
@@ -26,10 +27,11 @@ const notes = [
 const serveStatic = serveStaticCreator('./public', {});
 
 const app = async (request: IncomingMessage, response: ServerResponse) => {
+    const appLog = debug('10-back:app');
     try {
         // console.log(request.url, request.method);
         // console.log(request.headers);
-        debug(`[${request.method}] ${request.url}`);
+        appLog('App');
 
         if (request.method === 'PUT') {
             response.statusCode = 405;
@@ -39,6 +41,12 @@ const app = async (request: IncomingMessage, response: ServerResponse) => {
 
         if (request.method === 'POST') {
             response.statusCode = 201;
+            const body = await json(request) as Record<string, unknown>;
+            // Simulamos que guardamos la info
+            // asignándole un id
+            body.id = crypto.randomUUID()
+            response.end(JSON.stringify(body));
+            return;
         }
 
         let html = '';
@@ -47,7 +55,7 @@ const app = async (request: IncomingMessage, response: ServerResponse) => {
                 response.setHeader('Content-type', 'text/html; charset=utf-8');
                 response.end('<p>API Rest</p>');
                 break;
-            case '/notes':
+            case '/api/notes':
                 response.setHeader('Content-type', 'application/json');
                 // Así no funcionaría response.write(notes);
                 response.write(JSON.stringify(notes));
@@ -69,8 +77,9 @@ const app = async (request: IncomingMessage, response: ServerResponse) => {
 };
 
 const middleware = (request: IncomingMessage, response: ServerResponse) => {
+    log(`[${request.method}] ${request.url}`);
+
     serveStatic(request, response, () => {
-        debug(`[${request.method}] ${request.url}`);
         app(request, response);
     });
 };
