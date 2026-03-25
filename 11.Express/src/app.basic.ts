@@ -39,6 +39,12 @@ app.get('/', (_req, res) => {
     return;
 });
 
+app.post('/', (req, res) => {
+    log(req.body);
+    res.statusCode = 201;
+    res.send('Hello Post!');
+    return;
+});
 
 app.get('/api', (_req, res) => {
     res.setHeader('X-Owner', 'Cas API');
@@ -46,7 +52,25 @@ app.get('/api', (_req, res) => {
     return;
 });
 
+app.get('/api/notes', (_req, res) => {
+    const notes = [{ id: 1 }, { id: 2 }];
+    res.json(notes);
+    return;
+});
 
+app.get('/api/notes/search', (req, res) => {
+    const query = req.query;
+    // Código de búsqueda
+    res.json(query);
+    return;
+});
+
+app.get('/api/notes/:id', (req, res) => {
+    const { id } = req.params;
+    const notes = [{ id: 1 }, { id: 2 }];
+    res.json(notes.find((note) => note.id === Number(id)));
+    return;
+});
 
 app.use((_req, res) => {
     res.status(404);
