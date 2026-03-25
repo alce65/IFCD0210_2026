@@ -2,8 +2,13 @@ import { AboutPage } from "../../about/about-page";
 import { HomePage } from "../../home/home-page";
 import { ProductsPage } from "../../products/products-page";
 
+export interface Route {
+    path: string,
+    label: string,
+    renderComponent: () => void
+}
 
-export const routes = [
+export const routes: Route[] = [
     {
         path: "/",
         label: "Inicio",

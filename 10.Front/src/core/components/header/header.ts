@@ -1,4 +1,4 @@
-import { Theme } from '../theme.ts';
+import { Theme } from '../theme/theme';
 
 export class Header extends HTMLElement {
     static #selector = 'app-header';
@@ -36,10 +36,6 @@ export class Header extends HTMLElement {
     }
 
     setElement() {
-        // const parentElement = document.createElement('parent');
-        // parentElement.innerHTML = template;
-        // const element = parentElement.firstElementChild;
-        // return element;
         this.innerHTML = this.#template
     }
 }

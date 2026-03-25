@@ -1,32 +1,34 @@
-import { Footer } from "../footer-wc/footer";
+import { routes } from '../../router/router';
+import { Footer } from '../footer-wc/footer';
+import { Header } from '../header/header';
+import { Menu } from '../menu/menu';
 
 export class App extends HTMLElement {
-    static #selector = 'app-root'
+    static #selector = 'app-root';
     static render() {
-       customElements.define(App.#selector, App)
-       Footer.render()
-       // Debería hacerlo el router
+        customElements.define(App.#selector, App);
+        Header.render();
+        Menu.render(routes)
+        Footer.render();
     }
 
     #template!: string;
 
-    constructor () {
-        super()
-        this.#setTemplate()
-        this.#setElement()
+    constructor() {
+        super();
+        this.#setTemplate();
+        this.#setElement();
     }
-
 
     #setTemplate() {
-        this.#template = /*html*/`
+        this.#template = /*html*/ `
+            <app-header></app-header>
             <main></main>
             <app-footer></app-footer>
-        `
+        `;
     }
-    
+
     #setElement() {
-        this.innerHTML = this.#template
+        this.innerHTML = this.#template;
     }
-
 }
-
