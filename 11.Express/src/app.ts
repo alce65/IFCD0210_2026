@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 import { errorHandler } from './middleware/error-handler.ts';
 import { customHeaders } from './middleware/customs.ts';
+import notesRouter from './router/notes.ts'
 
 const log = debug('11-express:app');
 
@@ -46,7 +47,7 @@ app.get('/api', (_req, res) => {
     return;
 });
 
-
+app.use('/api/notes', notesRouter )
 
 app.use((_req, res) => {
     res.status(404);
