@@ -1,5 +1,5 @@
 import { readFile, writeFile } from 'node:fs/promises';
-import type { Note } from '../types/note.ts';
+import type { Note } from '../entities/note.ts';
 import type { Repository } from '../types/repo.ts';
 
 export class NotesRepoJson implements Repository<Note> {
@@ -72,4 +72,4 @@ export class NotesRepoJson implements Repository<Note> {
     }
 }
 
-new NotesRepoJson('data.json', 'alexNotes')
+

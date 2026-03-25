@@ -1,12 +1,19 @@
-import { Router  } from "express";
+import { Router } from 'express';
 import debug from 'debug';
+import { NotesRepoJson } from '../services/notes-repo-json.ts';
+import { join, resolve } from 'node:path';
 
 const log = debug('11-express:router:notes');
 
-const router = Router()
+const router = Router();
 // Asociado a la ruta api/notes
 
-log('Notes router created')
+const __dirname = resolve('.');
+const file = join(__dirname, 'src', 'data', 'db.json');
+
+const repo = new NotesRepoJson(file);
+
+log('Notes router created');
 
 // router.get('ruta', fn)
 // router.post('ruta', fn)
@@ -14,8 +21,8 @@ log('Notes router created')
 // router.patch('ruta', fn)
 // router.delete('ruta', fn)
 
-router.get('/', (_req, res) => {
-    const notes = [{ id: 1 }, { id: 2 }];
+router.get('/', async (_req, res) => {
+    const notes = await repo.read();
     res.json(notes);
     return;
 });
@@ -27,10 +34,10 @@ router.get('/search', (req, res) => {
     return;
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
     const { id } = req.params;
-    const notes = [{ id: 1 }, { id: 2 }];
-    res.json(notes.find((note) => note.id === Number(id)));
+    const note = await repo.readById(id);
+    res.json(note);
     return;
 });
 
@@ -38,39 +45,35 @@ router.post('/', (req, res) => {
     res.statusCode = 201;
     const result = {
         ...req.body,
-        id: crypto.randomUUID()
-    }
+        id: crypto.randomUUID(),
+    };
     res.json(result);
     return;
 });
 
-
 router.patch('/:id', (req, res) => {
-    const { id }  = req.params
+    const { id } = req.params;
     const result = {
         ...req.body,
-        id
-    }
+        id,
+    };
     res.json(result);
     return;
 });
 
 router.put('/:id', (req, res) => {
-    res.status(405)
-    res.statusMessage = 'Method Not Allowed'
-    res.end()
-})
-
+    res.status(405);
+    res.statusMessage = 'Method Not Allowed';
+    res.end();
+});
 
 router.delete('/:id', (req, res) => {
-    const { id }  = req.params
-    log(id)
+    const { id } = req.params;
+    log(id);
     res.statusCode = 204;
-    res.statusMessage = 'No Content'
+    res.statusMessage = 'No Content';
     res.end();
     return;
 });
 
-
-
-export default router
+export default router;
