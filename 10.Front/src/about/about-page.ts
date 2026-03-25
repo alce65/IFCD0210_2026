@@ -1,5 +1,3 @@
-
-
 export class AboutPage extends HTMLElement {
     static #selector = 'app-about-page';
     static render() {
@@ -10,7 +8,9 @@ export class AboutPage extends HTMLElement {
         }
         el.innerHTML = `<${AboutPage.#selector}></${AboutPage.#selector}>`;
         // Register custom element
-        customElements.define(AboutPage.#selector, AboutPage);
+        if (customElements.get(AboutPage.#selector) === undefined) {
+            customElements.define(AboutPage.#selector, AboutPage);
+        }
         // Render child custom elements
     }
 

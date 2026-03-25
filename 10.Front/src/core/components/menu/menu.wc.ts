@@ -1,28 +1,35 @@
 import { navigate, type Route } from '../../router/router.js';
+import './menu.css';
 
 type MenuType = 'mobile-menu' | 'full-menu';
 
 export class Menu extends HTMLElement {
     static #selector = 'app-menu';
     static render(routes: Route[]) {
+        customElements.define(Menu.#selector, Menu);
         const elements = document.querySelectorAll(Menu.#selector);
         elements.forEach((element) => {
-            const menuType = (element as HTMLElement).dataset.type as MenuType;
-            element.replaceWith(new Menu(routes, menuType));
+            (element as Menu).routes = routes;
         });
     }
 
-    #menuOptions: Route[];
-    #menuType: MenuType;
+    #menuOptions: Route[] = [];
+    #menuType: MenuType = 'full-menu';
     #template!: string;
 
-    constructor(menuOptions: Route[], menuType: MenuType) {
-        super();
+    set routes(menuOptions: Route[]) {
         this.#menuOptions = menuOptions;
-        this.#menuType = menuType;
-
         this.#setTemplate();
         this.#setElement();
+    }
+
+    constructor() {
+        super();
+        this.#menuType = this.dataset.type as MenuType;
+
+        // Tras  el constructor
+        // LLamar a set Routes(menuOptions) para 
+        // inyectar las rutas y que se renderice el menu;
     }
 
     #setTemplate() {
@@ -92,14 +99,16 @@ export class Menu extends HTMLElement {
             '#menu-dialog',
         ) as HTMLDialogElement;
         if (current.localName === 'a') {
+            // Menu-icon
             event.preventDefault();
             menuDialogElement.showModal();
-        } else if (current.localName === 'menu') {
+        } else if (current.localName === 'app-menu') {
+            // Opción del menú
             event.preventDefault();
+            menuDialogElement.close();
             navigate(target.href);
             // const linkHref = event.target.getAttribute("href");
             // navigate(linkHref);
-            menuDialogElement.close();
         } else {
             menuDialogElement.close();
         }

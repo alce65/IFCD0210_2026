@@ -16,7 +16,7 @@ export const routes: Route[] = [
     },
     {
         path: "/products",
-        label: "Proyectos",
+        label: "Productos",
         renderComponent: ProductsPage.render,
     },
     // {

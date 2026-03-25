@@ -1,0 +1,19 @@
+@layer layout {
+    app-root {
+        height: 100vh;
+        min-width: 300px;
+        max-width: 1200px; /* max-width: 900px; */
+        margin: 0 auto;
+        display: grid;
+        grid-template-rows: min-content auto min-content;
+    }
+
+    main {
+        /* Definimos el display para tener gap */
+        padding: 1rem;
+        display: grid;
+        gap: 1.5rem;
+        padding: 1rem;
+        border: 1px solid rgb(176, 176, 180);
+    }
+}

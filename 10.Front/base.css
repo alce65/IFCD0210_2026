@@ -56,9 +56,9 @@
 
     /* Fuentes*/
     --font-primary:
-        Montserrat, "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        Montserrat, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
         sans-serif;
-    --font-title: "Arial Black", "Arial Bold", Gadget, sans-serif;
+    --font-title: 'Arial Black', 'Arial Bold', Gadget, sans-serif;
 
     /* Escala*/
     --scala: 1.2;
@@ -179,51 +179,25 @@
     }
 }
 
-/* Layout  */
-@layer layout {
+@layer body {
+    /* Layout  */
     body {
         height: 100vh;
         min-width: 300px;
         max-width: 1200px; /* max-width: 900px; */
         margin: 0 auto;
-        display: grid;
-        grid-template-rows: min-content auto min-content;
     }
 
-    main {
-        /* Definimos el display para tener gap */
-        display: grid;
-        gap: 1.5rem;
-        padding: 1rem;
-    }
-
-    /* Borde provisional para visualizar las áreas del layout, luego se eliminará */
-
-    body > header,
-    body > footer,
-    main {
-        border: 1px solid rgb(176, 176, 180);
-        padding: 1rem;
-    }
-}
-
-/* Propiedades básicas */
-
-@layer main-components {
+    /* Propiedades básicas */
     body {
         font-family: var(--font-primary);
         font-size: var(--size-normal);
         background-color: var(--color-back);
         color: var(--color-font);
     }
-
-    body > header {
-        background-color: var(--color-primary);
-        color: var(--color-font-primary);
-    }
 }
 
-/* Componentes */
+/* Componentes del system design*/
 
 @layer buttons {
     .button {

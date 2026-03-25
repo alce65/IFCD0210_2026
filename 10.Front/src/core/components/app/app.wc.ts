@@ -1,14 +1,15 @@
 import { routes } from '../../router/router';
-import { Footer } from '../footer-wc/footer';
-import { Header } from '../header/header';
-import { Menu } from '../menu/menu';
+import { Footer } from '../footer-wc/footer.wc';
+import { Header } from '../header/header.wc';
+import { Menu } from '../menu/menu.wc';
+import './app.css';
 
 export class App extends HTMLElement {
     static #selector = 'app-root';
     static render() {
         customElements.define(App.#selector, App);
         Header.render();
-        Menu.render(routes)
+        Menu.render(routes);
         Footer.render();
     }
 

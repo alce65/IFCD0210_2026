@@ -1,5 +1,5 @@
-import { Counter } from "../counter/counter2";
-import { Footer } from "../footer-wc/footer";
+import { Counter } from '../counter/counter2';
+import { Footer } from '../footer-wc/footer.wc';
 
 export class App {
     static #selector = 'app-root';

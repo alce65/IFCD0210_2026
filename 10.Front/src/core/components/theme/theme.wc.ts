@@ -1,9 +1,9 @@
+import './theme.css';
+
 export class Theme extends HTMLElement {
     static #selector = 'app-theme';
     static render() {
-        document
-            .querySelectorAll(Theme.#selector)
-            .forEach((el) => el.replaceWith(new Theme()));
+        customElements.define(Theme.#selector, Theme);
     }
 
     #template!: string;

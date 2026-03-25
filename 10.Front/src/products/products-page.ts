@@ -1,5 +1,3 @@
-
-
 export class ProductsPage extends HTMLElement {
     static #selector = 'app-products-page';
     static render() {
@@ -10,7 +8,9 @@ export class ProductsPage extends HTMLElement {
         }
         el.innerHTML = `<${ProductsPage.#selector}></${ProductsPage.#selector}>`;
         // Register custom element
-        customElements.define(ProductsPage.#selector, ProductsPage);
+        if (customElements.get(ProductsPage.#selector) === undefined) {
+            customElements.define(ProductsPage.#selector, ProductsPage);
+        }
         // Render child custom elements
     }
 

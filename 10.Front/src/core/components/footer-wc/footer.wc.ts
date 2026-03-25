@@ -16,8 +16,8 @@ export class Footer extends HTMLElement {
     constructor(address?: string) {
         super();
         this.#address = address ?? this.#address;
-        this.setTemplate();
-        console.log('loading footer');
+        this.#setTemplate();
+        this.#setElement();
     }
 
     #setList() {
@@ -30,7 +30,7 @@ export class Footer extends HTMLElement {
             .join('');
     }
 
-    private setTemplate(): void {
+    #setTemplate(): void {
         this.#setList();
         this.#template = /*html*/ `    
          <footer class="footer">
@@ -39,6 +39,9 @@ export class Footer extends HTMLElement {
              <p>${Math.random()}</p>
          </footer>
          `;
+    }
+
+    #setElement() {
         this.innerHTML = this.#template;
     }
 }

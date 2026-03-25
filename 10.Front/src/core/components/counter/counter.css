@@ -1,0 +1,11 @@
+.counter {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    border: 1px solid var(--color-secondary);
+    border-radius: var(--border-radius);
+    margin-block: 1rem;
+}
+

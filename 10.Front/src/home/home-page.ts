@@ -1,4 +1,4 @@
-import { Counter } from '../core/components/counter/counter2';
+import { Counter } from '../core/components/counter/counter.wc';
 
 export class HomePage extends HTMLElement {
     static #selector = 'app-home-page';
@@ -10,7 +10,9 @@ export class HomePage extends HTMLElement {
         }
         el.innerHTML = `<${HomePage.#selector}></${HomePage.#selector}>`;
         // Register custom element
-        customElements.define(HomePage.#selector, HomePage);
+        if (customElements.get(HomePage.#selector) === undefined) {
+            customElements.define(HomePage.#selector, HomePage);
+        }
         // Render child custom elements
         Counter.render();
     }
