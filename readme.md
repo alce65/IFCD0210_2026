@@ -905,7 +905,7 @@ Sesión anticipadas del módulo 3
 
 ### Día 2 (24/03/2026) - M2.01 15 - Node + Express
 
--- Servidores Web: Node + Express
+- Servidores Web: Node + Express
 
 - Separación de responsabilidades: server v. app
 - Rutas (method / url) y controladores
@@ -922,11 +922,23 @@ Sesión anticipadas del módulo 3
 
 ### Día 3 (25/03/2026) - M2.01 16 - Node + Express
 
+- Servidores Web: Node + Express
+  - Mejoras del server: eventos
+  - Mejoras de App
+    - Cabeceras: pp.disable(), añadir cabeceras
+    - Rutas con parámetros
+    - Rutas con query string
+
+  - Rutas y controladores
+
+[Descanso]
+
+  - Rutas y controladores
+
 <!-- Servidores Web: Node + Express
   - Validaciones: Zod
   - Templating (Vistas ES6)
   - Tagged templates
-  - Rutas y controladores
 - Práctica: Servidores Web: Node + Express -->
 
 ## Unidad 2
