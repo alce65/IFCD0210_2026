@@ -1,0 +1,18 @@
+{
+    "notes": [
+        {
+            "id": "d5f4e4de-16c4-4280-8658-092e350fa88a",
+            "content": "Primera nota"
+        },
+        {
+            "id": "ba687855-ef73-4591-a8d4-0e41b5f36184",
+            "content": "Segunda nota"
+        },
+        {
+            "content": "Nota creada",
+            "id": "df10700f-18ae-41ea-9e8e-16583023b8db",
+            "owner": "Pepe"
+        }
+    ],
+    "users": []
+}
