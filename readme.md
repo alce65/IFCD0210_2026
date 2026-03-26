@@ -925,21 +925,23 @@ Sesión anticipadas del módulo 3
 - Servidores Web: Node + Express
   - Mejoras del server: eventos
   - Mejoras de App
-    - Cabeceras: pp.disable(), añadir cabeceras
+    - Cabeceras: app.disable(), añadir cabeceras
     - Rutas con parámetros
     - Rutas con query string
 
-  - Rutas y controladores
+  - Rutas y routers
 
 [Descanso]
 
-  - Rutas y controladores
-
-<!-- Servidores Web: Node + Express
-  - Validaciones: Zod
-  - Templating (Vistas ES6)
-  - Tagged templates
-- Práctica: Servidores Web: Node + Express -->
+- Rutas y routers
+  - rutas del CRUD de notes
+  - probadas con postman
+- Capa de datos
+  - Entities
+  - Repo (el mismo que para el CLI)
+- Validaciones: Zod
+  - Validación de variables de env
+  - Validación de entities
 
 ## Unidad 2
 
@@ -947,36 +949,48 @@ Acceso a datos en aplicaciones web del entorno servidor - 16 días (antes 18)
 
 ### Día 4 (26/03/2026) - M2.02 01 - Node / Express
 
-<!-- Code review de la práctica de Servidor Web: Node + Express
-
-Especial atención a
+- Uso de validaciones Zod en la ruta de Create Note (POST)
+- Nuevo servidor express
 
 - Server y app: separación de responsabilidades
 - Middleware
   - Logger
   - Cors
   - Error Handler
-- Diferentes patrones de renderizado
-  - Servidor de ficheros estáticos (Static Site Generation)
-  - Publicación de Astro SSG
-  - Servidor dinámico: Server Side Rendering (SSR)
+
+[Descanso]
+
 - MVC (Clean Architecture)
-- Rutas y controladores, vistas
+- Rutas y controladores
   - Definición mediante clases
-  - Herencia y clases abstractas
+- Inyección de dependencias. Patrón Repositorio
+  - Clases
+  - Funciones (e.g. Router)
+  - Inversión de control
 - Modelo: Patrón Repositorio
   - ODM encapsulando NodeJS FS
-  - Modelo (Repo) como clase instanciable -->
+  - Modelo (Repo) como clase instanciable
 
 ### Día 5 (27/03/2026) - - M2.02 02 - Node / Express
 
 <!-- Dudas de la code review de la práctica de Servidor Web: Node + Express
 
-- Inyección de dependencias. Patrón Repositorio
-  - Clases
-  - Funciones (e.g. Router)
-  - Inversión de control
-- Validaciones: Zod -->
+- Validaciones: Zod
+- Rutas y controladores, vistas
+  - Definición mediante clases
+  - ¿Herencia y clases abstractas?
+
+- Servidores Web: Node + Express
+  - Templating (Vistas ES6)
+  - Tagged templates
+
+- Diferentes patrones de renderizado
+  - Servidor de ficheros estáticos (Static Site Generation)
+  - Publicación de Astro SSG
+  - Servidor dinámico: Server Side Rendering (SSR)
+
+- Challenge: Servidores Web: Node + Express
+-->
 
 ## Semana Santa
 
