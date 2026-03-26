@@ -16,6 +16,3 @@ try {
     console.log(error as ZodError)
     process.exit(1)
 }
-
-
-

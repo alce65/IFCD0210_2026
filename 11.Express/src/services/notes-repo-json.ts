@@ -1,5 +1,5 @@
 import { readFile, writeFile } from 'node:fs/promises';
-import type { Note } from '../entities/note.ts';
+import type { Note, NoteDTO } from '../entities/note.ts';
 import type { Repository } from '../types/repo.ts';
 
 export class NotesRepoJson implements Repository<Note> {
@@ -37,7 +37,7 @@ export class NotesRepoJson implements Repository<Note> {
         return note;
     }
 
-    async create(noteData: Omit<Note, 'id'>): Promise<Note> {
+    async create(noteData: NoteDTO): Promise<Note> {
         await this.load();
         // Crear una nota
         const note: Note = { ...noteData, id: crypto.randomUUID() };

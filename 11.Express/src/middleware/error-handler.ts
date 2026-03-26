@@ -1,6 +1,7 @@
 import type { Request, Response, NextFunction } from 'express';
 import debug from 'debug';
 import { HttpError } from '../errors/http-error.ts';
+import { ZodError } from 'zod';
 
 const log = debug('11-express:error-handler');
 
@@ -22,6 +23,11 @@ export const errorHandler = (
         res.statusCode = error.status
         res.statusMessage = error.statusMessage
         res.send(error.message);
+    } else if (error instanceof ZodError) {
+        res.statusCode = 400 
+        res.statusMessage = 'Bad Request'
+        res.json(error.issues) 
+
     } else if (error instanceof Error) {
         res.send(error.message);
     } else {

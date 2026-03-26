@@ -12,6 +12,10 @@
             "content": "Nota creada",
             "id": "df10700f-18ae-41ea-9e8e-16583023b8db",
             "owner": "Pepe"
+        },
+        {
+            "content": "Cosas de Pepe",
+            "id": "1dbcc5e7-bdae-4717-8fbc-6d86c95442da"
         }
     ],
     "users": []
