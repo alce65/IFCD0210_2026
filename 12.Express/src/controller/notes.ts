@@ -1,21 +1,23 @@
 import type { NextFunction, Request, Response } from 'express';
 import { NotesRepoJson } from '../services/notes-repo-json.ts';
-import { NoteSchemaDTO, type Note } from '../entities/note.ts';
+import { NoteSchemaDTO, type NoteUpdateDTO } from '../entities/note.ts';
 import debug from 'debug';
-import type { Repository } from '../types/repo.ts';
 import { HttpError } from '../errors/http-error.ts';
 
 const log = debug('12-express:controller:notes');
 
 export class NotesController {
-    repo: Repository<Note>;
+    // repo: Repository<Note>;
+    // Lo anterior se usaría en otros lenguajes(Java...)
+    // En TS con el duck typing, no es necesario
+    repo: NotesRepoJson;
 
     // constructor(repo: Repository<Note>) {
     // Lo anterior se usaría en otros lenguajes(Java...)
     // En TS con el duck typing, no es necesario
     constructor(repo: NotesRepoJson) {
-        this.repo = repo
-        log('Instancia creada')
+        this.repo = repo;
+        log('Instancia creada');
     }
 
     async getAll(_req: Request, res: Response) {
@@ -33,9 +35,13 @@ export class NotesController {
             res.json(note);
             return;
         } catch (error) {
-            const finalError = new HttpError(404, 'NotFound', (error as Error).message)
-            finalError.cause = error
-            throw finalError
+            const finalError = new HttpError(
+                404,
+                'NotFound',
+                (error as Error).message,
+            );
+            finalError.cause = error;
+            throw finalError;
         }
     };
 
@@ -47,6 +53,8 @@ export class NotesController {
     };
 
     create = async (req: Request, res: Response, next: NextFunction) => {
+        // El try/catch no es necesario
+        // porque ya lo hace express
         try {
             const data = NoteSchemaDTO.parse(req.body);
             const result = await this.repo.create(data);
@@ -60,15 +68,19 @@ export class NotesController {
 
     update = async (req: Request, res: Response, next: NextFunction) => {
         const { id } = req.params;
-        const data = req.body
+        const data = NoteSchemaDTO.partial().parse(req.body) as NoteUpdateDTO
         try {
-            const result =  await this.repo.updateById(id as string, data)
+            const result = await this.repo.updateById(id as string, data);
             res.json(result);
             return;
         } catch (error) {
-            const finalError = new HttpError(404, 'NotFound', (error as Error).message)
-            finalError.cause = error
-            next(finalError)
+            const finalError = new HttpError(
+                404,
+                'NotFound',
+                (error as Error).message,
+            );
+            finalError.cause = error;
+            next(finalError);
         }
     };
 
@@ -78,12 +90,22 @@ export class NotesController {
         res.end();
     };
 
-    delete = (req: Request, res: Response) => {
-        const { id } = req.params;
-        this.repo.deleteById(id as string)
-        res.statusCode = 204;
-        res.statusMessage = 'No Content';
-        res.end();
-        return;
+    delete = (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const { id } = req.params;
+            this.repo.deleteById(id as string);
+            res.statusCode = 204;
+            res.statusMessage = 'No Content';
+            res.end();
+            return;
+        } catch (error) {
+            const finalError = new HttpError(
+                404,
+                'NotFound',
+                (error as Error).message,
+            );
+            finalError.cause = error;
+            next(finalError);
+        }
     };
 }

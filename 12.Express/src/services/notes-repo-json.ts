@@ -1,14 +1,19 @@
 import { readFile, writeFile } from 'node:fs/promises';
-import type { Note, NoteDTO } from '../entities/note.ts';
+import type { Note, NoteDTO, NoteUpdateDTO } from '../entities/note.ts';
 import type { Repository } from '../types/repo.ts';
+import { configDB } from '../config/db-config.ts';
+import debug from 'debug';
+
+const log = debug('12-express:repo:notes');
 
 export class NotesRepoJson implements Repository<Note> {
     #notes: Note[] = [];
     #file: string;
     #collection: string;
 
-    constructor(file: string, collection = 'notes') {
-        this.#file = file;
+    constructor(collection = 'notes') {
+        log('NotesRepoJson created')
+        this.#file = configDB();
         this.#collection = collection;
     }
 
@@ -50,7 +55,7 @@ export class NotesRepoJson implements Repository<Note> {
 
     async updateById(
         id: string,
-        data: Omit<Partial<Note>, 'id'>,
+        data: NoteUpdateDTO,
     ): Promise<Note> {
         const note = await this.readById(id);
         Object.assign(note, data);
