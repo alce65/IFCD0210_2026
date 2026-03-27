@@ -973,24 +973,31 @@ Acceso a datos en aplicaciones web del entorno servidor - 16 días (antes 18)
 
 ### Día 5 (27/03/2026) - - M2.02 02 - Node / Express
 
-<!-- Dudas de la code review de la práctica de Servidor Web: Node + Express
-
-- Validaciones: Zod
-- Rutas y controladores, vistas
-  - Definición mediante clases
+- Fase final: arquitectura por capas
+  - Router funcional
+  - DI completa desde app
   - ¿Herencia y clases abstractas?
+  - Validaciones: Zod
+
+- Rutas y controladores -- vistas
+  - API
+  - Sitio Web: Diferentes patrones de renderizado
+    - Static Site Generation (SSG) and Static Sites -> HTML, CSS Y JS
+      - Servidor de ficheros estáticos creados manualmente
+      - Publicación de Astro SSG
+    - Server Side Rendering (SSR)
+      - Servidor dinámico: PHP, JSP, .NET
+      - Node + express
+    - Client Side Rendering (CSR) -> SPA en React, Angular, Vue, Web Components
+
+[Descanso]
 
 - Servidores Web: Node + Express
   - Templating (Vistas ES6)
   - Tagged templates
-
-- Diferentes patrones de renderizado
-  - Servidor de ficheros estáticos (Static Site Generation)
-  - Publicación de Astro SSG
-  - Servidor dinámico: Server Side Rendering (SSR)
+  - Clases y herencia
 
 - Challenge: Servidores Web: Node + Express
--->
 
 ## Semana Santa
 

@@ -411,7 +411,7 @@ Sistemas de vistas basados en lenguajes de plantillas reconocidos por Express:
 - Pug: [npm](https://www.npmjs.com/package/pug) - 1.5M
 - Handlebars: [npm - hbs](https://www.npmjs.com/package/hbs) 160K - [express-handlebars](https://www.npmjs.com/package/express-handlebars) 280K
 
-En estos casos exixsten tres elementos de Express que se utilizan para configurar y usar el sistema de vistas:
+En estos casos existen tres elementos de Express que se utilizan para configurar y usar el sistema de vistas:
 
 - uso de app.set('view engine', 'ejs')
 - uso de app.set('views', 'views')
