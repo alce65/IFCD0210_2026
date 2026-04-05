@@ -2,11 +2,10 @@ import { View } from '../types/view.ts';
 import { socials } from './socials.ts';
 import { readFileSync } from 'node:fs';
 
-
-export class FooterView extends  View {
+export class FooterView extends View {
     // Propiedades y métodos estáticos
 
-     static viewName = 'footer'
+    static viewName = 'footer';
     static render() {
         return new FooterView('footer').template;
     }
@@ -15,9 +14,8 @@ export class FooterView extends  View {
     address = '&copy; 2026 CFD Alcobendas - Curso IF2001';
     list: string;
 
-
     constructor(address?: string) {
-        super(FooterView.viewName)
+        super(FooterView.viewName);
         this.address = address ?? this.address;
         this.list = socials
             .map(
@@ -27,7 +25,9 @@ export class FooterView extends  View {
             )
             .join('');
 
-        this.css = readFileSync('./src/views/footer/footer.css', { encoding: 'utf8' });
+        this.css = readFileSync('./src/views/footer/footer.css', {
+            encoding: 'utf8',
+        });
         this.setTemplate();
         console.log('loading footer');
     }
