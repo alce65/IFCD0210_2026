@@ -1016,23 +1016,35 @@ Bases de datos
 Bases de datos relacionales (SQL)
 
 - Conceptos generales: arquitectura cliente-servidor
-- Servidor
-  - MySQL: instalación del servidor local
-  - PostgreSQL: acceso a un servidor remoto SupaBase
+- Servidor: MySQL, MariaBD, PostgreSQL...
+  - **PostgreSQL**
+    - acceso a un servidor remoto SupaBase
+    - instalación del servidor local
+    - Contenedor Docker
+
+  ```shell
+  docker run -d --name postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=Curso_@2026 -e POSTGRES_DB=postgres -p 5432:5432 postgres:latest
+  ```
+
 - Cliente
+  - **pgAdmin**
   - MySQL Workbench
-  - pgAdmin
   - Otras opciones: DBeaver...
+
+- SQLite / SQLite Browser
+
 - SQL
   - DDL => CREATE, ALTER, DROP
   - DML => SELECT, INSERT, UPDATE, DELETE
   - DCL => GRANT, REVOKE
+
+<!--
 - Diseño de bases de datos: herramientas
-  - Diagramas Entidad-Relación (ER)
+  - Diagramas Entidad-Relación (ER) -->
 
 ## Día 2 (7/04/2026) - M2.02 05 - DB (MySQL)
 
-Bases de datos MySQL
+<!-- Bases de datos MySQL
 
 - Conceptos de diseño de bases de datos
   - E/R. Claves y relaciones
@@ -1049,18 +1061,18 @@ Bases de datos MySQL
   - Restricciones (constrains)
 - Consultas avanzadas
   - JOIN
-  - Sub-consultas
+  - Sub-consultas -->
 
 ## Día 3 (8/04/2026) - M2.02 06 - DB (Diseño)
 
-- Conceptos de diseño de bases de datos. Prácticas
+<!-- - Conceptos de diseño de bases de datos. Prácticas
   - Diagramas E/R
   - Normalización
-  - Diseño de tablas
+  - Diseño de tablas -->
 
 ## Día 4 (9/04/2026) - M2.02 07 - DB (Ejemplos)
 
-- Review conceptos de diseño de bases de datos.
+<!-- - Review conceptos de diseño de bases de datos.
   - Un sistema para gestionar una biblioteca
   - Un sistema para gestionar venta de billetes de avión
     - usuario
@@ -1076,11 +1088,11 @@ Bases de datos MySQL
     - Provider
     - Order
     - Order_item
-    - Shipper
+    - Shipper -->
 
 ## Día 5 (10/04/2026) - M2.02 08 - DB (DDL, DML)
 
-Tipos de datos
+<!-- Tipos de datos
 
 - DDL => CREATE, ALTER, DROP
   - Conexión: Shell v. Workbench (GUI)
@@ -1116,7 +1128,7 @@ Tipos de datos
   - UNION
   - INSERT, UPDATE, DELETE
   - Group y Funciones de agregación
-  - Otras funciones
+  - Otras funciones -->
 
 ## Semana 13 (Abril)
 
