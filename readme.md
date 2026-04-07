@@ -1023,7 +1023,7 @@ Bases de datos relacionales (SQL)
     - Contenedor Docker
 
   ```shell
-  docker run -d --name postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=Curso_@2026 -e POSTGRES_DB=postgres -p 5432:5432 postgres:latest
+  docker run -d --name postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=Curso_@2026 -e POSTGRES_DB=postgres -p 5432:5432 -v postgres-data:/var/lib/postgresql postgres:latest
   ```
 
 - Cliente
