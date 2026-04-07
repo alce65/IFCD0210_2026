@@ -1038,30 +1038,25 @@ Bases de datos relacionales (SQL)
   - DML => SELECT, INSERT, UPDATE, DELETE
   - DCL => GRANT, REVOKE
 
-<!--
-- Diseño de bases de datos: herramientas
-  - Diagramas Entidad-Relación (ER) -->
-
 ## Día 2 (7/04/2026) - M2.02 05 - DB (MySQL)
 
-<!-- Bases de datos MySQL
+- Revisión de las instalaciones
+  - WSL
+  - Docker
+  - Container: postgres
+  - Postgres: server + clientes (pgAdmin, CLI)
+  - Conexiones desde pgAdmin
+  - SQlite
+  - SQLite Browser
 
-- Conceptos de diseño de bases de datos
-  - E/R. Claves y relaciones
-  - Normalización
-  - Diagramas E/R
-- MySQL
-  - Conexión
-  - Referencia: SQLBolt
-- DB y tablas
-  - Listado y creación de bases de datos
-  - Listado y uso de tablas
-  - Descripción de una tabla
-- Consultas: SELECT
-  - Restricciones (constrains)
-- Consultas avanzadas
-  - JOIN
-  - Sub-consultas -->
+[descanso]
+
+- Diseño de bases de datos SQL: herramientas
+  - Diagramas Entidad-Relación (ER)
+  - Conceptos de diseño de bases de datos
+    - E/R. Claves y relaciones
+    - Diagramas E/R
+    - Normalización
 
 ## Día 3 (8/04/2026) - M2.02 06 - DB (Diseño)
 
@@ -1069,8 +1064,6 @@ Bases de datos relacionales (SQL)
   - Diagramas E/R
   - Normalización
   - Diseño de tablas -->
-
-## Día 4 (9/04/2026) - M2.02 07 - DB (Ejemplos)
 
 <!-- - Review conceptos de diseño de bases de datos.
   - Un sistema para gestionar una biblioteca
@@ -1089,6 +1082,20 @@ Bases de datos relacionales (SQL)
     - Order
     - Order_item
     - Shipper -->
+
+## Día 4 (9/04/2026) - M2.02 07 - DB (Ejemplos)
+
+<!--
+  - Referencia: SQLBolt
+- DB y tablas
+  - Listado y creación de bases de datos
+  - Listado y uso de tablas
+  - Descripción de una tabla
+- Consultas: SELECT
+  - Restricciones (constrains)
+- Consultas avanzadas
+  - JOIN
+  - Sub-consultas -->
 
 ## Día 5 (10/04/2026) - M2.02 08 - DB (DDL, DML)
 
