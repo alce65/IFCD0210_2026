@@ -15,12 +15,19 @@ title: SQL Resources
 
 - [Entity-Relationship-Diagram (ERD)](https://michael-fuchs-sql.netlify.app/2021/03/03/entity-relationship-diagram-erd/)
   Articulo sobre ER Diagrams by [Michael Fuchs](https://michael-fuchs-sql.netlify.app/)
-
   - Chen Notation
   - Min-Max-Notation
   - Martin-Notation (Crow’s foot notation) literalmente: Notación de pata de cuervo
 
 ## Tutoriales de SQL
+
+- [CURSO COMPLETO de SQL y BASES DE DATOS Desde Cero](https://www.youtube.com/watch?v=8N4M994IDt8)
+  Vídeo de TodoCode (Luisina de Paula) en YouTube. Marzo 2025.
+  Curso completo de SQL desde cero (más de 8 horas).
+
+- [Curso COMPLETO de SQL y BASES DE DATOS Desde Cero para PRINCIPIANTES](https://www.youtube.com/watch?v=OuJerKzV5T0)
+  Vídeo de mouredev en YouTube. Marzo 2024.
+  Curso completo de SQL desde cero (más de 6:52 horas).
 
 - [Curso de SQL desde CERO (Completo)](https://www.youtube.com/watch?v=DFg1V-rO6Pg)
   Video de Soy Dalto en YouTube. Abril 2023.
@@ -89,6 +96,13 @@ title: SQL Resources
   Creación de una base de datos MySQL con [DBngin](https://dbngin.com/)
   GUI [MySQL Workbench](https://www.mysql.com/products/workbench/)
   Despliegue a producción en [PlanetScale](https://planetscale.com/) - Entonces free, ahora ya no
+
+- [AprendeSQL desde cero](https://www.twitch.tv/videos/2731487210)
+  Video de midudev en Twitch. Marzo 2026.
+  Claase del JSCamp Bootcamp FullStack utilizando SQLite y PostgreSQL.
+
+- [Aprende SQL](https://www.aprendesql.dev/)
+  Curso interactivo de SQL ofrecido por midudev incluyendo un playground de SQL.
 
 ## SQL en Node
 
