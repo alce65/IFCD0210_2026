@@ -19,6 +19,11 @@ title: SQL Resources
   - Min-Max-Notation
   - Martin-Notation (Crow’s foot notation) literalmente: Notación de pata de cuervo
 
+## Cursos de FrontEnd Masters
+
+- [Complete Intro to SQL and PostgreSQL](https://sql.holt.courses/)
+- [Complete Intro to SQLite](https://sqlite.holt.courses/)
+
 ## Tutoriales de SQL
 
 - [CURSO COMPLETO de SQL y BASES DE DATOS Desde Cero](https://www.youtube.com/watch?v=8N4M994IDt8)

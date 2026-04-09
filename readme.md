@@ -1061,17 +1061,16 @@ Bases de datos relacionales (SQL)
 ## Día 3 (8/04/2026) - M2.02 06 - DB (Diseño)
 
 - Ejemplos
- - [world](https://countrystatecity.in/product/database/)
-  - [esquema](https://docs.countrystatecity.in/database/schema)
-  - [descargas](https://github.com/dr5hn/countries-states-cities-database/releases/)
+  - [world](https://countrystatecity.in/product/database/)
+    - [esquema](https://docs.countrystatecity.in/database/schema)
+    - [descargas](https://github.com/dr5hn/countries-states-cities-database/releases/)
 - [Chinook](https://github.com/lerocha/chinook-database/releases/tag/v1.4.5)
 
 Docker container: update size of shared memory (default 64MB).
 
-  ```shell
-  docker run -d --name postgres --shm-size=1g -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=Curso_@2026 -e POSTGRES_DB=postgres -p 5432:5432 -v postgres-data:/var/lib/postgresql postgres:latest
-  ```
-
+```shell
+docker run -d --name postgres --shm-size=1g -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=Curso_@2026 -e POSTGRES_DB=postgres -p 5432:5432 -v postgres-data:/var/lib/postgresql postgres:latest
+```
 
 - DDL => CREATE, ALTER, DROP
   - DB y tablas
@@ -1090,32 +1089,42 @@ Docker container: update size of shared memory (default 64MB).
   - Indexación
   - Modificación de tablas (ALTER)
   - Claves primarias y foráneas
-   
 - DML =>
   - SELECT
     - Restricciones (constrains)
   - JOIN
   - INSERT, UPDATE, DELETE
- 
+
 ## Día 4 (9/04/2026) - M2.02 07 - DB (Ejemplos)
+
+- Solución de problemas:
+  - world DB en container Docker
+  - reubicación de Chinook
+  - nuevo container [omdb-postgress](https://github.com/credativ/omdb-postgresql) - omdb (open media database) is a free database for film media
+
+  - Docker recipesGuro/OMDB image from [Complete Intro to SQL and PostgreSQL](https://sql.holt.courses/)
+
+  ```shell
+   docker run -d --name=pg-films -e POSTGRES_PASSWORD=Curso_@2026 -p 5434:5432 btholt/complete-intro-to-sql
+  ```
 
 - DDL (Review). Creación de tablas
   - Tipos de datos
   - Restricciones
-      - UNIQUE
-      - DEFAULT
-      - CHECK
-      - AUTO_INCREMENT
+    - UNIQUE
+    - DEFAULT
+    - CHECK
+    - AUTO_INCREMENT
   - Añadiendo Named Constraints (e.g. CHECK)
   - Indexación: Creación de índices
- 
+
   <!-- - Ejemplos / ejercicios - creación de tablas simples
     - red social: usuarios, posts, comentarios, likes, seguidores
     - named constraints: likes, seguidores
     - red social amigos / enemigos -->
-  
+
 - DML (Review)
-  - OUTER JOIN... 
+  - OUTER JOIN...
   - UNION
   - Sub-consultas
   - Group y Funciones de agregación
@@ -1145,7 +1154,7 @@ Docker container: update size of shared memory (default 64MB).
     - Order
     - Order_item
     - Shipper
-  
+
   - Referencia: SQLBolt
  -->
 
