@@ -14,7 +14,7 @@ Centro de Formación Digital Alcobendas (CFD-A)
 Formador / Desarrollador Web FullStack
 
 - JavaScript - Typescript - Angular - React
-- NodeJS - Express - MongoDB - MySQL
+- NodeJS - Express - MongoDB - MySQL - PostgreSQL
 
 ## Alumnos
 
@@ -51,7 +51,7 @@ Formador / Desarrollador Web FullStack
 - **Express**,
 - **NestJS**,
   **Prisma**,
-- **MySQL**,
+- **Postgre**,
 - **MongoDB**,
 - **Jest / Vitest**,
 
@@ -552,7 +552,7 @@ Examen práctico (1)
 
 ## Semana 7b (Febrero) - Módulo 2
 
-### Día 4 (J 26/02/2026) - M2.01 01
+### Día 4 (J 26/02/2026) - M2.01 01 - JS Pro: Entorno
 
 Review Examen
 
@@ -567,7 +567,7 @@ Review Examen
   - Linter
   - Build
 
-### Día 5 (V 27/02/2026) - M2.03 01
+### Día 5 (V 27/02/2026) - M2.03 01 - Despliegue / Frontend con Vite
 
 - Despliegue de una aplicación web
   - GitHub Pages
@@ -584,7 +584,7 @@ Review Examen
 
 ## Semana 8 (Marzo)
 
-### Día 1 (02/03/2026) - M2.01 02 - JS
+### Día 1 (L 02/03/2026) - M2.01 02 - JS
 
 - JS como lenguaje: profundización
   - Valores. Variables y tipos
@@ -609,7 +609,7 @@ Review Examen
     - Acceso a propiedades
     - Iteración: for - in
 
-### Día 2 (03/03/2026) - M2.01 03 - JS
+### Día 2 (M 03/03/2026) - M2.01 03 - JS
 
 - Objetos en JS (continuación)
   - Métodos de instancia
@@ -628,7 +628,7 @@ Review Examen
 - Objetos en JS. Literales
   - Prototype (\_\_proto\_\_)
 
-### Día 3 (04/03/2026) - M2.01 04 - JS (OOP)
+### Día 3 (X 04/03/2026) - M2.01 04 - JS (OOP)
 
 - Objetos en JS. Literales (continuación)
   - Prototype shadowing
@@ -651,7 +651,7 @@ Review Examen
   - Constructor: "clases".
   - Constructores y miembros estáticos
 
-### Día 4 (05/03/2026) - M2.01 05 - JS (OOP)
+### Día 4 (J 05/03/2026) - M2.01 05 - JS (OOP)
 
 - Review Funciones constructoras
   - Herencia
@@ -667,7 +667,7 @@ Review Examen
   - User & Pet
 - Ejercicios OOP: Facturas
 
-### Día 5 (06/03/2026) - M2.01 06 - TS
+### Día 5 (V 06/03/2026) - M2.01 06 - TS
 
 - Code Review ejercicios OOP: Facturas
 
@@ -684,7 +684,7 @@ Review Examen
 
 ## Semana 9 (Marzo)
 
-### Día 1 (09/03/2026) - M2.01 07 - TS
+### Día 1 (L 09/03/2026) - M2.01 07 - TS
 
 - Review: proyectos con TS
   - Compilación (emit) v. type checking (no emit)
@@ -703,7 +703,7 @@ Review Examen
   - Objetos. Propiedades
   - Arrays y tuplas
 
-### Día 2 (10/03/2026) - M2.01 08 - TS
+### Día 2 (M 10/03/2026) - M2.01 08 - TS
 
 - TS
   - Narrowing. Guardias de tipos
@@ -718,7 +718,7 @@ Review Examen
     - Ámbitos: privado, protected, public
     - Propiedades de parámetros
 
-### Día 3 (11/03/2026) - M2.01 09 - OOP
+### Día 3 (X 11/03/2026) - M2.01 09 - OOP
 
 - TS
   - Clases abstractas
@@ -744,7 +744,7 @@ Review Examen
     - Genéricos
     - Propiedades privadas
 
-### Día 4 (12/03/2026) - M2.01 10 - OOP
+### Día 4 (J 12/03/2026) - M2.01 10 - OOP
 
 - Elementos de la OOP
   - Clases
@@ -760,7 +760,7 @@ Review Examen
   - UML
   - Modularidad, genericidad y sobrecarga
 
-### Día 5 (13/03/2026) - M2.01 11 - ?
+### Día 5 (V 13/03/2026) - M2.01 11 - OOP / Test en Node
 
 - Practica: Figuras geométricas
   - Herencia
@@ -770,7 +770,7 @@ Review Examen
 
 ## Semana 10 (Marzo)
 
-### Día 1 (16/03/2026) - M2.01 12 - Node / FS
+### Día 1 (L 16/03/2026) - M2.01 12 - Node / FS
 
 - NodeJS
   - Nuevo proyecto desde cero
@@ -787,7 +787,7 @@ Review Examen
   - variables de entorno. dotenv
   - .env.SAMPLE
 
-### Día 2 (17/03/2026) - M2.01 13 - Node (CLI)
+### Día 2 (M 17/03/2026) - M2.01 13 - Node (CLI)
 
 - Linea de comandos
   - stdin / stdout / stderr
@@ -820,7 +820,7 @@ Review Examen
   - Entity
   - Interface de operaciones
 
-### Día 3 (18/03/2026) - M2.01 14
+### Día 3 (X 18/03/2026) - M2.01 14
 
 - Creación de un CLI - CRUD
   - Patrón repository
@@ -834,7 +834,7 @@ Review Examen
 - Eventos (?)
 - Streams (?)
 
-### Día 4 (19/03/2026) - M2.03 01 - Backend Node (Servidor) v. Frontend
+### Día 4 (J 19/03/2026) - M2.03 02 - Backend Node (Servidor) v. Frontend
 
 Sesión anticipadas del módulo 3
 
@@ -862,7 +862,7 @@ Sesión anticipadas del módulo 3
   - proyecto vite
   - componentes funcionales en vanilla TS
 
-### Día 5 (20/03/2026) - M2.03 02 - Frontend OOP
+### Día 5 (V 20/03/2026) - M2.03 03 - Frontend OOP
 
 Sesión anticipadas del módulo 3
 
@@ -881,7 +881,7 @@ Sesión anticipadas del módulo 3
 
 ## Semana 11 (Marzo)
 
-### Día 1 (23/03/2026) - M2.02 03
+### Día 1 (L 23/03/2026) - M2.03 04 - Frontend OOP - Despliegue
 
 Sesión anticipadas del módulo 3
 
@@ -903,7 +903,7 @@ Sesión anticipadas del módulo 3
 
 - Logger: Debug
 
-### Día 2 (24/03/2026) - M2.01 15 - Node + Express
+### Día 2 (M 24/03/2026) - M2.01 15 - Node + Express
 
 - Servidores Web: Node + Express
 
@@ -920,7 +920,7 @@ Sesión anticipadas del módulo 3
 - Mejoras del server
   - Listen info
 
-### Día 3 (25/03/2026) - M2.01 16 - Node + Express
+### Día 3 (X 25/03/2026) - M2.01 16 - Node + Express
 
 - Servidores Web: Node + Express
   - Mejoras del server: eventos
@@ -947,7 +947,7 @@ Sesión anticipadas del módulo 3
 
 Acceso a datos en aplicaciones web del entorno servidor - 16 días (antes 18)
 
-### Día 4 (26/03/2026) - M2.02 01 - Node / Express
+### Día 4 (J 26/03/2026) - M2.02 01 - Node / Express
 
 - Uso de validaciones Zod en la ruta de Create Note (POST)
 - Nuevo servidor express
@@ -971,7 +971,7 @@ Acceso a datos en aplicaciones web del entorno servidor - 16 días (antes 18)
   - ODM encapsulando NodeJS FS
   - Modelo (Repo) como clase instanciable
 
-### Día 5 (27/03/2026) - - M2.02 02 - Node / Express
+### Día 5 (V 27/03/2026) - - M2.02 02 - Node / Express
 
 - Fase final: arquitectura por capas
   - Router funcional
@@ -1003,7 +1003,7 @@ Acceso a datos en aplicaciones web del entorno servidor - 16 días (antes 18)
 
 ## Semana 12 (Abril)
 
-## Día 1 (6/04/2026) - M2.02 04 - DB (SQL)
+## Día 1 (L 6/04/2026) - M2.02 03 - DB (SQL)
 
 Bases de datos
 
@@ -1038,7 +1038,7 @@ Bases de datos relacionales (SQL)
   - DML => SELECT, INSERT, UPDATE, DELETE
   - DCL => GRANT, REVOKE
 
-## Día 2 (7/04/2026) - M2.02 05 - DB (MySQL)
+## Día 2 (M 7/04/2026) - M2.02 04 - DB (Postgres)
 
 - Revisión de las instalaciones
   - WSL
@@ -1058,7 +1058,7 @@ Bases de datos relacionales (SQL)
     - Diagramas E/R
     - Normalización
 
-## Día 3 (8/04/2026) - M2.02 06 - DB (Diseño)
+## Día 3 (X 8/04/2026) - M2.02 05 - DB (Diseño)
 
 - Ejemplos
   - [world](https://countrystatecity.in/product/database/)
@@ -1095,7 +1095,7 @@ docker run -d --name postgres --shm-size=1g -e POSTGRES_USER=postgres -e POSTGRE
   - JOIN
   - INSERT, UPDATE, DELETE
 
-## Día 4 (9/04/2026) - M2.02 07 - DB (Ejemplos)
+## Día 4 (J 9/04/2026) - M2.02 06 - DB (Ejemplos)
 
 - Solución de problemas:
   - world DB en container Docker
@@ -1118,7 +1118,7 @@ docker run -d --name postgres --shm-size=1g -e POSTGRES_USER=postgres -e POSTGRE
   - Añadiendo Named Constraints (e.g. CHECK)
   - Indexación: Creación de índices
 
-  <!-- - Ejemplos / ejercicios - creación de tablas simples
+  - Ejemplos - creación de tablas simples y relaciones
     - red social: usuarios, posts, comentarios, likes, seguidores
     - named constraints: likes, seguidores
     - red social amigos / enemigos -->
@@ -1126,11 +1126,20 @@ docker run -d --name postgres --shm-size=1g -e POSTGRES_USER=postgres -e POSTGRE
 - DML (Review)
   - OUTER JOIN...
   - UNION
-  - Sub-consultas
   - Group y Funciones de agregación
   - Otras funciones
 
-## Día 5 (10/04/2026) - M2.02 08 - DB (DDL, DML)
+## Día 5 (V 10/04/2026) - M2.02 07 - DB (DDL, DML)
+
+ - Postgres: Consultas avanzadas
+  - Subconsultas
+  - Vistas
+    - ejemplos con NorthWind Table
+  - Bloqueos y Transacciones - e.g. películas: películas, géneros, actores, directores, estudios
+  - Procedimientos almacenados y Funciones
+  - Triggers
+- SQLite
+- Ejercicios: Users relations - Uso de triggers
 
 <!-- - Conceptos de diseño de bases de datos. Prácticas
   - Diagramas E/R
@@ -1160,4 +1169,275 @@ docker run -d --name postgres --shm-size=1g -e POSTGRES_USER=postgres -e POSTGRE
 
 ## Semana 13 (Abril)
 
-## Día 1 (13/04/2026) - M2.02 09
+## Día 1 (L 13/04/2026) - M2.02 08 - Node + DB
+
+<!-- - Code review: Ejercicio users relations - Uso de triggers
+- Node + PostgreSQL
+- Driver nativo (pg) - emulación de ORM
+  - Instalación y conexión a DB
+  - Operaciones CRUD: tabla generes
+- Ejercicio: Operaciones CRUD con PostgreSQL
+  - Tabla de películas y relaciones con géneros -->
+
+## Día 2 (M 14/04/2026) - M2.02 09 - Node + Express + DB
+
+<!-- - Code review: Ejercicio Operaciones CRUD con PostgreSQL
+  - Read (SELECT) y transformación de tablas a objetos
+  - Create (INSERT) y recuperación de ids no auto-incrementales
+  - Update (UPDATE) tipo 'patch' (sin proporcionar todos los datos)
+  - Delete (DELETE)
+
+Servidores Web: Node + Express + PostgreSQL
+
+- Planteamiento y estructura del proyecto
+  - proyecto: Films - Users - Reviews
+- Patrón Repositorio
+- Posibilidades
+
+  - Driver nativo (SQLite)
+  - Driver nativo (pg) - emulación de ORM -->
+
+## Día 3 (X 15/04/2026) - M2.02 10 - Node + Express + DB
+
+<!-- Servidores Web: Node + Express + PostgreSQL
+
+- Driver nativo (SQLite)
+- Funciones basadas en callbacks
+- Promisificación -->
+
+## Día 4 (J 16/04/2026) - M2.02 11 -  Node + Express + DB
+
+<!-- Servidores Web: Node + Express + PostgreSQL
+
+- Driver nativo (SQLite) (revisión (Pormisificación en TS) y finalización)
+- Driver nativo (pg)
+- Gestión de errores
+- Configuración de la base de datos y seedings -->
+
+## Día 5 (V 17/04/2026) - M2.02 12 - Prisma
+
+<!-- Servidores Web: Node + Express + PostgreSQL
+
+- ORM (Prisma)
+- Instalación y configuración
+- Introspección desde una base de datos existente
+- Primary Key UUID (Binary)
+- Operaciones CRUD
+
+Presentación de la Arquitectura distribuida
+
+- SPA
+- API REST
+
+Nuevo proyecto: API REST con Prisma: Películas -->
+
+## Semana 14 (Abril)
+
+### Día 1 (L 20/04/2026) - M2.02 13 - API Rest con Prisma
+
+<!-- API REST Películas
+
+- Servidores Web: Node + Express
+- ORM (Prisma)
+- Verbos HTTP, enrutamiento y controladores
+- Modelo de datos y repositorios con Prisma
+- Operaciones CRUD -->
+
+### Día 2 (M 21/04/2026) - M2.02 14 - API Rest con Prisma
+
+<!-- - Review de la API REST Películas:
+  - Arquitectura en capas: server, app, routes, controllers, repositories
+  - Router como función
+  - Controladores como clases: completando las operaciones CRUD
+  - Modelo de datos y repositorios con Prisma
+  - Inyección de dependencias en app: router, controller, repository
+  - Control de errores
+- Nuevo proyecto: Node + TS + Prisma
+  - DB World: Introspección
+  - Ejercicio: Queries con Prisma -->
+
+### Día 3 (X 22/04/2026) - M2.02 15 -  API Rest con Prisma
+
+<!-- Code review queries con Prisma
+
+API REST: Films
+
+- Completando el control de Errors
+
+  - Errores de Prisma
+
+- Usuarios - Auth
+
+  - Autenticación: ¿Tienes permiso?
+  - Autorización: ¿De que tienes permiso
+
+- Registro
+  - Password: Hash y No reenviarla
+- Login -->
+
+### Día 4 (J 23/04/2026) -  
+
+<!-- Ajuste según vaya hasta aquí -->
+
+## Semana 14 (Abril) - Unidad 3
+
+<!-- Desarrollo de aplicaciones web distribuidas - 10 días (antes 12)
+Ya consumidos
+
+- (V 27/02/2026) - M2.03 01 - Despliegue / Frontend con Vite
+- (J 19/03/2026) - M2.03 02 - Backend Node (Servidor) v. Frontend
+- (V 20/03/2026) - M2.03 03 - Frontend OOP 
+- (L 23/03/2026) - M2.03 04 - 04 - Frontend OOP - Despliegue
+-->
+
+### Día 5 (V 24/04/2026) - M2.03 05 - Login / Validación - 1.5 día
+
+<!-- Aplicaciones Web Distribuidas  (2) -->
+
+<!-- API REST
+- Usuarios: Autenticación: Login
+  - JWT
+- Validaciones
+  - UsersDTOs con Zod
+  - Validaciones en el controladores
+  - FilmsDTOs con Zod
+  - Validaciones extendiendo el modelo
+- Usuarios: Autorización 
+-->
+
+<!-- - Review de la API REST Films
+
+  - Usuarios: register (singUp)
+  - Usuarios: login (signIn): Autorización
+  - Request with JWT
+
+- Update user model with roles
+- Uso de Postman como APIRest Client -->
+
+## Semana 15 (Abril / Mayo)
+
+### Día 1 (L 27/04/2026) - M2.03 06 - - Proyecto Films (Back)
+
+<!-- Aplicaciones Web Distribuidas -->
+
+<!-- - Planteamiento del proyecto: Films - Users - Reviews
+
+- Films: Endpoints ya creados
+
+  - GET /films
+  - GET /films/:id
+  - POST /films
+  - PATCH /films/:id
+  - DELETE /films/:id
+
+- Usuarios: Endpoints ya creados
+
+  - POST /users/register
+  - POST /users/login
+
+- Authorization: roles (admin, editor)
+- Nuevo modelo: Reviews
+
+  - Repositorio, Controller, DTOs, Rutas
+  - Endpoints
+    - GET /reviews
+    - POST /reviews -->
+
+### Día 2 (M 28/04/2026) - M2.03 07 - - Proyecto Films (Back)
+
+<!-- Endpoints Reviews (continuación) - GET /reviews/:id - PATCH /reviews/:id - DELETE /reviews/:id
+
+Rutas review:/id -> Authorization: owner
+
+Rutas films -> comprobar y revisar Auth
+
+Rutas users -> revisar auth y añadir las que faltan
+
+- GET /users
+- GET /users/:id
+- PATCH /users/role/:id
+- PATCH /users/:id
+- DELETE /users/:id -->
+
+### Día 3 (X 29/04/2026) - M2.03 08 - - Proyecto Films (Back)
+
+<!-- Review de la API REST Films - Users - Reviews
+
+- Route users protected for owners:
+
+  - PATCH /users/:id
+  - DELETE /users/:id
+
+- Categories
+
+  - Review of the model
+  - Repositories, Controllers, Routes
+  - Endpoints
+    - GET /categories
+    - POST /categories
+
+- Films permite añadir categorías al crearlo
+
+- Films:permite añadir/eliminar categorías posteriormente
+
+  - POST /films/:id/categories/:id
+  - DELETE /films/:id/categories/:id
+
+  - PATCH /films/:id/categories/:id -->
+
+### Día 4 (J 30/04/2026) - M2.03 09
+
+<!-- Examen Módulo 2 (Primera convocatoria) -->
+
+### Día 5 (V 01/05/2026)  - Fiesta
+
+## Semana 16 (Mayo) - Módulo 3
+
+### Día 1 (L 04/05/2026) - M2.03 10
+
+<!-- Examen Módulo 2 (Segunda convocatoria) -->
+
+<!-- Code review del examen
+
+Upload de ficheros desde Angular
+Almacenamiento de las imágenes: Cloudinary -->
+
+### Día 2 (M 05/05/2026) - M3.00 01 -
+
+### Día 3 (X 06/05/2026) - M3.00 02 -
+
+### Día 4 (J 07/05/2026) - M3.00 03 -
+
+### Día 5 (V 08/05/2026) - M3.00 04 -
+
+## Semana 17 (Mayo)
+
+### Día 1 (L 11/05/2026) - M3.00 05 -
+
+### Día 2 (M 12/05/2026) - M3.00 06 -
+
+### Día 3 (X 13/05/2026) - M3.00 07 -
+
+### Día 4 (J 14/05/2026) - M3.00 08 -
+
+### Día 5 (V 15/05/2026) - Fiesta
+
+## Semana 18 (Mayo)
+
+### Día 1 (L 18/05/2026) - M3.00 09 -
+
+### Día 2 (M 19/05/2026) - M3.00 10 -
+
+### Día 3 (X 20/05/2026) - M3.00 11 -
+
+### Día 4 (J 21/05/2026) - M3.00 12 -
+
+### Día 5 (V 22/05/2026) - M3.00 13 -
+
+## Semana 19 (Mayo)
+
+### Día 1 (L 25/05/2026) - M3.00 14 -
+
+### Día 2 (M 26/05/2026) - M3.00 15 -
+
+### Día 3 (X 27/05/2026) - M3.00 16 -
