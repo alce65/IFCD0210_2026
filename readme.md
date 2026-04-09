@@ -1060,6 +1060,69 @@ Bases de datos relacionales (SQL)
 
 ## Día 3 (8/04/2026) - M2.02 06 - DB (Diseño)
 
+- Ejemplos
+ - [world](https://countrystatecity.in/product/database/)
+  - [esquema](https://docs.countrystatecity.in/database/schema)
+  - [descargas](https://github.com/dr5hn/countries-states-cities-database/releases/)
+- [Chinook](https://github.com/lerocha/chinook-database/releases/tag/v1.4.5)
+
+Docker container: update size of shared memory (default 64MB).
+
+  ```shell
+  docker run -d --name postgres --shm-size=1g -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=Curso_@2026 -e POSTGRES_DB=postgres -p 5432:5432 -v postgres-data:/var/lib/postgresql postgres:latest
+  ```
+
+
+- DDL => CREATE, ALTER, DROP
+  - DB y tablas
+  - Conexión: Shell v. Workbench (GUI)
+  - Listado y Creación de bases de datos. Uso
+  - Listado y descripción de tablas
+  - Creación de tablas. Uso de IF NOT EXISTS
+    - Tipos de datos
+    - Restricciones
+      - NOT NULL ...
+      - Claves primarias y foráneas
+        - PRIMARY KEY numérica
+        - PRIMARY KEY UUID
+        - FOREIGN KEY
+  - Borrado de tablas (DROP)
+  - Indexación
+  - Modificación de tablas (ALTER)
+  - Claves primarias y foráneas
+   
+- DML =>
+  - SELECT
+    - Restricciones (constrains)
+  - JOIN
+  - INSERT, UPDATE, DELETE
+ 
+## Día 4 (9/04/2026) - M2.02 07 - DB (Ejemplos)
+
+- DDL (Review). Creación de tablas
+  - Tipos de datos
+  - Restricciones
+      - UNIQUE
+      - DEFAULT
+      - CHECK
+      - AUTO_INCREMENT
+  - Añadiendo Named Constraints (e.g. CHECK)
+  - Indexación: Creación de índices
+ 
+  <!-- - Ejemplos / ejercicios - creación de tablas simples
+    - red social: usuarios, posts, comentarios, likes, seguidores
+    - named constraints: likes, seguidores
+    - red social amigos / enemigos -->
+  
+- DML (Review)
+  - OUTER JOIN... 
+  - UNION
+  - Sub-consultas
+  - Group y Funciones de agregación
+  - Otras funciones
+
+## Día 5 (10/04/2026) - M2.02 08 - DB (DDL, DML)
+
 <!-- - Conceptos de diseño de bases de datos. Prácticas
   - Diagramas E/R
   - Normalización
@@ -1081,61 +1144,10 @@ Bases de datos relacionales (SQL)
     - Provider
     - Order
     - Order_item
-    - Shipper -->
-
-## Día 4 (9/04/2026) - M2.02 07 - DB (Ejemplos)
-
-<!--
+    - Shipper
+  
   - Referencia: SQLBolt
-- DB y tablas
-  - Listado y creación de bases de datos
-  - Listado y uso de tablas
-  - Descripción de una tabla
-- Consultas: SELECT
-  - Restricciones (constrains)
-- Consultas avanzadas
-  - JOIN
-  - Sub-consultas -->
-
-## Día 5 (10/04/2026) - M2.02 08 - DB (DDL, DML)
-
-<!-- Tipos de datos
-
-- DDL => CREATE, ALTER, DROP
-  - Conexión: Shell v. Workbench (GUI)
-  - Listado y Creación de bases de datos. Uso
-  - Listado y descripción de tablas
-  - Creación de tablas. Uso de IF NOT EXISTS
-    - Tipos de datos
-    - Restricciones
-      - NOT NULL
-      - UNIQUE
-      - DEFAULT
-      - CHECK
-      - AUTO_INCREMENT
-      - Claves primarias y foráneas
-        - PRIMARY KEY numérica
-        - PRIMARY KEY UUID
-        - FOREIGN KEY
-    - Añadiendo Named Constraints (e.g. CHECK)
-  - Borrado de tablas (DROP)
-  - Indexación
-  - Modificación de tablas (ALTER)
-  - Claves primarias y foráneas
-  - Creación de índices
-
-  - Ejemplos / ejercicios - creación de tablas simples
-    - red social: usuarios, posts, comentarios, likes, seguidores
-    - named constraints: likes, seguidores
-    - red social amigos / enemigos
-
-- DML =>
-  - SELECT
-  - JOIN
-  - UNION
-  - INSERT, UPDATE, DELETE
-  - Group y Funciones de agregación
-  - Otras funciones -->
+ -->
 
 ## Semana 13 (Abril)
 
