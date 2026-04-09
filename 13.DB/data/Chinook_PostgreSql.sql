@@ -16,17 +16,28 @@
 /*******************************************************************************
    Drop database if it exists
 ********************************************************************************/
-DROP DATABASE IF EXISTS chinook;
+-- DROP DATABASE IF EXISTS chinook;
 
 
 /*******************************************************************************
    Create database
 ********************************************************************************/
-CREATE DATABASE chinook;
+-- CREATE DATABASE chinook;
 
 
-\c chinook;
+-- \c chinook;
 
+DROP TABLE IF EXISTS track CASCADE;
+DROP TABLE IF EXISTS playlist_track CASCADE;
+DROP TABLE IF EXISTS playlist CASCADE;
+DROP TABLE IF EXISTS media_type CASCADE;
+DROP TABLE IF EXISTS invoice_line CASCADE;
+DROP TABLE IF EXISTS invoice CASCADE;
+DROP TABLE IF EXISTS genre CASCADE;
+DROP TABLE IF EXISTS employee CASCADE;
+DROP TABLE IF EXISTS customer CASCADE;
+DROP TABLE IF EXISTS artist CASCADE;
+DROP TABLE IF EXISTS album CASCADE;
 
 /*******************************************************************************
    Create Tables
