@@ -1,5 +1,6 @@
 *.xls*
 _entregas
+world.sql
 uploads
 
 *-lock.json

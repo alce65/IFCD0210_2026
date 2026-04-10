@@ -1110,28 +1110,31 @@ docker run -d --name postgres --shm-size=1g -e POSTGRES_USER=postgres -e POSTGRE
 
 - DDL (Review). Creación de tablas
   - Tipos de datos
+    - Específicos de Postgres: JSON/JSONB, Array
+    - Limitados en SQLite (5 tipos)
   - Restricciones
+    - AUTO_INCREMENT (MySQL)
     - UNIQUE
     - DEFAULT
     - CHECK
-    - AUTO_INCREMENT
   - Añadiendo Named Constraints (e.g. CHECK)
   - Indexación: Creación de índices
 
   - Ejemplos - creación de tablas simples y relaciones
     - red social: usuarios, posts, comentarios, likes, seguidores
     - named constraints: likes, seguidores
-    - red social amigos / enemigos -->
+    - red social amigos / enemigos
 
 - DML (Review)
   - OUTER JOIN...
   - UNION
   - Group y Funciones de agregación
+  - ejemplos: world
   - Otras funciones
 
 ## Día 5 (V 10/04/2026) - M2.02 07 - DB (DDL, DML)
 
- - Postgres: Consultas avanzadas
+- Postgres: Consultas avanzadas
   - Subconsultas
   - Vistas
     - ejemplos con NorthWind Table
@@ -1205,7 +1208,7 @@ Servidores Web: Node + Express + PostgreSQL
 - Funciones basadas en callbacks
 - Promisificación -->
 
-## Día 4 (J 16/04/2026) - M2.02 11 -  Node + Express + DB
+## Día 4 (J 16/04/2026) - M2.02 11 - Node + Express + DB
 
 <!-- Servidores Web: Node + Express + PostgreSQL
 
@@ -1256,7 +1259,7 @@ Nuevo proyecto: API REST con Prisma: Películas -->
   - DB World: Introspección
   - Ejercicio: Queries con Prisma -->
 
-### Día 3 (X 22/04/2026) - M2.02 15 -  API Rest con Prisma
+### Día 3 (X 22/04/2026) - M2.02 15 - API Rest con Prisma
 
 <!-- Code review queries con Prisma
 
@@ -1275,7 +1278,7 @@ API REST: Films
   - Password: Hash y No reenviarla
 - Login -->
 
-### Día 4 (J 23/04/2026) -  
+### Día 4 (J 23/04/2026) -
 
 <!-- Ajuste según vaya hasta aquí -->
 
@@ -1286,7 +1289,7 @@ Ya consumidos
 
 - (V 27/02/2026) - M2.03 01 - Despliegue / Frontend con Vite
 - (J 19/03/2026) - M2.03 02 - Backend Node (Servidor) v. Frontend
-- (V 20/03/2026) - M2.03 03 - Frontend OOP 
+- (V 20/03/2026) - M2.03 03 - Frontend OOP
 - (L 23/03/2026) - M2.03 04 - 04 - Frontend OOP - Despliegue
 -->
 
@@ -1302,7 +1305,7 @@ Ya consumidos
   - Validaciones en el controladores
   - FilmsDTOs con Zod
   - Validaciones extendiendo el modelo
-- Usuarios: Autorización 
+- Usuarios: Autorización
 -->
 
 <!-- - Review de la API REST Films
@@ -1389,7 +1392,7 @@ Rutas users -> revisar auth y añadir las que faltan
 
 <!-- Examen Módulo 2 (Primera convocatoria) -->
 
-### Día 5 (V 01/05/2026)  - Fiesta
+### Día 5 (V 01/05/2026) - Fiesta
 
 ## Semana 16 (Mayo) - Módulo 3
 

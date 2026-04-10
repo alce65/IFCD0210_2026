@@ -1610,13 +1610,16 @@ Se puede usar una union de diferentes consultas a una misma tabla, añadiendo un
 
 #### Funciones de agregación
 
-- GROUP BY
 - COUNT(field) devuelve el número de filas que coinciden con la condición
 - SUM(field) devuelve la suma de los valores de un campo
 - AVG(field) devuelve la media de los valores de un campo
 - MIN(field) devuelve el valor mínimo de un campo
 - MAX(field) devuelve el valor máximo de un campo
 - FIRST(field) y LAST(field) no existen como funciones agregadas estándar en PostgreSQL. Para obtener el primer o último valor, se suele usar ORDER BY junto con LIMIT 1, o funciones como array_agg y luego acceder al primer/último elemento del array.
+
+Se usan con:
+
+- GROUP BY
 - HAVING(field) se utiliza para filtrar los resultados de una consulta que contiene una cláusula GROUP BY
 
 #### Funciones de cadena (PostgreSQL)
