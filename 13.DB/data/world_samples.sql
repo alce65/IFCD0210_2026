@@ -5,7 +5,7 @@ select count(*), sum(population) as "población total", avg(population) as media
 select 
 		re.name, 
 		count(*) as "numero", 
-		sum(co.population) as "población total", 
+		to_char(sum(co.population), '999G999G999G999') as "población total", 
 		avg(co.population) as media 
 	from countries as co 
 	join regions as re
@@ -20,8 +20,8 @@ select
 		re.name as region,
 		sr.name as subregion, 
 		count(*) as "numero", 
-		sum(co.population) as "población total", 
-		avg(co.population) as media 
+		to_char(sum(co.population), '999G999G999G999') as "población total", 
+		to_char(avg(co.population), '999G999G999G999') as media 
 	from countries as co 
 	join regions as re
 		on co.region_id = re.id
