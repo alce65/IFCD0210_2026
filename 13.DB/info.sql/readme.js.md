@@ -2,14 +2,15 @@
 title: SQL y ECMAScript (JavaScript)
 ---
 
-- [MySQL y JavaScript / TypeScript](#mysql-y-javascript--typescript)
-  - [Opciones en Node.js para utilizar MySQL](#opciones-en-nodejs-para-utilizar-mysql)
-    - [Driver nativo para Node](#driver-nativo-para-node)
-    - [ORM (Object–relational mapping)](#orm-objectrelational-mapping)
-  - [Driver nativo MySQL con Node.js y TypeScript](#driver-nativo-mysql-con-nodejs-y-typescript)
+- [DB SQL y ECMAScript (JavaScript / TypeScript)](#db-sql-y-ecmascript-javascript--typescript)
+  - [ORM (Object–relational mapping)](#orm-objectrelational-mapping)
+- [PostgreSQL y JavaScript / TypeScript: Driver nativo para Node.js](#postgresql-y-javascript--typescript-driver-nativo-para-nodejs)
+  - [Instalación del Driver nativo PostgreSQL con Node.js y TypeScript](#instalación-del-driver-nativo-postgresql-con-nodejs-y-typescript)
     - [Consultas: método `query` de la conexión. Tipado de resultados](#consultas-método-query-de-la-conexión-tipado-de-resultados)
     - [Consultas y placeholders. Problema de la inyección SQL](#consultas-y-placeholders-problema-de-la-inyección-sql)
     - [Creación de registros y obtención del id](#creación-de-registros-y-obtención-del-id)
+- [MySQL y JavaScript / TypeScript: Driver nativo para Node](#mysql-y-javascript--typescript-driver-nativo-para-node)
+  - [Instalación del Driver nativo MySQL con Node.js y TypeScript](#instalación-del-driver-nativo-mysql-con-nodejs-y-typescript)
 - [SQLite y JavaScript / TypeScript](#sqlite-y-javascript--typescript)
   - [Opciones en Node.js para utilizar SQLite](#opciones-en-nodejs-para-utilizar-sqlite)
   - [sqlite3](#sqlite3)
@@ -35,23 +36,15 @@ title: SQL y ECMAScript (JavaScript)
   - [Uso de Prisma Client](#uso-de-prisma-client)
   - [Prisma Seed](#prisma-seed)
 
-## MySQL y JavaScript / TypeScript
+## DB SQL y ECMAScript (JavaScript / TypeScript)
 
-### Opciones en Node.js para utilizar MySQL
+Para trabajar con bases de datos SQL en JavaScript o TypeScript, existen varias opciones, dependiendo del tipo de base de datos que se utilice y del enfoque que se quiera adoptar.
 
-#### Driver nativo para Node
+- Para bases de datos relacionales como PostgreSQL, MySQL o SQLite, se pueden utilizar **drivers nativos**:
+  -  permiten ejecutar **sentencias SQL** directamente desde el código JavaScript o TypeScript.
+- También existen ORMs (Object–relational mapping) que permiten trabajar con bases de datos SQL de forma más sencilla, utilizando objetos y métodos en lugar de sentencias SQL.
 
-- driver antiguo [mysql](https://www.npmjs.com/package/mysql)
-
-This is a node.js driver for mysql.
-It is written in JavaScript, does not require compiling, and is 100% MIT licensed.
-
-- driver moderno [mysql2](https://www.npmjs.com/package/mysql2)
-
-A continuation of MySQL-Native.
-Protocol parser code was rewritten from scratch and api changed to match popular Node MySQL.
-
-#### ORM (Object–relational mapping)
+### ORM (Object–relational mapping)
 
 Un ORM (Object Relational Mapping) es una técnica de programación que permite convertir datos entre sistemas de tipo orientado a objetos y sistemas de tipo relacionales. En el caso de Node.js, un ORM permite trabajar con bases de datos SQL de forma más sencilla, utilizando objetos y métodos en lugar de sentencias SQL.
 
@@ -65,33 +58,71 @@ from [9 Best JavaScript and TypeScript ORMs for 2024](https://www.sitepoint.com/
 - [MikroORM](https://mikro-orm.io/) TypeScript ORM Library for SQL and NoSQL inspired by PHP Doctrine
 - [Prisma](https://www.prisma.io/) recent TypeScript ORM
 
-### Driver nativo MySQL con Node.js y TypeScript
+## PostgreSQL y JavaScript / TypeScript: Driver nativo para Node.js
+
+Para trabajar con PostgreSQL en Node.js, la opción más común es utilizar el driver nativo [`pg`](https://node-postgres.com/), que incluye soporte para TypeScript. 
+
+### Instalación del Driver nativo PostgreSQL con Node.js y TypeScript
 
 Instalación
 
 ```shell
-npm install mysql2
+npm i pg
 ```
 
-Como ya incluye soporte para TypeScript, no es necesario instalar tipos adicionales
+Como no incluye soporte para TypeScript, es necesario instalar tipos adicionales
+
+```shell
+npm i -D @types/pg
+```
 
 Conexión a la base de datos
 
 ```typescript
-import mysql from 'mysql2/promise';
-
-const connection = await mysql.createConnection({
-  host: process.env.DB_HOST || 'localhost:3306',
-  // port:  process.env.DB_PORT || 3306,
+import { Client } from 'pg'
+ 
+const client = new Client({
   user: process.env.DB_USER || 'root',
-  passwd: process.env.DB_PASSWD,
+  password: process.env.DB_PASSWD,
+  host: process.env.DB_HOST || 'localhost',
+  port:  process.env.DB_PORT || 3306,
   database: process.env.DB_NAME || 'movies_db',
-});
+})
+```
+
+Opcionalmente se puede usar `Pool` en lugar de `Client` para gestionar un pool de conexiones a la base de datos, lo que mejora el rendimiento en aplicaciones con muchas consultas concurrentes.
+
+```typescript
+import { Pool } from 'pg'
+const pool = new Pool({
+  user: process.env.DB_USER || 'root',
+  password: process.env.DB_PASSWD,
+  host: process.env.DB_HOST || 'localhost
+  port:  process.env.DB_PORT || 3306,
+  database: process.env.DB_NAME || 'movies_db',
+})
+```
+
+En ambos casos se pueden utilizar por defecto las variables de entorno para configurar la conexión a la base de datos, siempre que se sigan las convenciones de nombrado de variables de entorno para la configuración de la base de datos, como `PGUSER`, `PGPASSWORD`, `PGHOST`, `PGPORT` y `PGDATABASE`.
+
+```typescript
+import { Client } from 'pg'
+const client = new Client()
+```
+
+Igualmente es posible configurar la conexión a través de una cadena de conexión, que se puede incluir en el archivo .env como `DATABASE_URL` o `PG_CONNECTION_STRING`
+
+```typescript
+
+import { Client } from 'pg'
+const client = new Client({
+  connectionString: process.env.DATABASE_URL || 'postgresql://user:password@localhost:5432/dbname',
+})
 ```
 
 #### Consultas: método `query` de la conexión. Tipado de resultados
 
-La conexión incluye un método `query` para realizar consultas
+La conexión (Client) incluye un método `query` para realizar consultas
 
 ```typescript
 const [rows, fields] = await connection.query('SELECT * FROM movies');
@@ -242,6 +273,44 @@ const [result] = await connection.query<ResultSetHeader[]>(
 );
 
 console.log(result.insertId);
+```
+
+
+
+## MySQL y JavaScript / TypeScript: Driver nativo para Node
+
+- driver antiguo [mysql](https://www.npmjs.com/package/mysql)
+
+This is a node.js driver for mysql.
+It is written in JavaScript, does not require compiling, and is 100% MIT licensed.
+
+- driver moderno [mysql2](https://www.npmjs.com/package/mysql2)
+
+A continuation of MySQL-Native.
+Protocol parser code was rewritten from scratch and api changed to match popular Node MySQL.
+
+### Instalación del Driver nativo MySQL con Node.js y TypeScript
+
+Instalación
+
+```shell
+npm install mysql2
+```
+
+Como ya incluye soporte para TypeScript, no es necesario instalar tipos adicionales
+
+Conexión a la base de datos
+
+```typescript
+import mysql from 'mysql2/promise';
+
+const connection = await mysql.createConnection({
+  host: process.env.DB_HOST || 'localhost:3306',
+  // port:  process.env.DB_PORT || 3306,
+  user: process.env.DB_USER || 'root',
+  passwd: process.env.DB_PASSWD,
+  database: process.env.DB_NAME || 'movies_db',
+});
 ```
 
 ## SQLite y JavaScript / TypeScript

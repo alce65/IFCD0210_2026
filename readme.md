@@ -1038,7 +1038,7 @@ Bases de datos relacionales (SQL)
   - DML => SELECT, INSERT, UPDATE, DELETE
   - DCL => GRANT, REVOKE
 
-## Día 2 (M 7/04/2026) - M2.02 04 - DB (Postgres)
+## Día 2 (M 7/04/2026) - M2.02 04 - DB (Instalaciones / Diseño)
 
 - Revisión de las instalaciones
   - WSL
@@ -1058,7 +1058,7 @@ Bases de datos relacionales (SQL)
     - Diagramas E/R
     - Normalización
 
-## Día 3 (X 8/04/2026) - M2.02 05 - DB (Diseño)
+## Día 3 (X 8/04/2026) - M2.02 05 - DB (Postgres)
 
 - Ejemplos
   - [world](https://countrystatecity.in/product/database/)
@@ -1095,7 +1095,7 @@ docker run -d --name postgres --shm-size=1g -e POSTGRES_USER=postgres -e POSTGRE
   - JOIN
   - INSERT, UPDATE, DELETE
 
-## Día 4 (J 9/04/2026) - M2.02 06 - DB (Ejemplos)
+## Día 4 (J 9/04/2026) - M2.02 06 - DB (DDL, DML / Ejemplos)
 
 - Solución de problemas:
   - world DB en container Docker
@@ -1132,24 +1132,15 @@ docker run -d --name postgres --shm-size=1g -e POSTGRES_USER=postgres -e POSTGRE
   - ejemplos: world
   - Otras funciones
 
-## Día 5 (V 10/04/2026) - M2.02 07 - DB (DDL, DML)
+## Día 5 (V 10/04/2026) - M2.02 07 - DB (Practica: diseño / select)
 
-- Postgres: Consultas avanzadas
-  - Subconsultas
-  - Vistas
-    - ejemplos con NorthWind Table
-  - Bloqueos y Transacciones - e.g. películas: películas, géneros, actores, directores, estudios
-  - Procedimientos almacenados y Funciones
-  - Triggers
-- SQLite
-- Ejercicios: Users relations - Uso de triggers
-
-<!-- - Conceptos de diseño de bases de datos. Prácticas
-  - Diagramas E/R
+- Conceptos de diseño de bases de datos
+- Ejercicio: diseño de una base de datos para un sistema de gestión de una escuela
   - Normalización
-  - Diseño de tablas -->
+  - Diagramas E/R
+  - Diagramas de tablas
 
-<!-- - Review conceptos de diseño de bases de datos.
+- Otros ejemplos de diseño de bases de datos disponibles.
   - Un sistema para gestionar una biblioteca
   - Un sistema para gestionar venta de billetes de avión
     - usuario
@@ -1167,26 +1158,57 @@ docker run -d --name postgres --shm-size=1g -e POSTGRES_USER=postgres -e POSTGRE
     - Order_item
     - Shipper
 
-  - Referencia: SQLBolt
- -->
+- Ejemplos de consultas SQL
+  - world: países por continente, ciudades por país, países con más de 10 ciudades, países sin ciudades...
+
+- Ejemplos propuestos para ejercicios de consulta SQL (DML)
+  - chinook: clientes por país, artistas con más álbumes, álbumes con más canciones...
+  - omdb: películas por género, películas por año, películas con más de 1000 votos y valoración superior a 8...
+- Referencia: SQLBolt
 
 ## Semana 13 (Abril)
 
-## Día 1 (L 13/04/2026) - M2.02 08 - Node + DB
+## Día 1 (L 13/04/2026) - M2.02 08 - DB (Postgres avanzado)
 
-<!-- - Code review: Ejercicio users relations - Uso de triggers
+<!--
+- Postgres: Consultas avanzadas
+  - Subconsultas
+  - Vistas
+    - ejemplos con ....
+  - Bloqueos y Transacciones - e.g. películas: películas, géneros, actores, directores, estudios
+  - Procedimientos almacenados y Funciones
+  - Triggers
+- Ejercicio: Users relations - Uso de triggers
+
+[descanso]
+
+- SQLite
+
+-->
+
+## Día 2 (M 14/04/2026) - M2.02 09 - Node + DB
+
+<!--
+
+- Code review: Ejercicio users relations - Uso de triggers
+
 - Node + PostgreSQL
-- Driver nativo (pg) - emulación de ORM
-  - Instalación y conexión a DB
+  - Driver nativo (pg)
+- Nuevo proyecto: Node + DB (en la carpeta de DB)
+  - Creación y populado de las tablas de géneros y películas
+  - Inicio del proyecto: Lectura de entorno (.env), zod y debug
+  - Entidades. Errores Sql
+  - Instalación de pg y tipos. Conexión a DB
+- Patron repositorio
   - Operaciones CRUD: tabla generes
 - Ejercicio: Operaciones CRUD con PostgreSQL
-  - Tabla de películas y relaciones con géneros -->
+  - Tabla de películas y relaciones con géneros
 
-## Día 2 (M 14/04/2026) - M2.02 09 - Node + Express + DB
+## Día 3 (X 15/04/2026) - M2.02 10 - Node + Express + DB (PostgreSQL)
 
 <!-- - Code review: Ejercicio Operaciones CRUD con PostgreSQL
   - Read (SELECT) y transformación de tablas a objetos
-  - Create (INSERT) y recuperación de ids no auto-incrementales
+  - Create (INSERT) y recuperación de los datos
   - Update (UPDATE) tipo 'patch' (sin proporcionar todos los datos)
   - Delete (DELETE)
 
@@ -1200,15 +1222,15 @@ Servidores Web: Node + Express + PostgreSQL
   - Driver nativo (SQLite)
   - Driver nativo (pg) - emulación de ORM -->
 
-## Día 3 (X 15/04/2026) - M2.02 10 - Node + Express + DB
+## Día 4 (J 16/04/2026) - M2.02 11 - Node + Express + DB (SQLite)
 
-<!-- Servidores Web: Node + Express + PostgreSQL
+<!-- Servidores Web: Node + Express + SQLite
 
 - Driver nativo (SQLite)
 - Funciones basadas en callbacks
 - Promisificación -->
 
-## Día 4 (J 16/04/2026) - M2.02 11 - Node + Express + DB
+## Día 5 (V 17/04/2026) - Node + Express + DB
 
 <!-- Servidores Web: Node + Express + PostgreSQL
 
@@ -1217,7 +1239,9 @@ Servidores Web: Node + Express + PostgreSQL
 - Gestión de errores
 - Configuración de la base de datos y seedings -->
 
-## Día 5 (V 17/04/2026) - M2.02 12 - Prisma
+## Semana 14 (Abril)
+
+### Día 1 (L 20/04/2026) - M2.02 13 - M2.02 12 - Prisma
 
 <!-- Servidores Web: Node + Express + PostgreSQL
 
@@ -1234,9 +1258,7 @@ Presentación de la Arquitectura distribuida
 
 Nuevo proyecto: API REST con Prisma: Películas -->
 
-## Semana 14 (Abril)
-
-### Día 1 (L 20/04/2026) - M2.02 13 - API Rest con Prisma
+### Día 2 (M 21/04/2026) - M2.02 14 - API Rest con Prisma
 
 <!-- API REST Películas
 
@@ -1246,7 +1268,7 @@ Nuevo proyecto: API REST con Prisma: Películas -->
 - Modelo de datos y repositorios con Prisma
 - Operaciones CRUD -->
 
-### Día 2 (M 21/04/2026) - M2.02 14 - API Rest con Prisma
+### Día 3 (X 22/04/2026) - M2.02 15 - API Rest con Prisma
 
 <!-- - Review de la API REST Películas:
   - Arquitectura en capas: server, app, routes, controllers, repositories
@@ -1259,7 +1281,7 @@ Nuevo proyecto: API REST con Prisma: Películas -->
   - DB World: Introspección
   - Ejercicio: Queries con Prisma -->
 
-### Día 3 (X 22/04/2026) - M2.02 15 - API Rest con Prisma
+### Día 4 (J 23/04/2026) - M2.02 16 - API Rest con Prisma
 
 <!-- Code review queries con Prisma
 
@@ -1276,11 +1298,9 @@ API REST: Films
 
 - Registro
   - Password: Hash y No reenviarla
-- Login -->
+- Login
 
-### Día 4 (J 23/04/2026) -
-
-<!-- Ajuste según vaya hasta aquí -->
+-->
 
 ## Semana 14 (Abril) - Unidad 3
 
