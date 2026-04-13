@@ -28,6 +28,22 @@ C:\Users\Alejandro>sqlite3 --version
 3.49.0 2025-02-06 11:55:18 4a7dd425dc2a0e5082a9049c9b4a9d4f199a71583d014c24b4cfe276c5a77cde (64-bit)
 ```
 
+Ejemplo 
+
+```sql
+
+CREATE TABLE users (
+  user_id SERIAL PRIMARY KEY,
+  user_alias VARCHAR(50) NOT NULL UNIQUE,
+  email VARCHAR(50) NOT NULL UNIQUE,
+  first_name VARCHAR(100) NOT NULL,
+  surname VARCHAR(100),
+  phone CHAR(12) UNIQUE,
+  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMP NOT NULL DEFAULT NOW()
+);
+```
+
 ### SQLite Browser: instalación em Windows
 
 SQLite Browser es una herramienta visual de código abierto para crear, diseñar y editar bases de datos SQLite. Para instalar SQLite Browser en Windows, siga los siguientes pasos:

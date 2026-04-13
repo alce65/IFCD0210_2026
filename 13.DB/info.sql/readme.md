@@ -110,7 +110,7 @@ title: SQL
   - [Triggers (Disparadores) en PostgreSQL](#triggers-disparadores-en-postgresql)
     - [Sintaxis básica](#sintaxis-básica)
     - [Ejemplo: actualizar número de likes](#ejemplo-actualizar-número-de-likes)
-    - [Diferencias clave respecto a MySQL](#diferencias-clave-respecto-a-mysql-1)
+    - [Diferencias clave en los triggers respecto a MySQL](#diferencias-clave-en-los-triggers-respecto-a-mysql)
 
 ## Introducción
 
@@ -1872,6 +1872,12 @@ Un índice es una estructura de datos que mejora la velocidad de las operaciones
 
 Para la PK y la FK se crean índices automáticamente
 
+Ejemplo
+
+```sql
+CREATE INDEX idx_texto ON tabla (campos)
+```
+
 Desventajas
 
 - Ocupan espacio en disco
@@ -2031,40 +2037,40 @@ PostgreSQL soporta transacciones de forma nativa y completa. Los comandos básic
 
 1. **Iniciar una Transacción**:
 
-- `BEGIN;` o `START TRANSACTION;` (ambos válidos en PostgreSQL)
+   - `BEGIN;` o `START TRANSACTION;` (ambos válidos en PostgreSQL)
 
-```sql
-BEGIN;
--- o
-START TRANSACTION;
-```
+   ```sql
+   BEGIN;
+   -- o
+   START TRANSACTION;
+   ```
 
 2. **Confirmar una Transacción**:
 
-- `COMMIT;` confirma la transacción y hace permanentes todos los cambios.
+   - `COMMIT;` confirma la transacción y hace permanentes todos los cambios.
 
-```sql
-COMMIT;
-```
+   ```sql
+   COMMIT;
+   ```
 
 3. **Deshacer una Transacción**:
 
-- `ROLLBACK;` deshace todos los cambios realizados durante la transacción.
+   - `ROLLBACK;` deshace todos los cambios realizados durante la transacción.
 
-```sql
-ROLLBACK;
-```
+   ```sql
+   ROLLBACK;
+   ```
 
 4. **Puntos de Salvaguarda**:
 
-- `SAVEPOINT nombre_save_point;` crea un punto de restauración dentro de la transacción.
-- `ROLLBACK TO nombre_save_point;` revierte los cambios realizados desde ese punto.
+   - `SAVEPOINT nombre_save_point;` crea un punto de restauración dentro de la transacción.
+   - `ROLLBACK TO nombre_save_point;` revierte los cambios realizados desde ese punto.
 
-```sql
-SAVEPOINT punto1;
--- Realizar algunas operaciones
-ROLLBACK TO punto1;
-```
+   ```sql
+   SAVEPOINT punto1;
+   -- Realizar algunas operaciones
+   ROLLBACK TO punto1;
+   ```
 
 ##### Niveles de Aislamiento
 
@@ -2215,26 +2221,26 @@ En PostgreSQL, los triggers siempre llaman a una función (trigger function) esc
 
 1. Crear la función del trigger:
 
-```sql
-CREATE OR REPLACE FUNCTION actualizar_salario()
-RETURNS TRIGGER AS $$
-BEGIN
-  IF NEW.experiencia > 5 THEN
-    NEW.salario := NEW.salario * 1.1;
-  END IF;
-  RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-```
+    ```sql
+    CREATE OR REPLACE FUNCTION actualizar_salario()
+    RETURNS TRIGGER AS $$
+    BEGIN
+      IF NEW.experiencia > 5 THEN
+        NEW.salario := NEW.salario * 1.1;
+      END IF;
+      RETURN NEW;
+    END;
+    $$ LANGUAGE plpgsql;
+    ```
 
 2. Crear el trigger asociado a la tabla:
 
-```sql
-CREATE TRIGGER trg_actualizar_salario
-BEFORE UPDATE ON empleados
-FOR EACH ROW
-EXECUTE FUNCTION actualizar_salario();
-```
+  ```sql
+  CREATE TRIGGER trg_actualizar_salario
+  BEFORE UPDATE ON empleados
+  FOR EACH ROW
+  EXECUTE FUNCTION actualizar_salario();
+  ```
 
 **Uso:**
 
@@ -2246,24 +2252,24 @@ UPDATE empleados SET experiencia = 6 WHERE id = 1;
 
 1. Función para incrementar likes:
 
-```sql
-CREATE OR REPLACE FUNCTION incrementar_likes()
-RETURNS TRIGGER AS $$
-BEGIN
-  UPDATE tweets SET num_likes = num_likes + 1 WHERE tweet_id = NEW.tweet_id;
-  RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-```
+    ```sql
+    CREATE OR REPLACE FUNCTION incrementar_likes()
+    RETURNS TRIGGER AS $$
+    BEGIN
+      UPDATE tweets SET num_likes = num_likes + 1 WHERE tweet_id = NEW.tweet_id;
+      RETURN NEW;
+    END;
+    $$ LANGUAGE plpgsql;
+    ```
 
 2. Trigger:
 
-```sql
-CREATE TRIGGER trg_incrementar_likes
-AFTER INSERT ON tweet_likes
-FOR EACH ROW
-EXECUTE FUNCTION incrementar_likes();
-```
+    ```sql
+    CREATE TRIGGER trg_incrementar_likes
+    AFTER INSERT ON tweet_likes
+    FOR EACH ROW
+    EXECUTE FUNCTION incrementar_likes();
+    ```
 
 Para decrementar:
 
@@ -2282,7 +2288,7 @@ FOR EACH ROW
 EXECUTE FUNCTION decrementar_likes();
 ```
 
-#### Diferencias clave respecto a MySQL
+#### Diferencias clave en los triggers respecto a MySQL
 
 - En PostgreSQL, el trigger ejecuta siempre una función.
 - No se usa `DELIMITER`.
