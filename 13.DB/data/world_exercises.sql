@@ -1,6 +1,6 @@
-# 1. Listar todos los países con su población y su extensión, 
-# incluyendo los correspondientes alias adecuados en español
-# Listar los 10 primeros países
+-- 1. Listar todos los países con su población y su extensión, 
+-- incluyendo los correspondientes alias adecuados en español
+-- Listar los 10 primeros países
 
 select 
 	id,
@@ -9,7 +9,7 @@ select
 	to_char(area_sq_km, '999G999G999G999') as extensión 
 from countries Limit 10;
 
-# 2. Añadir un elemento calculado: la densidad
+-- 2. Añadir un elemento calculado: la densidad
 
 select 
 	id,
@@ -20,7 +20,7 @@ select
 from countries Limit 10;
 
 
-# 3. Listar los anteriores datos de los países entre el 10 y el 20
+-- 3. Listar los anteriores datos de los países entre el 10 y el 20
 
 select
 	id,
@@ -30,7 +30,7 @@ select
 	to_char(population/area_sq_km, '999G999') as densidad
 from countries where id > 10 limit 10;
 
-# 4. Mostrar los 10 paises de mayor densidad (sin verla)
+-- 4. Mostrar los 10 paises de mayor densidad (sin verla)
 
 select
 	id,
@@ -42,7 +42,7 @@ where population/area_sq_km IS NOT NULL
 order by population/area_sq_km desc
 limit 10;
 
-# Lo mismo, viendo la densidad
+-- Lo mismo, viendo la densidad
 
 select
 	id,
@@ -55,7 +55,7 @@ where population/area_sq_km IS NOT NULL
 order by population/area_sq_km desc
 limit 10;
 
-# Listar los países de Asia o África de cuatro letras ordenados por población
+-- Listar los países de Asia o África de cuatro letras ordenados por población
 
 select 
 		co.id,
@@ -72,8 +72,8 @@ select
 	order by co.population
 	limit 10;
 
-# Nombre de la ciudad, país y su forma de gobierno de las ciudades 
-# de más de 10.000.000 de habitantes de Asia y África
+-- Nombre de la ciudad, país y su forma de gobierno de las ciudades 
+-- de más de 10.000.000 de habitantes de Asia y África
 
 select ci.name, co.name, co.nationality, co.native
 from cities ci
@@ -84,7 +84,44 @@ join regions re
 where re.name IN ('Asia','Africa')
 	AND ci.population > 10000000;
 
-###########################################################
+select ci.name as city, st.name as region, ci.type, ci.population from cities ci
+	join countries co
+		on ci.country_id = co.id
+	join states st
+		on ci.state_id = st.id
+where co.name = 'Spain' and ci.type != 'section' and ci.population > 100000 limit 20;
+
+-- Subconsultas
+
+select ci.name as city, st.name as region, ci.type, ci.population from cities ci
+	join states st
+		on ci.state_id = st.id
+where ci.country_id = (select id from countries where name ='Spain')
+ and ci.type != 'section' and ci.population > 100000 limit 20;
+
+drop view if exists country_cities;
+create view country_cities as
+	select 
+			ci.name as city, 
+			st.name as region, 
+			ci.type, 
+			ci.population,
+			co.name as pais
+		from cities ci
+		join countries co
+			on ci.country_id = co.id
+		join states st
+			on ci.state_id = st.id;
+
+select * from country_cities 
+	where pais = 'Spain' and type != 'section' and population > 100000 
+	limit 20;
+
+select * from country_cities 
+	where pais = 'Portugal' and type != 'section' and population > 100000 
+	limit 20;
+
+-- ###########################################################
 select count(*), sum(population) as "población total", avg(population) as media from countries;
 
 select 
