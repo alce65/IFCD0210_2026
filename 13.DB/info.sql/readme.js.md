@@ -41,7 +41,7 @@ title: SQL y ECMAScript (JavaScript)
 Para trabajar con bases de datos SQL en JavaScript o TypeScript, existen varias opciones, dependiendo del tipo de base de datos que se utilice y del enfoque que se quiera adoptar.
 
 - Para bases de datos relacionales como PostgreSQL, MySQL o SQLite, se pueden utilizar **drivers nativos**:
-  -  permiten ejecutar **sentencias SQL** directamente desde el código JavaScript o TypeScript.
+  - permiten ejecutar **sentencias SQL** directamente desde el código JavaScript o TypeScript.
 - También existen ORMs (Object–relational mapping) que permiten trabajar con bases de datos SQL de forma más sencilla, utilizando objetos y métodos en lugar de sentencias SQL.
 
 ### ORM (Object–relational mapping)
@@ -57,6 +57,7 @@ from [9 Best JavaScript and TypeScript ORMs for 2024](https://www.sitepoint.com/
 - [TypeORM](https://typeorm.io/) TypeScript ORM Library on top of reflect-metadata and some native driver
 - [MikroORM](https://mikro-orm.io/) TypeScript ORM Library for SQL and NoSQL inspired by PHP Doctrine
 - [Prisma](https://www.prisma.io/) recent TypeScript ORM
+- [Drizzle](https://orm.drizzle.team/) next gen TypeScript ORM.
 
 ## PostgreSQL y JavaScript / TypeScript: Driver nativo para Node.js
 

@@ -1170,21 +1170,23 @@ docker run -d --name postgres --shm-size=1g -e POSTGRES_USER=postgres -e POSTGRE
 
 ## Día 1 (L 13/04/2026) - M2.02 08 - DB (Postgres avanzado)
 
-<!--
 - Postgres: Consultas avanzadas
-  - Subconsultas
+  - Sub-consultas
   - Vistas
     - ejemplos con ....
   - Bloqueos y Transacciones - e.g. películas: películas, géneros, actores, directores, estudios
+
+[descanso]
+
+- Postgres: PLpg/SQL -> Lenguaje declarativo
   - Procedimientos almacenados y Funciones
   - Triggers
 - Ejercicio: Users relations - Uso de triggers
 
-[descanso]
-
-- SQLite
-
--->
+- SQLite -> DB autocontenida en un fichero
+  - Instalación
+  - Conceptos básicos
+  - Incorporación de DB: chinook
 
 ## Día 2 (M 14/04/2026) - M2.02 09 - Node + DB
 
