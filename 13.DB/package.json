@@ -1,0 +1,35 @@
+{
+    "name": "13.DB",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "cross-env NODE_ENV=prod node ./src/index.ts",
+        "dev": "node --watch --env-file=.env ./src/index.ts",
+        "test": "node --env-file=.env.test node --test"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "type": "module",
+    "dependencies": {
+        "cross-env": "^10.1.0",
+        "debug": "^4.4.3",
+        "pg": "^8.20.0",
+        "zod": "^4.3.6"
+    },
+    "devDependencies": {
+        "@eslint/js": "^10.0.1",
+        "@types/debug": "^4.1.13",
+        "@types/node": "^25.5.0",
+        "@types/pg": "^8.20.0",
+        "eslint": "^10.0.3",
+        "globals": "^17.4.0",
+        "prettier": "^3.8.1",
+        "typescript": "^5.9.3",
+        "typescript-eslint": "^8.57.0"
+    },
+    "prettier": {
+        "singleQuote": true
+    }
+}
