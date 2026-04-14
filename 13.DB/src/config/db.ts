@@ -14,8 +14,10 @@ export const connectDB = async () => {
         database: env.PGDATABASE
     });
     try {
-        await pool.connect();
+        const client = await pool.connect();
         log("Database connection established successfully.");
+        log("Connected to database:", pool.options.database);
+        client.release();
     } catch (error) {
         log("Error connecting to the database:", error);
         throw error;

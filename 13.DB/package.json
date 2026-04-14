@@ -6,7 +6,7 @@
     "scripts": {
         "start": "cross-env NODE_ENV=prod node ./src/index.ts",
         "dev": "node --watch --env-file=.env ./src/index.ts",
-        "test": "node --env-file=.env.test node --test"
+        "test": "node --env-file=.env.test --test"
     },
     "keywords": [],
     "author": "",
