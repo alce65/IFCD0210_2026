@@ -1190,8 +1190,6 @@ docker run -d --name postgres --shm-size=1g -e POSTGRES_USER=postgres -e POSTGRE
 
 ## Día 2 (M 14/04/2026) - M2.02 09 - Node + DB
 
-<!--
-
 - Code review: Ejercicio users relations - Uso de triggers
 
 - Node + PostgreSQL
@@ -1202,18 +1200,34 @@ docker run -d --name postgres --shm-size=1g -e POSTGRES_USER=postgres -e POSTGRE
   - Entidades. Errores Sql
   - Instalación de pg y tipos. Conexión a DB
 - Patron repositorio
-  - Operaciones CRUD: tabla generes
-- Ejercicio: Operaciones CRUD con PostgreSQL
-  - Tabla de películas y relaciones con géneros
+  - Operaciones Read: tabla genres
+  - Test: node:test
 
 ## Día 3 (X 15/04/2026) - M2.02 10 - Node + Express + DB (PostgreSQL)
 
-<!-- - Code review: Ejercicio Operaciones CRUD con PostgreSQL
+- Test: db de testing
+- Operaciones CRUD con PostgreSQL: tabla genres
+  - Create (INSERT) y recuperación de los datos & test
+  - Update (UPDATE) tipo 'patch' (sin proporcionar todos los datos) & test
+  - Delete (DELETE) & test
+
+  - Tabla de películas y relaciones con géneros
+    - Entidad
+    - Incorporación a las tablas de testing
+
+[descanso]
+
+- Operaciones CRUD con PostgreSQL: tabla movies y relación con genres
   - Read (SELECT) y transformación de tablas a objetos
+
+- Challenge
   - Create (INSERT) y recuperación de los datos
   - Update (UPDATE) tipo 'patch' (sin proporcionar todos los datos)
   - Delete (DELETE)
 
+## Día 4 (J 16/04/2026) - M2.02 11 - Node + Express + DB (SQLite)
+
+<!--
 Servidores Web: Node + Express + PostgreSQL
 
 - Planteamiento y estructura del proyecto
@@ -1223,8 +1237,6 @@ Servidores Web: Node + Express + PostgreSQL
 
   - Driver nativo (SQLite)
   - Driver nativo (pg) - emulación de ORM -->
-
-## Día 4 (J 16/04/2026) - M2.02 11 - Node + Express + DB (SQLite)
 
 <!-- Servidores Web: Node + Express + SQLite
 
