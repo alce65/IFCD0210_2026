@@ -3,30 +3,22 @@ import assert from 'node:assert/strict';
 import { connectDB } from '../config/db.ts';
 import { GenresRepo } from './genres.ts';
 import type { SqlError } from '../errors/sql-error.ts';
+import { prepareTestingDB } from '../config/prepare-testing-db.ts';
+
 
 describe('GenresRepo', async () => {
     const pool = await connectDB();
     const genresRepo = new GenresRepo(pool);
 
     beforeEach(async () => {
-        // Setup code before each test, e.g., initialize the database connection and the GenresRepo instance
-        await pool.query('DROP TABLE IF EXISTS genres');
-        await pool.query(`
-            CREATE TABLE genres (
-                genre_id SERIAL PRIMARY KEY,
-                name VARCHAR(100) NOT NULL,
-                created_at TIMESTAMP DEFAULT NOW()
-            )
-        `);
-        await pool.query(`
-            INSERT INTO genres (name) VALUES
-            ('Action'),
-            ('Adventure')`);
+        await prepareTestingDB(pool);
     });
 
     afterEach(async () => {
         // Cleanup code after each test, e.g., close the database connection
-        await pool.query('DROP TABLE IF EXISTS genres');
+        await pool.query(`DROP TABLE IF EXISTS movies_genres CASCADE`);
+        await pool.query('DROP TABLE IF EXISTS genres CASCADE');
+        await pool.query(`DROP TABLE IF EXISTS movies CASCADE`);
     });
 
     describe('Read operations', () => {
@@ -89,7 +81,10 @@ describe('GenresRepo', async () => {
                 assert.fail('Expected an error to be thrown');
             } catch (error) {
                 assert.strictEqual((error as SqlError).code, 'NOT_FOUND');
-                assert.strictEqual((error as SqlError).sqlState, 'UPDATE_FAILED');
+                assert.strictEqual(
+                    (error as SqlError).sqlState,
+                    'UPDATE_FAILED',
+                );
             }
         });
     });
@@ -103,7 +98,7 @@ describe('GenresRepo', async () => {
             assert(deletedGenre);
             assert.strictEqual(deletedGenre.id, 1);
             assert.strictEqual(deletedGenre.name, 'Action');
-            
+
             // Verify that the genre has been deleted
             const genres = await genresRepo.readAllGenres();
             assert.strictEqual(genres.length, 1);
@@ -118,7 +113,10 @@ describe('GenresRepo', async () => {
                 assert.fail('Expected an error to be thrown');
             } catch (error) {
                 assert.strictEqual((error as SqlError).code, 'NOT_FOUND');
-                assert.strictEqual((error as SqlError).sqlState, 'DELETE_FAILED');
+                assert.strictEqual(
+                    (error as SqlError).sqlState,
+                    'DELETE_FAILED',
+                );
             }
         });
     });

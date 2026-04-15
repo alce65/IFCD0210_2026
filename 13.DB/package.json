@@ -6,7 +6,8 @@
     "scripts": {
         "start": "cross-env NODE_ENV=prod node ./src/index.ts",
         "dev": "node --watch --env-file=.env ./src/index.ts",
-        "test": "node --env-file=.env.test --test"
+        "test": "node --env-file=.env.test --test",
+        "test:serie": "node --env-file=.env.test --test --test-concurrency=1"
     },
     "keywords": [],
     "author": "",
