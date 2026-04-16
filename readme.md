@@ -1203,7 +1203,7 @@ docker run -d --name postgres --shm-size=1g -e POSTGRES_USER=postgres -e POSTGRE
   - Operaciones Read: tabla genres
   - Test: node:test
 
-## Día 3 (X 15/04/2026) - M2.02 10 - Node + Express + DB (PostgreSQL)
+## Día 3 (X 15/04/2026) - M2.02 10 - Node + DB (PostgreSQL)
 
 - Test: db de testing
 - Operaciones CRUD con PostgreSQL: tabla genres
@@ -1227,8 +1227,28 @@ docker run -d --name postgres --shm-size=1g -e POSTGRES_USER=postgres -e POSTGRE
 
 ## Día 4 (J 16/04/2026) - M2.02 11 - Node + Express + DB (SQLite)
 
+- Operaciones CRUD con PostgreSQL: tabla movies y relación con genres
+  - Completar operaciones del crud
+    - readByID
+    - create
+
+[descanso]
+
+- Operaciones CRUD con PostgreSQL (continuación)
+  - update
+  - toggleGeneres (add/delete generes to movies)
+  - delete
+
+- Driver nativo (node:SQLite)
+
 <!--
-Servidores Web: Node + Express + PostgreSQL
+- Driver nativo (node:SQLite)
+- Driver nativo (SQLite3)
+  - Funciones basadas en callbacks
+  - Promisificación
+
+
+Servidores Web: Node + Express + PostgreSQL/SQLite
 
 - Planteamiento y estructura del proyecto
   - proyecto: Films - Users - Reviews
@@ -1237,12 +1257,6 @@ Servidores Web: Node + Express + PostgreSQL
 
   - Driver nativo (SQLite)
   - Driver nativo (pg) - emulación de ORM -->
-
-<!-- Servidores Web: Node + Express + SQLite
-
-- Driver nativo (SQLite)
-- Funciones basadas en callbacks
-- Promisificación -->
 
 ## Día 5 (V 17/04/2026) - Node + Express + DB
 
