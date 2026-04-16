@@ -1,4 +1,5 @@
 import { Pool } from "pg";
+import { DatabaseSync} from "node:sqlite"
 import { env } from "./env.ts";
 import debug from 'debug';
 const log = debug(`${env.PROJECT_NAME}:configDB`);
@@ -23,4 +24,15 @@ export const connectDB = async () => {
         throw error;
     }
     return pool;
+}
+
+export const connectSQLiteDB = async () => {
+    try {
+        const db = new DatabaseSync(env.SQLITE_FILE);
+        log("SQLite database connection established successfully.");
+        return db;
+    } catch (error) {
+        log("Error connecting to the SQLite database:", error);
+        throw error;
+    }
 }
