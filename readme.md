@@ -1241,26 +1241,22 @@ docker run -d --name postgres --shm-size=1g -e POSTGRES_USER=postgres -e POSTGRE
 
 - Driver nativo (node:SQLite)
 
-<!--
-- Driver nativo (node:SQLite)
-- Driver nativo (SQLite3)
-  - Funciones basadas en callbacks
-  - Promisificación
+## Día 5 (V 17/04/2026) - Node + Express + DB
 
+- Servidores: Node + PostgreSQL/SQLite
+  - Driver nativo (SQLite)
+  - Entidad User
+  - CRUD users en SQLite
+  - Test
 
-Servidores Web: Node + Express + PostgreSQL/SQLite
+[descanso]
+
+<!-- Servidores Web: Node + Express + PostgreSQL
 
 - Planteamiento y estructura del proyecto
   - proyecto: Films - Users - Reviews
 - Patrón Repositorio
 - Posibilidades
-
-  - Driver nativo (SQLite)
-  - Driver nativo (pg) - emulación de ORM -->
-
-## Día 5 (V 17/04/2026) - Node + Express + DB
-
-<!-- Servidores Web: Node + Express + PostgreSQL
 
 - Driver nativo (SQLite) (revisión (Pormisificación en TS) y finalización)
 - Driver nativo (pg)
