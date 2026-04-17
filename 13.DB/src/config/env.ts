@@ -10,6 +10,7 @@ export const EnvSchema = z.object({
     PGHOST: z.string(),
     PGPORT: z.coerce.number(),
     PGDATABASE: z.string(),
+    SQLITE_FILE: z.string()
 });
 
 export type Env = z.infer<typeof EnvSchema>;
