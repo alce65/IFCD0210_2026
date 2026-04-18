@@ -1,0 +1,41 @@
+{
+    "name": "12.express",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+       "start": "cross-env NODE_ENV=prod node ./src/index.ts",
+        "dev": "node --watch --env-file=.env ./src/index.ts",
+        "setup:testDB": "node --env-file=.env.test ./src/setup.ts",
+        "test": "node --env-file=.env.test --test",
+        "test:serie": "node --env-file=.env.test --test --test-concurrency=1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "type": "module",
+    "dependencies": {
+        "cors": "^2.8.6",
+        "cross-env": "^10.1.0",
+        "debug": "^4.4.3",
+        "express": "^5.2.1",
+        "morgan": "^1.10.1",
+        "zod": "^4.3.6"
+    },
+    "devDependencies": {
+        "@eslint/js": "^10.0.1",
+        "@types/cors": "^2.8.19",
+        "@types/debug": "^4.1.13",
+        "@types/express": "^5.0.6",
+        "@types/morgan": "^1.9.10",
+        "@types/node": "^25.5.0",
+        "eslint": "^10.0.3",
+        "globals": "^17.4.0",
+        "prettier": "^3.8.1",
+        "typescript": "^5.9.3",
+        "typescript-eslint": "^8.57.0"
+    },
+    "prettier": {
+        "singleQuote": true
+    }
+}
