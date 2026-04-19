@@ -1,6 +1,6 @@
 import { Router } from "express";
 import type { Pool } from "pg";
-import { env } from "../.././config/env.ts";
+import { env } from "../../config/env.ts";
 import debug from 'debug';
 
 

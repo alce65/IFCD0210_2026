@@ -6,11 +6,12 @@ import type { Animal, AnimalCreateDTO, AnimalUpdateDTO } from '../entities/anima
 
 
 const log = debug(`${env.PROJECT_NAME}:repo:animals`);
-log('Starting animals repository...');
+log('Loading animals repository...');
 
 export class AnimalsRepo { 
     private pool: Pool;
     constructor(pool: Pool) {
+        log('Starting animals repository...');
         this.pool = pool;
     }
     
@@ -20,13 +21,13 @@ export class AnimalsRepo {
             SELECT 
                 id, 
                 name, 
-                english_name as englishName, 
-                sci_name as sciName, 
+                english_name AS "englishName", 
+                sci_name AS "sciName", 
                 diet, 
                 lifestyle, 
                 location, 
                 slogan, 
-                group_name as group, 
+                group_name AS "group", 
                 image
             FROM animals`);
         return rows as Animal[]; 
@@ -38,13 +39,13 @@ export class AnimalsRepo {
             SELECT 
                 id, 
                 name, 
-                english_name as englishName, 
-                sci_name as sciName, 
+                english_name AS "englishName", 
+                sci_name AS "sciName", 
                 diet, 
                 lifestyle, 
                 location, 
                 slogan, 
-                group_name as group, 
+                group_name AS "group", 
                 image
             FROM animals 
             WHERE id = $1`;
@@ -79,13 +80,13 @@ export class AnimalsRepo {
             RETURNING 
                 id, 
                 name, 
-                english_name as englishName, 
-                sci_name as sciName, 
+                english_name AS "englishName", 
+                sci_name AS "sciName", 
                 diet, 
                 lifestyle, 
                 location, 
                 slogan, 
-                group_name as group, 
+                group_name AS "group", 
                 image`;
         const { rows } = await this.pool.query<Animal>(q, [
             animal.name,
@@ -106,26 +107,26 @@ export class AnimalsRepo {
         const q = `
             UPDATE animals 
             SET name = $2, 
-                english_name = $3,
-                sci_name = $4,
-                diet = $5,
-                lifestyle = $6,
-                location = $7,
-                slogan = $8,
-                group_name = $9,
-                image = $10
+                english_name = COALESCE($3, english_name),
+                sci_name = COALESCE($4, sci_name),
+                diet = COALESCE($5, diet),
+                lifestyle = COALESCE($6, lifestyle),
+                location = COALESCE($7, location),
+                slogan = COALESCE($8, slogan),
+                group_name = COALESCE($9, group_name),
+                image = COALESCE($10, image)
             WHERE 
                 id = $1
             RETURNING 
                 id, 
                 name, 
-                english_name as englishName, 
-                sci_name as sciName, 
+                english_name AS "englishName", 
+                sci_name AS "sciName", 
                 diet, 
                 lifestyle, 
                 location, 
                 slogan, 
-                group_name as group, 
+                group_name AS "group", 
                 image`;
         const { rows } = await this.pool.query<Animal>(q, [
             id,
@@ -159,13 +160,13 @@ export class AnimalsRepo {
             RETURNING 
                 id, 
                 name, 
-                english_name as englishName, 
-                sci_name as sciName, 
+                english_name AS "englishName", 
+                sci_name AS "sciName", 
                 diet, 
                 lifestyle, 
                 location, 
                 slogan, 
-                group_name as group, 
+                group_name AS "group", 
                 image`;
         const { rows } = await this.pool.query<Animal>(q, [id]);
 
@@ -180,6 +181,5 @@ export class AnimalsRepo {
         return rows[0] as Animal;
     }
 }
-
 
 
