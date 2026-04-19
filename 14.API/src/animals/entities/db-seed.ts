@@ -7,7 +7,7 @@ import { fileURLToPath } from 'url';
 const log = debug(`${env.PROJECT_NAME}:seed`);
 log("Loading seed...");
 
-export const animalSeed = async (pool: Pool) => {
+export const seedAnimalsDB = async (pool: Pool) => {
     log("Seeding to database...");
 
     await pool.query(`DROP TABLE IF EXISTS animals;`);
@@ -48,7 +48,7 @@ const currentFilePath = fileURLToPath(import.meta.url);
 const processFilePath = process.argv[1];
 
 if (currentFilePath === processFilePath) {
-    animalSeed(await connectDB())
+    seedAnimalsDB(await connectDB())
     .then(() => {
         log("Seed completed successfully.")
         process.exit(0)

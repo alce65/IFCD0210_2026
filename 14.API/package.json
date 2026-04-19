@@ -9,7 +9,8 @@
         "setup:testDB": "node --env-file=.env.test ./src/setup.ts",
         "test": "node --env-file=.env.test --test",
         "test:serie": "node --env-file=.env.test --test --test-concurrency=1",
-        "seed:dev": "node --env-file=.env ./src/animals/entities/db_seed.ts"
+        "seed:dev": "node --env-file=.env ./src/animals/entities/db_seed.ts",
+        "seed:test": "node --env-file=.env.test ./src/animals/entities/test-db-seed.ts"
     },
     "keywords": [],
     "author": "",

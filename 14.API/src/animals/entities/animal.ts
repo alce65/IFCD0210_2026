@@ -5,7 +5,7 @@ log('Loaded module');
 
 import { z } from 'zod';
 
-export const Animal = z.object({
+export const AnimalSchema = z.object({
     id: z.string(),
     name: z.string().nonempty(),
     englishName: z.string().nonempty(),
@@ -19,7 +19,7 @@ export const Animal = z.object({
 });
 
 // extract the inferred type
-export type Animal = z.infer<typeof Animal>;
+export type Animal = z.infer<typeof AnimalSchema>;
 // {
 //     id: string;
 //     name: string;
@@ -33,6 +33,8 @@ export type Animal = z.infer<typeof Animal>;
 //     image: string;
 // }
 
-export type AnimalCreateDTO = Omit<Animal, 'id'>;
+export const AnimalCreateSchema = AnimalSchema.omit({ id: true });
+export const AnimalUpdateSchema = AnimalSchema.partial().omit({ id: true });
 
-export type AnimalUpdateDTO = Partial<Omit<Animal, 'id'>>;
+export type AnimalCreateDTO = z.infer<typeof AnimalCreateSchema>;
+export type AnimalUpdateDTO = z.infer<typeof AnimalUpdateSchema>;
