@@ -1249,23 +1249,36 @@ docker run -d --name postgres --shm-size=1g -e POSTGRES_USER=postgres -e POSTGRE
   - CRUD users en SQLite
   - Test
 
+- Comentado: driver SQLite3 (callbacks; promisificación en TS)
+
 [descanso]
 
-<!-- Servidores Web: Node + Express + PostgreSQL
+- Servidores Web: Node + Express + PostgreSQL
+  - Planteamiento y estructura del proyecto: Animales
+  - Posibilidades
+    - Configuración y variables de entorno
+    - Separación de responsabilidades: server v. app
+    - Gestión de errores centralizada
+    - Patrón Repositorio
+    - Driver nativo (pg)
 
-- Planteamiento y estructura del proyecto
-  - proyecto: Films - Users - Reviews
-- Patrón Repositorio
-- Posibilidades
-
-- Driver nativo (SQLite) (revisión (Pormisificación en TS) y finalización)
-- Driver nativo (pg)
-- Gestión de errores
-- Configuración de la base de datos y seedings -->
+[Challenge] API Animales: Node + Express + PostgreSQL
 
 ## Semana 14 (Abril)
 
 ### Día 1 (L 20/04/2026) - M2.02 13 - M2.02 12 - Prisma
+
+<!--
+- Revisión del Challenge
+  - Proyecto base: Node + Express
+  - PostgreSQL
+  - Configuración de la base de datos y seedings
+  - CRUD: MVC + Repositorio
+  - Controller y Router
+  - Validaciones
+-->
+
+[Descanso]
 
 <!-- Servidores Web: Node + Express + PostgreSQL
 
@@ -1280,7 +1293,9 @@ Presentación de la Arquitectura distribuida
 - SPA
 - API REST
 
-Nuevo proyecto: API REST con Prisma: Películas -->
+Nuevo proyecto: API REST con Prisma: Películas
+  - proyecto: Films - Users - Reviews
+-->
 
 ### Día 2 (M 21/04/2026) - M2.02 14 - API Rest con Prisma
 
