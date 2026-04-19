@@ -5,7 +5,11 @@ import morgan from "morgan";
 import cors from "cors";
 import type { Pool } from "pg";
 import { animalRouter } from "./animals/routers/animal.router.ts";
-
+import { customHeaders } from "./middleware/customs.ts";
+import { HomeView } from "./views/home.ts";
+import { apiController } from "./controllers/api.ts";
+import { HttpError } from "./errors/http-error.ts";
+import { errorHandler } from "./middleware/error-handler.ts";
 
 export const createApp = (pool: Pool) => {
     const log = debug(`${env.PROJECT_NAME}:app`);
@@ -21,6 +25,9 @@ export const createApp = (pool: Pool) => {
     );
     app.use(express.json());
     app.use(express.urlencoded());
+    app.use(customHeaders(env.PROJECT_NAME));
+
+    app.use(express.static('public'));
 
     app.use('/health', (_req, res) => {
         return res.json({
@@ -29,15 +36,22 @@ export const createApp = (pool: Pool) => {
         });
     });
 
+     app.get('/', async (_req, res) => {
+        log('Received request to root endpoint');
+        return res.send(HomeView.render());
+    });
+
+    app.get('/api', apiController);
+
     app.use('/api/animals', animalRouter(pool));
 
-    app.use((_req, res) => {
-        res.status(404);
-        res.statusMessage = 'Not Found';
-        return res.json({
-            message: 'Resource not found',
-        });
+    app.use((_req, _res, next) => {
+        log('Calling errorHandler for 404 error');
+        const error = new HttpError(404, 'Not Found', 'Resource not found');
+        next(error);
     });
+
+    app.use(errorHandler);
     
     return app;
 }

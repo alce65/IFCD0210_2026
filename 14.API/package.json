@@ -4,11 +4,12 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-       "start": "cross-env NODE_ENV=prod node ./src/index.ts",
+        "start": "cross-env NODE_ENV=prod node ./src/index.ts",
         "dev": "node --watch --env-file=.env ./src/index.ts",
         "setup:testDB": "node --env-file=.env.test ./src/setup.ts",
         "test": "node --env-file=.env.test --test",
-        "test:serie": "node --env-file=.env.test --test --test-concurrency=1"
+        "test:serie": "node --env-file=.env.test --test --test-concurrency=1",
+        "seed:dev": "node --env-file=.env ./src/animals/entities/db_seed.ts"
     },
     "keywords": [],
     "author": "",
@@ -19,6 +20,8 @@
         "cross-env": "^10.1.0",
         "debug": "^4.4.3",
         "express": "^5.2.1",
+        "gray-matter": "^4.0.3",
+        "marked": "^18.0.2",
         "morgan": "^1.10.1",
         "pg": "^8.20.0",
         "zod": "^4.3.6"

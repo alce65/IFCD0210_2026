@@ -3,12 +3,6 @@ import { env } from "./env.ts";
 import debug from 'debug';
 const log = debug(`${env.PROJECT_NAME}:configDB`);
 
-//    import { join, resolve } from 'node:path';
-//     log('Running config db/file connection');
-//     const __dirname = resolve('.');
-//     const file = join(__dirname, 'src', 'data', 'db.json');
-
-
 log("Loaded database connection...");
 
 export const connectDB = async () => {
