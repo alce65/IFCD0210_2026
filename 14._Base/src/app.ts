@@ -3,6 +3,11 @@ import debug from 'debug';
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
+import { customHeaders } from './middleware/customs.ts';
+import { errorHandler } from './middleware/error-handler.ts';
+import { HttpError } from './errors/http-error.ts';
+import { HomeView } from './views/home.ts';
+import { apiController } from './controllers/api.ts';
 
 export const createApp = () => {
     const log = debug(`${env.PROJECT_NAME}:app`);
@@ -18,6 +23,9 @@ export const createApp = () => {
     );
     app.use(express.json());
     app.use(express.urlencoded());
+    app.use(customHeaders(env.PROJECT_NAME));
+
+    app.use(express.static('public'));
 
     app.use('/health', (_req, res) => {
         return res.json({
@@ -26,17 +34,21 @@ export const createApp = () => {
         });
     });
 
-    app.use('/api', () => {
-        return;
+    app.get('/', async (_req, res) => {
+        log('Received request to root endpoint');
+        return res.send(HomeView.render());
     });
 
-    app.use((_req, res) => {
-        res.status(404);
-        res.statusMessage = 'Not Found';
-        return res.json({
-            message: 'Resource not found',
-        });
+   
+    app.get('/api', apiController);
+
+    app.use((_req, _res, next) => {
+        log('Calling errorHandler for 404 error');
+        const error = new HttpError(404, 'Not Found', 'Resource not found');
+        next(error);
     });
+
+    app.use(errorHandler);
 
     return app;
 };
