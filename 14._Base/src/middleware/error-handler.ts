@@ -5,7 +5,6 @@ import { HttpError } from '../errors/http-error.ts';
 import { ZodError } from 'zod';
 
 const log = debug(`${env.PROJECT_NAME}:error-handler`);
-
 log('Loading error handler...');
 
 export const errorHandler = (

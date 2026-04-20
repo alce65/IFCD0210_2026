@@ -34,7 +34,7 @@ Se definen dos endpoints básicos: un endpoint raíz que devuelve una página HT
    - DEBUG: string (PROJECT_NAME:\*)
    - PORT: number (opcional, por defecto 3000)
 5. Selección del fichero de entorno desde los scripts de npm
-   - npm run dev: carga `.env.dev`
+   - npm run dev: carga `.env`
    - npm run test: carga `.env.test`
    - npm run prod: no carga ningún `.env`, se asume que las variables de entorno están configuradas en el entorno de producción. Usa cross-env para establecer NODE_ENV a prod.
 

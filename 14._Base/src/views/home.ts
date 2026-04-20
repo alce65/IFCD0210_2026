@@ -6,16 +6,14 @@ import { marked } from 'marked';
 import matter from "gray-matter";
 
 const log = debug(`${env.PROJECT_NAME}:home-view`);
-
 log('Loading home view class...');
 
-const readme = await readFile('./README.md', 'utf-8');
-const { data, content } = matter(readme);
-const html = marked.parse(content);
-const title = env.PROJECT_NAME || 'Home';
-
 export class HomeView {
-    static render = () => {
+    static render = async () => {
+        const readme = await readFile('./README.md', 'utf-8');
+        const { data, content } = matter(readme);
+        const html = marked.parse(content);
+        const title = env.PROJECT_NAME || 'Home';
         const template = /*html*/ `
         <!doctype html>
         <html lang="en">

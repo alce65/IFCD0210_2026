@@ -9,8 +9,9 @@ import { HttpError } from './errors/http-error.ts';
 import { HomeView } from './views/home.ts';
 import { apiController } from './controllers/api.ts';
 
+const log = debug(`${env.PROJECT_NAME}:app`);
+log('Loading application...');
 export const createApp = () => {
-    const log = debug(`${env.PROJECT_NAME}:app`);
     log('Starting Express app...');
     const app = express();
     app.disable('x-powered-by');
@@ -27,7 +28,7 @@ export const createApp = () => {
 
     app.use(express.static('public'));
 
-    app.use('/health', (_req, res) => {
+    app.get('/health', (_req, res) => {
         return res.json({
             status: 'ok',
             timestamp: new Date().toISOString(),
@@ -36,7 +37,7 @@ export const createApp = () => {
 
     app.get('/', async (_req, res) => {
         log('Received request to root endpoint');
-        return res.send(HomeView.render());
+        return res.send(await HomeView.render());
     });
 
    
@@ -46,6 +47,7 @@ export const createApp = () => {
         log('Calling errorHandler for 404 error');
         const error = new HttpError(404, 'Not Found', 'Resource not found');
         next(error);
+
     });
 
     app.use(errorHandler);

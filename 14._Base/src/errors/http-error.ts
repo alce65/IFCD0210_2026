@@ -2,7 +2,6 @@ import { env } from "../config/env.ts";
 import debug from 'debug';
 
 const log = debug(`${env.PROJECT_NAME}:http-error`);
-
 log('Loading HTTP error class...');
 
 export class HttpError extends Error {

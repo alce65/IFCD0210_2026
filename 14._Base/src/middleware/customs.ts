@@ -5,7 +5,6 @@ import debug from 'debug';
 const log = debug(`${env.PROJECT_NAME}:middleware`);
 log("Loading middleware...");
 
-
 export const customHeaders = (project: string) => {
     return (req: Request, res: Response, next: NextFunction) => {
         log(`Setting custom header for project: ${project}`);
