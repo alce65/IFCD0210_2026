@@ -9,10 +9,12 @@ import { HttpError } from './errors/http-error.ts';
 import { HomeView } from './views/home.ts';
 import { apiController } from './controllers/api.ts';
 import type { Pool } from 'pg';
+import { AnimalsRepo } from './animals/repositories/animals.ts';
+import { AnimalsController } from './animals/controllers/animals.ts';
+import { AnimalsRouter } from './animals/routers/animals.valid.ts';
 
 const log = debug(`${env.PROJECT_NAME}:app`);
 log('Loading application...');
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const createApp = (pool: Pool) => {
     log('Starting Express app...');
     const app = express();
@@ -43,6 +45,11 @@ export const createApp = (pool: Pool) => {
     });
    
     app.get('/api', apiController);
+
+    const animalRepo = new AnimalsRepo(pool);
+    const animalController = new AnimalsController(animalRepo);
+    const animalRouter = new AnimalsRouter(animalController);
+    app.use('/api/animals', animalRouter.router);
 
     app.use((_req, _res, next) => {
         log('Calling errorHandler for 404 error');
