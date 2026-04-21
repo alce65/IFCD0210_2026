@@ -7,10 +7,10 @@ import { createApp } from "./app.ts";
 const log = debug(`${env.PROJECT_NAME}:index`);
 log("Starting API server...");
 
-const pool = await connectDB()
+const prisma = await connectDB()
 
 const port = env.PORT || 3000;
-const app = createApp(pool);
+const app = createApp(prisma);
 
 const server = createServer(app);
 log('Server created');

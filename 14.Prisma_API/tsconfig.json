@@ -43,5 +43,5 @@
     "allowImportingTsExtensions": true,
     "erasableSyntaxOnly": true
   },
-  "include": ["./src"]
+  "include": ["./src", "./prisma.config.ts"]
 }

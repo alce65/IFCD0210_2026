@@ -11,7 +11,7 @@ export const EnvSchema = z.object({
   PGPASSWORD: z.string(),
   PGHOST: z.string(),
   PGPORT: z.coerce.number(),
-  PGDATABASE: z.string()
+  PGDATABASE: z.string(),
 });
 
 export type Env = z.infer<typeof EnvSchema>

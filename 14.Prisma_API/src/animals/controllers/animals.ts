@@ -4,6 +4,7 @@ import type { AnimalsRepo } from '../repositories/animals.ts';
 import type { NextFunction, Request, Response } from "express";
 import { HttpError } from '../../errors/http-error.ts';
 import type { AnimalCreateDTO, AnimalUpdateDTO } from '../entities/animal.ts';
+import { SqlError } from '../../errors/sql-error.ts';
 
 
 const log = debug(`${env.PROJECT_NAME}:controller:animals`);
@@ -34,13 +35,17 @@ export class AnimalsController {
         log(`Getting animal with id ${id} from repository...`);
         try {
             const animal = await this.repo.readAnimalById(id);
-            if (!animal) {
-                const httpError = new HttpError(404, 'Not Found', 'Animal not found');
-                next(httpError);
-                return;
-            }
+            // if (!animal) {
+            //     const httpError = new HttpError(404, 'Not Found', 'Animal not found');
+            //     next(httpError);
+            //     return;
+            // }
             res.json(animal);
         } catch (error: unknown) {
+            if (error instanceof SqlError) {
+                next(error);
+                return;
+            }
             log('Error occurred while fetching animal.');
             const httpError = new HttpError(500, 'Internal Server Error', 'An error occurred while fetching animal', { cause: error });
             next(httpError);
@@ -69,14 +74,18 @@ export class AnimalsController {
             const animalData = req.body as AnimalUpdateDTO;
             // body Validado por el middleware de validación
             const animal = await this.repo.updateAnimal(id, animalData);
-            if (!animal) {
-                const httpError = new HttpError(404, 'Not Found', 'Animal not found');
-                next(httpError);
-                return;
-            }
+            // if (!animal) {
+            //     const httpError = new HttpError(404, 'Not Found', 'Animal not found');
+            //     next(httpError);
+            //     return;
+            // }
             res.json(animal);
         } catch (error: unknown) {
             log('Error occurred while updating animal.');
+            if (error instanceof SqlError) {
+                next(error);
+                return;
+            }
             const httpError = new HttpError(500, 'Internal Server Error', 'An error occurred while updating animal', { cause: error });
             next(httpError);
         }
@@ -90,6 +99,10 @@ export class AnimalsController {
             await this.repo.deleteAnimal(id);
             res.status(204).send();
         } catch (error: unknown) {
+            if (error instanceof SqlError) {
+                next(error);
+                return;
+            }
             log('Error occurred while deleting animal.');
             const httpError = new HttpError(500, 'Internal Server Error', 'An error occurred while deleting animal', { cause: error });
             next(httpError);

@@ -3,7 +3,7 @@ import debug from 'debug';
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
-import type { Pool } from "pg";
+
 // import { animalRouter } from "./animals/routers/animal.fn.router.ts";
 import { customHeaders } from "./middleware/customs.ts";
 import { HomeView } from "./views/home.ts";
@@ -13,8 +13,10 @@ import { errorHandler } from "./middleware/error-handler.ts";
 import { AnimalsRouter } from "./animals/routers/animals.ts";
 import { AnimalsRepo } from "./animals/repositories/animals.ts";
 import { AnimalsController } from "./animals/controllers/animals.ts";
+import type { PrismaClient } from "../generated/prisma/client.ts";
 
-export const createApp = (pool: Pool) => {
+
+export const createApp = (prisma: PrismaClient) => {
     const log = debug(`${env.PROJECT_NAME}:app`);
     log("Starting Express app...");
     const app = express();
@@ -46,8 +48,7 @@ export const createApp = (pool: Pool) => {
 
     app.get('/api', apiController);
 
-
-    const appRepo = new AnimalsRepo(pool);
+    const appRepo = new AnimalsRepo(prisma);
     const appController = new AnimalsController(appRepo);
     const appRouter = new AnimalsRouter(appController);
     app.use('/api/animals', appRouter.router);

@@ -1,0 +1,22 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model animals {
+  id           Int     @id @default(autoincrement())
+  name         String  @db.VarChar(255)
+  englishName  String  @db.VarChar(255) @map("english_name")
+  sciName      String  @db.VarChar(255) @map("sci_name")
+  diet         String?
+  lifestyle    String? @db.VarChar(20)
+  location     String?
+  slogan       String?
+  group        String? @db.VarChar(255) @map("group_name")
+  image        String?
+}

@@ -88,13 +88,13 @@ const dbURL =
 /${process.env['PGDATABASE']}?schema=public`;
 
 export default defineConfig({
-  schema: 'prisma/schema.prisma',
-  migrations: {
-    path: 'prisma/migrations',
-  },
-  datasource: {
-    url: dbURL,
-  },
+  // schema: 'prisma/schema.prisma',
+  // migrations: {
+  //   path: 'prisma/migrations',
+  // },
+  // datasource: {
+  //   url: dbURL,
+  // },
 });
 ```
 
@@ -106,7 +106,15 @@ Utiliza los datos proporcionados en `prisma.config.ts` para conectarse a la base
 npx prisma db pull
 ```
 
-Con esto se crea el modelo de Prisma a partir de la base de datos, y se genera el cliente de Prisma en el directorio `generated/prisma` (definido en `prisma/schema.prisma`).
+Con esto se crea el modelo de Prisma a partir de la base de datos.
+
+Finalmente generamos el cliente específico de nuestro proyecto
+
+```shell
+npx prisma generate
+```
+
+Asi se genera el cliente de Prisma en el directorio `generated/prisma` (definido en `prisma/schema.prisma`).
 
 Esta carpeta ha sido incluida en el `.gitignore`, por lo que no se subirá a GitHub, pero es importante que esté en nuestro proyecto para poder usar el cliente de Prisma.
 
