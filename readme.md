@@ -1268,46 +1268,44 @@ docker run -d --name postgres --shm-size=1g -e POSTGRES_USER=postgres -e POSTGRE
 
 ### Día 1 (L 20/04/2026) - M2.02 13 - M2.02 12 - Prisma
 
-<!--
-- Revisión del Challenge
+- Revisión del Challenge: API Animales
   - Proyecto base: Node + Express
   - PostgreSQL
   - Configuración de la base de datos y seedings
-  - CRUD: MVC + Repositorio
-  - Controller y Router
-  - Validaciones
--->
 
 [Descanso]
 
-<!-- Servidores Web: Node + Express + PostgreSQL
+- CRUD: MVC + Repositorio
+- Controller y Router
+- Validaciones
 
-- ORM (Prisma)
-- Instalación y configuración
-- Introspección desde una base de datos existente
-- Primary Key UUID (Binary)
+### Día 2 (M 21/04/2026) - M2.02 14 - API Rest con Prisma
+
+- Servidores Web: Node + Express + PostgreSQL
+  - ORM (Prisma)
+  - Instalación y configuración
+  - Introspección desde una base de datos existente
+  - Primary Key UUID (Binary)
+
+[descanso]
+
 - Operaciones CRUD
+  - Verbos HTTP, enrutamiento y controladores
+  - Modelo de datos y repositorios con Prisma
+
+### Día 3 (X 22/04/2026) - M2.02 15 - API Rest con Prisma
+
+<!-- API REST Películas
+
+Nuevo proyecto: API REST con Prisma: Películas
+  - proyecto: Films - Users - Reviews
 
 Presentación de la Arquitectura distribuida
 
 - SPA
 - API REST
 
-Nuevo proyecto: API REST con Prisma: Películas
-  - proyecto: Films - Users - Reviews
 -->
-
-### Día 2 (M 21/04/2026) - M2.02 14 - API Rest con Prisma
-
-<!-- API REST Películas
-
-- Servidores Web: Node + Express
-- ORM (Prisma)
-- Verbos HTTP, enrutamiento y controladores
-- Modelo de datos y repositorios con Prisma
-- Operaciones CRUD -->
-
-### Día 3 (X 22/04/2026) - M2.02 15 - API Rest con Prisma
 
 <!-- - Review de la API REST Películas:
   - Arquitectura en capas: server, app, routes, controllers, repositories
