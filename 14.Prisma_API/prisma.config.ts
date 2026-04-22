@@ -15,6 +15,7 @@ export default defineConfig({
   schema: "prisma/schema.prisma",
   migrations: {
     path: "prisma/migrations",
+    seed: "node --env-file=.env ./src/animals/entities/db-seed.ts"
   },
   datasource: {
     // url: process.env["DATABASE_URL"],

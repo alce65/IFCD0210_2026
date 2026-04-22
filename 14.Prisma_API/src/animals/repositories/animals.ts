@@ -9,20 +9,20 @@ import type {
 import type { PrismaClient } from '../../../generated/prisma/client.ts';
 import { Pool } from 'pg';
 
-const log = debug(`${env.PROJECT_NAME}:repo:animals`);
-log('Loading animals repository...');
+const log = debug(`${env.PROJECT_NAME}:repo:animal`);
+log('Loading animal repository...');
 
 export class AnimalsRepo {
     private prisma: PrismaClient;
     pool: Pool; // Placeholder for the database connection pool
     constructor(prisma: PrismaClient) {
-        log('Starting animals repository...');
+        log('Starting animal repository...');
         this.prisma = prisma;
         this.pool = new Pool(); // Placeholder for the database connection pool
     }
 
     async readAllAnimals() {
-        log('Reading all animals from database...');
+        log('Reading all animal from database...');
         // const { rows } = await this.pool.query<Animal>(`
         //     SELECT
         //         id,
@@ -35,10 +35,10 @@ export class AnimalsRepo {
         //         slogan,
         //         group_name AS "group",
         //         image
-        //     FROM animals`);
+        //     FROM animal`);
 
         try {
-            const result = await this.prisma.animals.findMany();
+            const result = await this.prisma.animal.findMany();
             return result;
         } catch (error) {
             console.error(error);
@@ -59,12 +59,12 @@ export class AnimalsRepo {
         //         slogan,
         //         group_name AS "group",
         //         image
-        //     FROM animals
+        //     FROM animal
         //     WHERE id = $1`;
 
         // const { rows } = await this.pool.query<Animal>(q, [id]);
 
-        const result = await this.prisma.animals.findUnique({
+        const result = await this.prisma.animal.findUnique({
             where: {
                 id: id,
             },
@@ -85,7 +85,7 @@ export class AnimalsRepo {
     async createAnimal(animal: AnimalCreateDTO): Promise<Animal> {
         log(`Creating animal with name ${animal.name}...`);
         // const q = `
-        //     INSERT INTO animals
+        //     INSERT INTO animal
         //         (name,
         //         english_name,
         //         sci_name,
@@ -118,7 +118,7 @@ export class AnimalsRepo {
         //     animal.group,
         //     animal.image,
         // ]);
-        const result = await this.prisma.animals.create({
+        const result = await this.prisma.animal.create({
             data: animal,
         });
         return result as unknown as Animal;
@@ -130,7 +130,7 @@ export class AnimalsRepo {
     ): Promise<Animal> {
         log(`Updating animal with id ${id}...`);
         // const q = `
-        //     UPDATE animals
+        //     UPDATE animal
         //     SET name = $2,
         //         english_name = COALESCE($3, english_name),
         //         sci_name = COALESCE($4, sci_name),
@@ -168,7 +168,7 @@ export class AnimalsRepo {
 
 
         try {
-                   const result = await this.prisma.animals.update({
+                   const result = await this.prisma.animal.update({
             where: {
                 id: id,
             },
@@ -188,7 +188,7 @@ export class AnimalsRepo {
     async deleteAnimal(id: number): Promise<Animal> {
         log(`Deleting animal with id ${id}...`);
         // const q = `
-        //     DELETE FROM animals
+        //     DELETE FROM animal
         //     WHERE id = $1
         //     RETURNING
         //         id,
@@ -204,7 +204,7 @@ export class AnimalsRepo {
         // const { rows } = await this.pool.query<Animal>(q, [id]);
 
         try {
-            const result = await this.prisma.animals.delete({
+            const result = await this.prisma.animal.delete({
                 where: {
                     id: id,
                 },

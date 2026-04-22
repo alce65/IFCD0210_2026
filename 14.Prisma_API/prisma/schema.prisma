@@ -7,16 +7,27 @@ datasource db {
   provider = "postgresql"
 }
 
+enum Lifestyle {
+  Diurno
+  Nocturno
+}
+
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
-model animals {
+
+
+model Animal {
   id           Int     @id @default(autoincrement())
   name         String  @db.VarChar(255)
   englishName  String  @db.VarChar(255) @map("english_name")
   sciName      String  @db.VarChar(255) @map("sci_name")
   diet         String?
-  lifestyle    String? @db.VarChar(20)
+  lifestyle    Lifestyle?
   location     String?
   slogan       String?
   group        String? @db.VarChar(255) @map("group_name")
   image        String?
+  created_at   DateTime @default(dbgenerated("(now())")) @db.Timestamp(0) @ignore
+  updated_at   DateTime @default(dbgenerated("(now())")) @db.Timestamp(0) @ignore
+
+  @@map("animals")
 }
