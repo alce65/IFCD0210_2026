@@ -1295,34 +1295,46 @@ docker run -d --name postgres --shm-size=1g -e POSTGRES_USER=postgres -e POSTGRE
 
 ### Día 3 (X 22/04/2026) - M2.02 15 - API Rest con Prisma
 
-<!-- API REST Películas
+- Datos y tablas
+  - Generate -> Desde el Model, genera el cliente prisma
+  - Seed (Populate) -> Lleva datos a las tablas
+  - Migrations -> Modificar las tablas + Generate
+
+[descanso]
+
+API REST Películas
 
 Nuevo proyecto: API REST con Prisma: Películas
-  - proyecto: Films - Users - Reviews
+  
+- proyecto: Films - Users - Reviews
 
 Presentación de la Arquitectura distribuida
 
 - SPA
 - API REST
 
--->
-
-<!-- - Review de la API REST Películas:
+- Review conceptos en las APIs REST:
   - Arquitectura en capas: server, app, routes, controllers, repositories
   - Router como función
   - Controladores como clases: completando las operaciones CRUD
   - Modelo de datos y repositorios con Prisma
   - Inyección de dependencias en app: router, controller, repository
   - Control de errores
+
+<!-- 
 - Nuevo proyecto: Node + TS + Prisma
   - DB World: Introspección
-  - Ejercicio: Queries con Prisma -->
+  - Ejercicio: Queries con Prisma 
+
+-->
 
 ### Día 4 (J 23/04/2026) - M2.02 16 - API Rest con Prisma
 
 <!-- Code review queries con Prisma
 
 API REST: Films
+
+  - Modelos y tablas
 
 - Completando el control de Errors
 
