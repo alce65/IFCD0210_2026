@@ -2,6 +2,7 @@
 _entregas
 world.sql
 uploads
+/generated/prisma
 
 *-lock.json
 *.code-workspace
