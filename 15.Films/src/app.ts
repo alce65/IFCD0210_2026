@@ -7,12 +7,8 @@ import { customHeaders } from './middleware/customs.ts';
 import { HttpError } from './errors/http-error.ts';
 import { errorHandler } from './middleware/error-handler.ts';
 import { HomeView } from './views/home.ts';
+import type { PrismaClient } from '../generated/prisma/client.ts';
 
-// import type { PrismaClient } from '../generated/prisma/client.ts';
-
-interface PrismaClient {
-    id: number
-}
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const createApp = (prisma: PrismaClient) => {
