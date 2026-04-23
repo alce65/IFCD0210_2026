@@ -1,5 +1,6 @@
 import type { PrismaClient } from '../../generated/prisma/client.ts';
 import type {
+    ProfileCreateWithoutUserInput,
     UserCreateInput,
     UserCreateWithoutProfileInput,
     UserCreateWithoutReviewsInput,
@@ -11,17 +12,30 @@ import { AuthService } from '../services/auth.ts';
 const log = debug(`${env.PROJECT_NAME}:repo:users`);
 log('Loading users repo...');
 
+interface RegisterUserData {
+  email: UserCreateInput['email'];
+  password: UserCreateInput['password'];
+  profile: ProfileCreateWithoutUserInput;
+}
+
+
 export class UsersRepo {
     #prisma: PrismaClient;
     constructor(prisma: PrismaClient) {
         this.#prisma = prisma;
     }
 
-    async register(userData: UserCreateInput) {
+    async register(userData: RegisterUserData) {
         console.log(userData);
         userData.password = await AuthService.hash(userData.password);
         const result = await this.#prisma.user.create({
-            data: userData,
+            data: {
+                email: userData.email,
+                password: userData.password,
+                profile: {
+                    create: userData.profile,
+                },
+            },
             include: {
                 profile: true,
             },

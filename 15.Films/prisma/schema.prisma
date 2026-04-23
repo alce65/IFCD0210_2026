@@ -10,6 +10,7 @@ generator client {
 
 // generator zod {
 //   provider = "prisma-zod-generator"
+//   output   = "../generated/zod"
 // }
 
 datasource db {
@@ -19,7 +20,7 @@ datasource db {
 model User {
   id       Int      @id @default(autoincrement()) @map("user_id")
   email    String   @unique() @db.VarChar(100)
-  password String   @db.VarChar(24)
+  password String   @db.VarChar(255)
   profile  Profile?
   reviews  Review[]
 
@@ -31,7 +32,7 @@ model User {
 model Profile {
   id         Int      @id @map("profile_id")
   firstname  String   @db.VarChar(200)
-  suername   String   @db.VarChar(200)
+  surname   String   @db.VarChar(200)
   avatar     String   @db.VarChar(200)
   user       User     @relation(fields: [id], references: [id])
   created_at DateTime @default(now()) @ignore
