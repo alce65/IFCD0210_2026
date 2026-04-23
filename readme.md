@@ -1321,34 +1321,31 @@ Presentación de la Arquitectura distribuida
   - Inyección de dependencias en app: router, controller, repository
   - Control de errores
 
-<!-- 
-- Nuevo proyecto: Node + TS + Prisma
-  - DB World: Introspección
-  - Ejercicio: Queries con Prisma 
 
--->
 
 ### Día 4 (J 23/04/2026) - M2.02 16 - API Rest con Prisma
 
-<!-- Code review queries con Prisma
-
-API REST: Films
-
+- API REST: Films
   - Modelos y tablas
 
-- Completando el control de Errors
+<!-- 
 
+- Completando el control de Errors
   - Errores de Prisma
 
 - Usuarios - Auth
-
   - Autenticación: ¿Tienes permiso?
   - Autorización: ¿De que tienes permiso
 
 - Registro
   - Password: Hash y No reenviarla
 - Login
+-->
 
+<!-- 
+- Nuevo proyecto: Node + TS + Prisma
+  - DB World: Introspección
+  - Ejercicio: Queries con Prisma 
 -->
 
 ## Semana 14 (Abril) - Unidad 3
