@@ -1,37 +1,26 @@
-import type { PrismaClient } from '../../generated/prisma/client.ts';
-import type {
-    ProfileCreateWithoutUserInput,
-    UserCreateInput,
-    UserCreateWithoutProfileInput,
-    UserCreateWithoutReviewsInput,
-} from '../../generated/prisma/models.ts';
+
 import { env } from '../config/env.ts';
 import debug from 'debug';
 import { AuthService } from '../services/auth.ts';
+import type { AppPrismaClient } from '../config/db-config.ts';
+import type { LoginUserData, RegisterUserData } from '../zod/user.schemas.ts';
 
 const log = debug(`${env.PROJECT_NAME}:repo:users`);
 log('Loading users repo...');
 
-interface RegisterUserData {
-  email: UserCreateInput['email'];
-  password: UserCreateInput['password'];
-  profile: ProfileCreateWithoutUserInput;
-}
-
-
 export class UsersRepo {
-    #prisma: PrismaClient;
-    constructor(prisma: PrismaClient) {
+    #prisma: AppPrismaClient;
+    constructor(prisma: AppPrismaClient) {
         this.#prisma = prisma;
     }
 
     async register(userData: RegisterUserData) {
         console.log(userData);
-        userData.password = await AuthService.hash(userData.password);
+        const hashedPassword = await AuthService.hash(userData.password);
         const result = await this.#prisma.user.create({
             data: {
                 email: userData.email,
-                password: userData.password,
+                password: hashedPassword,
                 profile: {
                     create: userData.profile,
                 },
@@ -39,22 +28,23 @@ export class UsersRepo {
             include: {
                 profile: true,
             },
-            omit: {
-                password: true,
-            },
+            // omit: {
+            //     password: true,
+            // },
         });
 
         return result;
     }
 
-    async login(
-        userData: UserCreateWithoutProfileInput & UserCreateWithoutReviewsInput,
-    ) {
+    async login(userData: LoginUserData) {
         const loginError = new Error('Invalid login')
 
         const result = await this.#prisma.user.findUnique({
             where: {
                 email: userData.email,
+            },
+            omit: {
+                password: false,
             },
         });
 

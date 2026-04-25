@@ -17,49 +17,59 @@ datasource db {
   provider = "postgresql"
 }
 
+enum Role {
+  USER // @map("user")
+  EDITOR // @map("editor")
+  ADMIN // @map("admin")
+}
+
 model User {
   id       Int      @id @default(autoincrement()) @map("user_id")
   email    String   @unique() @db.VarChar(100)
   password String   @db.VarChar(255)
+  role     Role     @default(USER)
   profile  Profile?
   reviews  Review[]
-
   created_at DateTime @default(now()) @ignore
+  updated_at DateTime @default(now()) @updatedAt @ignore
 
   @@map("users")
 }
 
 model Profile {
   id         Int      @id @map("profile_id")
-  firstname  String   @db.VarChar(200)
-  surname   String   @db.VarChar(200)
+  firstName  String   @db.VarChar(200) @map("first_name")
+  surname    String   @db.VarChar(200)
   avatar     String   @db.VarChar(200)
   user       User     @relation(fields: [id], references: [id])
   created_at DateTime @default(now()) @ignore
+  updated_at DateTime @default(now()) @updatedAt @ignore
 
   @@map("profiles")
 }
 
 model Film {
-  id         Int      @id @default(autoincrement()) @map("movie_id")
+  id         Int      @id @default(autoincrement()) @map("film_id")
   title      String   @db.VarChar(255)
   year       Int      @map("release_year")
   director   String   @db.VarChar(255)
   duration   Int
   poster     String?  @db.Text
   rate       Decimal  @db.Decimal(2, 1)
-  genres     Genre[]
+  genres     Genre[]  @relation("films_genres")
   reviews    Review[]
   created_at DateTime @default(now()) @ignore
+  updated_at DateTime @default(now()) @updatedAt @ignore
 
   @@map("films")
 }
 
 model Genre {
   id         Int      @id @default(autoincrement()) @map("genre_id")
-  name       String   @db.VarChar(60)
-  films      Film[]
+  name       String   @unique @db.VarChar(60)
+  films      Film[]   @relation("films_genres")
   created_at DateTime @default(now()) @ignore
+  updated_at DateTime @default(now()) @updatedAt @ignore
 
   @@map("genres")
 }
@@ -68,7 +78,9 @@ model Review {
   user   User?  @relation(fields: [userID], references: [id])
   film   Film?  @relation(fields: [filmID], references: [id])
   review String
-  created DateTime @default(now()) @map("created_at")
+  rate   Decimal  @db.Decimal(3, 1)
+  created_at DateTime @default(now()) @ignore
+  date DateTime @default(now()) @map("updated_at") @updatedAt
   userID Int   @map("user_id")
   filmID Int   @map("film_id")
   @@id([userID, filmID])

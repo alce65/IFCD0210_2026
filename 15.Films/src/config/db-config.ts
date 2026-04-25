@@ -7,7 +7,15 @@ const log = debug(`${env.PROJECT_NAME}:configDB`);
 
 log('Loaded database connection...');
 
-export const connectDB = async () => {
+export const globalOmit = {
+    user: {
+        password: true,
+    },
+} as const;
+
+export type AppPrismaClient = PrismaClient<never, typeof globalOmit>;
+
+export const connectDB = async (): Promise<AppPrismaClient> => {
     const adapter = new PrismaPg({
         user: env.PGUSER,
         password: env.PGPASSWORD,
@@ -17,6 +25,7 @@ export const connectDB = async () => {
     });
     const prisma = new PrismaClient({
         adapter,
+        omit: globalOmit,
     });
 
     try {

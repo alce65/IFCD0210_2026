@@ -7,11 +7,14 @@
         "start": "cross-env NODE_ENV=prod node ./src/index.ts",
         "dev": "node --watch --env-file=.env ./src/index.ts",
         "ts:check": "tsc --noEmit",
-        "setup:testDB": "node --env-file=.env.test ./src/setup.ts",
+        "seed:dev": "prisma db seed",
+        "_comment:1": "llama a  node --env-file=.env ./src/config/db.seed.ts",
+        "db:push:test": "prisma db push --config prisma.test.config.ts",
+        "db:seed:test": "prisma db seed --config prisma.test.config.ts",
+        "seed:test": "npm run db:push:test && npm run db:seed:test",
+        "_comment:2": "llama a  node --env-file=.env.test ./src/config/db-test.seed.ts",
         "test": "node --env-file=.env.test --test",
-        "test:serie": "node --env-file=.env.test --test --test-concurrency=1",
-        "seed:dev": "node --env-file=.env ./src/animals/entities/db_seed.ts",
-        "seed:test": "node --env-file=.env.test ./src/animals/entities/test-db-seed.ts"
+        "test:serie": "node --env-file=.env.test --test --test-concurrency=1"
     },
     "keywords": [],
     "author": "",

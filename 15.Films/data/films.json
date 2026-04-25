@@ -1,226 +1,339 @@
 [
   {
     "title": "The Shawshank Redemption",
-    "release_year": 1994,
+    "year": 1994,
     "director": "Frank Darabont",
     "duration": 142,
     "rate": 9.3,
-    "poster": "https://www.imdb.com/title/tt0111161/"
+    "poster": "https://www.imdb.com/title/tt0111161/",
+    "genres": [
+        "Drama",
+        "Crime"
+    ]
   },
   {
     "title": "The Godfather",
-    "release_year": 1972,
+    "year": 1972,
     "director": "Francis Ford Coppola",
     "duration": 175,
     "rate": 9.2,
-    "poster": "https://www.imdb.com/title/tt0068646/"
+    "poster": "https://www.imdb.com/title/tt0068646/",
+    "genres": [
+        "Drama",
+        "Crime"
+    ]
   },
   {
     "title": "The Dark Knight",
-    "release_year": 2008,
+    "year": 2008,
     "director": "Christopher Nolan",
     "duration": 152,
     "rate": 9.0,
-    "poster": "https://www.imdb.com/title/tt0468569/"
+    "poster": "https://www.imdb.com/title/tt0468569/",
+    "genres": [
+        "Action",
+        "Crime",
+        "Drama"
+    ]
   },
   {
     "title": "The Lord of the Rings: The Return of the King",
-    "release_year": 2003,
+    "year": 2003,
     "director": "Peter Jackson",
     "duration": 201,
     "rate": 8.9,
-    "poster": "https://www.imdb.com/title/tt0167260/"
+    "poster": "https://www.imdb.com/title/tt0167260/",
+    "genres": [
+        "Adventure",
+        "Drama",
+        "Fantasy"
+    ]
   },
   {
     "title": "Pulp Fiction",
-    "release_year": 1994,
+    "year": 1994,
     "director": "Quentin Tarantino",
     "duration": 154,
     "rate": 8.9,
-    "poster": "https://www.imdb.com/title/tt0110912/"
+    "poster": "https://www.imdb.com/title/tt0110912/",
+    "genres": [
+        "Crime",
+        "Drama"
+    ]
   },
   {
     "title": "Schindler's List",
-    "release_year": 1993,
+    "year": 1993,
     "director": "Steven Spielberg",
     "duration": 195,
     "rate": 8.9,
-    "poster": "https://www.imdb.com/title/tt0108052/"
+    "poster": "https://www.imdb.com/title/tt0108052/",
+    "genres": [
+        "Drama"
+    ]
   },
   {
     "title": "The Lord of the Rings: The Fellowship of the Ring",
-    "release_year": 2001,
+    "year": 2001,
     "director": "Peter Jackson",
     "duration": 178,
     "rate": 8.8,
-    "poster": "https://www.imdb.com/title/tt0120737/"
+    "poster": "https://www.imdb.com/title/tt0120737/",
+    "genres": [
+        "Adventure",
+        "Drama",
+        "Fantasy"
+    ]
   },
   {
     "title": "Forrest Gump",
-    "release_year": 1994,
+    "year": 1994,
     "director": "Robert Zemeckis",
     "duration": 142,
     "rate": 8.8,
-    "poster": "https://www.imdb.com/title/tt0109830/"
+    "poster": "https://www.imdb.com/title/tt0109830/",
+    "genres": [
+        "Drama"
+    ]
   },
   {
     "title": "Inception",
-    "release_year": 2010,
+    "year": 2010,
     "director": "Christopher Nolan",
     "duration": 148,
     "rate": 8.7,
-    "poster": "https://www.imdb.com/title/tt1375666/"
+    "poster": "https://www.imdb.com/title/tt1375666/",
+    "genres": [
+        "Action",
+        "Adventure",
+        "Sci-Fi"
+    ]
   },
   {
     "title": "The Lord of the Rings: The Two Towers",
-    "release_year": 2002,
+    "year": 2002,
     "director": "Peter Jackson",
     "duration": 179,
     "rate": 8.7,
-    "poster": "https://www.imdb.com/title/tt0167261/"
+    "poster": "https://www.imdb.com/title/tt0167261/",
+    "genres": [
+        "Adventure",
+        "Drama",
+        "Fantasy"
+    ]
   },
   {
     "title": "The Matrix",
-    "release_year": 1999,
+    "year": 1999,
     "director": "Lana Wachowski, Lilly Wachowski",
     "duration": 136,
     "rate": 8.7,
-    "poster": "https://www.imdb.com/title/tt0133093/"
+    "poster": "https://www.imdb.com/title/tt0133093/",
+    "genres": [
+        "Action",
+        "Sci-Fi"
+    ]
   },
   {
     "title": "Goodfellas",
-    "release_year": 1990,
+    "year": 1990,
     "director": "Martin Scorsese",
     "duration": 146,
     "rate": 8.7,
-    "poster": "https://www.imdb.com/title/tt0099685/"
+    "poster": "https://www.imdb.com/title/tt0099685/",
+    "genres": [
+        "Crime",
+        "Drama"
+    ]
   },
   {
     "title": "One Flew Over the Cuckoo's Nest",
-    "release_year": 1975,
+    "year": 1975,
     "director": "Milos Forman",
     "duration": 133,
     "rate": 8.7,
-    "poster": "https://www.imdb.com/title/tt0073486/"
+    "poster": "https://www.imdb.com/title/tt0073486/",
+    "genres": [
+        "Drama"
+    ]
   },
   {
     "title": "Seven",
-    "release_year": 1995,
+    "year": 1995,
     "director": "David Fincher",
     "duration": 127,
     "rate": 8.6,
-    "poster": "https://www.imdb.com/title/tt0114369/"
+    "poster": "https://www.imdb.com/title/tt0114369/",
+    "genres": [
+        "Crime",
+        "Drama"
+    ]
   },
   {
     "title": "The Silence of the Lambs",
-    "release_year": 1991,
+    "year": 1991,
     "director": "Jonathan Demme",
     "duration": 118,
     "rate": 8.6,
-    "poster": "https://www.imdb.com/title/tt0102926/"
+    "poster": "https://www.imdb.com/title/tt0102926/",
+    "genres": [
+        "Crime",
+        "Drama"
+    ]
   },
   {
     "title": "The Usual Suspects",
-    "release_year": 1995,
+    "year": 1995,
     "director": "Bryan Singer",
     "duration": 106,
     "rate": 8.5,
-    "poster": "https://www.imdb.com/title/tt0114814/"
+    "poster": "https://www.imdb.com/title/tt0114814/",
+    "genres": [
+        "Crime",
+        "Drama"
+    ]
   },
   {
     "title": "Léon: The Professional",
-    "release_year": 1994,
+    "year": 1994,
     "director": "Luc Besson",
     "duration": 110,
     "rate": 8.5,
-    "poster": "https://www.imdb.com/title/tt0110413/"
+    "poster": "https://www.imdb.com/title/tt0110413/",
+    "genres": [
+        "Crime",
+        "Drama"
+    ]
   },
   {
     "title": "The Lion King",
-    "release_year": 1994,
+    "year": 1994,
     "director": "Roger Allers, Rob Minkoff",
     "duration": 88,
     "rate": 8.5,
-    "poster": "https://www.imdb.com/title/tt0110357/"
+    "poster": "https://www.imdb.com/title/tt0110357/",
+    "genres": [
+        "Animation",
+        "Adventure",
+        "Drama"
+    ]
   },
   {
     "title": "Terminator 2: Judgment Day",
-    "release_year": 1991,
+    "year": 1991,
     "director": "James Cameron",
     "duration": 137,
     "rate": 8.5,
-    "poster": "https://www.imdb.com/title/tt0103064/"
+    "poster": "https://www.imdb.com/title/tt0103064/",
+    "genres": [
+        "Action",
+        "Sci-Fi"
+    ]
   },
   {
     "title": "Saving Private Ryan",
-    "release_year": 1998,
+    "year": 1998,
     "director": "Steven Spielberg",
     "duration": 169,
     "rate": 8.5,
-    "poster": "https://www.imdb.com/title/tt0120815/"
+    "poster": "https://www.imdb.com/title/tt0120815/",
+    "genres": [
+        "Drama",
+        "War"
+    ]
   },
   {
     "title": "The Green Mile",
-    "release_year": 1999,
+    "year": 1999,
     "director": "Frank Darabont",
     "duration": 189,
     "rate": 8.5,
-    "poster": "https://www.imdb.com/title/tt0120689/"
+    "poster": "https://www.imdb.com/title/tt0120689/",
+    "genres": [
+        "Drama"
+    ]
   },
   {
     "title": "Back to the Future",
-    "release_year": 1985,
+    "year": 1985,
     "director": "Robert Zemeckis",
     "duration": 116,
     "rate": 8.5,
-    "poster": "https://www.imdb.com/title/tt0088763/"
+    "poster": "https://www.imdb.com/title/tt0088763/",
+    "genres": [
+        "Adventure",
+        "Comedy",
+        "Sci-Fi"
+    ]
   },
   {
     "title": "American History X",
-    "release_year": 1998,
+    "year": 1998,
     "director": "Tony Kaye",
     "duration": 119,
     "rate": 8.5,
-    "poster": "https://www.imdb.com/title/tt0120586/"
+    "poster": "https://www.imdb.com/title/tt0120586/",
+    "genres": [
+        "Crime",
+        "Drama"
+    ]
   },
   {
     "title": "The Pianist",
-    "release_year": 2002,
+    "year": 2002,
     "director": "Roman Polanski",
     "duration": 150,
     "rate": 8.5,
-    "poster": "https://www.imdb.com/title/tt0253474/"
+    "poster": "https://www.imdb.com/title/tt0253474/",
+    "genres": [
+        "Drama"
+    ]
   },
   {
     "title": "Gladiator",
-    "release_year": 2000,
+    "year": 2000,
     "director": "Ridley Scott",
     "duration": 155,
     "rate": 8.5,
-    "poster": "https://www.imdb.com/title/tt0172495/"
+    "poster": "https://www.imdb.com/title/tt0172495/",
+    "genres": [
+        "Action",
+        "Drama"
+    ]
   },
   {
     "title": "The Departed",
-    "release_year": 2006,
+    "year": 2006,
     "director": "Martin Scorsese",
     "duration": 151,
     "rate": 8.5,
-    "poster": "https://www.imdb.com/title/tt0407887/"
+    "poster": "https://www.imdb.com/title/tt0407887/",
+    "genres": [
+        "Crime",
+        "Drama"
+    ]
   },
   {
     "title": "The Prestige",
-    "release_year": 2006,
+    "year": 2006,
     "director": "Christopher Nolan",
     "duration": 130,
     "rate": 8.5,
-    "poster": "https://www.imdb.com/title/tt0482571/"
+    "poster": "https://www.imdb.com/title/tt0482571/",
+    "genres": [
+        "Drama"
+    ]
   },
   {
     "title": "The Intouchables",
-    "release_year": 2011,
+    "year": 2011,
     "director": "Olivier Nakache, Éric Toledano",
     "duration": 112,
     "rate": 8.5,
-    "poster": "https://www.imdb.com/title/tt1675434/"
+    "poster": "https://www.imdb.com/title/tt1675434/",
+    "genres": [
+        "Crime",
+        "Drama"
+    ]
   }
 ]
