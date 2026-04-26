@@ -7,6 +7,7 @@ export const EnvSchema = z.object({
   NODE_ENV: z.enum(['dev', 'prod', 'test']),
   DEBUG: z.string().optional(),
   PROJECT_NAME: z.string(),
+  JWT_SECRET: z.string().min(32), // Asegura que la clave sea al menos de 32 caracteres
   PGUSER: z.string(),
   PGPASSWORD: z.string(),
   PGHOST: z.string(),
