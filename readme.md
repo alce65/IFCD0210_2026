@@ -1321,34 +1321,25 @@ Presentación de la Arquitectura distribuida
   - Inyección de dependencias en app: router, controller, repository
   - Control de errores
 
-
-
 ### Día 4 (J 23/04/2026) - M2.02 16 - API Rest con Prisma
 
 - API REST: Films
   - Modelos y tablas
-
-<!-- 
-
-- Completando el control de Errors
-  - Errores de Prisma
 
 - Usuarios - Auth
   - Autenticación: ¿Tienes permiso?
   - Autorización: ¿De que tienes permiso
 
 - Registro
+  - Usuarios: register (singUp)
   - Password: Hash y No reenviarla
-- Login
--->
+- Login (sin token)
 
-<!-- 
-- Nuevo proyecto: Node + TS + Prisma
-  - DB World: Introspección
-  - Ejercicio: Queries con Prisma 
--->
 
-## Semana 14 (Abril) - Unidad 3
+### Día 5 (V 24/04/2026) - Sin clase
+
+
+## Semana 15 (Abril / Mayo) - Unidad 3
 
 <!-- Desarrollo de aplicaciones web distribuidas - 10 días (antes 12)
 Ya consumidos
@@ -1359,37 +1350,44 @@ Ya consumidos
 - (L 23/03/2026) - M2.03 04 - 04 - Frontend OOP - Despliegue
 -->
 
-### Día 5 (V 24/04/2026) - M2.03 05 - Login / Validación - 1.5 día
+### Día 1 (L 27/04/2026) - M2.03 05  - Login / Validación 
 
-<!-- Aplicaciones Web Distribuidas  (2) -->
+- Aplicaciones Web Distribuidas
+  - Conceptos
+  - Info de la unidad
+
+- Proyecto: Films - Users - Reviews
+  - Revisión del estado del proyecto
+  - Modelo de datos
+  - Info disponible
+  
+
+<!-- 1.5 día -->
 
 <!-- API REST
 - Usuarios: Autenticación: Login
   - JWT
+  - Usuarios: login (signIn): Autorización
 - Validaciones
   - UsersDTOs con Zod
   - Validaciones en el controladores
   - FilmsDTOs con Zod
   - Validaciones extendiendo el modelo
-- Usuarios: Autorización
+
+- Request with JWT
+- Completando el control de Errors
+  - Errores de Prisma
 -->
 
-<!-- - Review de la API REST Films
-
-  - Usuarios: register (singUp)
-  - Usuarios: login (signIn): Autorización
-  - Request with JWT
-
-- Update user model with roles
+<!-- 
+  - Usuarios: Autorización
+  - Update user model with roles
 - Uso de Postman como APIRest Client -->
 
-## Semana 15 (Abril / Mayo)
 
-### Día 1 (L 27/04/2026) - M2.03 06 - - Proyecto Films (Back)
+### Día 2 (M 28/04/2026) - M2.03 06  - Proyecto Films (Back)
 
-<!-- Aplicaciones Web Distribuidas -->
-
-<!-- - Planteamiento del proyecto: Films - Users - Reviews
+<!-- Aplicaciones Web Distribuidas (continuación)
 
 - Films: Endpoints ya creados
 
@@ -1412,7 +1410,7 @@ Ya consumidos
     - GET /reviews
     - POST /reviews -->
 
-### Día 2 (M 28/04/2026) - M2.03 07 - - Proyecto Films (Back)
+### Día 3 (X 29/04/2026) - M2.03 07 - Proyecto Films (Back)
 
 <!-- Endpoints Reviews (continuación) - GET /reviews/:id - PATCH /reviews/:id - DELETE /reviews/:id
 
@@ -1428,7 +1426,7 @@ Rutas users -> revisar auth y añadir las que faltan
 - PATCH /users/:id
 - DELETE /users/:id -->
 
-### Día 3 (X 29/04/2026) - M2.03 08 - - Proyecto Films (Back)
+### Día 4 (J 30/04/2026) - M2.03 08 - Proyecto Films (Back)
 
 <!-- Review de la API REST Films - Users - Reviews
 
@@ -1454,15 +1452,15 @@ Rutas users -> revisar auth y añadir las que faltan
 
   - PATCH /films/:id/categories/:id -->
 
-### Día 4 (J 30/04/2026) - M2.03 09
+### Día 5 (V 01/05/2026) - Fiesta
+
+## Semana 16 (Mayo) - Exámenes Módulo 2
+
+### Día 1 (L 04/05/2026) - M2.03 09
 
 <!-- Examen Módulo 2 (Primera convocatoria) -->
 
-### Día 5 (V 01/05/2026) - Fiesta
-
-## Semana 16 (Mayo) - Módulo 3
-
-### Día 1 (L 04/05/2026) - M2.03 10
+### Día 2 (M 05/05/2026) - M2.03 10
 
 <!-- Examen Módulo 2 (Segunda convocatoria) -->
 
@@ -1471,42 +1469,49 @@ Rutas users -> revisar auth y añadir las que faltan
 Upload de ficheros desde Angular
 Almacenamiento de las imágenes: Cloudinary -->
 
-### Día 2 (M 05/05/2026) - M3.00 01 -
+## Semana 16 (Mayo) - Módulo 3
 
-### Día 3 (X 06/05/2026) - M3.00 02 -
+### Día 3 (X 06/05/2026) - M3.00 01 - Web - Agile - Testing
 
-### Día 4 (J 07/05/2026) - M3.00 03 -
+### Día 4 (J 07/05/2026) - M3.00 02 - Vitest
 
-### Día 5 (V 08/05/2026) - M3.00 04 -
+### Día 5 (V 08/05/2026) - M3.00 03 - Test Backend
 
 ## Semana 17 (Mayo)
 
-### Día 1 (L 11/05/2026) - M3.00 05 -
+### Día 1 (L 11/05/2026) - M3.00 04 - Test Backend
 
-### Día 2 (M 12/05/2026) - M3.00 06 -
+### Día 2 (M 12/05/2026) - M3.00 05 - Supertest
 
-### Día 3 (X 13/05/2026) - M3.00 07 -
+### Día 3 (X 13/05/2026) - M3.00 06 - Test Frontend
 
-### Día 4 (J 14/05/2026) - M3.00 08 -
+### Día 4 (J 14/05/2026) - M3.00 07 - Tests Frontend
 
 ### Día 5 (V 15/05/2026) - Fiesta
 
 ## Semana 18 (Mayo)
 
-### Día 1 (L 18/05/2026) - M3.00 09 -
+### Día 1 (L 18/05/2026) - M3.00 08 - JsDoc - Review Tests
 
-### Día 2 (M 19/05/2026) - M3.00 10 -
+### Día 2 (M 19/05/2026) - M3.00 09 - ¿Test Angular?
 
-### Día 3 (X 20/05/2026) - M3.00 11 -
+### Día 3 (X 20/05/2026) - M3.00 10 - E2E
 
-### Día 4 (J 21/05/2026) - M3.00 12 -
+### Día 4 (J 21/05/2026) - M3.00 11 -  Git y GitHub
 
-### Día 5 (V 22/05/2026) - M3.00 13 -
+### Día 5 (V 22/05/2026) - M3.00 12 - Git y GitHub
 
 ## Semana 19 (Mayo)
 
-### Día 1 (L 25/05/2026) - M3.00 14 -
+### Día 1 (L 25/05/2026) - M3.00 13 - CI/CD Husky - GitHub Actions
 
-### Día 2 (M 26/05/2026) - M3.00 15 -
+### Día 2 (M 26/05/2026) - M3.00 14
 
-### Día 3 (X 27/05/2026) - M3.00 16 -
+<!-- Examen Módulo 3 (Primera convocatoria) -->
+
+### Día 3 (X 27/05/2026) - M3.00 15
+
+<!-- Examen Módulo 3 (Segunda convocatoria) -->
+
+### Día 4 (J 28/05/2026) - M3.00 16 - (2 horas)
+
