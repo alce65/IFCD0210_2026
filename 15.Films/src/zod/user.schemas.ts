@@ -16,17 +16,10 @@ import type {
 // No se incluyen atributos ignorados en prisma,
 // Se utilizan para validar los datos que obtenemos de la base de datos
 // y para checks de compatibilidad
-// Se utiliza z.Lazy para resolver la dependencia circular
-// entre UserModelSchema y ReviewSchema
 
 // Los valores <name>DTOSchema representan los datos
 // que aceptamos en las operaciones de la aplicación,
 // permitiendo validar req.body, req.params, etc.
-
-// - rate puede ser number
-// - evita recursión
-// - evita nested Prisma-style inputs
-// - usa shapes planas y cómodas para HTTP
 
 export const ProfileModelSchema = z.object({
     id: z.number(),
@@ -57,15 +50,18 @@ export const UserCredentialsDTOSchema = z.object({
     password: z.string().min(6),
 });
 
+// El profile se actualiza independientemente
 export const UpdateUserDTOSchema = z.object({
+    email: z.string().optional(),
+    password: z.string().min(6).optional(),
     role: z.enum(['ADMIN', 'EDITOR', 'USER']).optional(),
-    profile: ProfileDTOSchema.partial().optional(),
+    // profile: ProfileDTOSchema.partial().optional(),
 });
 
 export const RegisterUserDTOSchema = UserCredentialsDTOSchema.extend(
     z.object({
         role: z.enum(['ADMIN', 'EDITOR', 'USER']).optional(),
-        profile: ProfileDTOSchema
+        profile: ProfileDTOSchema,
     }).shape,
 );
 
@@ -73,30 +69,27 @@ export const RegisterUserDTOSchema = UserCredentialsDTOSchema.extend(
 // - al modelo de datos (e,g. UserModel o ProfileModel)
 // - a los datos que prisma acepta en una operación (e.g. UserCreateInput o UserCreateUpdate)
 
-// A partir de ellos podemos hablar de shapes para definir el contrato estructural de dichas operaciones
-// (Login Register, Update) que puede aceptar solo parcialmente los tipos de la operación
-// En lugar de Partial creamos nuestra propia utilidad de tipos
-// para permitir campos opcionales como undefined
-
-type OptionalsUndefined<T> = {
-    [K in keyof T]?: T[K] | undefined;
-};
+// A partir de ellos podemos hablar de shapes para definir el contrato estructural
+// de dichas operaciones (Login Register, Update), que acepta sólo la parte
+// de los tipos Prisma que realmente queremos exponer en la API.
 
 type UserModelShape = UserModel & {
-    profile?: ProfileModel | undefined;
-    reviews?: ReviewModel[] | undefined;
+    profile?: ProfileModel;
+    reviews?: ReviewModel[];
 };
 
 type LoginUserShape = Pick<UserCreateInput, 'email' | 'password'>;
 
 type RegisterUserShape = Pick<UserCreateInput, 'email' | 'password'> & {
-    role?: UserCreateInput['role'] | undefined;
+    role?: UserCreateInput['role'];
     profile: ProfileCreateWithoutUserInput;
 };
 
 interface UserUpdateShape {
-    role?: UserCreateInput['role'] | undefined;
-    profile?: OptionalsUndefined<ProfileCreateWithoutUserInput> | undefined;
+    email?: UserCreateInput['email'];
+    password?: UserCreateInput['password'];
+    role?: UserCreateInput['role'];
+    // profile?: OptionalsUndefined<ProfileCreateWithoutUserInput> | undefined;
 }
 
 // Los tipos que realmente exportaremos se infieren desde los schemas de validación de Zod,
@@ -139,9 +132,15 @@ export type _ProfileDTOCheck = Assert<
     IsExact<ProfileDTO, ProfileCreateWithoutUserInput>
 >;
 
-export type User = z.infer<typeof UserModelSchema>;
+export type FullUser = z.infer<typeof UserModelSchema>;
 // En Prisma corresponde a UserCreateInput sin el campo profile
-export type _UserCheck = Assert<IsExact<User, UserModelShape>>;
+export type _UserCheck = Assert<IsExact<FullUser, UserModelShape>>;
+
+export type User = Omit<FullUser, 'password'>;
+// En Prisma corresponde a UserCreateInput sin el campo profile
+export type _UserWithoutPasswordCheck = Assert<
+    IsExact<User, Omit<UserModelShape, 'password'>>
+>;
 
 export type RegisterUserData = z.infer<typeof RegisterUserDTOSchema>;
 // En Prisma corresponde a UserCreateInput sin el campo profile

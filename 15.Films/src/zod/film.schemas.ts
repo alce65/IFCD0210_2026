@@ -119,49 +119,45 @@ export const ReviewParamsSchema = z.object({
 // A partir de ellos definimos shapes para expresar el contrato estructural
 // de las operaciones de la aplicación con DTOs más planos y cómodos para HTTP.
 
-type OptionalsUndefined<T> = {
-    [K in keyof T]?: T[K] | undefined;
-};
-
 type GenreModelShape = GenreModel;
 
 type FilmModelShape = FilmModel & {
-    genres?: GenreModel[] | undefined;
-    reviews?: ReviewModel[] | undefined;
+    genres?: GenreModel[];
+    reviews?: ReviewModel[];
 };
 
 type ReviewModelShape = ReviewModel;
 
 type GenreCreateShape = Pick<GenreCreateInput, 'name'>;
 
-type GenreUpdateShape = OptionalsUndefined<GenreCreateShape>;
+type GenreUpdateShape = Partial<GenreCreateShape>;
 
 type FilmCreateShape = Pick<
     FilmCreateInput,
     'title' | 'year' | 'director' | 'duration'
 > & {
-    poster?: string | null | undefined;
+    poster?: string | null;
     rate: number;
     genres: string[];
 };
 
-type FilmUpdateShape = OptionalsUndefined<FilmCreateShape>;
+type FilmUpdateShape = Partial<FilmCreateShape>;
 
 interface FilmParamsShape {
     id: number;
 }
 
 interface FilmQueryShape {
-    title?: string | undefined;
-    year?: number | undefined;
-    director?: string | undefined;
-    genre?: string | undefined;
-    minRate?: number | undefined;
-    maxRate?: number | undefined;
-    page?: number | undefined;
-    limit?: number | undefined;
-    sortBy?: 'id' | 'title' | 'year' | 'director' | 'duration' | 'rate' | undefined;
-    order?: 'asc' | 'desc' | undefined;
+    title?: string;
+    year?: number;
+    director?: string;
+    genre?: string;
+    minRate?: number;
+    maxRate?: number;
+    page?: number;
+    limit?: number;
+    sortBy?: 'id' | 'title' | 'year' | 'director' | 'duration' | 'rate';
+    order?: 'asc' | 'desc';
 }
 
 type ReviewCreateShape = Pick<
@@ -171,10 +167,7 @@ type ReviewCreateShape = Pick<
     rate: number;
 };
 
-interface ReviewUpdateShape {
-    review?: string | undefined;
-    rate?: number | undefined;
-}
+type ReviewUpdateShape = Partial<Pick<ReviewCreateShape, 'review' | 'rate'>>;
 
 type ReviewParamsShape = ReviewUserIDFilmIDCompoundUniqueInput;
 
