@@ -3,7 +3,8 @@ import { env } from "../config/env.ts";
 import debug from 'debug';
 import { HttpError } from '../errors/http-error.ts';
 import { ZodError } from 'zod';
-import { SqlError } from '../errors/sql-error.ts';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/client';
+
 
 const log = debug(`${env.PROJECT_NAME}:error-handler`);
 
@@ -24,7 +25,7 @@ export const errorHandler = (
         res.statusCode = error.status
         res.statusMessage = error.statusMessage
         res.send(error.message);
-    } else if (error instanceof SqlError && error.code === 'NOT_FOUND') {
+    } else if (error instanceof PrismaClientKnownRequestError && error.code === 'NOT_FOUND') {
         res.statusCode = 404;
         res.statusMessage = 'Not Found';
         res.send(error.message);

@@ -2,7 +2,13 @@ import { env } from '../../config/env.ts';
 import debug from 'debug';
 import type { UsersRepo } from '../repos/users.repo.ts';
 import type { NextFunction, Request, Response } from 'express';
-import type { RegisterUserData, User } from '../../zod/user.schemas.ts';
+import type {
+    LoginUserData,
+    ProfileDTO,
+    RegisterUserData,
+    User,
+    UserUpdateDTO,
+} from '../../zod/user.schemas.ts';
 import { HttpError } from '../../errors/http-error.ts';
 import type { LoginResult } from '../../types/login.ts';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/client';
@@ -16,9 +22,9 @@ export class UsersController {
         this.#repo = repo;
     }
 
-
     async register(req: Request, res: Response, next: NextFunction) {
         try {
+            log('Registering new user...'); 
             const userData: RegisterUserData = req.body; // Validate this data in a real application
             const user: User = await this.#repo.register(userData);
             return res.status(201).json(user);
@@ -37,7 +43,8 @@ export class UsersController {
     }
     async login(req: Request, res: Response, next: NextFunction) {
         try {
-            const loginData = req.body; // Validate this data in a real application
+            log('Logging in user...');
+            const loginData: LoginUserData = req.body; // Validate this data in a real application
             const loginResult: LoginResult = await this.#repo.login(loginData);
             return res.json(loginResult);
         } catch (error) {
@@ -52,20 +59,180 @@ export class UsersController {
                     },
                 );
                 return next(finalError);
-            } else {
+            }
+            const finalError = new HttpError(
+                500,
+                'Internal Server Error',
+                'Failed to login user',
+                {
+                    cause: error,
+                },
+            );
+            return next(finalError);
+        }
+    }
+
+    async getAllUsers(req: Request, res: Response, next: NextFunction) {
+        try {
+            log('Getting all users...');
+            const users: User[] = await this.#repo.getAllUsers();
+            return res.json(users);
+        } catch (error) {
+            log('Error getting all users: %O', error);
+            const finalError = new HttpError(
+                500,
+                'Internal Server Error',
+                'Failed to get users',
+                {
+                    cause: error,
+                },
+            );
+            return next(finalError);
+        }
+    }
+
+    async getUserById(req: Request, res: Response, next: NextFunction) {
+        try {
+            const id = Number(req.params.id); // Validate this data in a real application
+            log('Get User: %O', id);
+            const user: User = await this.#repo.getUserById(id);
+            return res.json(user);
+        } catch (error) {
+            log('Error getting user by id: %O', error);
+            if (
+                error instanceof PrismaClientKnownRequestError &&
+                error.code === 'P2025'
+            ) {
                 const finalError = new HttpError(
-                    500,
-                    'Internal Server Error',
-                    'Failed to login user',
+                    404,
+                    'Not Found',
+                    'User not found',
                     {
                         cause: error,
                     },
                 );
                 return next(finalError);
             }
+
+            const finalError = new HttpError(
+                500,
+                'Internal Server Error',
+                'Failed to get user',
+                {
+                    cause: error,
+                },
+            );
+            return next(finalError);
         }
     }
 
-    // async getProfile(req: Request, res: Response) { ... }
-    // async updateProfile(req: Request, res: Response) { ... }
+    async updateUser(req: Request, res: Response, next: NextFunction) {
+        try {
+            const id = Number(req.params.id); // Validate this data in a real application
+            log('Updating user with ID: %O', id);
+            const userData: UserUpdateDTO = req.body; // Validate this data in a real application
+            const user: User = await this.#repo.updateUser(id, userData);
+            return res.json(user);
+        } catch (error) {
+            log('Error updating user: %O', error);
+            if (
+                error instanceof PrismaClientKnownRequestError &&
+                error.code === 'P2025'
+            ) {
+                const finalError = new HttpError(
+                    404,
+                    'Not Found',
+                    'User not found',
+                    {
+                        cause: error,
+                    },
+                );
+                return next(finalError);
+            }
+
+            const finalError = new HttpError(
+                500,
+                'Internal Server Error',
+                'Failed to update user',
+                {
+                    cause: error,
+                },
+            );
+            return next(finalError);
+        }
+    }
+
+    async updateProfileUser(req: Request, res: Response, next: NextFunction) {
+        try {
+            log('Updating user profile...');
+            const id = Number(req.params.id); // Validate this data in a real application
+            const profileData: Partial<ProfileDTO> = req.body; // Validate this data in a real application
+            const user: User = await this.#repo.updateUserProfile(
+                id,
+                profileData,
+            );
+            return res.json(user);
+        } catch (error) {
+            log('Error updating user profile: %O', error);
+            if (
+                error instanceof PrismaClientKnownRequestError &&
+                error.code === 'P2025'
+            ) {
+                const finalError = new HttpError(
+                    404,
+                    'Not Found',
+                    'User not found',
+                    {
+                        cause: error,
+                    },
+                );
+                return next(finalError);
+            }
+
+            const finalError = new HttpError(
+                500,
+                'Internal Server Error',
+                'Failed to update user profile',
+                {
+                    cause: error,
+                },
+            );
+            return next(finalError);
+        }
+    }
+
+    async deleteUser(req: Request, res: Response, next: NextFunction) {
+        try {
+            const id = Number(req.params.id); // Validate this data in a real application
+            log('Deleting user with ID: %O', id);
+            await this.#repo.deleteUser(id);
+            return res.status(204).end();
+        } catch (error) {
+            log('Error deleting user: %O', error);
+            if (
+                error instanceof PrismaClientKnownRequestError &&
+                error.code === 'P2025'
+            ) {
+                const finalError = new HttpError(
+                    404,
+                    'Not Found',
+                    'User not found',
+                    {
+                        cause: error,
+                    },
+                );
+                return next(finalError);
+            }
+
+            const finalError = new HttpError(
+                500,
+                'Internal Server Error',
+                'Failed to delete user',
+                {
+                    cause: error,
+                },
+            );
+            return next(finalError);
+        }
+    }
 }

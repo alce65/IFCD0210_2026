@@ -51,7 +51,7 @@ export const UserCredentialsDTOSchema = z.object({
 });
 
 // El profile se actualiza independientemente
-export const UpdateUserDTOSchema = z.object({
+export const UpdateUserDTOSchema = z.strictObject({
     email: z.string().optional(),
     password: z.string().min(6).optional(),
     role: z.enum(['ADMIN', 'EDITOR', 'USER']).optional(),
