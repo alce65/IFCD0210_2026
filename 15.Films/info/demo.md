@@ -40,11 +40,11 @@ description: Ejemplo de API REST para la gestión de una colección de película
   - [Políticas de servicio](#políticas-de-servicio)
   - [Pruebas y Documentación](#pruebas-y-documentación)
 - [Arquitectura y Secuencia de Implementación](#arquitectura-y-secuencia-de-implementación)
-- [Repositorio](#repositorio)
-- [Controller](#controller)
-- [Router](#router)
-- [Montaje en la aplicación](#montaje-en-la-aplicación)
-- [Validaciones con zod](#validaciones-con-zod)
+  - [Repositorio](#repositorio)
+  - [Controller](#controller)
+  - [Router](#router)
+  - [Montaje en la aplicación](#montaje-en-la-aplicación)
+  - [Validaciones con zod](#validaciones-con-zod)
 - [Usuarios](#usuarios)
   - [Contraseñas: Bcrypt y hashing](#contraseñas-bcrypt-y-hashing)
     - [Servicio auth](#servicio-auth)
@@ -1708,7 +1708,7 @@ La secuencia de implementación será la siguiente:
 - routers (recibe el controlador como DI)
 - integración en app que instancia el repositorio, el controlador y el router, y los conecta con el cliente de prisma.
 
-## Repositorio
+### Repositorio
 
 El repositorio `FilmRepository` se encargará de la lógica de acceso a datos para la entidad Film. Tendrá métodos para crear, leer, actualizar y eliminar films en la base de datos. Utilizará el cliente de prisma para ejecutar consultas SQL y manejará cualquier error que pueda ocurrir durante el acceso a los datos.
 
@@ -1724,7 +1724,7 @@ El repositorio `FilmRepository` se encargará de la lógica de acceso a datos pa
 - manejo de errores SQL utilizando la clase `SqlError` para representar errores personalizados relacionados con la base de datos
 - escribimos y ejecutamos tests de integración para el repositorio de films, utilizando una base de datos de test preparada con la función `seedFilmsTestDB` para asegurar que la tabla de films esté creada y limpia antes de cada test.
 
-## Controller
+### Controller
 
 El controlador `FilmController` se encargará de manejar las solicitudes relacionadas con films. Recibirá el repositorio como dependencia y utilizará sus métodos para realizar las operaciones necesarias en la base de datos. El controlador también se encargará de validar los datos de entrada utilizando los DTOs definidos en la entidad, y de manejar cualquier error que pueda ocurrir durante el procesamiento de las solicitudes.
 
@@ -1743,7 +1743,7 @@ El controlador `FilmController` se encargará de manejar las solicitudes relacio
 - manejo de errores utilizando la clase `HttpError` para representar errores personalizados relacionados con las solicitudes HTTP
 - escribimos y ejecutamos tests unitarios para el controlador de films, utilizando mocks para el repositorio y para los objetos de request, response y next de Express, para asegurar que el controlador maneja correctamente las solicitudes y los errores relacionados con las operaciones de films. Solo se incluyen como ejemplo tests para el método de lectura de films.
 
-## Router
+### Router
 
 El router `FilmRouter` se encargará de definir las rutas relacionadas con films y de conectarlas con los métodos del controlador. Recibirá el controlador como dependencia y utilizará sus métodos para manejar las solicitudes en las rutas correspondientes. El router también se encargará de validar los datos de entrada utilizando los DTOs definidos en la entidad, y de manejar cualquier error que pueda ocurrir durante el procesamiento de las solicitudes.
 
@@ -1758,11 +1758,11 @@ El router `FilmRouter` se encargará de definir las rutas relacionadas con films
   - al crear una instancia del router
 - en el constructor se definen las rutas relacionadas con films, utilizando el método correspondiente del controlador para manejar las solicitudes en las rutas correspondientes
 
-## Montaje en la aplicación
+### Montaje en la aplicación
 
 Una vez definidos el repositorio, el controlador y el router para la entidad Film, se integran en la aplicación principal. En el archivo `app.ts`, se instancia el repositorio pasando el cliente de prisma, luego se instancia el controlador pasando el repositorio, y finalmente se instancia el router pasando el controlador. El router se conecta a la aplicación utilizando `app.use()` para que las rutas relacionadas con films estén disponibles en la API.
 
-## Validaciones con zod
+### Validaciones con zod
 
 Para validar los datos de entrada en las solicitudes relacionadas con films, se utilizan schemas de zod definidos en la entidad Film. Estos schemas se utilizan para validar los datos de creación y actualización de films, asegurando que los datos recibidos en las solicitudes cumplen con el formato esperado antes de ser procesados por el controlador y el repositorio. Los DTOs definidos en la entidad Film, corresponden a estos schemas y se utilizan como tipos para indicar a nivel de TypeScript el formato esperado de los datos de entrada en las solicitudes relacionadas con films.
 
@@ -1791,7 +1791,7 @@ La **autorización** (authorization) se refiere al proceso de verificar si un us
 
 Como parte del proceso de **autenticación**, las contraseñas de los usuarios se almacenarán de forma segura utilizando un algoritmo de hashing. Esto garantiza que las contraseñas no se almacenen en texto plano en la base de datos, lo que mejora la seguridad general del sistema.
 
-La librería `bcrypt` se utilizará para hashear las contraseñas antes de almacenarlas en la base de datos. Se basa en el algoritmo de hashing Blowfish, que es resistente a ataques de fuerza bruta y permite configurar un factor de costo para aumentar la dificultad de generar hashes, lo que mejora la seguridad a medida que aumenta la potencia de cómputo.
+La librería `bcrypt` se utilizará para hashear las contraseñas antes de almacenarlas en la base de datos. Se basa en el algoritmo de hashing **Blowfish**, que es resistente a ataques de fuerza bruta y permite configurar un factor de costo para aumentar la dificultad de generar hashes, lo que mejora la seguridad a medida que aumenta la potencia de cómputo.
 
 Proceso de hashing con bcrypt
 
@@ -1845,7 +1845,7 @@ log('Loading auth service...');
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class AuthService {
   static hash(password: string): Promise<string> {
-    return hash(password, 10);
+    return hash(password, 12);
   }
 
   static compare(password: string, hash: string): Promise<boolean> {
@@ -2213,6 +2213,7 @@ El método `deleteUser` se encargará de eliminar un usuario de la base de datos
 En los casos de lectura, actualización y eliminación, si el ID proporcionado no corresponde a ningún usuario en la base de datos, Prisma lanzará un error `PrismaClientKnownRequestError`. Si el usuario existe y se manipula correctamente, el método devolverá el usuario afectado como resultado.
 
 Para evitar salto de capa (layer skipping) o permeabilidad, este error no debe ser convertido a error HTTP en el repositorio, sino que se debe dejar que se propague hasta las capas superiores
+
 -  hasta el controlador, donde se puede capturar y convertir a un error HTTP de "Not Found" con un mensaje personalizado. 
 -  hasta el manejador de errores global, donde se puede capturar y tratar como los demás errores, emitiendo la srspuesta adecurada, con un código de estado apropiado (404 Not Found).
 

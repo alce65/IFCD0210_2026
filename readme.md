@@ -1335,9 +1335,7 @@ Presentación de la Arquitectura distribuida
   - Password: Hash y No reenviarla
 - Login (sin token)
 
-
 ### Día 5 (V 24/04/2026) - Sin clase
-
 
 ## Semana 15 (Abril / Mayo) - Unidad 3
 
@@ -1357,10 +1355,14 @@ Ya consumidos
   - Info de la unidad
 
 - Proyecto: Films - Users - Reviews
+  - Info disponible
   - Revisión del estado del proyecto
   - Modelo de datos
-  - Info disponible
+  - Schemas de Zod y tipos
+  - DB Seed
+  - Entorno de test: Seed
   
+[descanso]
 
 <!-- 1.5 día -->
 
