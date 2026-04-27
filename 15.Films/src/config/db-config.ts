@@ -7,7 +7,7 @@ const log = debug(`${env.PROJECT_NAME}:configDB`);
 
 log('Loaded database connection...');
 
-export const globalOmit = {
+const globalOmit = {
     user: {
         password: true,
     },

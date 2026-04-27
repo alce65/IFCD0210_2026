@@ -12,8 +12,11 @@ log('Loading auth service...');
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class AuthService {
+
+    static saltRounds = 12;
+
     static hash(password: string): Promise<string> {
-        return hash(password, 10);
+        return hash(password, this.saltRounds);
     }
 
     static compare(password: string, hash: string): Promise<boolean> {

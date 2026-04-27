@@ -67,7 +67,7 @@ export const filmSeed = async (films: FilmCreateDTO[], genres: GenreCreateDTO[])
                 director: film.director,
                 duration: film.duration,
                 rate: film.rate,
-                poster: film.poster as string,
+                poster: film.poster,
                 genres: {
                     connect: film.genres.map((genre) => ({ name: genre })),
                 },
@@ -91,7 +91,7 @@ export const userSeed = async (users: RegisterUserData[]) => {
             data: {
                 email: user.email,
                 password: hashedPassword,
-                role: user.role as Role,
+                role: user.role,
                 profile: {
                     create: user.profile,
                 },
