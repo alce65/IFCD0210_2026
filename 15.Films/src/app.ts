@@ -8,6 +8,9 @@ import { HttpError } from './errors/http-error.ts';
 import { errorHandler } from './middleware/error-handler.ts';
 import { HomeView } from './views/home.ts';
 import type { AppPrismaClient } from './config/db-config.ts';
+import { UsersRepo } from './users/repos/users.repo.ts';
+import { UsersController } from './users/controllers/users.controller.ts';
+import { UsersRouter } from './users/router/users.routes.ts';
 
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -47,10 +50,10 @@ export const createApp = (prisma: AppPrismaClient) => {
     });
 
 
-    // const appRepo = new AnimalsRepo(prisma);
-    // const appController = new AnimalsController(appRepo);
-    // const appRouter = new AnimalsRouter(appController);
-    // app.use('/api/animals', appRouter.router);
+    const appRepo = new UsersRepo(prisma);
+    const appController = new UsersController(appRepo);
+    const appRouter = new UsersRouter(appController);
+    app.use('/api/users', appRouter.router);
 
     // app.use('/api/animals', animalRouter(pool));
 

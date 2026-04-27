@@ -1,16 +1,17 @@
-import { env } from '../config/env.ts';
+import { env } from '../../config/env.ts';
 import debug from 'debug';
-import { AuthService } from '../services/auth.ts';
-import type { AppPrismaClient } from '../config/db-config.ts';
+import { AuthService } from '../../services/auth.ts';
+import type { AppPrismaClient } from '../../config/db-config.ts';
 import type {
     LoginUserData,
     ProfileDTO,
     RegisterUserData,
     User,
     UserUpdateDTO,
-} from '../zod/user.schemas.ts';
-import { HttpError } from '../errors/http-error.ts';
-import type { LoginResult, TokenPayload } from '../types/login.ts';
+} from '../../zod/user.schemas.ts';
+import type { LoginResult, TokenPayload } from '../../types/login.ts';
+import { Role } from '../../../generated/prisma/enums.ts';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/client';
 
 const log = debug(`${env.PROJECT_NAME}:repo:users`);
 log('Loading users repo...');
@@ -28,6 +29,7 @@ export class UsersRepo {
             data: {
                 email: userData.email,
                 password: hashedPassword,
+                role: Role.USER,
                 profile: {
                     create: userData.profile,
                 },
@@ -47,13 +49,8 @@ export class UsersRepo {
 
     async login(userData: LoginUserData): Promise<LoginResult> {
         log('Logging in user with email %s', userData.email);
-        const loginError = new HttpError(
-            401,
-            'Unauthorized',
-            'Invalid user or password',
-        );
 
-        const result = await this.#prisma.user.findUnique({
+        const result = await this.#prisma.user.findUniqueOrThrow({
             where: {
                 email: userData.email,
             },
@@ -62,9 +59,6 @@ export class UsersRepo {
             },
         });
 
-        if (result === null) {
-            throw loginError;
-        }
 
         const isValid = await AuthService.compare(
             userData.password, // desencriptada
@@ -72,7 +66,10 @@ export class UsersRepo {
         );
 
         if (!isValid) {
-            throw loginError;
+            throw new PrismaClientKnownRequestError('Invalid user or password', {
+                code: 'P2004',
+                clientVersion: '',
+            })
         }
 
         // create token
