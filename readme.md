@@ -1364,95 +1364,86 @@ Ya consumidos
   
 [descanso]
 
-<!-- 1.5 día -->
-
-<!-- API REST
 - Usuarios: Autenticación: Login
   - JWT
   - Usuarios: login (signIn): Autorización
-- Validaciones
-  - UsersDTOs con Zod
-  - Validaciones en el controladores
-  - FilmsDTOs con Zod
-  - Validaciones extendiendo el modelo
-
-- Request with JWT
-- Completando el control de Errors
-  - Errores de Prisma
--->
-
-<!-- 
-  - Usuarios: Autorización
-  - Update user model with roles
-- Uso de Postman como APIRest Client -->
+- Controllers
+- Router
+- Montaje de la API REST
 
 
 ### Día 2 (M 28/04/2026) - M2.03 06  - Proyecto Films (Back)
 
-<!-- Aplicaciones Web Distribuidas (continuación)
+<!-- 
+- Revisión de la feature usuarios
+- Completando el control de Errors
+  - Errores de Prisma
+  - eliminando SqlError
+- Validaciones
+  - UsersDTOs con Zod
+  - Middleware de Validaciones en las rutas
+- Uso de Postman como APIRest Client 
+- Autenticación
+  - Request with JWT
+  - Rutas (Endpoints) protegidas
+  - Pruebas desde Postman 
+- Autorización (Authorization): roles (admin, editor)
+  - Update user model with roles
+  - Uso de Postman como APIRest Client 
+-->
+
+### Día 3 (X 29/04/2026) - M2.03 07 - Proyecto Films (Back)
+
+<!-- 
 
 - Films: Endpoints ya creados
-
   - GET /films
   - GET /films/:id
   - POST /films
   - PATCH /films/:id
   - DELETE /films/:id
+- Rutas films -> comprobar y revisar Auth
 
-- Usuarios: Endpoints ya creados
-
-  - POST /users/register
-  - POST /users/login
-
-- Authorization: roles (admin, editor)
-- Nuevo modelo: Reviews
-
+ Nuevo modelo: Reviews
   - Repositorio, Controller, DTOs, Rutas
   - Endpoints
     - GET /reviews
-    - POST /reviews -->
-
-### Día 3 (X 29/04/2026) - M2.03 07 - Proyecto Films (Back)
-
-<!-- Endpoints Reviews (continuación) - GET /reviews/:id - PATCH /reviews/:id - DELETE /reviews/:id
-
+    - POST /reviews
+    - GET /reviews/:id 
+    - PATCH /reviews/:id 
+    - DELETE /reviews/:id
 Rutas review:/id -> Authorization: owner
 
-Rutas films -> comprobar y revisar Auth
-
-Rutas users -> revisar auth y añadir las que faltan
-
-- GET /users
-- GET /users/:id
-- PATCH /users/role/:id
-- PATCH /users/:id
-- DELETE /users/:id -->
+-->
 
 ### Día 4 (J 30/04/2026) - M2.03 08 - Proyecto Films (Back)
 
 <!-- Review de la API REST Films - Users - Reviews
 
-- Route users protected for owners:
+Rutas users -> revisar auth y añadir las que faltan
+- GET /users
+- GET /users/:id
+- PATCH /users/role/:id
 
+- Route users protected for owners:
   - PATCH /users/:id
   - DELETE /users/:id
 
 - Categories
-
   - Review of the model
   - Repositories, Controllers, Routes
   - Endpoints
     - GET /categories
-    - POST /categories
+    - POST /categories 
+-->
 
+<!-- Extras
 - Films permite añadir categorías al crearlo
-
 - Films:permite añadir/eliminar categorías posteriormente
-
   - POST /films/:id/categories/:id
   - DELETE /films/:id/categories/:id
-
-  - PATCH /films/:id/categories/:id -->
+  - PATCH /films/:id/categories/:id  
+-->
 
 ### Día 5 (V 01/05/2026) - Fiesta
 

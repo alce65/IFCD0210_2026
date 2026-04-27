@@ -159,22 +159,7 @@ Con esta reorganización se sugieren las siguientes orientaciones didácticas:
 
 - Comenzar la unidad con la **introducción textual** sobre APIs y REST (apartado 2.1) para contextualizar al alumnado.
 - Utilizar el esquema de `rest.md` como base del Bloque 1, pero enriquecido con el enfoque en recursos, APIs REST y ejemplos concretos.[^2]
-- Replantear el Bloque 2 como un itinerario práctico: diseño de una pequeña API REST, implementación con un framework concreto, aseguramiento básico (autenticación/autorización) y consumo desde una aplicación web cliente.[^1]
+- Replantear el Bloque 2 como un itinerario práctico: diseño de una pequeña API REST, implementación con un framework concreto, aseguramiento básico (autenticación/autorización) y consumo desde una aplicación web cliente.
 
-De este modo, la unidad pasa de un enfoque genérico sobre servicios web distribuidos a uno claramente centrado en el diseño, implementación y consumo de **APIs REST**, sin perder la coherencia con el currículo oficial ni con los contenidos de seguridad y estándares previstos originalmente.[^2][^1]
-
----
-
-### References
-
-1. [unidad.3-2.md](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/826912118/9c2376a6-e1cd-47d8-a93f-db4348d9bf3b/unidad.3-2.md?AWSAccessKeyId=ASIA2F3EMEYEX3ICMF6N&Signature=Ov1d8rTz%2BfXyPUnJX8NLtAxrEzw%3D&x-amz-security-token=IQoJb3JpZ2luX2VjELP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIB4pIBfdKxysfomgUTouFxXw5TJb3w3kGckd3MO9FrEwAiEA2KphCZ%2BJKUxgyaby0VMkZ0Thnl5j2Z38yn9OXAFyI9wq8wQIfBABGgw2OTk3NTMzMDk3MDUiDL3nApEWcYD2zJqHsCrQBLbBXblE9MpsS8BybYyzb%2F77IfC5bJJzzEEIesUc8I161tokJfszi4SLQUKNH3hkMgcwSnfhpD3Tc668wRDmwygXPWDkGdwCBnuDmIVmJcIP6TsPpXwvV3aDMEhlHWVwL6EmQm9jqHqro7wW%2Fkvk0JvOy6rnyWHDSE8Gv%2B5Fcdx0CPlxbikOstUz3nwXtdZZXYn3prjvOctrtShvIarbpF%2BZI%2F9oiFyhNTtyGBm8jfDIdz6x0ea2XIH2aDkdRImx13RBjgBh2NtgeEjFnyWqU1qWpSIGscbwxGviBLoF%2F6aN2M%2B6YYPYa8vJ%2F1ThlvPd95NRx0vrN99ScAnVnR5FZbYHqsHPx4ybOWfmWrwT%2BOMX%2Bs02sTURKfGvp%2FWfhNSrMw05RwWyJMuAgCs8uNaJU1TpM%2BtBmBnbN5gkkCtXF38fudfKn%2Bm2OoAVj4%2FSWDeUQpkQfYsYV7QL%2Fze1VGn2ZR5d%2FKKTKl6CvywoZpB%2BGOh9d5MluPqHvFG2aKtf0sAWxsOWK5iE0z0JboRU0HABunLAqwwR1kBMoOm3kpE%2FQdFAGkHlFXXxxc3R1JXvfDjG5GSMYebEKzOQe7qwCekwjkvPoTnZa3J4Nm%2BDRBb5NBXLjnmNGZ686wqUFMfJSmZoiTfel0i07R6GEUjfCWxyFIfZ7vsvmSKqU2xmj2D6ZrXWDTvq5IKQxTliEZgNqdim5LF1GVBfNBM9VbWDtFsRRrsPZ6c%2BKpsDtMn%2FExluW8ekK95KgP5UVmV0UCQNsJYZ138kgou%2BEewqqbFu7%2FBwVAkwn5atzwY6mAF%2FC%2Fa148TnxVJAxVxmrvbE9Alq4lwhSOajPHiZS0JY8NMKCZ%2Brgn5DvW9%2BYu0bk8kZKyWJlMKv%2FkKswB5ItqO2X8O%2Bzs4WT%2FVQ%2F9V1dcQaj1zhcIQdgKdtLLXP69zFIM7XY79WZL56zLvkBafXXoN6ORpOqPRwSobP%2BYXU1zaX9tyD%2FG%2BFWTPOfEQKiQqseP6pAnJRV5rbNg%3D%3D&Expires=1777031410) - ## Aplicaciones Web Distribuidas
-
-Denominación: DESARROLLO DE APLICACIONES WEB DISTRIBUIDAS
-(Desarrol...
-
-2. [rest.md](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/826912118/343e91f2-38f8-4912-bd00-a1d9b677f967/rest.md?AWSAccessKeyId=ASIA2F3EMEYEX3ICMF6N&Signature=x7nYx3Qc1VJ3ioLUScICqnCN4Qs%3D&x-amz-security-token=IQoJb3JpZ2luX2VjELP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIB4pIBfdKxysfomgUTouFxXw5TJb3w3kGckd3MO9FrEwAiEA2KphCZ%2BJKUxgyaby0VMkZ0Thnl5j2Z38yn9OXAFyI9wq8wQIfBABGgw2OTk3NTMzMDk3MDUiDL3nApEWcYD2zJqHsCrQBLbBXblE9MpsS8BybYyzb%2F77IfC5bJJzzEEIesUc8I161tokJfszi4SLQUKNH3hkMgcwSnfhpD3Tc668wRDmwygXPWDkGdwCBnuDmIVmJcIP6TsPpXwvV3aDMEhlHWVwL6EmQm9jqHqro7wW%2Fkvk0JvOy6rnyWHDSE8Gv%2B5Fcdx0CPlxbikOstUz3nwXtdZZXYn3prjvOctrtShvIarbpF%2BZI%2F9oiFyhNTtyGBm8jfDIdz6x0ea2XIH2aDkdRImx13RBjgBh2NtgeEjFnyWqU1qWpSIGscbwxGviBLoF%2F6aN2M%2B6YYPYa8vJ%2F1ThlvPd95NRx0vrN99ScAnVnR5FZbYHqsHPx4ybOWfmWrwT%2BOMX%2Bs02sTURKfGvp%2FWfhNSrMw05RwWyJMuAgCs8uNaJU1TpM%2BtBmBnbN5gkkCtXF38fudfKn%2Bm2OoAVj4%2FSWDeUQpkQfYsYV7QL%2Fze1VGn2ZR5d%2FKKTKl6CvywoZpB%2BGOh9d5MluPqHvFG2aKtf0sAWxsOWK5iE0z0JboRU0HABunLAqwwR1kBMoOm3kpE%2FQdFAGkHlFXXxxc3R1JXvfDjG5GSMYebEKzOQe7qwCekwjkvPoTnZa3J4Nm%2BDRBb5NBXLjnmNGZ686wqUFMfJSmZoiTfel0i07R6GEUjfCWxyFIfZ7vsvmSKqU2xmj2D6ZrXWDTvq5IKQxTliEZgNqdim5LF1GVBfNBM9VbWDtFsRRrsPZ6c%2BKpsDtMn%2FExluW8ekK95KgP5UVmV0UCQNsJYZ138kgou%2BEewqqbFu7%2FBwVAkwn5atzwY6mAF%2FC%2Fa148TnxVJAxVxmrvbE9Alq4lwhSOajPHiZS0JY8NMKCZ%2Brgn5DvW9%2BYu0bk8kZKyWJlMKv%2FkKswB5ItqO2X8O%2Bzs4WT%2FVQ%2F9V1dcQaj1zhcIQdgKdtLLXP69zFIM7XY79WZL56zLvkBafXXoN6ORpOqPRwSobP%2BYXU1zaX9tyD%2FG%2BFWTPOfEQKiQqseP6pAnJRV5rbNg%3D%3D&Expires=1777031410) - ## API REST
-
-1. Arquitecturas distribuidas orientadas a servicios
-
-  – Características generales de l...
+De este modo, la unidad pasa de un enfoque genérico sobre servicios web distribuidos a uno claramente centrado en el diseño, implementación y consumo de **APIs REST**, sin perder la coherencia con el currículo oficial ni con los contenidos de seguridad y estándares previstos originalmente.
 

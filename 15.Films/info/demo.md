@@ -39,25 +39,42 @@ description: Ejemplo de API REST para la gestión de una colección de película
     - [Formatos de entrada: Zod schemas y validación:](#formatos-de-entrada-zod-schemas-y-validación)
   - [Políticas de servicio](#políticas-de-servicio)
   - [Pruebas y Documentación](#pruebas-y-documentación)
-- [Arquitectura y Secuencia de Implementación](#arquitectura-y-secuencia-de-implementación)
-  - [Repositorio](#repositorio)
-  - [Controller](#controller)
-  - [Router](#router)
-  - [Montaje en la aplicación](#montaje-en-la-aplicación)
-  - [Validaciones con zod](#validaciones-con-zod)
+  - [Arquitectura y Secuencia de Implementación](#arquitectura-y-secuencia-de-implementación)
 - [Usuarios](#usuarios)
   - [Contraseñas: Bcrypt y hashing](#contraseñas-bcrypt-y-hashing)
     - [Servicio auth](#servicio-auth)
   - [JSON Web Tokens (JWT)](#json-web-tokens-jwt)
     - [Secret](#secret)
     - [Servicio auth y token JWT](#servicio-auth-y-token-jwt)
-  - [Repositorio](#repositorio-1)
-    - [Register](#register)
-    - [Login](#login)
-    - [Read](#read)
-    - [Updates](#updates)
-    - [Delete](#delete)
-    - [Errores Not Found](#errores-not-found)
+  - [Repositorio: UsersRepo](#repositorio-usersrepo)
+    - [Register (UserRepo)](#register-userrepo)
+    - [Login (UserRepo)](#login-userrepo)
+    - [Read (UserRepo)](#read-userrepo)
+    - [Updates (UserRepo)](#updates-userrepo)
+    - [Delete (UserRepo)](#delete-userrepo)
+    - [Errores Not Found (UserRepo)](#errores-not-found-userrepo)
+  - [Controller: UsersController](#controller-userscontroller)
+    - [Register (UserController)](#register-usercontroller)
+    - [Login (UserController)](#login-usercontroller)
+    - [Read (UserController)](#read-usercontroller)
+    - [Update (UserController)](#update-usercontroller)
+    - [Delete (UserController)](#delete-usercontroller)
+  - [Router: UsersRouter](#router-usersrouter)
+  - [Montaje en la aplicación](#montaje-en-la-aplicación)
+  - [Validaciones con zod](#validaciones-con-zod)
+    - [Validador de ID](#validador-de-id)
+      - [Validador de Body](#validador-de-body)
+    - [Validadores en el UsersRouter](#validadores-en-el-usersrouter)
+  - [Prueba de las rutas: Postman](#prueba-de-las-rutas-postman)
+- [Implementación de Políticas de servicio](#implementación-de-políticas-de-servicio)
+  - [Autenticación (Authentication) y rutas protegidas](#autenticación-authentication-y-rutas-protegidas)
+    - [Interface de la request de Express](#interface-de-la-request-de-express)
+    - [Auth Interceptor](#auth-interceptor)
+    - [Rutas protegidas: uso del intertceptor](#rutas-protegidas-uso-del-intertceptor)
+    - [Pruebas de las rutas protegidas](#pruebas-de-las-rutas-protegidas)
+  - [Autorización (Authorization)](#autorización-authorization)
+    - [Método en el interceptor](#método-en-el-interceptor)
+    - [Uso del interceptor en las rutas](#uso-del-interceptor-en-las-rutas)
 
 ## Proyecto inicial. Arquitectura
 
@@ -76,6 +93,19 @@ La estructura de carpetas reflejo de esa arquitectura será la siguiente:
     - `error-handler.ts` (middleware para manejar errores)
   - `app.ts` (configuración de Express)
   - `index.ts` (punto de entrada del servidor)
+  - users/
+    - entities/
+      - `user.entity.ts` (definición de la entidad User y sus DTOs)
+      - `db-seed.ts` (función para preparar la base de datos con la tabla de usuarios)
+    - repositories/
+      - `user.repository.ts` (clase con la lógica de acceso a datos para la entidad User)
+      - `auth.repository.ts` (clase con la lógica de acceso a datos para la autenticación de usuarios, e.g. login)
+    - controllers/
+      - `user.controller.ts` (clase con el controlador para manejar las solicitudes relacionadas con usuarios)
+      - `user.controller.test.ts` (tests unitarios para el controlador de usuarios)
+    - routers/
+      - `user.router.ts` (clase con la definición de las rutas relacionadas con usuarios, utilizando el servicio)
+      - `user.router.test.ts` (tests de integración para las rutas de usuarios)
   - films/
     - entities/
       - `film.entity.ts` (definición de la entidad Film y sus DTOs)
@@ -88,7 +118,6 @@ La estructura de carpetas reflejo de esa arquitectura será la siguiente:
       - `film.router.ts` (clase con la definición de las rutas relacionadas con películas, utilizando el servicio)
       - `film.router.test.ts` (tests de integración para las rutas de películas)
       - `film.controller.test.ts` (tests unitarios para el controlador de películas)
-  - users/
   - reviews/
   - categories/
   - ...
@@ -138,9 +167,9 @@ Detalles de la configuración en tsconfig.json:
 - express @types/express
 - cors
 - morgan
-- ¿helmet?
-- ¿compression?
-- ¿rate-limit?
+- ¿helmet?: `npm i helmet` [npm](https://www.npmjs.com/package/helmet)
+- ¿compression?: `npm i compression` [npm](https://www.npmjs.com/package/compression)
+- ¿rate-limit?: `npm i express-rate-limit` [npm](https://www.npmjs.com/package/express-rate-limit)
 - bcrypt
 - jsonwebtoken
 - openapi-typescript
@@ -269,16 +298,17 @@ Detalles de la configuración en tsconfig.json:
        log('Loaded database connection...');
 
        export const connectDB = async () => {
-           const adapter = new PrismaPg({
-               user: env.PGUSER,
-               password: env.PGPASSWORD,
-               host: env.PGHOST,
-               port: env.PGPORT,
-               database: env.PGDATABASE,
-           });
-           const prisma = new PrismaClient({
-               adapter
-           });
+          const adapter = new PrismaPg({
+              user: env.PGUSER,
+              password: env.PGPASSWORD,
+              host: env.PGHOST,
+              port: env.PGPORT,
+              database: env.PGDATABASE,
+          });
+          const prisma = new PrismaClient({
+              adapter
+          });
+       };
        ```
 
    - se prueba la conexión utilizando la configuración obtenida de las variables de entorno
@@ -286,19 +316,20 @@ Detalles de la configuración en tsconfig.json:
    - se exporta el cliente de prisma para ser utilizado en otras partes de la aplicación
 
      ```ts
-         try {
-             await prisma.$connect();
-             const [info] = (await prisma.$queryRaw`SELECT current_database()`) as {
-                 current_database: string;
-             }[];
-             log('Database connection established successfully.');
-             log('Connected to database:', info?.current_database);
-             prisma.$disconnect();
-         } catch (error) {
-             log('Error connecting to the database:', error);
-             throw error;
-         }
-         return prisma;
+     { // ...continuación del código anterior
+        try {
+          await prisma.$connect();
+          const [info] = (await prisma.$queryRaw`SELECT current_database()`) as {
+              current_database: string;
+          }[];
+          log('Database connection established successfully.');
+          log('Connected to database:', info?.current_database);
+          prisma.$disconnect();
+        } catch (error) {
+          log('Error connecting to the database:', error);
+          throw error;
+        }
+        return prisma;
      };
      ```
 
@@ -307,7 +338,7 @@ Detalles de la configuración en tsconfig.json:
 Para ocultar el campo password en todas las consultas SQL relacionadas con el modelo User que luego crearemos, se puede configurar el cliente de Prisma para omitir ese campo de forma global. Esto se hace utilizando la opción `omit` al instanciar el cliente de Prisma. En este caso, se omite el campo `password` del modelo `User` en todas las consultas, lo que garantiza que el hash de la contraseña no se exponga accidentalmente en las respuestas de la API.
 
 ```ts
-export const globalOmit = {
+const globalOmit = {
   user: {
     password: true,
   },
@@ -1622,6 +1653,7 @@ El contrato del servicio incluye:
 
 [POST] /api/users/registro - 201 Created
 [POST] /api/users/login - 200 OK / 401 Unauthorized
+[GET] /api/users - 200 OK
 [GET] /api/users/:id - 200 OK / 404 Not Found
 [PATCH] /api/users/:id [Owner] - 200 OK / 404 Not Found
 [DELETE] /api/users/:id [Owner,Admin] - 204 No Content / 404 Not Found
@@ -1682,7 +1714,7 @@ if (!resultado.success) return res.status(400).json(resultado.error);
 - pruebas unitarias y de integración (supertest)
 - OpenAPI (Swagger)
 
-## Arquitectura y Secuencia de Implementación
+### Arquitectura y Secuencia de Implementación
 
 Usaremos una arquitectura modular MVC + Repository para organizar el código de la aplicación.
 
@@ -1708,72 +1740,14 @@ La secuencia de implementación será la siguiente:
 - routers (recibe el controlador como DI)
 - integración en app que instancia el repositorio, el controlador y el router, y los conecta con el cliente de prisma.
 
-### Repositorio
+Sus funciones serán las siguientes:
 
-El repositorio `FilmRepository` se encargará de la lógica de acceso a datos para la entidad Film. Tendrá métodos para crear, leer, actualizar y eliminar films en la base de datos. Utilizará el cliente de prisma para ejecutar consultas SQL y manejará cualquier error que pueda ocurrir durante el acceso a los datos.
+- Cada **repositorio** se encargará de la lógica de acceso a datos para su entidad, utilizando el cliente de prisma para ejecutar consultas SQL.
+- Cada **controlador** se encargará de manejar las solicitudes relacionadas con su entidad. Recibirá el repositorio como DI y lo utilizará para realizar las operaciones necesarias en la base de datos. El controlador también se encargará de de manejar cualquier error que pueda ocurrir durante el procesamiento de las solicitudes.
+- Cada **router** se encargará de definir las rutas relacionadas con su entidad y de conectarlas con los métodos del controlador. Recibirá el controlador como dependencia y utilizará sus métodos para manejar las solicitudes en las rutas correspondientes.
+- El router también se encargará invocar el **middleware** responsable de **validar** los datos de entrada utilizando los DTOs definidos en la entidad, y de manejar cualquier error que pueda ocurrir durante el procesamiento de las solicitudes.
 
-- estructura de carpetas
-  - src/
-    - errors/
-      - `sql-error.ts` (clase para representar errores SQL personalizados)
-    - films/
-      - repositories/
-        - `film.repository.ts` (clase con la lógica de acceso a datos para la entidad Film)
-        - `film.repository.test.ts` (tests unitarios para el repositorio de films)
-- definición de la clase `FilmRepository` con métodos para crear, leer, actualizar y eliminar films en la base de datos
-- manejo de errores SQL utilizando la clase `SqlError` para representar errores personalizados relacionados con la base de datos
-- escribimos y ejecutamos tests de integración para el repositorio de films, utilizando una base de datos de test preparada con la función `seedFilmsTestDB` para asegurar que la tabla de films esté creada y limpia antes de cada test.
-
-### Controller
-
-El controlador `FilmController` se encargará de manejar las solicitudes relacionadas con films. Recibirá el repositorio como dependencia y utilizará sus métodos para realizar las operaciones necesarias en la base de datos. El controlador también se encargará de validar los datos de entrada utilizando los DTOs definidos en la entidad, y de manejar cualquier error que pueda ocurrir durante el procesamiento de las solicitudes.
-
-- estructura de carpetas
-  - src/
-    - films/
-      - controllers/
-        - `film.controller.ts` (clase con el controlador para manejar las solicitudes relacionadas con films)
-        - `film.controller.test.ts` (tests unitarios para el controlador de films).
-- definición de la clase `FilmController` con métodos para manejar las solicitudes relacionadas con films, utilizando el repositorio para realizar las operaciones necesarias en la base de datos
-- logueo de debug
-  - al importar el módulo
-  - al crear una instancia del controlador
-  - para cada método del controlador, indicando la operación que se está realizando
-- tipado de los datos de entrada utilizando los DTOs definidos en la entidad Film
-- manejo de errores utilizando la clase `HttpError` para representar errores personalizados relacionados con las solicitudes HTTP
-- escribimos y ejecutamos tests unitarios para el controlador de films, utilizando mocks para el repositorio y para los objetos de request, response y next de Express, para asegurar que el controlador maneja correctamente las solicitudes y los errores relacionados con las operaciones de films. Solo se incluyen como ejemplo tests para el método de lectura de films.
-
-### Router
-
-El router `FilmRouter` se encargará de definir las rutas relacionadas con films y de conectarlas con los métodos del controlador. Recibirá el controlador como dependencia y utilizará sus métodos para manejar las solicitudes en las rutas correspondientes. El router también se encargará de validar los datos de entrada utilizando los DTOs definidos en la entidad, y de manejar cualquier error que pueda ocurrir durante el procesamiento de las solicitudes.
-
-- estructura de carpetas
-  - src/
-    - films/
-      - routers/
-        - `film.router.ts` (clase con la definición de las rutas relacionadas con films, utilizando el servicio)
-- definición de la clase `FilmRouter` con el router de Express y el controller como dependencia inyectada.
-- logueo de debug
-  - al importar el módulo
-  - al crear una instancia del router
-- en el constructor se definen las rutas relacionadas con films, utilizando el método correspondiente del controlador para manejar las solicitudes en las rutas correspondientes
-
-### Montaje en la aplicación
-
-Una vez definidos el repositorio, el controlador y el router para la entidad Film, se integran en la aplicación principal. En el archivo `app.ts`, se instancia el repositorio pasando el cliente de prisma, luego se instancia el controlador pasando el repositorio, y finalmente se instancia el router pasando el controlador. El router se conecta a la aplicación utilizando `app.use()` para que las rutas relacionadas con films estén disponibles en la API.
-
-### Validaciones con zod
-
-Para validar los datos de entrada en las solicitudes relacionadas con films, se utilizan schemas de zod definidos en la entidad Film. Estos schemas se utilizan para validar los datos de creación y actualización de films, asegurando que los datos recibidos en las solicitudes cumplen con el formato esperado antes de ser procesados por el controlador y el repositorio. Los DTOs definidos en la entidad Film, corresponden a estos schemas y se utilizan como tipos para indicar a nivel de TypeScript el formato esperado de los datos de entrada en las solicitudes relacionadas con films.
-
-- estructura de carpetas
-  - src/
-    - middleware/
-      - `validations.ts` (definición de los schemas de zod para validación de los datos)
-- cada validador es un middleware de Express que utiliza el schema de zod que recibe como parámetro
-  - validateId: middleware para validar que el parámetro id en la ruta es un número entero positivo
-  - validateBody: middleware para validar que el cuerpo de la solicitud cumple con el schema de zod correspondiente a la operación que se está realizando (creación o actualización de films)
-- estos middlewares se pueden utilizar en las rutas definidas en el router de films para asegurar que los datos recibidos en las solicitudes cumplen con el formato esperado antes de ser procesados por el controlador y el repositorio.
+**Montaje en la aplicación**: Una vez definidos el repositorio, el controlador y el router para la entidad Film, se integran en la aplicación principal. En el archivo `app.ts`, se instancia el repositorio pasando el cliente de prisma, luego se instancia el controlador pasando el repositorio, y finalmente se instancia el router pasando el controlador. El router se conecta a la aplicación utilizando `app.use()` para que las rutas relacionadas con films estén disponibles en la API.
 
 ## Usuarios
 
@@ -1844,8 +1818,10 @@ log('Loading auth service...');
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class AuthService {
+  static saltRounds = 12;
+
   static hash(password: string): Promise<string> {
-    return hash(password, 12);
+    return hash(password, this.saltRounds);
   }
 
   static compare(password: string, hash: string): Promise<boolean> {
@@ -1965,8 +1941,8 @@ También se define el typo correspondiente al resultado del login, que incluye e
 
 ```ts
 export interface LoginResult {
-    token: string;
-    payload: TokenPayload;
+  token: string;
+  payload: TokenPayload;
 }
 ```
 
@@ -2008,9 +1984,9 @@ jwt.verify tiene tres posibles comportamientos:
 
 Los errores se capturan en el catch, se loguea el error y se devuelve null. Esto permite que el método `verifyToken` devuelva un payload válido si el token es correcto, o null si el token es inválido o ha expirado, sin lanzar errores que puedan interrumpir el flujo de la aplicación.
 
-### Repositorio
+### Repositorio: UsersRepo
 
-La clase `UserRepository` se encargará de la lógica de acceso a datos para la entidad User. Tendrá métodos para crear, leer, actualizar y eliminar usuarios en la base de datos, así como métodos específicos para manejar la autenticación y autorización de usuarios. Utilizará el cliente de prisma para ejecutar consultas SQL y manejará cualquier error que pueda ocurrir durante el acceso a los datos.
+La clase `UsersRepository` se encargará de la lógica de acceso a datos para la entidad User. Tendrá métodos para crear, leer, actualizar y eliminar usuarios en la base de datos, así como métodos específicos para manejar la autenticación y autorización de usuarios. Utilizará el cliente de prisma que recibe como DI para ejecutar consultas SQL y manejará cualquier error que pueda ocurrir durante el acceso a los datos.
 
 - estructura de carpetas
   - src/
@@ -2020,11 +1996,13 @@ La clase `UserRepository` se encargará de la lógica de acceso a datos para la 
       - `login.ts` (tipos para el payload del login y su resultado)
     - users/
       - repositories/
-        - `user.repository.ts` (clase con la lógica de acceso a datos para la entidad User)
-        - `user.repository.test.ts` (tests unitarios para el repositorio de usuarios)
+        - `users.repository.ts` (clase con la lógica de acceso a datos para la entidad User)
+        - `users.repository.test.ts` (tests unitarios para el repositorio de usuarios)
 - DI: el repositorio de usuarios recibirá el cliente de prisma como dependencia inyectada, lo que permitirá una mayor flexibilidad y facilidad para realizar pruebas unitarias utilizando mocks del cliente de prisma.
+- definición de la clase `UsersRepository` con métodos para crear (register), leer, actualizar y eliminar usuarios en la base de datos, ademáss de gestionar el login.
+- escribimos y ejecutamos tests de integración para el repositorio de usuarios, utilizando una base de datos de test preparada con la función `seedUsersTestDB` para asegurar que la tabla de usuarios esté creada y limpia antes de cada test.
 
-#### Register
+#### Register (UserRepo)
 
 El método `register` del `UserRepository` se encargará de crear un nuevo usuario en la base de datos. Recibirá los datos del usuario, incluyendo su email, contraseña y perfil, y realizará las siguientes operaciones:
 
@@ -2038,6 +2016,7 @@ Para el perfil se utiliza la creación anidada de Prisma, que permite crear un u
             data: {
                 email: userData.email,
                 password: hashedPassword,
+                role: Role.USER,
                 profile: {
                     create: userData.profile,
                 },
@@ -2056,7 +2035,7 @@ Para el perfil se utiliza la creación anidada de Prisma, que permite crear un u
 
 El método devuelve el usuario creado, incluyendo su perfil relacionado. En este punto, la contraseña se ha hasheado utilizando el `AuthService` antes de ser almacenada en la base de datos, lo que garantiza que las contraseñas no se almacenen en texto plano. Además, la contraseña hasheada no se incluye en el resultado devuelto por el método, lo que mejora la seguridad al evitar exponer incluso el hash de la contraseña. Como este comportamiento se ha configurado por defecto en el cliente de prisma, no es necesario el código comentado `omit: { password: true }` en cada consulta, aunque se podría hacer si se quisiera asegurar que la contraseña nunca se incluya en ningún resultado.
 
-#### Login
+#### Login (UserRepo)
 
 El método `login` del `UserRepository` se encargará de autenticar a un usuario. Recibirá las credenciales del usuario (email y contraseña) y realizará las siguientes operaciones:
 
@@ -2070,7 +2049,7 @@ El método `login` del `UserRepository` se encargará de autenticar a un usuario
 async login(userData: LoginUserData) {
     const loginError = new HttpError(401, 'Unauthorized', 'Invalid user or password');
 
-    const result = await this.#prisma.user.findUnique({
+    const result = await this.#prisma.user.findUniqueOrThrow({
         where: {
             email: userData.email,
         },
@@ -2079,17 +2058,16 @@ async login(userData: LoginUserData) {
         },
     });
 
-    if (result === null) {
-        throw loginError;
-    }
-
     const isValid = await AuthService.compare(
         userData.password, // desencriptada
         result.password, // encriptada
     );
 
     if (!isValid) {
-        throw loginError;
+      throw new PrismaClientKnownRequestError('Invalid user or password', {
+          code: 'P2004',
+          clientVersion: '',
+      })
     }
 
     // create token
@@ -2107,7 +2085,7 @@ async login(userData: LoginUserData) {
 }
 ```
 
-#### Read
+#### Read (UserRepo)
 
 Similares a los de cualquier otro repo se pueden añadir los métodos de lectura de usuarios, como `getById`, `getAll`, etc. Ambos incluyen la información del profile y omiten la contraseña hasheada en los resultados, utilizando la configuración del cliente de prisma.
 
@@ -2136,7 +2114,7 @@ En este caso prisma dispone de 2 métodos para obtener un único registro: `find
 
 En este proyecto se ha optado por usar `findUniqueOrThrow` para ser coherentes con la forma de comportamiento de update y delete.
 
-#### Updates
+#### Updates (UserRepo)
 
 Los updates de usuarios plantean algunas cuestiones de diseño interesantes, distinguiéndose las actualizaciones de la propia entidad User o de su perfil relacionado:
 
@@ -2190,7 +2168,7 @@ En el caso del profile, al ser una entidad relacionada, se puede utilizar la sin
 
 En ambos casos, el método devuelve el usuario actualizado, incluyendo su perfil relacionado. Si el id proporcionado no corresponde a ningún usuario en la base de datos, Prisma lanzará un error `PrismaClientKnownRequestError` que se puede capturar en el controlador para lanzar un error de "Not Found" con un mensaje personalizado.
 
-#### Delete
+#### Delete (UserRepo)
 
 El método `deleteUser` se encargará de eliminar un usuario de la base de datos. Recibirá el ID del usuario a eliminar y realizará las siguientes operaciones:
 
@@ -2208,14 +2186,837 @@ El método `deleteUser` se encargará de eliminar un usuario de la base de datos
   }
 ```
 
-#### Errores Not Found
+#### Errores Not Found (UserRepo)
+
+En el proceso de login, si el usuario no existe, al usar `findUniqueOrThrow`, prisma lanzará un error `PrismaClientKnownRequestError` con un código específico (P2025) que indica que el registro no fue encontrado. Si la paswword es incorrectas es nuestro código el que lanza el mismo error.
 
 En los casos de lectura, actualización y eliminación, si el ID proporcionado no corresponde a ningún usuario en la base de datos, Prisma lanzará un error `PrismaClientKnownRequestError`. Si el usuario existe y se manipula correctamente, el método devolverá el usuario afectado como resultado.
 
-Para evitar salto de capa (layer skipping) o permeabilidad, este error no debe ser convertido a error HTTP en el repositorio, sino que se debe dejar que se propague hasta las capas superiores
+Para evitar salto de capa (layer skipping) o permeabilidad, estos errores no deben ser convertidos a errores HTTP en el repositorio, sino que se debe dejar que se propaguen hasta las capas superiores
 
--  hasta el controlador, donde se puede capturar y convertir a un error HTTP de "Not Found" con un mensaje personalizado. 
--  hasta el manejador de errores global, donde se puede capturar y tratar como los demás errores, emitiendo la srspuesta adecurada, con un código de estado apropiado (404 Not Found).
+- hasta el controlador, donde se puede capturar y convertir a un error HTTP adecuado: "401 Unauthorized" o "404 Not Found", con un mensaje personalizado en cada caso (así lo haremos en nuestra aplicación).
+- hasta el manejador de errores global, donde se puede capturar y tratar como los demás errores, emitiendo la srspuesta adecurada, con un código de estado apropiado (404 Not Found).
 
 Esto permite mantener la separación de responsabilidades entre el repositorio (que se encarga del acceso a datos) y el controlador (que se encarga de manejar las solicitudes y respuestas HTTP), y facilita el manejo de errores de forma consistente en toda la aplicación.
- que se puede capturar en el controlador para lanzar un error de "Not Found" con un mensaje personalizado. 
+
+### Controller: UsersController
+
+El controlador `UsersController` se encargará de manejar las solicitudes relacionadas con usuarios. Recibirá el repositorio como dependencia y utilizará sus métodos para realizar las operaciones necesarias en la base de datos. El controlador también se encargará de manejar cualquier error que pueda ocurrir durante el procesamiento de las solicitudes.
+
+- estructura de carpetas
+  - src/
+    - users/
+      - controllers/
+        - `users.controller.ts` (clase con el controlador para manejar las solicitudes relacionadas con users)
+        - `users.controller.test.ts` (tests unitarios para el controlador de users).
+- definición de la clase `UsersController` con métodos para manejar las solicitudes relacionadas con users, utilizando el repositorio para realizar las operaciones necesarias en la base de datos
+- logueo de debug
+  - al importar el módulo
+  - al crear una instancia del controlador
+  - para cada método del controlador, indicando la operación que se está realizando
+- tipado de los datos de entrada utilizando los DTOs definidos en la entidad Film
+- manejo de errores utilizando la clase `HttpError` para representar errores personalizados relacionados con las solicitudes HTTP
+- escribimos y ejecutamos tests unitarios para el controlador de users, utilizando mocks para el repositorio y para los objetos de request, response y next de Express, para asegurar que el controlador maneja correctamente las solicitudes y los errores relacionados con las operaciones de users. Solo se incluyen como ejemplo tests para el método de lectura de users.
+
+#### Register (UserController)
+
+El método `register` del `UsersController` se encargará de manejar las solicitudes de registro de nuevos usuarios.
+
+- Recibirá los datos del usuario a registrar a través del cuerpo de la solicitud
+- previemanete validados en un meiddlewaw utilizando los DTOs definidos en la entidad User
+- luego utilizará el repositorio para crear el nuevo usuario en la base de datos.
+
+Como resultado
+
+- Si la operación es exitosa, devolverá una respuesta con el usuario creado (sin la contraseña hasheada) con un código de estado 201.
+- Si ocurre algún error durante el proceso, como datos inválidos o problemas con la base de datos, capturará el error y llamará al middleware de errores pasándole un error de la clase `HttpError` para que genere y envía una respuesta HTTP adecuada utilizando lael error recibido.
+
+```ts
+async register(req: Request, res: Response, next: NextFunction) {
+    try {
+      log('Registering new user...'); 
+      const userData: RegisterUserData = req.body; // Validate this data in a real application
+      const user: User = await this.#repo.register(userData);
+      return res.status(201).json(user);
+    } catch (error) {
+      log('Error registering user: %O', error);
+      const finalError = new HttpError(
+          500,
+          'Internal Server Error',
+          'Failed to register user',
+          {
+              cause: error,
+          },
+      );
+      return next(finalError);
+    }
+}
+```
+
+#### Login (UserController)
+
+El método `login` del `UsersController` se encargará de manejar las solicitudes de login de los usuarios.
+
+- Recibirá las credenciales del usuario a través del cuerpo de la solicitud
+- previamente validadas en un middleware utilizando los DTOs definidos en la entidad User
+- luego utilizará el repositorio para autenticar al usuario y generar un JWT.
+
+Como resultado
+
+- Si las credenciales son válidas, devolverá una respuesta con el usuario autenticado y el token JWT con un código de estado 200.
+- Si las credenciales son inválidas o ocurre algún error durante el proceso, capturará el error y llamará al middleware de errores pasándole un error de la clase `HttpError` para que genere y envíe una respuesta HTTP adecuada utilizando el error recibido.
+- Si ocurre algún otro tipo de error
+
+```ts
+export class UsersController {
+  // ...
+  async login(req: Request, res: Response, next: NextFunction) {
+    try {
+      log('Logging in user...');
+      const loginData = req.body; // Validar estos datos en una app real
+      const loginResult: LoginResult = await this.#repo.login(loginData);
+      return res.json(loginResult);
+    } catch (error) {
+      log('Error logging in user: %O', error);
+      if (error instanceof PrismaClientKnownRequestError) {
+        const finalError = new HttpError(
+          401,
+          'Unauthorized',
+          'Invalid email or password',
+          {
+            cause: error,
+          }
+        );
+        return next(finalError);
+      }
+      const finalError = new HttpError(
+        500,
+        'Internal Server Error',
+        'Failed to login user',
+        {
+          cause: error,
+        }
+      );
+      return next(finalError);
+    }
+  }
+}
+```
+
+#### Read (UserController)
+
+Los métodos de lectura del `UsersController` se encargan de recuperar usuarios desde el repositorio.
+
+- `getAllUsers` devuelve la colección completa de usuarios.
+- `getUserById` devuelve un único usuario a partir de su `id`.
+- en ambos casos el controller delega en el repositorio y transforma los errores en respuestas HTTP adecuadas.
+
+Como resultado:
+
+- Si la operación es exitosa, la respuesta será `200 OK` con los datos solicitados en formato JSON.
+- Si en la lectura por `id` Prisma no encuentra el usuario, se transforma el error en `404 Not Found`.
+- Si ocurre cualquier otro problema, se delega en el middleware de errores con un `HttpError` de tipo `500`.
+
+```ts
+async getAllUsers(req: Request, res: Response, next: NextFunction) {
+    try {
+      log('Getting all users...');
+      const users: User[] = await this.#repo.getAllUsers();
+      return res.json(users);
+    } catch (error) {
+      log('Error getting all users: %O', error);
+      const finalError = new HttpError(
+          500,
+          'Internal Server Error',
+          'Failed to get users',
+          {
+              cause: error,
+          },
+      );
+      return next(finalError);
+    }
+}
+
+async getUserById(req: Request, res: Response, next: NextFunction) {
+    try {
+      const id = Number(req.params.id); // Validate this data in a real application
+      log('Get User: %O', id);
+      const user: User = await this.#repo.getUserById(id);
+      return res.json(user);
+    } catch (error) {
+      log('Error getting user by id: %O', error);
+      if (
+          error instanceof PrismaClientKnownRequestError &&
+          error.code === 'P2025'
+      ) {
+          const finalError = new HttpError(
+              404,
+              'Not Found',
+              'User not found',
+              {
+                  cause: error,
+              },
+          );
+          return next(finalError);
+      }
+
+      const finalError = new HttpError(
+          500,
+          'Internal Server Error',
+          'Failed to get user',
+          {
+              cause: error,
+          },
+      );
+      return next(finalError);
+    }
+}
+```
+
+#### Update (UserController)
+
+Los métodos de actualización del `UsersController` permiten modificar tanto los datos principales del usuario como su perfil.
+
+- `updateUser` trabaja con el DTO `UserUpdateDTO` y permite cambios parciales sobre `email`, `password` y `role`.
+- `updateProfileUser` actualiza únicamente el perfil asociado al usuario.
+- ambos métodos reciben el `id` desde `req.params`, delegan la persistencia en el repositorio y convierten los errores de ausencia de registro en `404`.
+
+Como resultado:
+
+- Si la operación es exitosa, devuelven `200 OK` con el usuario actualizado.
+- Si Prisma no encuentra el usuario, la respuesta será `404 Not Found`.
+- Si ocurre cualquier otro problema, el controller genera un `HttpError` de tipo `500`.
+
+```ts
+async updateUser(req: Request, res: Response, next: NextFunction) {
+    try {
+      const id = Number(req.params.id); // Validate this data in a real application
+      log('Updating user with ID: %O', id);
+      const userData: UserUpdateDTO = req.body; // Validate this data in a real application
+      const user: User = await this.#repo.updateUser(id, userData);
+      return res.json(user);
+    } catch (error) {
+      log('Error updating user: %O', error);
+      if (
+          error instanceof PrismaClientKnownRequestError &&
+          error.code === 'P2025'
+      ) {
+          const finalError = new HttpError(
+              404,
+              'Not Found',
+              'User not found',
+              {
+                  cause: error,
+              },
+          );
+          return next(finalError);
+      }
+
+      const finalError = new HttpError(
+          500,
+          'Internal Server Error',
+          'Failed to update user',
+          {
+              cause: error,
+          },
+      );
+      return next(finalError);
+    }
+}
+
+async updateProfileUser(req: Request, res: Response, next: NextFunction) {
+    try {
+      log('Updating user profile...');
+      const id = Number(req.params.id); // Validate this data in a real application
+      const profileData: Partial<ProfileDTO> = req.body; // Validate this data in a real application
+      const user: User = await this.#repo.updateUserProfile(
+          id,
+          profileData,
+      );
+      return res.json(user);
+    } catch (error) {
+      log('Error updating user profile: %O', error);
+      if (
+          error instanceof PrismaClientKnownRequestError &&
+          error.code === 'P2025'
+      ) {
+          const finalError = new HttpError(
+              404,
+              'Not Found',
+              'User not found',
+              {
+                  cause: error,
+              },
+          );
+          return next(finalError);
+      }
+
+      const finalError = new HttpError(
+          500,
+          'Internal Server Error',
+          'Failed to update user profile',
+          {
+              cause: error,
+          },
+      );
+      return next(finalError);
+    }
+}
+```
+
+#### Delete (UserController)
+
+El método `deleteUser` del `UsersController` se encarga de eliminar un usuario existente a partir de su `id`.
+
+- obtiene el identificador desde `req.params`;
+- delega la eliminación en el repositorio;
+- si Prisma indica que el usuario no existe, transforma el error en `404 Not Found`.
+
+Como resultado:
+
+- Si la operación es exitosa, devuelve `204 No Content`.
+- Si el usuario no existe, devuelve `404 Not Found`.
+- Si ocurre cualquier otro problema, delega en el middleware de errores con un `HttpError` de tipo `500`.
+
+```ts
+async deleteUser(req: Request, res: Response, next: NextFunction) {
+    try {
+        const id = Number(req.params.id); // Validate this data in a real application
+        log('Deleting user with ID: %O', id);
+        await this.#repo.deleteUser(id);
+        return res.status(204).end();
+    } catch (error) {
+        log('Error deleting user: %O', error);
+        if (
+            error instanceof PrismaClientKnownRequestError &&
+            error.code === 'P2025'
+        ) {
+            const finalError = new HttpError(
+                404,
+                'Not Found',
+                'User not found',
+                {
+                    cause: error,
+                },
+            );
+            return next(finalError);
+        }
+
+        const finalError = new HttpError(
+            500,
+            'Internal Server Error',
+            'Failed to delete user',
+            {
+                cause: error,
+            },
+        );
+        return next(finalError);
+    }
+}
+```
+
+### Router: UsersRouter
+
+El router `UsersRouter` se encarga de definir las rutas relacionadas con users y de conectarlas con los métodos del controlador. Recibe el controller como dependencia y utiliza sus métodos para manejar las solicitudes HTTP en cada endpoint.
+
+- estructura de carpetas
+  - src/
+    - users/
+      - routers/
+        - `users.router.ts` (clase con la definición de las rutas relacionadas con users, utilizando el servicio)
+- definición de la clase `UsersRouter` con el router de Express y el controller como dependencia inyectada.
+- logueo de debug
+  - al importar el módulo
+  - al crear una instancia del router
+- en el constructor se definen las rutas relacionadas con users, utilizando el método correspondiente del controlador para manejar las solicitudes en las rutas correspondientes
+
+En la versión actual del proyecto, el router ya monta:
+
+- `POST /register`
+- `POST /login`
+- `GET /`
+- `GET /:id`
+- `PATCH /:id`
+- `DELETE /:id`
+
+El código del router queda así:
+
+```ts
+import { env } from '../../config/env.ts';
+import debug from 'debug';
+import type { UsersController } from '../controllers/users.controller.ts';
+import { Router } from 'express';
+
+const log = debug(`${env.PROJECT_NAME}:router:users`);
+log('Loading users router...')
+
+export class UsersRouter {
+    #controller: UsersController;
+    #router: Router;
+
+    constructor(controller: UsersController) {
+      log('Initializing users router...');
+      this.#controller = controller;
+      this.#router = Router();
+
+      this.#router.post(
+          '/register',
+          this.#controller.register.bind(this.#controller),
+      );
+      this.#router.post(
+          '/login',
+          this.#controller.login.bind(this.#controller),
+      );
+      this.#router.get('/', this.#controller.getAllUsers.bind(this.#controller));
+      this.#router.get('/:id', this.#controller.getUserById.bind(this.#controller));
+      this.#router.patch('/:id', this.#controller.updateUser.bind(this.#controller));
+      this.#router.delete('/:id', this.#controller.deleteUser.bind(this.#controller));
+    }
+
+    get router() {
+        return this.#router;
+    }
+}
+```
+
+Se utiliza `.bind(this.#controller)` para conservar correctamente el contexto de `this` cuando Express invoque los métodos del controller.
+
+También conviene observar dos detalles del estado actual:
+
+- el controller ya tiene un método `updateProfileUser`, pero todavía no existe una ruta específica que lo exponga;
+- el módulo de validación con Zod lo incorporarremos más adelante.
+
+### Montaje en la aplicación
+
+Una vez definidos el repositorio, el controlador y el router para la entidad Users, se integran en la aplicación principal. En el archivo `app.ts`, se instancia el repositorio pasando el cliente de prisma, luego se instancia el controlador pasando el repositorio, y finalmente se instancia el router pasando el controlador. El router se conecta a la aplicación utilizando `app.use()` para que las rutas relacionadas con users estén disponibles en la API.
+
+```ts
+export const createApp = (prisma: AppPrismaClient) => {
+  // ...
+    const appRepo = new UsersRepo(prisma);
+    const appController = new UsersController(appRepo);
+    const appRouter = new UsersRouter(appController);
+    app.use('/api/users', appRouter.router);
+}
+```
+
+### Validaciones con zod
+
+Para validar los datos de entrada en las solicitudes relacionadas con users, se utilizan schemas de zod definidos en la entidad Users. Estos schemas permiten validar los datos de creación, login y actualización, asegurando que los datos recibidos en las solicitudes cumplen con el formato esperado antes de ser procesados por el controlador y el repositorio. Los DTOs definidos en la entidad Users corresponden a estos schemas y se utilizan como tipos para indicar a nivel de TypeScript el formato esperado de los datos de entrada.
+
+- estructura de carpetas
+  - src/
+    - middleware/
+      - `validations.ts` (definición de los schemas de zod para validación de los datos)
+- cada validador es un middleware de Express que utiliza el schema de zod que recibe como parámetro
+  - validateId: middleware para validar que el parámetro id en la ruta es un número entero positivo
+  - validateBody: middleware para validar que el cuerpo de la solicitud cumple con el schema de zod correspondiente a la operación que se está realizando (creación o actualización de users)
+- estos middlewares se pueden utilizar en las rutas definidas en el router de users para asegurar que los datos recibidos en las solicitudes cumplen con el formato esperado antes de ser procesados por el controlador y el repositorio.
+
+#### Validador de ID
+
+El validador de ID es un middleware que se encarga de validar que el parámetro `id` en la ruta es un número entero positivo. Utiliza un schema de zod para realizar esta validación y, si el ID no es válido, devuelve una respuesta con un error de tipo `400 Bad Request` indicando que el ID proporcionado no es válido.
+
+```ts
+export const validateId = (schema: ZodObject = z.object({ id: z.coerce.number().int().positive() })) => {
+    return (req: Request, res: Response, next: NextFunction) => {
+        log('Validating ID...');
+        const { id } = req.params;
+        if (!id) {
+            const error = new HttpError(400, 'Bad Request', 'Animal ID is required');
+            next(error);
+        }
+        try {
+            schema.parse({ id });
+            next();
+        } catch (error) {
+            next(error);
+        }
+    };
+}
+```
+
+##### Validador de Body
+
+El validador de body es un middleware que se encarga de validar que el cuerpo de la solicitud cumple con el schema de zod correspondiente a la operación que se está realizando (creación o actualización de users). Recibe como parámetro el schema de zod que se desea utilizar para la validación y, si los datos no son válidos, devuelve una respuesta con un error de tipo `400 Bad Request` indicando que los datos proporcionados no son válidos.
+
+```ts
+export const validateBody = (schema: ZodObject) => {
+    return (req: Request, res: Response, next: NextFunction) => {
+        log('Validating request body...');
+        try {
+            const validationResult = schema.parse(req.body);
+            // Actualiza el body de la solicitud con los datos validados
+            // incluyendo posibles transformaciones realizadas por Zod
+            req.body = validationResult;
+            next();
+        } catch (error) {
+            next(error);
+        }
+    }
+}
+```
+
+NOTA: puede ser interesante cambiar los schemas de zod usando strictObject para evitar que se permitan campos adicionales no definidos en el schema, lo que puede ayudar a prevenir errores o ataques relacionados con datos inesperados en las solicitudes.
+
+#### Validadores en el UsersRouter
+
+Los middlewares de validación se pueden utilizar en las rutas definidas en el `UsersRouter` para asegurar que los datos recibidos en las solicitudes cumplen con el formato esperado antes de ser procesados por el controlador y el repositorio. Por ejemplo, se puede utilizar el validador de ID en las rutas que requieren un ID como parámetro, y el validador de body en las rutas que reciben datos en el cuerpo de la solicitud.
+
+```ts
+export class UsersRouter {
+    #controller: UsersController;
+    #router: Router;
+    constructor(controller: UsersController) {
+        log('Initializing users router...');
+        this.#controller = controller;
+        this.#router = Router();
+
+        // Define routes and bind them to controller methods
+        // For example:
+        this.#router.post(
+            '/register',
+            validateBody(RegisterUserDTOSchema),
+            this.#controller.register.bind(this.#controller),
+        );
+        this.#router.post(
+            '/login',
+            validateBody(UserCredentialsDTOSchema),
+            this.#controller.login.bind(this.#controller),
+        );
+        this.#router.get(
+            '/',
+            this.#controller.getAllUsers.bind(this.#controller),
+        );
+        this.#router.get(
+            '/:id',
+            validateId(),
+            this.#controller.getUserById.bind(this.#controller),
+        );
+        this.#router.patch(
+            '/:id',
+            validateId(),
+            validateBody(UpdateUserDTOSchema),
+            this.#controller.updateUser.bind(this.#controller),
+        );
+        this.#router.delete(
+            '/:id',
+            validateId(),
+            this.#controller.deleteUser.bind(this.#controller),
+        );
+    }
+
+    get router() {
+        return this.#router;
+    }
+}
+```
+
+### Prueba de las rutas: Postman
+
+Una vez que las rutas relacionadas con users están definidas en el `UsersRouter` y montadas en la aplicación, se pueden probar utilizando una herramienta como Postman para enviar solicitudes HTTP a los endpoints correspondientes y verificar que las respuestas son las esperadas. 
+
+
+Crearemos una coleccióbn depostman para poder probar las siguientes operaciones: 
+
+- Registro de un nuevo usuario (`POST /api/users/register`)
+- Login de un usuario existente (`POST /api/users/login`)
+- Obtención de todos los usuarios (`GET /api/users/`)
+- Obtención de un usuario por ID (`GET /api/users/:id`)
+- Actualización de un usuario (`PATCH /api/users/:id`)
+- Eliminación de un usuario (`DELETE /api/users/:id`)
+
+NOTA: Detectamos un error en el delete por la relación con profile: al eliminar un usuario, Prisma lanza un error `P2003` indicando que no se puede eliminar el usuario porque hay un registro relacionado en la tabla `Profile` que depende de él. Esto se debe a que la relación entre `User` y `Profile` es de uno a uno, y Prisma no permite eliminar un registro padre (`User`) si hay un registro hijo (`Profile`) que depende de él sin manejar explícitamente la eliminación de la relación. Para solucionar este problema, se puede configurar la relación en el esquema de Prisma para que, al eliminar un usuario, también se elimine automáticamente su perfil relacionado utilizando `onDelete: Cascade`. Esto se puede hacer modificando el modelo `User` en el archivo `schema.prisma` de la siguiente manera: 
+
+```prisma
+model User {
+  id       Int     @id @default(autoincrement())
+  email    String  @unique
+  password String
+  role     Role    @default(USER)
+  profile  Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId Int
+}
+```
+
+Con esta configuración, cuando se elimine un usuario, Prisma eliminará automáticamente el perfil relacionado, evitando el error `P2003` y permitiendo que la operación de eliminación se realice correctamente. Después de realizar este cambio en el esquema de Prisma, es necesario ejecutar `npx prisma migrate dev` para aplicar la migración correspondiente a la base de datos.
+
+## Implementación de Políticas de servicio
+
+- autenticación (login, JWT)
+- autorización (RBAC: Role-Based Access Control)
+- límites de uso
+- gestión de errores
+- requisitos de seguridad (CORS)
+- metadatos de auto-descubrimiento
+- health check estandarizado
+
+### Autenticación (Authentication) y rutas protegidas
+
+El proceso de autenticación se implementa en el método `login` del `UserRepository`, donde se verifica que las credenciales proporcionadas por el usuario son correctas. Si la autenticación es exitosa, se genera un token JWT que incluye información relevante del usuario (como su ID, email y rol) en el payload. Este token se devuelve al cliente como parte de la respuesta.
+
+Una vez que el **cliente** tiene el token JWT, puede incluirlo en las cabeceras de las solicitudes a rutas protegidas para acceder a **recursos que requieren autenticación**. 
+
+Para proteger estas rutas, se puede implementar un **middleware de autenticación** que verifique la validez del token JWT en cada solicitud. Este middleware se encargará de:
+
+1. Extraer el token JWT de las cabeceras de la solicitud (generalmente en la cabecera `Authorization` con el formato `Bearer <token>`).
+2. Verificar la validez del token utilizando el `AuthService` para asegurarse de que el token no ha expirado y que ha sido firmado correctamente.
+3. Si el token es válido, extraer la información del usuario del payload del token y adjuntarla al objeto `req` para que esté disponible en los controladores que manejan las rutas protegidas.
+4. Si el token no es válido o no se proporciona, el middleware debe responder con un error de tipo `401 Unauthorized`, indicando que el acceso a la ruta está restringido a usuarios autenticados.
+
+#### Interface de la request de Express
+
+Para poder guardar la información del usuario autenticado en el objeto `req`, se puede extender la interfaz `Request` de Express para incluir un nuevo campo, por ejemplo `user`, que contendrá la información del usuario extraída del token JWT. Esto se puede hacer creando un archivo de declaración de tipos (por ejemplo, `types.d.ts`) con el siguiente contenido:
+
+```ts
+import { TokenPayload } from './services/auth.service.ts';
+
+declare global {
+    namespace Express {
+        interface Request {
+            user?: TokenPayload;
+        }
+    }
+}
+```
+
+Para aplicar esta extensión, es necesario importar el archivo de declaración de tipos en el punto de entrada de la aplicación (por ejemplo, en `app.ts`) para que TypeScript reconozca la nueva propiedad `user` en el objeto `Request` de Express.
+
+```ts app.ts
+import './types.d.ts';
+```
+
+Otra opción es configurar el `tsconfig.json` para incluir automáticamente los archivos de declaración de tipos en la compilación, asegurándose de que el directorio donde se encuentra el archivo `types.d.ts` esté incluido en la propiedad `include` del `tsconfig.json`.
+
+```json
+{
+  "compilerOptions": {
+    // ... otras opciones ...
+  },
+  "include": [
+    "src/**/*",
+    "src/types.d.ts"
+  ]
+}
+``` 
+
+Finalmente sería posible incluir la decalración del typo en el fichero `app.ts` directamente, aunque es más recomendable mantener las declaraciones de tipos en archivos separados para mantener una mejor organización del código.
+
+```ts app.ts
+import { TokenPayload } from './services/auth.service.ts';
+declare module 'express' {
+    interface Request {
+        user?: TokenPayload;
+    }
+}
+```
+
+Con esta extensión, el middleware de autenticación puede asignar la información del usuario al campo `req.user`, lo que permitirá a los controladores acceder a esta información para realizar operaciones específicas basadas en el usuario autenticado, como verificar permisos o personalizar las respuestas.
+
+#### Auth Interceptor
+
+Un **Auth Interceptor** es un middleware que se encarga de interceptar las solicitudes entrantes a rutas protegidas para verificar la autenticación del usuario. Este interceptor se ejecuta antes de que la solicitud llegue al controlador correspondiente, lo que permite garantizar que solo los usuarios autenticados puedan acceder a ciertas rutas o recursos.
+
+Crearemos una clase `AuthInterceptor` que implementa este middleware. El interceptor tiene un método `use` que verificará la presencia y validez del token JWT en las cabeceras de la solicitud, y si el token es válido, extraerá la información del usuario y la adjuntará al objeto `req` para que esté disponible en los controladores.
+
+```ts
+import type { TokenPayload } from '../types/login.ts';
+import type { Request, Response, NextFunction } from 'express';
+import { HttpError } from '../errors/http-error.ts';
+import { AuthService } from '../services/auth.ts';
+
+
+export class AuthInterceptor {
+
+  authenticate = async (req: Request, _res: Response, next: NextFunction) => {
+        log('Authenticating request...');
+
+        //req.cookies
+        const { authorization } = req.headers;
+
+        if (!authorization || authorization.includes('Bearer') === false) {
+            const newError = new HttpError(
+                401,
+                'Unauthorized',
+                'Token not found',
+            );
+            return next(newError);
+        }
+
+        const token = authorization.split(' ')[1];
+
+        if (!token) {
+            const newError = new HttpError(
+                401,
+                'Unauthorized',
+                'Token not found',
+            );
+            return next(newError);
+        }
+
+        try {
+            const payload = AuthService.verifyToken(token);
+            // Añado datos a req disponibles para siguientes etapas
+            // Previamente he extendido la interfaz Request en express
+            req.user = payload;
+            log('User:', payload);
+            // Opcionalmente, añado datos a res.locals
+            // para que estén disponibles en las vistas
+            // res.locals.user = payload;
+            return next();
+        } catch (err) {
+            const newError = new HttpError(
+                401,
+                'Unauthorized',
+                'Invalid token',
+                {cause: err}
+            );
+            return next(newError);
+        }
+    };
+};
+```
+
+#### Rutas protegidas: uso del intertceptor
+
+Para proteger las rutas utilizando el `AuthInterceptor`, se puede aplicar el middleware de autenticación a las rutas que se desean proteger en el router correspondiente. 
+
+El interceptor puede injectarse como otra dependencia (**DI**) en el constructor del router, y luego se puede utilizar en las rutas que requieren autenticación.
+
+Por ejemplo, si queremos proteger la ruta `GET /api/users/` para que solo los usuarios autenticados puedan acceder a la lista de usuarios, podemos agregar el middleware `authenticate` del `AuthInterceptor` a esa ruta en el `UsersRouter`.
+
+```ts
+
+export class UsersRouter {
+    #controller: UsersController;
+    #router: Router;
+    #authInterceptor: AuthInterceptor;
+
+    constructor(controller: UsersController, authInterceptor: AuthInterceptor) {
+        log('Initializing users router...');
+        this.#controller = controller;
+        this.#authInterceptor = authInterceptor;
+        this.#router = Router();
+
+        // Rutas públicas
+        this.#router.post(
+            '/register',
+            validateBody(RegisterUserDTOSchema),
+            this.#controller.register.bind(this.#controller),
+        );
+        this.#router.post(
+            '/login',
+            validateBody(UserCredentialsDTOSchema),
+            this.#controller.login.bind(this.#controller),
+        );
+
+        // Rutas protegidas
+        this.#router.get(
+            '/',
+            this.#authInterceptor.authenticate,
+            this.#controller.getAllUsers.bind(this.#controller),
+        );
+        // ... otras rutas protegidas
+    }
+
+    get router() {
+        return this.#router;
+    }
+}
+```
+
+#### Pruebas de las rutas protegidas
+
+Una vez que las rutas están protegidas utilizando el `AuthInterceptor`, se pueden probar utilizando Postman para enviar solicitudes a las rutas protegidas y verificar que solo los usuarios autenticados pueden acceder a ellas. Para probar las rutas protegidas, se puede seguir el siguiente proceso:
+
+1. Primero, se debe utilizar un usuario existente o registrar un nuevo usuario utilizando la ruta de registro (`POST /api/users/register`)
+2. Luego, utilizar la ruta de inicio de sesión (`POST /api/users/login`) para obtener las credenciales de un usuario válido.
+3. Una vez que se obtiene el token JWT en la respuesta del login, se debe incluir este token en las cabeceras de las solicitudes a las rutas protegidas utilizando el formato `Authorization: Bearer <token>`. En Postman se puede utilizar la sección "Authorizations" seleccionando el tipo "Bearer Token" e ingresando el token JWT obtenido en el paso anterior.
+4. Finalmente, se pueden enviar solicitudes a las rutas protegidas (por ejemplo, `GET /api/users/`) y verificar que se obtiene una respuesta exitosa (por ejemplo, `200 OK`) con los datos esperados, lo que indica que el acceso a la ruta está permitido para usuarios autenticados. 
+5. También se deben probar casos en los que no se incluye el token o se incluye un token inválido para verificar que se obtiene una respuesta de error (por ejemplo, `401 Unauthorized`), lo que indica que el acceso a la ruta está restringido para usuarios no autenticados o con credenciales inválidas.
+ 
+El equivalente en un frontend sería almacenar el token JWT en el almacenamiento local (localStorage) o en una cookie después de un inicio de sesión exitoso, y luego incluir ese token en las cabeceras de las solicitudes a las rutas protegidas para acceder a los recursos que requieren autenticación. Es importante asegurarse de manejar el token de manera segura, evitando exponerlo a través de vulnerabilidades como XSS, y considerar opciones como el uso de cookies con la bandera `HttpOnly` para mejorar la seguridad del almacenamiento del token en el cliente.
+
+Usando fetch en el frontend, se puede incluir el token JWT en las cabeceras de las solicitudes de la siguiente manera:
+
+```js
+const token = localStorage.getItem('jwtToken'); // O obtenerlo de una cookie
+fetch('/api/users/', {
+    method: 'GET',
+    headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+    }
+})
+.then(response => {
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    return response.json();
+})
+.then(data => {
+    console.log('Protected data:', data);
+})
+.catch(error => {
+    console.error('Error accessing protected route:', error);
+});
+```
+
+### Autorización (Authorization)
+
+La autorización se refiere al proceso de determinar si un usuario autenticado tiene los permisos necesarios para acceder a ciertos recursos o realizar ciertas acciones en la aplicación. En el contexto de esta aplicación, se puede implementar un sistema de control de acceso basado en roles (RBAC) para gestionar los permisos de los usuarios.
+
+En un sistema RBAC, se definen diferentes roles (por ejemplo, `USER`, `ADMIN`) y se asignan permisos específicos a cada rol. Luego, a cada usuario se le asigna uno o más roles, lo que determina qué acciones pueden realizar en la aplicación. 
+
+Para implementar la autorización en esta aplicación, se pueden seguir los siguientes pasos:
+
+1. Definir los roles y permisos en el sistema. Por ejemplo, se puede definir un rol `USER` con permisos básicos para acceder a ciertas rutas, y un rol `ADMIN` con permisos adicionales para acceder a rutas administrativas.
+2. Asignar roles a los usuarios en el proceso de registro o mediante una interfaz de administración.
+3. Implementar un middleware de autorización que verifique los roles del usuario autenticado antes de permitir el acceso a ciertas rutas. Este middleware puede:
+   1. Recibe como parámetro el role mínimo requerido para acceder a la ruta (por ejemplo, `USER` o `ADMIN`).
+   2. Verificar el rol del usuario almacenado en `req.user` (que se establece en el `AuthInterceptor`) y comparar los roles requeridos para la ruta con los roles del usuario para determinar si se permite o se deniega el acceso.
+4. Proteger las rutas que requieren autorización utilizando el middleware de autorización para asegurarse de que solo los usuarios con los roles adecuados puedan acceder a esas rutas. Por ejemplo, se puede proteger una ruta administrativa para que solo los usuarios con el rol `ADMIN` puedan acceder a ella.
+
+#### Método en el interceptor
+
+El middleware de autorización se puede implementar como un método en el `AuthInterceptor` que verifica si el usuario autenticado tiene el rol necesario para acceder a la ruta. Este método puede recibir como parámetro el rol mínimo requerido para acceder a la ruta y comparar ese rol con el rol del usuario almacenado en `req.user`.
+
+```ts
+export class AuthInterceptor {
+    // ... método authenticate ...
+  authorize = (role: Role) => {
+      return (req: Request, _res: Response, next: NextFunction) => {
+          debug('hasRole');
+
+          if (
+              !req.user ||
+              (req.user.role !== role && req.user.role !== Role.ADMIN)
+          ) {
+              const newError = new HttpError(
+                403,
+                'Forbidden',
+                'You do not have permission',
+              );
+              return next(newError);
+          }
+
+          return next();
+      };
+  };
+};
+```
+
+#### Uso del interceptor en las rutas
+
+El interceptor de autorización (authorize)se incluira siempre despues de la autenticación (authenticate) en las rutas que se desean proteger, para asegurarse de que el usuario está autenticado antes de verificar sus permisos. Por ejemplo, si queremos proteger una ruta DELETE para que solo los usuarios con el rol `ADMIN` puedan acceder a ella, podemos agregar el middleware `authorize` del `AuthInterceptor` a esa ruta en el `UsersRouter`.
+
+```ts
+this.#router.delete(
+    '/:id',
+    this.#authInterceptor.authenticate,
+    this.#authInterceptor.authorize(Role.ADMIN),
+    this.#controller.deleteUser.bind(this.#controller),
+);
+```
+
+Igual que elnel interceptor anterior, podemos probar las rutas protegidas utilizando Postman para enviar solicitudes a las rutas protegidas y verificar que solo los usuarios con el rol adecuado pueden acceder a ellas. Para probar las rutas protegidas, se puede seguir el mismo proceso que para probar las rutas protegidas por autenticación, pero asegurándose de utilizar un usuario con el rol adecuado para acceder a la ruta protegida por autorización.
