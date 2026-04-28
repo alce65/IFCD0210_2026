@@ -13,7 +13,15 @@ import { UsersController } from './users/controllers/users.controller.ts';
 import { UsersRouter } from './users/router/users.routes.ts';
 
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import type { TokenPayload } from './types/login.ts';
+import { AuthInterceptor } from './middleware/auth.interceptor.ts';
+
+declare module 'express' {
+    interface Request {
+        user?: TokenPayload;
+    }
+}
+
 export const createApp = (prisma: AppPrismaClient) => {
     const log = debug(`${env.PROJECT_NAME}:app`);
     log('Starting Express app...');
@@ -51,8 +59,9 @@ export const createApp = (prisma: AppPrismaClient) => {
 
 
     const appRepo = new UsersRepo(prisma);
+    const authInterceptor = new AuthInterceptor();
     const appController = new UsersController(appRepo);
-    const appRouter = new UsersRouter(appController);
+    const appRouter = new UsersRouter(appController, authInterceptor);
     app.use('/api/users', appRouter.router);
 
     // app.use('/api/animals', animalRouter(pool));
