@@ -22,7 +22,6 @@ import type {
 // permitiendo validar req.body, req.params, etc.
 
 export const ProfileModelSchema = z.object({
-    id: z.number(),
     firstName: z.string(),
     surname: z.string(),
     avatar: z.string(),
@@ -73,8 +72,10 @@ export const RegisterUserDTOSchema = UserCredentialsDTOSchema.extend(
 // de dichas operaciones (Login Register, Update), que acepta sólo la parte
 // de los tipos Prisma que realmente queremos exponer en la API.
 
+type ProfileShape = Omit<ProfileModel, 'id'>;
+
 type UserModelShape = UserModel & {
-    profile?: ProfileModel;
+    profile?: Omit<ProfileModel, 'id'>;
     reviews?: ReviewModel[];
 };
 
@@ -124,7 +125,7 @@ type IsExact<A, B> = [A] extends [B]
 
 export type Profile = z.infer<typeof ProfileModelSchema>;
 // En Prisma corresponde a ProfileModel
-export type _ProfileCheck = Assert<IsExact<Profile, ProfileModel>>;
+export type _ProfileCheck = Assert<IsExact<Profile, ProfileShape>>;
 
 export type ProfileDTO = z.infer<typeof ProfileDTOSchema>;
 // En Prisma corresponde a ProfileCreateWithoutUserInput

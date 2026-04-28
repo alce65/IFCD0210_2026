@@ -11,6 +11,9 @@ const globalOmit = {
     user: {
         password: true,
     },
+    profile: {
+        id: true,
+    }
 } as const;
 
 export type AppPrismaClient = PrismaClient<never, typeof globalOmit>;
