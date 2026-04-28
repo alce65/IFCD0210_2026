@@ -298,16 +298,16 @@ Detalles de la configuración en tsconfig.json:
        log('Loaded database connection...');
 
        export const connectDB = async () => {
-          const adapter = new PrismaPg({
-              user: env.PGUSER,
-              password: env.PGPASSWORD,
-              host: env.PGHOST,
-              port: env.PGPORT,
-              database: env.PGDATABASE,
-          });
-          const prisma = new PrismaClient({
-              adapter
-          });
+         const adapter = new PrismaPg({
+           user: env.PGUSER,
+           password: env.PGPASSWORD,
+           host: env.PGHOST,
+           port: env.PGPORT,
+           database: env.PGDATABASE,
+         });
+         const prisma = new PrismaClient({
+           adapter,
+         });
        };
        ```
 
@@ -316,21 +316,22 @@ Detalles de la configuración en tsconfig.json:
    - se exporta el cliente de prisma para ser utilizado en otras partes de la aplicación
 
      ```ts
-     { // ...continuación del código anterior
-        try {
-          await prisma.$connect();
-          const [info] = (await prisma.$queryRaw`SELECT current_database()`) as {
-              current_database: string;
-          }[];
-          log('Database connection established successfully.');
-          log('Connected to database:', info?.current_database);
-          prisma.$disconnect();
-        } catch (error) {
-          log('Error connecting to the database:', error);
-          throw error;
-        }
-        return prisma;
-     };
+     {
+       // ...continuación del código anterior
+       try {
+         await prisma.$connect();
+         const [info] = (await prisma.$queryRaw`SELECT current_database()`) as {
+           current_database: string;
+         }[];
+         log('Database connection established successfully.');
+         log('Connected to database:', info?.current_database);
+         prisma.$disconnect();
+       } catch (error) {
+         log('Error connecting to the database:', error);
+         throw error;
+       }
+       return prisma;
+     }
      ```
 
 ### Global prisma omit
@@ -1653,14 +1654,14 @@ El contrato del servicio incluye:
 
 [POST] /api/users/registro - 201 Created
 [POST] /api/users/login - 200 OK / 401 Unauthorized
-[GET] /api/users - 200 OK
-[GET] /api/users/:id - 200 OK / 404 Not Found
-[PATCH] /api/users/:id [Owner] - 200 OK / 404 Not Found
+[GET] /api/users [User...] - 200 OK
+[GET] /api/users/:id [User...] - 200 OK / 404 Not Found
+[PATCH] /api/users/:id [Owner,Admin] - 200 OK / 404 Not Found
 [DELETE] /api/users/:id [Owner,Admin] - 204 No Content / 404 Not Found
 
-[GET] /api/users/:id/reviews [User] - 200 OK / 404 Not Found
-[GET] /api/users/:id/reviews/:id [User] - 200 OK / 404 Not Found
-[POST] /api/users/:id/reviews [User] - 201 Created
+[GET] /api/users/:id/reviews [User...] - 200 OK / 404 Not Found
+[GET] /api/users/:id/reviews/:id [User...] - 200 OK / 404 Not Found
+[POST] /api/users/:id/reviews [User...] - 201 Created
 [PATCH] /api/users/:id/reviews/:id [Owner] - 200 OK / 404 Not Found
 [DELETE] /api/users/:id/reviews/:id [Owner,Admin] - 204 No Content / 404 Not Found
 
@@ -2234,7 +2235,7 @@ Como resultado
 ```ts
 async register(req: Request, res: Response, next: NextFunction) {
     try {
-      log('Registering new user...'); 
+      log('Registering new user...');
       const userData: RegisterUserData = req.body; // Validate this data in a real application
       const user: User = await this.#repo.register(userData);
       return res.status(201).json(user);
@@ -2285,7 +2286,7 @@ export class UsersController {
           'Invalid email or password',
           {
             cause: error,
-          }
+          },
         );
         return next(finalError);
       }
@@ -2295,7 +2296,7 @@ export class UsersController {
         'Failed to login user',
         {
           cause: error,
-        }
+        },
       );
       return next(finalError);
     }
@@ -2548,34 +2549,40 @@ import type { UsersController } from '../controllers/users.controller.ts';
 import { Router } from 'express';
 
 const log = debug(`${env.PROJECT_NAME}:router:users`);
-log('Loading users router...')
+log('Loading users router...');
 
 export class UsersRouter {
-    #controller: UsersController;
-    #router: Router;
+  #controller: UsersController;
+  #router: Router;
 
-    constructor(controller: UsersController) {
-      log('Initializing users router...');
-      this.#controller = controller;
-      this.#router = Router();
+  constructor(controller: UsersController) {
+    log('Initializing users router...');
+    this.#controller = controller;
+    this.#router = Router();
 
-      this.#router.post(
-          '/register',
-          this.#controller.register.bind(this.#controller),
-      );
-      this.#router.post(
-          '/login',
-          this.#controller.login.bind(this.#controller),
-      );
-      this.#router.get('/', this.#controller.getAllUsers.bind(this.#controller));
-      this.#router.get('/:id', this.#controller.getUserById.bind(this.#controller));
-      this.#router.patch('/:id', this.#controller.updateUser.bind(this.#controller));
-      this.#router.delete('/:id', this.#controller.deleteUser.bind(this.#controller));
-    }
+    this.#router.post(
+      '/register',
+      this.#controller.register.bind(this.#controller),
+    );
+    this.#router.post('/login', this.#controller.login.bind(this.#controller));
+    this.#router.get('/', this.#controller.getAllUsers.bind(this.#controller));
+    this.#router.get(
+      '/:id',
+      this.#controller.getUserById.bind(this.#controller),
+    );
+    this.#router.patch(
+      '/:id',
+      this.#controller.updateUser.bind(this.#controller),
+    );
+    this.#router.delete(
+      '/:id',
+      this.#controller.deleteUser.bind(this.#controller),
+    );
+  }
 
-    get router() {
-        return this.#router;
-    }
+  get router() {
+    return this.#router;
+  }
 }
 ```
 
@@ -2593,11 +2600,11 @@ Una vez definidos el repositorio, el controlador y el router para la entidad Use
 ```ts
 export const createApp = (prisma: AppPrismaClient) => {
   // ...
-    const appRepo = new UsersRepo(prisma);
-    const appController = new UsersController(appRepo);
-    const appRouter = new UsersRouter(appController);
-    app.use('/api/users', appRouter.router);
-}
+  const appRepo = new UsersRepo(prisma);
+  const appController = new UsersController(appRepo);
+  const appRouter = new UsersRouter(appController);
+  app.use('/api/users', appRouter.router);
+};
 ```
 
 ### Validaciones con zod
@@ -2618,22 +2625,24 @@ Para validar los datos de entrada en las solicitudes relacionadas con users, se 
 El validador de ID es un middleware que se encarga de validar que el parámetro `id` en la ruta es un número entero positivo. Utiliza un schema de zod para realizar esta validación y, si el ID no es válido, devuelve una respuesta con un error de tipo `400 Bad Request` indicando que el ID proporcionado no es válido.
 
 ```ts
-export const validateId = (schema: ZodObject = z.object({ id: z.coerce.number().int().positive() })) => {
-    return (req: Request, res: Response, next: NextFunction) => {
-        log('Validating ID...');
-        const { id } = req.params;
-        if (!id) {
-            const error = new HttpError(400, 'Bad Request', 'Animal ID is required');
-            next(error);
-        }
-        try {
-            schema.parse({ id });
-            next();
-        } catch (error) {
-            next(error);
-        }
-    };
-}
+export const validateId = (
+  schema: ZodObject = z.object({ id: z.coerce.number().int().positive() }),
+) => {
+  return (req: Request, res: Response, next: NextFunction) => {
+    log('Validating ID...');
+    const { id } = req.params;
+    if (!id) {
+      const error = new HttpError(400, 'Bad Request', 'Animal ID is required');
+      next(error);
+    }
+    try {
+      schema.parse({ id });
+      next();
+    } catch (error) {
+      next(error);
+    }
+  };
+};
 ```
 
 ##### Validador de Body
@@ -2642,19 +2651,19 @@ El validador de body es un middleware que se encarga de validar que el cuerpo de
 
 ```ts
 export const validateBody = (schema: ZodObject) => {
-    return (req: Request, res: Response, next: NextFunction) => {
-        log('Validating request body...');
-        try {
-            const validationResult = schema.parse(req.body);
-            // Actualiza el body de la solicitud con los datos validados
-            // incluyendo posibles transformaciones realizadas por Zod
-            req.body = validationResult;
-            next();
-        } catch (error) {
-            next(error);
-        }
+  return (req: Request, res: Response, next: NextFunction) => {
+    log('Validating request body...');
+    try {
+      const validationResult = schema.parse(req.body);
+      // Actualiza el body de la solicitud con los datos validados
+      // incluyendo posibles transformaciones realizadas por Zod
+      req.body = validationResult;
+      next();
+    } catch (error) {
+      next(error);
     }
-}
+  };
+};
 ```
 
 NOTA: puede ser interesante cambiar los schemas de zod usando strictObject para evitar que se permitan campos adicionales no definidos en el schema, lo que puede ayudar a prevenir errores o ataques relacionados con datos inesperados en las solicitudes.
@@ -2665,59 +2674,55 @@ Los middlewares de validación se pueden utilizar en las rutas definidas en el `
 
 ```ts
 export class UsersRouter {
-    #controller: UsersController;
-    #router: Router;
-    constructor(controller: UsersController) {
-        log('Initializing users router...');
-        this.#controller = controller;
-        this.#router = Router();
+  #controller: UsersController;
+  #router: Router;
+  constructor(controller: UsersController) {
+    log('Initializing users router...');
+    this.#controller = controller;
+    this.#router = Router();
 
-        // Define routes and bind them to controller methods
-        // For example:
-        this.#router.post(
-            '/register',
-            validateBody(RegisterUserDTOSchema),
-            this.#controller.register.bind(this.#controller),
-        );
-        this.#router.post(
-            '/login',
-            validateBody(UserCredentialsDTOSchema),
-            this.#controller.login.bind(this.#controller),
-        );
-        this.#router.get(
-            '/',
-            this.#controller.getAllUsers.bind(this.#controller),
-        );
-        this.#router.get(
-            '/:id',
-            validateId(),
-            this.#controller.getUserById.bind(this.#controller),
-        );
-        this.#router.patch(
-            '/:id',
-            validateId(),
-            validateBody(UpdateUserDTOSchema),
-            this.#controller.updateUser.bind(this.#controller),
-        );
-        this.#router.delete(
-            '/:id',
-            validateId(),
-            this.#controller.deleteUser.bind(this.#controller),
-        );
-    }
+    // Define routes and bind them to controller methods
+    // For example:
+    this.#router.post(
+      '/register',
+      validateBody(RegisterUserDTOSchema),
+      this.#controller.register.bind(this.#controller),
+    );
+    this.#router.post(
+      '/login',
+      validateBody(UserCredentialsDTOSchema),
+      this.#controller.login.bind(this.#controller),
+    );
+    this.#router.get('/', this.#controller.getAllUsers.bind(this.#controller));
+    this.#router.get(
+      '/:id',
+      validateId(),
+      this.#controller.getUserById.bind(this.#controller),
+    );
+    this.#router.patch(
+      '/:id',
+      validateId(),
+      validateBody(UpdateUserDTOSchema),
+      this.#controller.updateUser.bind(this.#controller),
+    );
+    this.#router.delete(
+      '/:id',
+      validateId(),
+      this.#controller.deleteUser.bind(this.#controller),
+    );
+  }
 
-    get router() {
-        return this.#router;
-    }
+  get router() {
+    return this.#router;
+  }
 }
 ```
 
 ### Prueba de las rutas: Postman
 
-Una vez que las rutas relacionadas con users están definidas en el `UsersRouter` y montadas en la aplicación, se pueden probar utilizando una herramienta como Postman para enviar solicitudes HTTP a los endpoints correspondientes y verificar que las respuestas son las esperadas. 
+Una vez que las rutas relacionadas con users están definidas en el `UsersRouter` y montadas en la aplicación, se pueden probar utilizando una herramienta como Postman para enviar solicitudes HTTP a los endpoints correspondientes y verificar que las respuestas son las esperadas.
 
-
-Crearemos una coleccióbn depostman para poder probar las siguientes operaciones: 
+Crearemos una coleccióbn depostman para poder probar las siguientes operaciones:
 
 - Registro de un nuevo usuario (`POST /api/users/register`)
 - Login de un usuario existente (`POST /api/users/login`)
@@ -2726,7 +2731,7 @@ Crearemos una coleccióbn depostman para poder probar las siguientes operaciones
 - Actualización de un usuario (`PATCH /api/users/:id`)
 - Eliminación de un usuario (`DELETE /api/users/:id`)
 
-NOTA: Detectamos un error en el delete por la relación con profile: al eliminar un usuario, Prisma lanza un error `P2003` indicando que no se puede eliminar el usuario porque hay un registro relacionado en la tabla `Profile` que depende de él. Esto se debe a que la relación entre `User` y `Profile` es de uno a uno, y Prisma no permite eliminar un registro padre (`User`) si hay un registro hijo (`Profile`) que depende de él sin manejar explícitamente la eliminación de la relación. Para solucionar este problema, se puede configurar la relación en el esquema de Prisma para que, al eliminar un usuario, también se elimine automáticamente su perfil relacionado utilizando `onDelete: Cascade`. Esto se puede hacer modificando el modelo `User` en el archivo `schema.prisma` de la siguiente manera: 
+NOTA: Detectamos un error en el delete por la relación con profile: al eliminar un usuario, Prisma lanza un error `P2003` indicando que no se puede eliminar el usuario porque hay un registro relacionado en la tabla `Profile` que depende de él. Esto se debe a que la relación entre `User` y `Profile` es de uno a uno, y Prisma no permite eliminar un registro padre (`User`) si hay un registro hijo (`Profile`) que depende de él sin manejar explícitamente la eliminación de la relación. Para solucionar este problema, se puede configurar la relación en el esquema de Prisma para que, al eliminar un usuario, también se elimine automáticamente su perfil relacionado utilizando `onDelete: Cascade`. Esto se puede hacer modificando el modelo `User` en el archivo `schema.prisma` de la siguiente manera:
 
 ```prisma
 model User {
@@ -2755,7 +2760,7 @@ Con esta configuración, cuando se elimine un usuario, Prisma eliminará automá
 
 El proceso de autenticación se implementa en el método `login` del `UserRepository`, donde se verifica que las credenciales proporcionadas por el usuario son correctas. Si la autenticación es exitosa, se genera un token JWT que incluye información relevante del usuario (como su ID, email y rol) en el payload. Este token se devuelve al cliente como parte de la respuesta.
 
-Una vez que el **cliente** tiene el token JWT, puede incluirlo en las cabeceras de las solicitudes a rutas protegidas para acceder a **recursos que requieren autenticación**. 
+Una vez que el **cliente** tiene el token JWT, puede incluirlo en las cabeceras de las solicitudes a rutas protegidas para acceder a **recursos que requieren autenticación**.
 
 Para proteger estas rutas, se puede implementar un **middleware de autenticación** que verifique la validez del token JWT en cada solicitud. Este middleware se encargará de:
 
@@ -2772,11 +2777,11 @@ Para poder guardar la información del usuario autenticado en el objeto `req`, s
 import { TokenPayload } from './services/auth.service.ts';
 
 declare global {
-    namespace Express {
-        interface Request {
-            user?: TokenPayload;
-        }
+  namespace Express {
+    interface Request {
+      user?: TokenPayload;
     }
+  }
 }
 ```
 
@@ -2793,21 +2798,18 @@ Otra opción es configurar el `tsconfig.json` para incluir automáticamente los 
   "compilerOptions": {
     // ... otras opciones ...
   },
-  "include": [
-    "src/**/*",
-    "src/types.d.ts"
-  ]
+  "include": ["src/**/*", "src/types.d.ts"]
 }
-``` 
+```
 
 Finalmente sería posible incluir la decalración del typo en el fichero `app.ts` directamente, aunque es más recomendable mantener las declaraciones de tipos en archivos separados para mantener una mejor organización del código.
 
 ```ts app.ts
 import { TokenPayload } from './services/auth.service.ts';
 declare module 'express' {
-    interface Request {
-        user?: TokenPayload;
-    }
+  interface Request {
+    user?: TokenPayload;
+  }
 }
 ```
 
@@ -2825,103 +2827,92 @@ import type { Request, Response, NextFunction } from 'express';
 import { HttpError } from '../errors/http-error.ts';
 import { AuthService } from '../services/auth.ts';
 
+const unauthorizedError = new HttpError(
+  401,
+  'Unauthorized',
+  'Authentication failed. Please provide valid credentials.',
+);
 
 export class AuthInterceptor {
+  authenticate(req: Request, res: Response, next: NextFunction) {
+    log('Authenticating request...');
 
-  authenticate = async (req: Request, _res: Response, next: NextFunction) => {
-        log('Authenticating request...');
+    const authHeader = req.header('Authorization');
+    if (!authHeader) {
+      log('No authorization header found');
+      return next(unauthorizedError);
+    }
 
-        //req.cookies
-        const { authorization } = req.headers;
+    const [type, token] = authHeader.split(' ');
+    if (!token || type !== 'Bearer') {
+      log('No valid token found in authorization header');
+      return next(unauthorizedError);
+    }
 
-        if (!authorization || authorization.includes('Bearer') === false) {
-            const newError = new HttpError(
-                401,
-                'Unauthorized',
-                'Token not found',
-            );
-            return next(newError);
-        }
-
-        const token = authorization.split(' ')[1];
-
-        if (!token) {
-            const newError = new HttpError(
-                401,
-                'Unauthorized',
-                'Token not found',
-            );
-            return next(newError);
-        }
-
-        try {
-            const payload = AuthService.verifyToken(token);
-            // Añado datos a req disponibles para siguientes etapas
-            // Previamente he extendido la interfaz Request en express
-            req.user = payload;
-            log('User:', payload);
-            // Opcionalmente, añado datos a res.locals
-            // para que estén disponibles en las vistas
-            // res.locals.user = payload;
-            return next();
-        } catch (err) {
-            const newError = new HttpError(
-                401,
-                'Unauthorized',
-                'Invalid token',
-                {cause: err}
-            );
-            return next(newError);
-        }
-    };
-};
+    try {
+      const payload = AuthService.verifyToken(token);
+      req.user = payload;
+      // Añado datos a req disponibles para siguientes etapas
+      // Previamente he extendido la interfaz Request en express
+      req.user = payload;
+      log('User:', payload);
+      // Opcionalmente, añado datos a res.locals
+      // para que estén disponibles en las vistas
+      // res.locals.user = payload;
+      return next();
+    } catch (error) {
+      unauthorizedError.cause = error;
+      log('Token verification failed', { error });
+      return next(unauthorizedError);
+    }
+  }
+}
 ```
 
 #### Rutas protegidas: uso del intertceptor
 
-Para proteger las rutas utilizando el `AuthInterceptor`, se puede aplicar el middleware de autenticación a las rutas que se desean proteger en el router correspondiente. 
+Para proteger las rutas utilizando el `AuthInterceptor`, se puede aplicar el middleware de autenticación a las rutas que se desean proteger en el router correspondiente.
 
 El interceptor puede injectarse como otra dependencia (**DI**) en el constructor del router, y luego se puede utilizar en las rutas que requieren autenticación.
 
 Por ejemplo, si queremos proteger la ruta `GET /api/users/` para que solo los usuarios autenticados puedan acceder a la lista de usuarios, podemos agregar el middleware `authenticate` del `AuthInterceptor` a esa ruta en el `UsersRouter`.
 
 ```ts
-
 export class UsersRouter {
-    #controller: UsersController;
-    #router: Router;
-    #authInterceptor: AuthInterceptor;
+  #controller: UsersController;
+  #router: Router;
+  #authInterceptor: AuthInterceptor;
 
-    constructor(controller: UsersController, authInterceptor: AuthInterceptor) {
-        log('Initializing users router...');
-        this.#controller = controller;
-        this.#authInterceptor = authInterceptor;
-        this.#router = Router();
+  constructor(controller: UsersController, authInterceptor: AuthInterceptor) {
+    log('Initializing users router...');
+    this.#controller = controller;
+    this.#authInterceptor = authInterceptor;
+    this.#router = Router();
 
-        // Rutas públicas
-        this.#router.post(
-            '/register',
-            validateBody(RegisterUserDTOSchema),
-            this.#controller.register.bind(this.#controller),
-        );
-        this.#router.post(
-            '/login',
-            validateBody(UserCredentialsDTOSchema),
-            this.#controller.login.bind(this.#controller),
-        );
+    // Rutas públicas
+    this.#router.post(
+      '/register',
+      validateBody(RegisterUserDTOSchema),
+      this.#controller.register.bind(this.#controller),
+    );
+    this.#router.post(
+      '/login',
+      validateBody(UserCredentialsDTOSchema),
+      this.#controller.login.bind(this.#controller),
+    );
 
-        // Rutas protegidas
-        this.#router.get(
-            '/',
-            this.#authInterceptor.authenticate,
-            this.#controller.getAllUsers.bind(this.#controller),
-        );
-        // ... otras rutas protegidas
-    }
+    // Rutas protegidas
+    this.#router.get(
+      '/',
+      this.#authInterceptor.authenticate,
+      this.#controller.getAllUsers.bind(this.#controller),
+    );
+    // ... otras rutas protegidas
+  }
 
-    get router() {
-        return this.#router;
-    }
+  get router() {
+    return this.#router;
+  }
 }
 ```
 
@@ -2932,9 +2923,9 @@ Una vez que las rutas están protegidas utilizando el `AuthInterceptor`, se pued
 1. Primero, se debe utilizar un usuario existente o registrar un nuevo usuario utilizando la ruta de registro (`POST /api/users/register`)
 2. Luego, utilizar la ruta de inicio de sesión (`POST /api/users/login`) para obtener las credenciales de un usuario válido.
 3. Una vez que se obtiene el token JWT en la respuesta del login, se debe incluir este token en las cabeceras de las solicitudes a las rutas protegidas utilizando el formato `Authorization: Bearer <token>`. En Postman se puede utilizar la sección "Authorizations" seleccionando el tipo "Bearer Token" e ingresando el token JWT obtenido en el paso anterior.
-4. Finalmente, se pueden enviar solicitudes a las rutas protegidas (por ejemplo, `GET /api/users/`) y verificar que se obtiene una respuesta exitosa (por ejemplo, `200 OK`) con los datos esperados, lo que indica que el acceso a la ruta está permitido para usuarios autenticados. 
+4. Finalmente, se pueden enviar solicitudes a las rutas protegidas (por ejemplo, `GET /api/users/`) y verificar que se obtiene una respuesta exitosa (por ejemplo, `200 OK`) con los datos esperados, lo que indica que el acceso a la ruta está permitido para usuarios autenticados.
 5. También se deben probar casos en los que no se incluye el token o se incluye un token inválido para verificar que se obtiene una respuesta de error (por ejemplo, `401 Unauthorized`), lo que indica que el acceso a la ruta está restringido para usuarios no autenticados o con credenciales inválidas.
- 
+
 El equivalente en un frontend sería almacenar el token JWT en el almacenamiento local (localStorage) o en una cookie después de un inicio de sesión exitoso, y luego incluir ese token en las cabeceras de las solicitudes a las rutas protegidas para acceder a los recursos que requieren autenticación. Es importante asegurarse de manejar el token de manera segura, evitando exponerlo a través de vulnerabilidades como XSS, y considerar opciones como el uso de cookies con la bandera `HttpOnly` para mejorar la seguridad del almacenamiento del token en el cliente.
 
 Usando fetch en el frontend, se puede incluir el token JWT en las cabeceras de las solicitudes de la siguiente manera:
@@ -2942,31 +2933,31 @@ Usando fetch en el frontend, se puede incluir el token JWT en las cabeceras de l
 ```js
 const token = localStorage.getItem('jwtToken'); // O obtenerlo de una cookie
 fetch('/api/users/', {
-    method: 'GET',
-    headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-    }
+  method: 'GET',
+  headers: {
+    Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json',
+  },
 })
-.then(response => {
+  .then((response) => {
     if (!response.ok) {
-        throw new Error('Network response was not ok');
+      throw new Error('Network response was not ok');
     }
     return response.json();
-})
-.then(data => {
+  })
+  .then((data) => {
     console.log('Protected data:', data);
-})
-.catch(error => {
+  })
+  .catch((error) => {
     console.error('Error accessing protected route:', error);
-});
+  });
 ```
 
 ### Autorización (Authorization)
 
 La autorización se refiere al proceso de determinar si un usuario autenticado tiene los permisos necesarios para acceder a ciertos recursos o realizar ciertas acciones en la aplicación. En el contexto de esta aplicación, se puede implementar un sistema de control de acceso basado en roles (RBAC) para gestionar los permisos de los usuarios.
 
-En un sistema RBAC, se definen diferentes roles (por ejemplo, `USER`, `ADMIN`) y se asignan permisos específicos a cada rol. Luego, a cada usuario se le asigna uno o más roles, lo que determina qué acciones pueden realizar en la aplicación. 
+En un sistema RBAC, se definen diferentes roles (por ejemplo, `USER`, `ADMIN`) y se asignan permisos específicos a cada rol. Luego, a cada usuario se le asigna uno o más roles, lo que determina qué acciones pueden realizar en la aplicación.
 
 Para implementar la autorización en esta aplicación, se pueden seguir los siguientes pasos:
 
@@ -2983,27 +2974,27 @@ El middleware de autorización se puede implementar como un método en el `AuthI
 
 ```ts
 export class AuthInterceptor {
-    // ... método authenticate ...
+  // ... método authenticate ...
   authorize = (role: Role) => {
-      return (req: Request, _res: Response, next: NextFunction) => {
-          debug('hasRole');
+    return (req: Request, _res: Response, next: NextFunction) => {
+      debug('hasRole');
 
-          if (
-              !req.user ||
-              (req.user.role !== role && req.user.role !== Role.ADMIN)
-          ) {
-              const newError = new HttpError(
-                403,
-                'Forbidden',
-                'You do not have permission',
-              );
-              return next(newError);
-          }
+      if (
+        !req.user ||
+        (req.user.role !== role && req.user.role !== Role.ADMIN)
+      ) {
+        const newError = new HttpError(
+          403,
+          'Forbidden',
+          'You do not have permission',
+        );
+        return next(newError);
+      }
 
-          return next();
-      };
+      return next();
+    };
   };
-};
+}
 ```
 
 #### Uso del interceptor en las rutas
@@ -3012,10 +3003,10 @@ El interceptor de autorización (authorize)se incluira siempre despues de la aut
 
 ```ts
 this.#router.delete(
-    '/:id',
-    this.#authInterceptor.authenticate,
-    this.#authInterceptor.authorize(Role.ADMIN),
-    this.#controller.deleteUser.bind(this.#controller),
+  '/:id',
+  this.#authInterceptor.authenticate,
+  this.#authInterceptor.authorize(Role.ADMIN),
+  this.#controller.deleteUser.bind(this.#controller),
 );
 ```
 

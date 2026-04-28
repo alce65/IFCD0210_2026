@@ -1371,10 +1371,8 @@ Ya consumidos
 - Router
 - Montaje de la API REST
 
-
 ### Día 2 (M 28/04/2026) - M2.03 06  - Proyecto Films (Back)
 
-<!-- 
 - Revisión de la feature usuarios
 - Completando el control de Errors
   - Errores de Prisma
@@ -1382,20 +1380,26 @@ Ya consumidos
 - Validaciones
   - UsersDTOs con Zod
   - Middleware de Validaciones en las rutas
-- Uso de Postman como APIRest Client 
+- Uso de Postman como APIRest Client
+  - Solución al problema del borrado en cascada
+
+[descanso]
+
 - Autenticación
   - Request with JWT
   - Rutas (Endpoints) protegidas
-  - Pruebas desde Postman 
+  - Pruebas desde Postman
+
 - Autorización (Authorization): roles (admin, editor)
-  - Update user model with roles
-  - Uso de Postman como APIRest Client 
--->
+  - Auth interceptor with roles
+  - Owner interceptor
+  - Uso de Postman como APIRest Client
+
+- Front básico
 
 ### Día 3 (X 29/04/2026) - M2.03 07 - Proyecto Films (Back)
 
 <!-- 
-
 - Films: Endpoints ya creados
   - GET /films
   - GET /films/:id
@@ -1413,7 +1417,6 @@ Ya consumidos
     - PATCH /reviews/:id 
     - DELETE /reviews/:id
 Rutas review:/id -> Authorization: owner
-
 -->
 
 ### Día 4 (J 30/04/2026) - M2.03 08 - Proyecto Films (Back)
