@@ -14,13 +14,13 @@ export const validateId = (schema: ZodObject = z.object({ id: z.coerce.number().
         const { id } = req.params;
         if (!id) {
             const error = new HttpError(400, 'Bad Request', 'Animal ID is required');
-            next(error);
+            return next(error);
         }
         try {
             schema.parse({ id });
-            next();
+            return next();
         } catch (error) {
-            next(error);
+            return next(error);
         }
     };
 }
@@ -33,9 +33,9 @@ export const validateBody = (schema: ZodObject) => {
             // Actualiza el body de la solicitud con los datos validados
             // incluyendo posibles transformaciones realizadas por Zod
             req.body = validationResult;
-            next();
+            return next();
         } catch (error) {
-            next(error);
+            return next(error);
         }
     }
 }

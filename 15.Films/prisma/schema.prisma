@@ -28,7 +28,7 @@ model User {
   email    String   @unique() @db.VarChar(100)
   password String   @db.VarChar(255)
   role     Role     @default(USER)
-  profile  Profile?
+  profile  Profile? 
   reviews  Review[]
   created_at DateTime @default(now()) @ignore
   updated_at DateTime @default(now()) @updatedAt @ignore
@@ -41,7 +41,7 @@ model Profile {
   firstName  String   @db.VarChar(200) @map("first_name")
   surname    String   @db.VarChar(200)
   avatar     String   @db.VarChar(200)
-  user       User     @relation(fields: [id], references: [id])
+  user       User     @relation(fields: [id], references: [id], onDelete: Cascade)
   created_at DateTime @default(now()) @ignore
   updated_at DateTime @default(now()) @updatedAt @ignore
 

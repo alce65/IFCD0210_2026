@@ -24,8 +24,9 @@ export class UsersController {
 
     async register(req: Request, res: Response, next: NextFunction) {
         try {
-            log('Registering new user...'); 
-            const userData: RegisterUserData = req.body; // Validate this data in a real application
+            log('Registering new user...');
+            const userData: RegisterUserData = req.body;
+            // Validated previously with zod middleware
             const user: User = await this.#repo.register(userData);
             return res.status(201).json(user);
         } catch (error) {
@@ -44,7 +45,8 @@ export class UsersController {
     async login(req: Request, res: Response, next: NextFunction) {
         try {
             log('Logging in user...');
-            const loginData: LoginUserData = req.body; // Validate this data in a real application
+            const loginData: LoginUserData = req.body;
+            // Validated previously with zod middleware
             const loginResult: LoginResult = await this.#repo.login(loginData);
             return res.json(loginResult);
         } catch (error) {
@@ -93,7 +95,8 @@ export class UsersController {
 
     async getUserById(req: Request, res: Response, next: NextFunction) {
         try {
-            const id = Number(req.params.id); // Validate this data in a real application
+            const id = Number(req.params.id);
+            // Validated previously with zod middleware
             log('Get User: %O', id);
             const user: User = await this.#repo.getUserById(id);
             return res.json(user);
@@ -128,9 +131,11 @@ export class UsersController {
 
     async updateUser(req: Request, res: Response, next: NextFunction) {
         try {
-            const id = Number(req.params.id); // Validate this data in a real application
+            const id = Number(req.params.id);
+            // Validated previously with zod middleware
             log('Updating user with ID: %O', id);
-            const userData: UserUpdateDTO = req.body; // Validate this data in a real application
+            const userData: UserUpdateDTO = req.body;
+            // Validated previously with zod middleware
             const user: User = await this.#repo.updateUser(id, userData);
             return res.json(user);
         } catch (error) {
@@ -165,7 +170,8 @@ export class UsersController {
     async updateProfileUser(req: Request, res: Response, next: NextFunction) {
         try {
             log('Updating user profile...');
-            const id = Number(req.params.id); // Validate this data in a real application
+            const id = Number(req.params.id);
+            // Validate previously with zod middleware
             const profileData: Partial<ProfileDTO> = req.body; // Validate this data in a real application
             const user: User = await this.#repo.updateUserProfile(
                 id,
@@ -203,7 +209,8 @@ export class UsersController {
 
     async deleteUser(req: Request, res: Response, next: NextFunction) {
         try {
-            const id = Number(req.params.id); // Validate this data in a real application
+            const id = Number(req.params.id);
+            // Validated previously with zod middleware
             log('Deleting user with ID: %O', id);
             await this.#repo.deleteUser(id);
             return res.status(204).end();
