@@ -1,6 +1,7 @@
 import { AboutPage } from '../../about/about-page';
 import { HomePage } from '../../home/home-page';
 import { FilmsPage } from '../../films/films-page';
+import { TodoPage } from '../../todo/todo-page';
 
 export interface Route {
     path: string;
@@ -19,11 +20,11 @@ export const routes: Route[] = [
         label: 'Películas',
         renderComponent: FilmsPage.register,
     },
-    // {
-    //     path: "/todo",
-    //     label: "Tareas",
-    //     renderComponent: todoPage,
-    // },
+    {
+        path: '/todo',
+        label: 'Tareas',
+        renderComponent: TodoPage.register,
+    },
     {
         path: '/about',
         label: 'Acerca de',
