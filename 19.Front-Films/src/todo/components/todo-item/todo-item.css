@@ -1,0 +1,31 @@
+app-todo-item .todo-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid var(--color-border, #d1d5db);
+    border-radius: 0.5rem;
+    background-color: var(--color-surface, #ffffff);
+}
+
+app-todo-item .todo-item__main {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 0;
+}
+
+app-todo-item .todo-item__title {
+    overflow-wrap: anywhere;
+}
+
+app-todo-item .todo-item__title--completed {
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+app-todo-item .todo-item__remove {
+    font: inherit;
+    cursor: pointer;
+}

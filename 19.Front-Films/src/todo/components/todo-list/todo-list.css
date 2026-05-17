@@ -1,0 +1,9 @@
+app-todo-list .todo-list {
+    display: grid;
+    gap: 0.75rem;
+}
+
+app-todo-list .todo-list__empty {
+    margin: 0;
+    color: var(--color-text-secondary, #4b5563);
+}
