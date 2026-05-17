@@ -1,7 +1,4 @@
-import {
-    TodoModelSchema,
-    type Todo,
-} from '../../../core/entities/todo.entity';
+import { TodoModelSchema, type Todo } from '../../../core/entities/todo.entity';
 import { TodoItem } from '../todo-item/todo-item';
 import './todo-list.css';
 
@@ -29,24 +26,38 @@ export class TodoList extends HTMLElement {
 
     #render() {
         if (this.#todos.length === 0) {
-            this.innerHTML = '<p class="todo-list__empty">No hay tareas todavia</p>';
+            this.innerHTML =
+                '<p class="todo-list__empty">No hay tareas todavía</p>';
             return;
         }
 
+        // this.innerHTML = /*html*/ `
+        //     <div class="todo-list" role="list" aria-label="Lista de tareas">
+        //         ${this.#todos.map(() => '<app-todo-item></app-todo-item>').join('')}
+        //     </div>
+        // `;
+
+        // this.#hydrateItems();
+
         this.innerHTML = /*html*/ `
             <div class="todo-list" role="list" aria-label="Lista de tareas">
-                ${this.#todos.map(() => '<app-todo-item></app-todo-item>').join('')}
             </div>
         `;
 
         this.#hydrateItems();
     }
 
-    #hydrateItems() {
-        const itemElements = this.querySelectorAll(TodoItem.selector);
+    // #hydrateItems() {
+    //     const itemElements = this.querySelectorAll(TodoItem.selector);
+    //     itemElements.forEach((element, index) => {
+    //         (element as TodoItem).todo = this.#todos[index];
+    //     });
+    // }
 
-        itemElements.forEach((element, index) => {
-            (element as TodoItem).todo = this.#todos[index];
+    #hydrateItems() {
+        this.#todos.forEach((todo) => {
+            const itemElement = new TodoItem(todo);
+            this.appendChild(itemElement);
         });
     }
 }

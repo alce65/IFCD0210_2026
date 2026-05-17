@@ -1,7 +1,4 @@
-import {
-    TodoModelSchema,
-    type Todo,
-} from '../../../core/entities/todo.entity';
+import { TodoModelSchema, type Todo } from '../../../core/entities/todo.entity';
 import './todo-item.css';
 
 interface TodoActionEventDetail {
@@ -12,6 +9,14 @@ export class TodoItem extends HTMLElement {
     static selector = 'app-todo-item';
 
     #todo: Todo | null = null;
+
+    constructor(todo: Todo | null = null) {
+        super();
+        if (todo !== null) {
+            this.todo = todo;
+        }
+    }
+
     #handleChange = (event: Event) => {
         const target = event.target as HTMLInputElement;
 
