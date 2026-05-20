@@ -1,11 +1,17 @@
 import './todo-add.css';
 
-type TodoAddEventDetail = {
+interface TodoAddEventDetail {
     title: string;
-};
+}
 
 export class TodoAdd extends HTMLElement {
     static selector = 'app-todo-add';
+
+    static register() {
+        if (customElements.get(TodoAdd.selector) === undefined) {
+            customElements.define(TodoAdd.selector, TodoAdd);
+        }
+    }
 
     #handleSubmit = (event: Event) => {
         event.preventDefault();
@@ -27,15 +33,11 @@ export class TodoAdd extends HTMLElement {
         );
 
         form.reset();
-        const input = this.querySelector('#todo-title') as HTMLInputElement | null;
+        const input = this.querySelector(
+            '#todo-title',
+        ) as HTMLInputElement | null;
         input?.focus();
     };
-
-    static register() {
-        if (customElements.get(TodoAdd.selector) === undefined) {
-            customElements.define(TodoAdd.selector, TodoAdd);
-        }
-    }
 
     connectedCallback() {
         this.#render();

@@ -86,7 +86,8 @@ export class TodoContainer extends HTMLElement {
 
     async #loadTodos() {
         this.#todos = await this.#repo.getAll();
-        this.#syncList();
+        console.log(this.#todos)
+        //this.#syncList();
     }
 
     #syncList() {

@@ -13,7 +13,10 @@ export class TodoItem extends HTMLElement {
     constructor(todo: Todo | null = null) {
         super();
         if (todo !== null) {
-            this.todo = todo;
+            // this.todo = todo;
+
+             this.#todo = TodoModelSchema.parse(todo);
+            // this.#render();
         }
     }
 
@@ -56,10 +59,10 @@ export class TodoItem extends HTMLElement {
         }
     }
 
-    set todo(value: Todo) {
-        this.#todo = TodoModelSchema.parse(value);
-        this.#render();
-    }
+    // set todo(value: Todo) {
+    //     this.#todo = TodoModelSchema.parse(value);
+    //     this.#render();
+    // }
 
     connectedCallback() {
         this.#render();
